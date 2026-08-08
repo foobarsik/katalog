@@ -127,6 +127,8 @@ function renderDataFile(items) {
   social: string;
   instagram: string;
   description: string;
+  review: string;
+  comment: string;
   communityMatch: boolean;
   avatar: string;
   instagramTitle: string;
@@ -146,6 +148,11 @@ function pick(row, keys) {
   return "";
 }
 
+function combineText(row, keyGroups) {
+  const values = keyGroups.map((keys) => pick(row, keys)).filter(Boolean);
+  return [...new Set(values)].join("\n\n");
+}
+
 const catalogRows = readCsv(catalogPath);
 const instagramRows = readCsv(instagramPath, false);
 const avatars = copyAvatars();
@@ -161,6 +168,8 @@ const specialists = catalogRows.map((row, index) => {
   const title = pick(row, ["Назва", "Название", "Ім'я", "Ім’я", "Имя"]);
   const category = pick(row, ["Категорія", "Категория"]);
   const subcategory = pick(row, ["Підкатегорія", "Подкатегория"]);
+  const review = pick(row, ["Відгук", "Отзыв"]);
+  const comment = pick(row, ["Коментар", "Кометар", "Комментарий"]);
 
   return {
     id: Number.isFinite(id) ? id : index + 1,
@@ -172,7 +181,9 @@ const specialists = catalogRows.map((row, index) => {
     website: normalizeUrl(pick(row, ["Сайт"])),
     social,
     instagram: username,
-    description: pick(row, ["Опис", "Описание"]),
+    description: combineText(row, [["Відгук", "Отзыв"], ["Коментар", "Кометар", "Комментарий"]]),
+    review,
+    comment,
     communityMatch: Boolean(pick(row, ["Національність (для сумнівних випадків)", "Национальность (для сомнительных случаев)"])),
     avatar: avatarFile ? `/avatars/${avatarFile}` : "",
     instagramTitle: extra.instagramTitle || "",

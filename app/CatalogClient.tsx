@@ -68,6 +68,16 @@ function getRank(item: Specialist) {
   );
 }
 
+function InstagramIcon() {
+  return (
+    <svg aria-hidden="true" className="instagram-icon" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1.2" />
+    </svg>
+  );
+}
+
 function ContactLink({
   href,
   children,
@@ -111,17 +121,19 @@ function SpecialistCard({
         <div className="identity">
           <p className="category">{item.category}</p>
           <h2>{item.title}</h2>
-          <p className="subcategory">{item.subcategory}</p>
         </div>
       </div>
 
-      {item.name && item.name !== item.title ? <p className="person">Контакт: {item.name}</p> : null}
+      <div className="card-meta">
+        {item.subcategory ? <span>{item.subcategory}</span> : null}
+      </div>
+
+      {item.name && item.name !== item.title ? <p className="person">{item.name}</p> : null}
 
       <p className="description">{summary}</p>
 
       {hasInstagramDetails ? (
         <div className="instagram-preview">
-          <span>Instagram-опис</span>
           <p>{item.instagramBio || item.instagramTitle}</p>
         </div>
       ) : null}
@@ -129,7 +141,8 @@ function SpecialistCard({
       <div className="card-actions">
         {instagramUrl ? (
           <ContactLink href={instagramUrl} variant="primary">
-            Instagram
+            <span className="visually-hidden">Instagram</span>
+            <InstagramIcon />
           </ContactLink>
         ) : null}
         {item.website ? <ContactLink href={item.website}>Сайт</ContactLink> : null}
@@ -285,17 +298,10 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     <main className="site-shell">
       <header className="app-header">
         <div className="brand">
-          <div className="brand-mark" aria-hidden="true">
-            К
-          </div>
           <div>
-            <p>Катовіце та околиці</p>
+            <p>Катовіце та околиці · {specialists.length} записів</p>
             <h1>Каталог спеціалістів</h1>
           </div>
-        </div>
-        <div className="header-count">
-          <strong>{specialists.length}</strong>
-          <span>записів у каталозі</span>
         </div>
       </header>
 
