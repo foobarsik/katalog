@@ -451,9 +451,6 @@ p {
 .instagram-preview p,
 .review-quote,
 .catalog-comment {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
   line-height: 1.48;
   white-space: pre-line;
 }
@@ -462,7 +459,6 @@ p {
   margin: 12px 0 0;
   color: #2f3835;
   font-size: 0.94rem;
-  -webkit-line-clamp: 3;
 }
 
 .review-quote {
@@ -473,14 +469,12 @@ p {
   padding: 10px 12px;
   font-size: 0.94rem;
   font-style: italic;
-  -webkit-line-clamp: 4;
 }
 
 .catalog-comment {
   margin: 5px 0 0;
   color: var(--muted-strong);
   font-size: 0.9rem;
-  -webkit-line-clamp: 3;
 }
 
 .instagram-preview,
@@ -509,7 +503,6 @@ p {
   margin: 0;
   color: #34413d;
   font-size: 0.86rem;
-  -webkit-line-clamp: 2;
 }
 
 .comment-block {
