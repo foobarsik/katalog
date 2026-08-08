@@ -540,7 +540,8 @@ p {
 }
 
 .instagram-icon,
-.website-icon {
+.website-icon,
+.phone-icon {
   width: 20px;
   height: 20px;
   fill: none;
