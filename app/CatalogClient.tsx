@@ -146,17 +146,28 @@ function SpecialistCard({
 
       {item.name && item.name !== item.title ? <p className="person">{item.name}</p> : null}
 
-      {item.review ? <blockquote className="review-quote">{item.review}</blockquote> : null}
-
-      {item.comment ? <p className="catalog-comment">{item.comment}</p> : null}
-
-      {!hasCatalogText && !hasInstagramDetails ? <p className="description">Опис буде доповнено.</p> : null}
-
       {hasInstagramDetails ? (
         <div className="instagram-preview">
+          <span className="content-label">Instagram</span>
           <p>{item.instagramBio || item.instagramTitle}</p>
         </div>
       ) : null}
+
+      {item.review ? (
+        <div className="review-block">
+          <span className="content-label">Відгук</span>
+          <blockquote className="review-quote">{item.review}</blockquote>
+        </div>
+      ) : null}
+
+      {item.comment ? (
+        <div className="comment-block">
+          <span className="content-label">Коментар</span>
+          <p className="catalog-comment">{item.comment}</p>
+        </div>
+      ) : null}
+
+      {!hasCatalogText && !hasInstagramDetails ? <p className="description">Опис буде доповнено.</p> : null}
 
       <div className="card-actions">
         {instagramUrl ? (

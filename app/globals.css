@@ -466,7 +466,7 @@ p {
 }
 
 .review-quote {
-  margin: 12px 0 0;
+  margin: 5px 0 0;
   border-left: 3px solid rgba(189, 90, 69, 0.58);
   background: rgba(189, 90, 69, 0.07);
   color: #2f3835;
@@ -477,14 +477,29 @@ p {
 }
 
 .catalog-comment {
-  margin: 10px 0 0;
+  margin: 5px 0 0;
   color: var(--muted-strong);
   font-size: 0.9rem;
   -webkit-line-clamp: 3;
 }
 
-.instagram-preview {
+.instagram-preview,
+.review-block,
+.comment-block {
   margin-top: 12px;
+}
+
+.content-label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.instagram-preview {
   border-left: 3px solid rgba(47, 98, 143, 0.4);
   background: rgba(47, 98, 143, 0.06);
   padding: 9px 11px;
@@ -495,6 +510,11 @@ p {
   color: #34413d;
   font-size: 0.86rem;
   -webkit-line-clamp: 2;
+}
+
+.comment-block {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
 }
 
 .card-actions,
