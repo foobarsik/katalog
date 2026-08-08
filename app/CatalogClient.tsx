@@ -49,15 +49,6 @@ function getInstagramUrl(item: Specialist) {
   return "";
 }
 
-function Stat({ value, label }: { value: string | number; label: string }) {
-  return (
-    <div className="stat">
-      <strong>{value}</strong>
-      <span>{label}</span>
-    </div>
-  );
-}
-
 function ContactLink({
   href,
   children,
@@ -146,10 +137,6 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     );
   }, [specialists]);
 
-  const instagramCount = specialists.filter((item) => item.instagramBio || item.instagramFollowers).length;
-  const contactCount = specialists.filter((item) => item.phone || item.website || item.social).length;
-  const avatarCount = specialists.filter((item) => item.avatar).length;
-
   const filtered = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase("uk-UA");
     return specialists
@@ -169,16 +156,6 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
         <div className="hero-copy">
           <p className="eyebrow">Катовіце та околиці</p>
           <h1>Каталог українських спеціалістів</h1>
-          <p className="lead">
-            Зібрані контакти майстрів, лікарів, сервісів, юристів, закладів та освітніх
-            ініціатив із Telegram-каталогу. Частина карток доповнена даними Instagram.
-          </p>
-        </div>
-        <div className="hero-stats" aria-label="Статистика каталогу">
-          <Stat value={specialists.length} label="записів" />
-          <Stat value={contactCount} label="із контактами" />
-          <Stat value={instagramCount} label="з Instagram-даними" />
-          <Stat value={avatarCount} label="з аватарками" />
         </div>
       </section>
 
