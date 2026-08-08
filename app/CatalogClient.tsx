@@ -496,6 +496,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const [selected, setSelected] = useState<Specialist | null>(null);
   const [visible, setVisible] = useState(PAGE_SIZE);
   const searchRef = useRef<HTMLInputElement | null>(null);
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   const reviewCount = useMemo(() => specialists.filter((item) => item.review).length, [specialists]);
 
@@ -556,6 +557,25 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     setLastFilterKey(filterKey);
     setVisible(PAGE_SIZE);
   }
+
+  /**
+   * Auto-loads as the sentinel nears the viewport, but the button stays a real control so the
+   * list is still reachable by keyboard. `visible` is deliberately not a dependency: re-observing
+   * an already-visible sentinel would fire immediately and drain every page at once.
+   */
+  useEffect(() => {
+    const node = sentinelRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) setVisible((current) => current + PAGE_SIZE);
+      },
+      { rootMargin: "800px" },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [filtered.length]);
 
   const hasFilters = Boolean(query || category !== ALL || profession || reviewedOnly);
 
@@ -680,7 +700,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
           </div>
 
           {visible < filtered.length ? (
-            <div className="more">
+            <div className="more" ref={sentinelRef}>
               <button type="button" onClick={() => setVisible(visible + PAGE_SIZE)}>
                 Показати ще {Math.min(PAGE_SIZE, filtered.length - visible)}
               </button>
