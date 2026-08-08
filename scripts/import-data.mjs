@@ -181,7 +181,10 @@ const specialists = catalogRows.map((row, index) => {
     website: normalizeUrl(pick(row, ["Сайт"])),
     social,
     instagram: username,
-    description: combineText(row, [["Відгук", "Отзыв"], ["Коментар", "Кометар", "Комментарий"]]),
+    description: combineText(row, [
+      ["Відгук", "Отзыв"],
+      ["Коментар", "Кометар", "Комментарий"],
+    ]),
     review,
     comment,
     communityMatch: Boolean(pick(row, ["Національність (для сумнівних випадків)", "Национальность (для сомнительных случаев)"])),
