@@ -560,16 +560,16 @@ ul {
 }
 
 .avatar.sm {
-  width: 46px;
-  height: 46px;
+  width: 52px;
+  height: 52px;
   font-size: 0.94rem;
 }
 
 .avatar.lg {
-  width: 66px;
-  height: 66px;
+  width: 96px;
+  height: 96px;
   border-radius: 16px;
-  font-size: 1.3rem;
+  font-size: 1.7rem;
 }
 
 .avatar img {
@@ -987,6 +987,14 @@ ul {
 
   .reset {
     margin-left: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .avatar.lg {
+    width: 80px;
+    height: 80px;
+    font-size: 1.5rem;
   }
 }
 
