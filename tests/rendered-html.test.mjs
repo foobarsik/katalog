@@ -75,4 +75,15 @@ test("marks contacts that still need review", async () => {
   assert.match(client, /Number\(a\.needsReview\) - Number\(b\.needsReview\)/);
   assert.match(client, /Number\(Boolean\(item\.review\)\) \* 32/);
   assert.match(client, /Number\(Boolean\(getInstagramUrl\(item\)\)\) \* 16/);
+  assert.match(client, /getLocationRank\(b\) - getLocationRank\(a\)/);
+});
+
+test("exposes quick filters from the search bar", async () => {
+  const client = await readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8");
+
+  assert.match(client, /aria-label="Відкрити фільтри"/);
+  assert.match(client, /Є відгук/);
+  assert.match(client, /Є Instagram/);
+  assert.match(client, /Є контакт/);
+  assert.match(client, /Очікують перевірки/);
 });

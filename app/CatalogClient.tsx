@@ -259,6 +259,12 @@ function getRank(item: Specialist) {
   );
 }
 
+function getLocationRank(item: Specialist) {
+  if (item.locationStatus === "confirmed") return 2;
+  if (item.locationStatus === "unconfirmed") return 0;
+  return 1;
+}
+
 function telHref(phone: string) {
   return `tel:${phone.replace(/[^\d+]/g, "")}`;
 }
@@ -326,6 +332,17 @@ function SearchIcon() {
     <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
       <circle cx="11" cy="11" r="7" />
       <path d="m20.5 20.5-3.9-3.9" />
+    </svg>
+  );
+}
+
+function FilterIcon() {
+  return (
+    <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
+      <path d="M4 7h16" />
+      <path d="M4 17h16" />
+      <circle cx="9" cy="7" r="2" />
+      <circle cx="15" cy="17" r="2" />
     </svg>
   );
 }
@@ -613,6 +630,11 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState(ALL);
   const [profession, setProfession] = useState("");
+  const [filterPanelOpen, setFilterPanelOpen] = useState(false);
+  const [onlyReviewed, setOnlyReviewed] = useState(false);
+  const [onlyInstagram, setOnlyInstagram] = useState(false);
+  const [onlyContacted, setOnlyContacted] = useState(false);
+  const [reviewState, setReviewState] = useState<"all" | "verified" | "pending">("all");
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [visible, setVisible] = useState(PAGE_SIZE);
   const searchRef = useRef<HTMLInputElement | null>(null);
@@ -667,16 +689,25 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
         category === ALL ? true : normalizeCategory(item.category) === normalizeCategory(category),
       )
       .filter((item) => (profession ? item.subcategory === profession : true))
+      .filter((item) => (onlyReviewed ? Boolean(item.review) : true))
+      .filter((item) => (onlyInstagram ? Boolean(getInstagramUrl(item)) : true))
+      .filter((item) => (onlyContacted ? hasAnyContact(item) : true))
+      .filter((item) => {
+        if (reviewState === "verified") return !item.needsReview;
+        if (reviewState === "pending") return item.needsReview;
+        return true;
+      })
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true))
       .sort(
         (a, b) =>
           Number(a.needsReview) - Number(b.needsReview) ||
           getRank(b) - getRank(a) ||
+          getLocationRank(b) - getLocationRank(a) ||
           getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
       );
-  }, [category, profession, query, specialists]);
+  }, [category, onlyContacted, onlyInstagram, onlyReviewed, profession, query, reviewState, specialists]);
 
-  const filterKey = `${category} ${profession} ${query}`;
+  const filterKey = `${category} ${profession} ${query} ${onlyReviewed} ${onlyInstagram} ${onlyContacted} ${reviewState}`;
   const [lastFilterKey, setLastFilterKey] = useState(filterKey);
   if (lastFilterKey !== filterKey) {
     setLastFilterKey(filterKey);
@@ -702,12 +733,23 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     return () => observer.disconnect();
   }, [filtered.length]);
 
-  const hasFilters = Boolean(query || category !== ALL || profession);
+  const activeFilterCount =
+    Number(category !== ALL) +
+    Number(Boolean(profession)) +
+    Number(onlyReviewed) +
+    Number(onlyInstagram) +
+    Number(onlyContacted) +
+    Number(reviewState !== "all");
+  const hasFilters = Boolean(query || activeFilterCount);
 
   const reset = useCallback(() => {
     setQuery("");
     setCategory(ALL);
     setProfession("");
+    setOnlyReviewed(false);
+    setOnlyInstagram(false);
+    setOnlyContacted(false);
+    setReviewState("all");
     searchRef.current?.focus();
   }, []);
 
@@ -739,7 +781,80 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
               Очистити
             </button>
           ) : null}
+          <button
+            aria-controls="catalog-filter-panel"
+            aria-expanded={filterPanelOpen}
+            aria-label="Відкрити фільтри"
+            className={activeFilterCount ? "filter-toggle on" : "filter-toggle"}
+            type="button"
+            onClick={() => setFilterPanelOpen((current) => !current)}
+          >
+            <FilterIcon />
+            {activeFilterCount ? <span>{activeFilterCount}</span> : null}
+          </button>
         </div>
+
+        {filterPanelOpen ? (
+          <div className="filter-panel" id="catalog-filter-panel">
+            <div className="filter-panel-head">
+              <h2>Фільтри</h2>
+              <button type="button" onClick={reset}>
+                Скинути
+              </button>
+            </div>
+
+            <div className="filter-group">
+              <p>Якість запису</p>
+              <div className="filter-options">
+                <button
+                  aria-pressed={onlyReviewed}
+                  className={onlyReviewed ? "filter-chip on" : "filter-chip"}
+                  type="button"
+                  onClick={() => setOnlyReviewed((current) => !current)}
+                >
+                  Є відгук
+                </button>
+                <button
+                  aria-pressed={onlyInstagram}
+                  className={onlyInstagram ? "filter-chip on" : "filter-chip"}
+                  type="button"
+                  onClick={() => setOnlyInstagram((current) => !current)}
+                >
+                  Є Instagram
+                </button>
+                <button
+                  aria-pressed={onlyContacted}
+                  className={onlyContacted ? "filter-chip on" : "filter-chip"}
+                  type="button"
+                  onClick={() => setOnlyContacted((current) => !current)}
+                >
+                  Є контакт
+                </button>
+              </div>
+            </div>
+
+            <div className="filter-group">
+              <p>Перевірка</p>
+              <div className="filter-options">
+                {[
+                  ["all", "Усі"],
+                  ["verified", "Перевірені"],
+                  ["pending", "Очікують перевірки"],
+                ].map(([value, label]) => (
+                  <button
+                    aria-pressed={reviewState === value}
+                    className={reviewState === value ? "filter-chip on" : "filter-chip"}
+                    key={value}
+                    type="button"
+                    onClick={() => setReviewState(value as "all" | "verified" | "pending")}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : null}
       </section>
 
       <div className="filters">
