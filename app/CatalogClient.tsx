@@ -20,6 +20,24 @@ function normalizeCategory(value: string) {
   return value.replace(/[ʼ’]/g, "'");
 }
 
+const categoryColors: Record<string, string> = {
+  "Здоров'я": "var(--cat-health)",
+  Краса: "var(--cat-beauty)",
+  Послуги: "var(--cat-services)",
+  "Юридичні послуги": "var(--cat-legal)",
+  Заклади: "var(--cat-venues)",
+  Освіта: "var(--cat-education)",
+  Транспорт: "var(--cat-transport)",
+  Фінанси: "var(--cat-finance)",
+  Нерухомість: "var(--cat-realestate)",
+  Їжа: "var(--cat-food)",
+  Інше: "var(--cat-other)",
+};
+
+function getCategoryColor(category: string) {
+  return categoryColors[normalizeCategory(category)] || "var(--cat-other)";
+}
+
 function getInitials(item: Specialist) {
   const source = item.name || item.title || item.instagram || "S";
   return source
@@ -50,8 +68,29 @@ function makeSearchText(item: Specialist) {
 }
 
 function getInstagramUrl(item: Specialist) {
-  if (item.social) return item.social;
+  const social = item.social.trim();
+  const instagramLink = social.match(/https?:\/\/(?:www\.)?instagram\.com\/([^/?#\s]+)/i);
+  if (instagramLink) return instagramLink[0];
+
+  const labeledHandle = social.match(/(?:^|[\/\s])instagram\s*:\s*@?([a-z0-9._]+)/i);
+  if (labeledHandle?.[1]) return `https://www.instagram.com/${labeledHandle[1]}`;
+
   if (item.instagram) return `https://www.instagram.com/${item.instagram}`;
+  return "";
+}
+
+function getExternalSocialUrl(item: Specialist) {
+  const social = item.social.trim();
+  if (!social || getInstagramUrl(item)) return "";
+
+  if (/^https?:\/\//i.test(social)) return social;
+
+  const telegram = social.match(/^telegram\s*:\s*@?([a-z0-9_]+)/i);
+  if (telegram?.[1]) return `https://t.me/${telegram[1]}`;
+
+  const telegramUrl = social.match(/(?:^|\s)(?:https?:\/\/)?t\.me\/([a-z0-9_]+)/i);
+  if (telegramUrl?.[1]) return `https://t.me/${telegramUrl[1]}`;
+
   return "";
 }
 
@@ -135,6 +174,7 @@ function SpecialistCard({
   onOpen: (item: Specialist) => void;
 }) {
   const instagramUrl = getInstagramUrl(item);
+  const externalSocialUrl = getExternalSocialUrl(item);
   const hasInstagramDetails = Boolean(item.instagramTitle || item.instagramBio);
 
   function openFromKeyboard(event: React.KeyboardEvent<HTMLElement>) {
@@ -150,6 +190,7 @@ function SpecialistCard({
       onClick={() => onOpen(item)}
       onKeyDown={openFromKeyboard}
       role="button"
+      style={{ "--cat-color": getCategoryColor(item.category) } as React.CSSProperties}
       tabIndex={0}
     >
       <div className="card-topline">
@@ -202,6 +243,12 @@ function SpecialistCard({
             <WebsiteIcon />
           </ContactLink>
         ) : null}
+        {externalSocialUrl ? (
+          <ContactLink href={externalSocialUrl}>
+            <span className="visually-hidden">Посилання</span>
+            <WebsiteIcon />
+          </ContactLink>
+        ) : null}
         {item.phone ? (
           <ContactLink href={`tel:${item.phone.replace(/\s+/g, "")}`} external={false}>
             <span className="visually-hidden">Телефон</span>
@@ -223,6 +270,7 @@ function DetailModal({
   if (!item) return null;
 
   const instagramUrl = getInstagramUrl(item);
+  const externalSocialUrl = getExternalSocialUrl(item);
 
   return (
     <div className="modal-backdrop">
@@ -232,6 +280,7 @@ function DetailModal({
         aria-modal="true"
         className="detail-modal"
         role="dialog"
+        style={{ "--cat-color": getCategoryColor(item.category) } as React.CSSProperties}
       >
         <button aria-label="Закрити" className="modal-close" type="button" onClick={onClose}>
           ×
@@ -289,6 +338,7 @@ function DetailModal({
             </ContactLink>
           ) : null}
           {item.website ? <ContactLink href={item.website}>Відкрити сайт</ContactLink> : null}
+          {externalSocialUrl ? <ContactLink href={externalSocialUrl}>Відкрити посилання</ContactLink> : null}
           {item.phone ? (
             <ContactLink href={`tel:${item.phone.replace(/\s+/g, "")}`} external={false}>
               Подзвонити
@@ -335,7 +385,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     const result = specialists
       .filter((item) => (category === "Усі" ? true : normalizeCategory(item.category) === normalizeCategory(category)))
       .filter((item) => (withInstagram ? Boolean(getInstagramUrl(item)) : true))
-      .filter((item) => (withWebsite ? Boolean(item.website) : true))
+      .filter((item) => (withWebsite ? Boolean(item.website || getExternalSocialUrl(item)) : true))
       .filter((item) => (withReviews ? Boolean(item.review) : true))
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true));
 
@@ -357,8 +407,20 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       <header className="app-header">
         <div className="brand">
           <div>
-            <p>Катовіце та околиці · {specialists.length} записів</p>
+            <span className="eyebrow">
+              <em>{specialists.length}</em>Катовіце та околиці
+            </span>
             <h1>Каталог спеціалістів</h1>
+            <ul className="category-legend">
+              {categories
+                .filter((item) => item !== "Усі")
+                .map((item) => (
+                  <li key={item}>
+                    <span className="dot" style={{ background: getCategoryColor(item) }} aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+            </ul>
           </div>
         </div>
       </header>
@@ -421,12 +483,14 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
               <button
                 className={item === category ? "category-button active" : "category-button"}
                 key={item}
+                style={item === "Усі" ? undefined : ({ "--cat-color": getCategoryColor(item) } as React.CSSProperties)}
                 type="button"
                 onClick={() => setCategory(item)}
-            >
-              <span>{item}</span>
-              <em>{categoryCounts[normalizeCategory(item)] || 0}</em>
-            </button>
+              >
+                <span className="dot" aria-hidden="true" />
+                <span>{item}</span>
+                <em>{categoryCounts[normalizeCategory(item)] || 0}</em>
+              </button>
             ))}
           </div>
         </aside>
