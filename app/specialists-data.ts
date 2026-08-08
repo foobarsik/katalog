@@ -12,8 +12,6 @@ export type Specialist = {
   communityMatch: boolean;
   avatar: string;
   instagramTitle: string;
-  instagramFollowers: string;
-  instagramFollowing: string;
   instagramBio: string;
   instagramStatus: string;
 };
@@ -33,8 +31,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "/avatars/yelyzaveta_hair_.jpg",
     "instagramTitle": "КЕРАТИН БОТОКС ОБУЧЕНИЕ КАТОВИЦЕ |KERATYNA KATOWICE",
-    "instagramFollowers": "1,544",
-    "instagramFollowing": "1,510",
     "instagramBio": "Бережно сохраняю прикорневой объём Эффект 4–6 месяцев без утяжеления Уютная студия в центре Катовице Обучение с нуля,...",
     "instagramStatus": "ok"
   },
@@ -52,8 +48,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "/avatars/dashery_stylist_kr.jpg",
     "instagramTitle": "ПАРИКМАХЕР КОЛОРИСТ Катовице Перукар Колорист Катовіце",
-    "instagramFollowers": "3,321",
-    "instagramFollowing": "763",
     "instagramBio": "Дарʼя Колорист Перукар| UGC 🤍Створюю шедеври на волоссі☞ Виправлю усе⁣⁣ 🎓Колористика Навчання ☞ Найскладніші фарбування...",
     "instagramStatus": "ok"
   },
@@ -71,8 +65,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "/avatars/olga.massage.katowice.jpg",
     "instagramTitle": "Масаж Катовіце | Masaż Katowice | Навчання масажу Катовіце",
-    "instagramFollowers": "1,885",
-    "instagramFollowing": "659",
     "instagramBio": "🔹 12 років досвіду 🔹 Дипломований спеціаліст по масажу 🔹 Медична освіта 🔹 -5 кг після курсу антицелюлітного масажу...",
     "instagramStatus": "ok"
   },
@@ -90,8 +82,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/perfect_nails_katowice.jpg",
     "instagramTitle": "Elena Neskorodieva",
-    "instagramFollowers": "340",
-    "instagramFollowing": "306",
     "instagramBio": "Elena Neskorodieva - Paznokcie Katowice - Manikiur hybrydowy - Manikiur żelowy - Pedikiur",
     "instagramStatus": "ok"
   },
@@ -109,8 +99,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -128,8 +116,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "/avatars/vean_tattoo_katowice.jpg",
     "instagramTitle": "VEAN TATTOO",
-    "instagramFollowers": "11.2k",
-    "instagramFollowing": "1,115",
     "instagramBio": "VEAN TATTOO - Największa sieć tattoo-studio w Europie - Tattoo Piercing Szkolenia Laser...",
     "instagramStatus": "ok"
   },
@@ -147,8 +133,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -166,8 +150,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "/avatars/moskalova.brows.jpg",
     "instagramTitle": "БРОВИ ЛАМІ ВІЙ КУРСИ КАТОВІЦЕ | BRWI LAMINACJA RZĘS KATOWICE",
-    "instagramFollowers": "1,263",
-    "instagramFollowing": "126",
     "instagramBio": "Даяна майстер брів & ламі, чую що хочеш - навіть якщо сама ще не знаєш, своя UA у Katowice, 6 років в beauty...",
     "instagramStatus": "ok"
   },
@@ -185,8 +167,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -204,8 +184,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "/avatars/nails_koshuba.pl.jpg",
     "instagramTitle": "Manicure Pedicure Katowice Манікюр Педікюр Навчання Катовіце",
-    "instagramFollowers": "524",
-    "instagramFollowing": "272",
     "instagramBio": "Idealny manicure w 1,5 godziny - 6 lat doświadczenia - Trwałość i jakość aż do 3 tygodni - Pracuję 7 dni w tygodniu...",
     "instagramStatus": "ok"
   },
@@ -223,8 +201,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/dr__maya.jpg",
     "instagramTitle": "Майя Руселевич • АЛЕРГОЛОГ • ПЕДІАТР • ПУЛЬМОНОЛОГ",
-    "instagramFollowers": "78k",
-    "instagramFollowing": "386",
     "instagramBio": "Кандидатка медичних наук; 20 років досвіду - Консультую в Direct - Healthy lifestyle doctor @dr.maya_lifestyle...",
     "instagramStatus": "ok"
   },
@@ -242,8 +218,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/dr.petrenko_olga.jpg",
     "instagramTitle": "Педіатр онлайн.Атопічний дерматит.Кашель.Прикорм.ГВ",
-    "instagramFollowers": "25.4k",
-    "instagramFollowing": "1,235",
     "instagramBio": "Педіатр онлайн, досвід 10+ років - Здобуваю другу вищу магістр нутріціології - Здоров’я дитини без паніки...",
     "instagramStatus": "ok"
   },
@@ -257,12 +231,10 @@ export const specialists: Specialist[] = [
     "website": "",
     "social": "",
     "instagram": "",
-    "description": "Пломба детского зуба — 250 zl. Пришли по рекомендации из местных чатов, подход врача понравился. Позже уточнили: \"у них є як дорослий кабінет(там працюють наші) так і дитячий кабінет(лікар полька, але дуже уважна)\"",
+    "description": "Пломба детского зуба — 250 zl. Пришли по рекомендации из местных чатов, подход врача понравился. Позже уточнили: \"у них є як дорослий кабінет(там працюють наші) так і дитячий кабінет(лікар полька, але дуже уважна)\". Также подтверждено: доктор Михайло (з Києва) и Олег Олегович (з Херсона)",
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -280,8 +252,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/ladna.ja.jpg",
     "instagramTitle": "LadnaJa • studio pięknego ciała • Katowice, Łódź",
-    "instagramFollowers": "3,085",
-    "instagramFollowing": "59",
     "instagramBio": "Modelujemy ciało z precyzją i pasją - Kriolipoliza, Kawitacja ultradźwiękowа, Zabiegi wyszczuplające, Nowoczesna...",
     "instagramStatus": "ok"
   },
@@ -299,8 +269,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "/avatars/beauty.fairy.s.jpg",
     "instagramTitle": "KOSMETYCZNA STUDIA | SOSNOWIEC",
-    "instagramFollowers": "127",
-    "instagramFollowing": "47",
     "instagramBio": "twój wygląd w rękach mistrza - paznokcie ta brwi za 2 godziny - gwarancja na usługi 5 dni",
     "instagramStatus": "ok"
   },
@@ -318,8 +286,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -337,8 +303,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/dr.ehsan.yousefian_.jpg",
     "instagramTitle": "Эхсан Юсефиан",
-    "instagramFollowers": "531",
-    "instagramFollowing": "1,097",
     "instagramBio": "Др.Эхсан Юсефиан - Детский стоматолог - Главный врач клиники Kids Dental - Лечение зубов во сне - Лечение детей от 0 [PRIVATE PROFILE - posts not visible]",
     "instagramStatus": "ok"
   },
@@ -356,8 +320,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -375,8 +337,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -394,8 +354,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -413,8 +371,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -432,8 +388,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -451,8 +405,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -470,8 +422,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -489,8 +439,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/olya_romashkova_cosmetology.jpg",
     "instagramTitle": "Romashkova Skin Aesthetics Clinic | Anti-age & Laser Clinic",
-    "instagramFollowers": "4,976",
-    "instagramFollowing": "795",
     "instagramBio": "Estetyczna i iniekcyjna kosmetologia - Laser CO2 IPL Morpheus8 - Anti-age терапії та сучасні методики - 10+...",
     "instagramStatus": "ok"
   },
@@ -508,8 +456,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -527,8 +473,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -546,8 +490,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -565,8 +507,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/yanina_shymanska.jpg",
     "instagramTitle": "Yanina Shymanska",
-    "instagramFollowers": "3,894",
-    "instagramFollowing": "2,624",
     "instagramBio": "Акушер-гінеколог, Статеве виховання - УЗД, Питання про гормони - Online консультації - Katowice...",
     "instagramStatus": "ok"
   },
@@ -584,8 +524,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -603,8 +541,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -622,8 +558,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -641,8 +575,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/dr.alina_katowice.jpg",
     "instagramTitle": "Kosmetologist 📍Odesa-Katowice",
-    "instagramFollowers": "2,363",
-    "instagramFollowing": "849",
     "instagramBio": "Высшее медицинское образование ОНМедУ - Аппаратная и инъекционная косметология - Ботокс Филлеры Биоревитализация...",
     "instagramStatus": "ok"
   },
@@ -660,8 +592,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/viktori.nice.hair.jpg",
     "instagramTitle": "ПЕРУКАР | Fryzjer | 🇵🇱 Katowice",
-    "instagramFollowers": "2,499",
-    "instagramFollowing": "3,196",
     "instagramBio": "Засновниця: @vedantahair - Стрижки Фарбування СПА-догляд - Працюю з текстурою - Відновлюю структуру, створюю форму",
     "instagramStatus": "ok"
   },
@@ -679,8 +609,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/crystal_katowice.jpg",
     "instagramTitle": "SALON BEAUTY KATOWICE • fryzjer • paznokcie • kosmetologia",
-    "instagramFollowers": "1,599",
-    "instagramFollowing": "125",
     "instagramBio": "Sztuka piękna dopracowanego w każdym detalu - Zadbamy o Twój wygląd od stóp do głów - Sprawdź naszą ofertę i umów...",
     "instagramStatus": "ok"
   },
@@ -698,8 +626,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "/avatars/torry_hair_studio.jpg",
     "instagramTitle": "FRYZJER-KOLORYSTA •TRWAŁA Ondulacja 📍KATOWICE🇺🇦🇵🇱",
-    "instagramFollowers": "354",
-    "instagramFollowing": "288",
     "instagramBio": "Dbam o zdrowie włosów i pełne zadowolenie klientów - Farbowanie, total blond, trwała ondulacja, odbudowa włosów",
     "instagramStatus": "ok"
   },
@@ -717,8 +643,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -736,8 +660,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/alledoctor.jpg",
     "instagramTitle": "Дмитро | лікар в Польщі| Лодзь | Варшава",
-    "instagramFollowers": "17.7k",
-    "instagramFollowing": "66",
     "instagramBio": "Швидкий прийом пацієнтів без тривалих черг - Languages: українська, русский, polski, english - Консультації онлайн...",
     "instagramStatus": "ok"
   },
@@ -755,8 +677,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/dr.kateryna_bakiko.jpg",
     "instagramTitle": "ДЕРМАТОЛОГ | ЛЬВІВ | ОНЛАЙН",
-    "instagramFollowers": "115k",
-    "instagramFollowing": "95",
     "instagramBio": "Дитячий та дорослий дерматолог, трихолог - Доказова медицина - Міжнародна сертифікація - Школа атопічного дерматиту",
     "instagramStatus": "ok"
   },
@@ -774,8 +694,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -793,8 +711,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -812,8 +728,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/studio_by_yuliia_ryzhak.jpg",
     "instagramTitle": "DEPILACJA CIAŁA ZA 1 GODZINĘ•PRZEDŁUŻANIE RZĘS ZA 110 MIN",
-    "instagramFollowers": "576",
-    "instagramFollowing": "5,032",
     "instagramBio": "Hejka, jestem Julia - Depilacja ciała za 1 godzinę - Przedłużania rzęs 110 min - Aby dokonać rezerwacji napisz do Direct",
     "instagramStatus": "ok"
   },
@@ -831,8 +745,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -850,8 +762,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -869,8 +779,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -888,8 +796,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -907,8 +813,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/lena_konovalova_podolog.jpg",
     "instagramTitle": "PODOLOGIA MANICURE PEDICURE KATOWICE",
-    "instagramFollowers": "775",
-    "instagramFollowing": "250",
     "instagramBio": "YOUR BEAUTY PLACE STUDIO - про роботу та особисте - PODOLOGIA/Подологія MANICURE/Манікюр PEDICURE/Педикюр",
     "instagramStatus": "ok"
   },
@@ -926,8 +830,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "/avatars/podolog_katowice_.jpg",
     "instagramTitle": "Александра Торговцова",
-    "instagramFollowers": "566",
-    "instagramFollowing": "857",
     "instagramBio": "ponad 15 lat w podologii - Terapia wrastających paznokci bez bólu - Pedicure, opracowanie...",
     "instagramStatus": "ok"
   },
@@ -945,8 +847,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "/avatars/liona.stylist.jpg",
     "instagramTitle": "Natalia Levchenko | Hair • Makeup • Color | Katowice",
-    "instagramFollowers": "1,169",
-    "instagramFollowing": "337",
     "instagramBio": "Hair & Makeup Artist - Bridal Event Colorist - Milan Fashion Week 2023 Team - Katowice",
     "instagramStatus": "ok"
   },
@@ -964,8 +864,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -983,8 +881,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/kolorysta_olgazinenko.jpg",
     "instagramTitle": "KOLORIST | KATOWICE | ВІДНОВЛЕННЯ ВОЛОССЯ",
-    "instagramFollowers": "1,662",
-    "instagramFollowing": "522",
     "instagramBio": "Specjalistka od strzyżenia, koloryzacji i regeneracji włosów - 16 lat doświadczenia - Efekt zdrowych, lśniących...",
     "instagramStatus": "ok"
   },
@@ -1002,8 +898,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1021,8 +915,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/studioroxe.jpg",
     "instagramTitle": "",
-    "instagramFollowers": "1,699",
-    "instagramFollowing": "110",
     "instagramBio": "Kosmetyczki & akcesoria do włosów - Zamówienia przez Direct - Based in Poland",
     "instagramStatus": "ok"
   },
@@ -1040,8 +932,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1059,8 +949,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1078,8 +966,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/oksana.ivaniuk_.jpg",
     "instagramTitle": "DEPILACJA| LASER | ELEKTROLIZA | SZKOLENIE | GLIWICE",
-    "instagramFollowers": "687",
-    "instagramFollowing": "252",
     "instagramBio": "Depilacja cukrem, woskiem, elektroliza - Laserowa epilacja - Trener szkoły PANDHY’S @pandhys_poland - Zaufaj...",
     "instagramStatus": "ok"
   },
@@ -1097,8 +983,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/vlada_monastyrska.jpg",
     "instagramTitle": "✈️🌍Тури • Готелі • Круїзи|Travelagent",
-    "instagramFollowers": "2,367",
-    "instagramFollowing": "598",
     "instagramBio": "PolFunTravel - Твій персональний турагент - Підберу тур, як для себе - Mikołów(Jana Pawła II 20)",
     "instagramStatus": "ok"
   },
@@ -1116,8 +1000,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/timetotravel_psn.jpg",
     "instagramTitle": "Поїхали з нами 🌍 Турагентство",
-    "instagramFollowers": "108",
-    "instagramFollowing": "22",
     "instagramBio": "Працюємо онлайн - зручно і швидко - З вами на звʼязку Наталія і Яна - 10 років досвіду в туризмі - Більше тисячі...",
     "instagramStatus": "ok"
   },
@@ -1135,8 +1017,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1154,8 +1034,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1173,8 +1051,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1192,8 +1068,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1211,8 +1085,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/hairdresser.000.jpg",
     "instagramTitle": "Yuliia hairdresser ✂️",
-    "instagramFollowers": "137",
-    "instagramFollowing": "108",
     "instagramBio": "Колорист стилист - 15 лет в сфере красоты - Индивидуальные стрижки - Все виды окрашивания...",
     "instagramStatus": "ok"
   },
@@ -1230,8 +1102,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1249,8 +1119,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1268,8 +1136,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/comfort_trans_dispatcher.jpg",
     "instagramTitle": "КВИТКИ НА АВТОБУС | СТРАХУВАННЯ | УКРАЇНА - ЄВРОПА",
-    "instagramFollowers": "10.9k",
-    "instagramFollowing": "14,725",
     "instagramBio": "Квитки та страховка в одному місці - Рейси до 25+ країн Європи - Оплата при посадці, купівля...",
     "instagramStatus": "ok"
   },
@@ -1287,8 +1153,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1306,8 +1170,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1325,8 +1187,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1344,8 +1204,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/krawcowa_proff.jpg",
     "instagramTitle": "Професійна кравчиня з дуже великим досвідом 🪡",
-    "instagramFollowers": "122",
-    "instagramFollowing": "38",
     "instagramBio": "Katowice/Sosnowiec - Кравчиня з 40+ років досвіду - Індивідуальний підхід до кожної ситуації - Зручна локалізація",
     "instagramStatus": "ok"
   },
@@ -1363,8 +1221,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1382,8 +1238,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1401,8 +1255,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1420,8 +1272,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/czas.katowice.jpg",
     "instagramTitle": "CZAS studio fitness Katowice",
-    "instagramFollowers": "2,701",
-    "instagramFollowing": "72",
     "instagramBio": "Po raz pierwszy w Katowicach - Rewolucyjne podejście do fitnessu: AERIAL YOGA, LATINA...",
     "instagramStatus": "ok"
   },
@@ -1439,8 +1289,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1458,8 +1306,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1477,8 +1323,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1496,8 +1340,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1515,8 +1357,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1534,8 +1374,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/anastasiakots.makeup.hair.jpg",
     "instagramTitle": "MAKEUP | HAIR KATOWICE | МАКИЯЖ • ОБУЧЕНИЕ КАТОВИЦЕ",
-    "instagramFollowers": "5,309",
-    "instagramFollowing": "689",
     "instagramBio": "ANASTASIA KOTS - Brides Evening Makeup Artist - Hairstylist - Базовый курс Визажист с 0...",
     "instagramStatus": "ok"
   },
@@ -1553,8 +1391,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/katrinnmakeup.jpg",
     "instagramTitle": "KATRIN | MAKE UP KATOWICE | HAIR | EDUCATION",
-    "instagramFollowers": "2,506",
-    "instagramFollowing": "482",
     "instagramBio": "Курс Визажист с 0 - Evening Wedding Make Up Hairstyle - Makeup Artist and Hairstylist - Katowice, Poland",
     "instagramStatus": "ok"
   },
@@ -1572,8 +1408,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/marina_zalizovskaja.jpg",
     "instagramTitle": "ФІЗИЧНИЙ РОЗВИТОК ПЛАВАННЯ НЕМОВЛЯТ | Тихи | Катовіце",
-    "instagramFollowers": "1,316",
-    "instagramFollowing": "651",
     "instagramBio": "Фізичний розвиток Плавання - 15+ років досвіду - працюю з немовлятами 0+ - Онлайн-консультація та супровід",
     "instagramStatus": "ok"
   },
@@ -1591,8 +1425,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/advokat_law_for_all.jpg",
     "instagramTitle": "Svitlana Savenko - АДВОКАТ ОНЛАЙН ЮРИСТ ПОМОЩЬ БИЗНЕСУ",
-    "instagramFollowers": "5,019",
-    "instagramFollowing": "499",
     "instagramBio": "Развод, алименты, раздел имущества, наследство, кредиты - Новая основная страница @advokat_law_for_all_",
     "instagramStatus": "ok"
   },
@@ -1610,8 +1442,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1629,8 +1459,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/kancelaria_kutsko.jpg",
     "instagramTitle": "ЛЕГАЛИЗАЦИЯ | ЮРИДИЧЕСКИЕ УСЛУГИ | ПОЛЬША МЕЖДУНАРОДНАЯ ЗАЩИТА",
-    "instagramFollowers": "32.7k",
-    "instagramFollowing": "1",
     "instagramBio": "Бессрочное право пребывания в Польше на основании международной защиты - За 4+ года 1987 дел - Оформим гражданство без ПМ...",
     "instagramStatus": "ok"
   },
@@ -1648,8 +1476,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1667,8 +1493,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/soniadei.jpg",
     "instagramTitle": "Sonia Dei / Tattoo / Katowice",
-    "instagramFollowers": "25.2k",
-    "instagramFollowing": "713",
     "instagramBio": "TATTOO w Katowice @astattookatowice - Z dbałością o detale przeniosę Twój pomysł na skórę - masz pytania napisz...",
     "instagramStatus": "ok"
   },
@@ -1686,8 +1510,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1705,8 +1527,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1724,8 +1544,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/dr_ersteniuk.jpg",
     "instagramTitle": "Трихолог /Варшава Уляна Ерстенюк",
-    "instagramFollowers": "11.8k",
-    "instagramFollowing": "222",
     "instagramBio": "Лікування волосся та шкіри голови - Ліцензія PST 074 - Засновниця @tress_therapy_centr",
     "instagramStatus": "ok"
   },
@@ -1743,8 +1561,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/mm_legallycompany.jpg",
     "instagramTitle": "Карта Побыту|Легализация в Польше Katowice",
-    "instagramFollowers": "1,069",
-    "instagramFollowing": "112",
     "instagramBio": "Полное сопровождение по Карте Побыту - Бесплатная консультация - ul.Przemysłowa 10/226, Katowice",
     "instagramStatus": "ok"
   },
@@ -1762,8 +1578,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1781,8 +1595,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1800,8 +1612,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1819,8 +1629,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1838,8 +1646,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "Profile isn't available • Instagram",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "[FAILED: profile_not_available]",
     "instagramStatus": "failed"
   },
@@ -1857,8 +1663,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/tourukraine.jpg",
     "instagramTitle": "Автобусні квитки до Європи | TOURUKRAINE",
-    "instagramFollowers": "107k",
-    "instagramFollowing": "1",
     "instagramBio": "Надійні рейси щодня - Квитки онлайн за 2 хвилини - Підтримка з 08:00 до 23:00 - Бронюй вже зараз",
     "instagramStatus": "ok"
   },
@@ -1876,8 +1680,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1895,8 +1697,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1914,8 +1714,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1933,8 +1731,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/drukidruk.pl.jpg",
     "instagramTitle": "Druki Druk | DTF Print Polska",
-    "instagramFollowers": "514",
-    "instagramFollowing": "72",
     "instagramBio": "Profesjonalny DTF Druk od 1 sztuki - Twój projekt lub nasza grafika - Szybka dostawa w całej Polsce - Jakość premium...",
     "instagramStatus": "ok"
   },
@@ -1952,8 +1748,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -1971,8 +1765,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/zharkov.evgen.jpg",
     "instagramTitle": "ведучий Варшава • Краків • Вроцлав • Євгеній Жарков",
-    "instagramFollowers": "3,176",
-    "instagramFollowing": "368",
     "instagramBio": "ведучий, за якого не соромно перед батьками, без шаблону і крінжа, створюю романтичні церемонії з гумором...",
     "instagramStatus": "ok"
   },
@@ -1990,8 +1782,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2009,8 +1799,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2028,8 +1816,6 @@ export const specialists: Specialist[] = [
     "communityMatch": false,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2047,8 +1833,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2066,8 +1850,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2085,8 +1867,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2104,8 +1884,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2123,8 +1901,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2142,8 +1918,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2161,8 +1935,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/alyonka_masalyova.jpg",
     "instagramTitle": "Tattoo Katowice",
-    "instagramFollowers": "11.2k",
-    "instagramFollowing": "128",
     "instagramBio": "Tattoo Katowice 9 lat doświadczenia Katowice Owner @tattoo_katowice_ tattoo tattoo Malta 🇲🇹 Gozo обучение",
     "instagramStatus": "ok"
   },
@@ -2180,8 +1952,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2199,8 +1969,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2218,8 +1986,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2237,8 +2003,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "Profile isn't available • Instagram",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "[FAILED: not_found]",
     "instagramStatus": "failed"
   },
@@ -2256,8 +2020,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2275,8 +2037,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/dr.liliia_nikulina.jpg",
     "instagramTitle": "Лілія Нікуліна ▫️гастроентеролог▫️",
-    "instagramFollowers": "2,064",
-    "instagramFollowing": "1,702",
     "instagramBio": "👩🏼‍⚕️Лікар-гастроентеролог 🥗Консультант з харчування 🩺Консультую в @panaceanova /online 👩🏼‍🏫Викладач НМУ імені О.О... f3.cool/Lilinjka/?hl=uk",
     "instagramStatus": "ok"
   },
@@ -2294,8 +2054,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/dr.krivenkogastro.jpg",
     "instagramTitle": "ГАСТРОЕНТЕРОЛОГ | АЛЕРГОЛОГ | ТИХИ",
-    "instagramFollowers": "1,756",
-    "instagramFollowing": "148",
     "instagramBio": "👩‍⚕️Гастроентеролог Польща 🇺🇦Прийом для українців 🔹Офлайн консультації українською 🔹Без страху й сорому 🔹Пояснюю... Алергія Запитання Прайс Відгуки Консультації",
     "instagramStatus": "ok"
   },
@@ -2313,8 +2071,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2332,8 +2088,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2351,8 +2105,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2370,8 +2122,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2389,8 +2139,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/adwokat_olga_kotyk.jpg",
     "instagramTitle": "Адвокат & Медіатор | 20+ років у праві",
-    "instagramFollowers": "2,713",
-    "instagramFollowing": "8,627",
     "instagramBio": "💼Веду юридичні справи 🇺🇦українців у Польщі🇵🇱 📌 Вирішую складні питання просто та зрозуміло:легалізація, бізнес,... Клієнтів ПІД КЛЮЧ Освіта Консультац 2026",
     "instagramStatus": "ok"
   },
@@ -2408,8 +2156,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/kpw_auto_.jpg",
     "instagramTitle": "SKUP•SPRZEDAŻ•ZAMIANA•KOMIS Bytom | Ruda Śląska",
-    "instagramFollowers": "321",
-    "instagramFollowing": "61",
     "instagramBio": "🚗 Skup•Sprzedaż•Zamiana 👍🏻 1000+ zadowolonych klientów 📂 auta z OC i przeglądem 📍 Bytom & Ruda Śląska 🕐 pn-sb 10-19 |... m.olx.pl/oferty/uzytkownik/1JGmfY",
     "instagramStatus": "ok"
   },
@@ -2427,8 +2173,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2446,8 +2190,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2465,8 +2207,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2484,8 +2224,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2503,8 +2241,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2522,8 +2258,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/pracownia.brigadir.jpg",
     "instagramTitle": "Grawerowanie laserowe | Prezenty z drzewa | Skarbonka | Katowice",
-    "instagramFollowers": "468",
-    "instagramFollowing": "2,836",
     "instagramBio": "● Ekskluzywne pomysły z drewna, skarbonka ● Wyjątkowe prezenty i dekoracje z drewnа ● Szybka realizacja zamówień 🇵🇱🇺🇦 business.allegro.pl/uzytkownik/Brigadir and 1 more",
     "instagramStatus": "ok"
   },
@@ -2541,8 +2275,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2560,8 +2292,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/kosmetolog_tarasova_katowice.jpg",
     "instagramTitle": "Helena Tarasova🇺🇦🇵🇱",
-    "instagramFollowers": "1,739",
-    "instagramFollowing": "741",
     "instagramBio": "Допоможу зберегти красу і молодість вашої шкіри👌 За здоровою шкірою голови і міцним волоссям - також до мене🌹 ☎️ +48... helena3.booksy.com",
     "instagramStatus": "ok"
   },
@@ -2579,8 +2309,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/beauty_atelier_ls.jpg",
     "instagramTitle": "Beauty Atelier | Kosmetologia Estetyczna | Powiększenie ust",
-    "instagramFollowers": "958",
-    "instagramFollowing": "992",
     "instagramBio": "• Kosmetologia estetyczna • Szkolenia | Zabiegi • Modelowanie twarzy – bez skalpela! • Autorskie techniki beautyatelierbylenashynderuk.booksy.com/h",
     "instagramStatus": "ok"
   },
@@ -2598,8 +2326,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/a.kittttty.jpg",
     "instagramTitle": "NAILS • GEMS | Katowice",
-    "instagramFollowers": "2,294",
-    "instagramFollowing": "302",
     "instagramBio": "hejka🌸 na razie jestem na wyjeździe w Korei do środka września 🇰🇷 second account @aleks.yashchuk_ zapisy przez dm 👇🏻",
     "instagramStatus": "ok"
   },
@@ -2617,8 +2343,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2636,8 +2360,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/tanita_zumba.kato.jpg",
     "instagramTitle": "ZIN Tetiana Katowice",
-    "instagramFollowers": "435",
-    "instagramFollowing": "80",
     "instagramBio": "Tetiana Metokhir Certyfikowany Instruktor Zumba Katowice 💃🏼 Zapis na treningi poprzez direct 💌",
     "instagramStatus": "ok"
   },
@@ -2655,8 +2377,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2674,8 +2394,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2693,8 +2411,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2712,8 +2428,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2731,8 +2445,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2750,8 +2462,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/lova.estate.katowice.jpg",
     "instagramTitle": "РІЄЛТОР 📌КАТОВІЦЕ | •КУПІВЛЯ •ОРЕНДА •ІНВЕСТИЦІЇ 🏡🔑",
-    "instagramFollowers": "122",
-    "instagramFollowing": "1",
     "instagramBio": "ELENA | Real Estate🤍 Уяви ранок у квартирі мрії… Я зроблю це реальністю- швидко та вигідно❕ 🗣️UA|RU|ENG|PL t.me/elena_realestatee and 1 more",
     "instagramStatus": "ok"
   },
@@ -2769,8 +2479,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/dynasty_stomatology.jpg",
     "instagramTitle": "СТОМАТОЛОГІЯ | ВІНІРИ | БРЕКЕТИ | ІМПЛАНТАЦІЯ | КРАКІВ",
-    "instagramFollowers": "22.4k",
-    "instagramFollowing": "2",
     "instagramBio": "Естетика та здоров'я для всiєї родини 📍 Kraków, Romanowicza 1 і 4B 📲 +48 576 676 266 ⌚️ Пн-Пт: 8-20 / Сб: 8-14 ✉️... dynastystomatology.pl/uk and 1 more",
     "instagramStatus": "ok"
   },
@@ -2788,8 +2496,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/records.pl.jpg",
     "instagramTitle": "RECORDS Męskie Strzyżenie |Strzyżenie brody |Szkolenie fryzjerów",
-    "instagramFollowers": "176",
-    "instagramFollowing": "224",
     "instagramBio": "profesjonalizm, doświadczenie, komfort ⭐️⭐️⭐️⭐️⭐️ 📞 799 090 303 - 🇵🇱🇺🇦🇬🇧 🕰️ codziennie 10-20 recordskatowice.booksy.com/a and 1 more",
     "instagramStatus": "ok"
   },
@@ -2807,8 +2513,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2826,8 +2530,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2845,8 +2547,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2864,8 +2564,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2883,8 +2581,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2902,8 +2598,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2921,8 +2615,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2940,8 +2632,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2959,8 +2649,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -2978,8 +2666,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/souljewelrypl.jpg",
     "instagramTitle": "Soul Jewelry • Obrączki ślubne • Pierścionki zaręczynowe • Inne",
-    "instagramFollowers": "2,857",
-    "instagramFollowing": "0",
     "instagramBio": "💍Produkcja i sprzedaż biżuterii złotej 🤍Unikalne wyroby jubilerskie stworzone z miłością 💌Indywidualne zamówienia... www.souljewelry.pl",
     "instagramStatus": "ok"
   },
@@ -2997,8 +2683,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "𝑇𝐻𝐸 𝐺𝐴𝑅𝐷𝐸𝑁 𝐿𝑂𝑈𝑁𝐺𝐸 𝐵𝐴𝑅 & 𝑇𝐸𝑅𝑅𝐴𝐶𝐸 ⚜️𝐊𝐀𝐓𝐎𝐖𝐈𝐂𝐄⚜️",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "[FAILED: login_wall]",
     "instagramStatus": "failed"
   },
@@ -3016,8 +2700,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3035,8 +2717,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3054,8 +2734,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/olga_lipkevych.jpg",
     "instagramTitle": "ДЕРМАТОЛОГ | КОСМЕТОЛОГ | ТРИХОЛОГ Катовіце, Польща📍",
-    "instagramFollowers": "1,647",
-    "instagramFollowing": "2,258",
     "instagramBio": "-Лікар-косметолог з вищою медичною освітою. -24роки досвіду 👩‍🎓Навчання -Підбір косметичних засобів ✍🏻Запис... online-zapis.com/online/01538",
     "instagramStatus": "ok"
   },
@@ -3073,8 +2751,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3092,8 +2768,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3111,8 +2785,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3130,8 +2802,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3149,8 +2819,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3168,8 +2836,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3187,8 +2853,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/vektor_24poland.jpg",
     "instagramTitle": "vektor_24Poland 🇺🇦 Кривий Ріг-Польща 🇵🇱",
-    "instagramFollowers": "13k",
-    "instagramFollowing": "5,650",
     "instagramBio": "ПАСАЖИРСЬКІ ПЕРЕВЕЗЕННЯ 🇺🇦Кривий Ріг,Кропивницький,Умань 🇵🇱Жешув,Краків,Катовіце,Глівіце,Ополе, Вроцлав... vektor24.com.ua/ua/napravleniya.html",
     "instagramStatus": "ok"
   },
@@ -3206,8 +2870,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/belinens_ua.jpg",
     "instagramTitle": "ПОСТІЛЬНА БІЛИЗНА 🖤 УКРАЇНА 🇺🇦 І 🌍",
-    "instagramFollowers": "7,844",
-    "instagramFollowing": "38",
     "instagramBio": "🖤Шию будь-який колір та розмір за 5 днів 🖤Простирадло на резинці без доплат 🖤Подарункова упаковка 🖤Дитяча білизна... ВІДГУКИ-2 ТЕНСЕЛ ПАЛІТРА ЦІНИ І РОЗМІРИ АКТУАЛЬНЕ",
     "instagramStatus": "ok"
   },
@@ -3225,8 +2887,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "Dr.Eugenia|DERMATOLOG&KOSMETOLOG| KATOWICE 🇵🇱|PHATTAYA🇹🇭",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "[FAILED: login_wall]",
     "instagramStatus": "failed"
   },
@@ -3244,8 +2904,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "Profile isn't available • Instagram",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "[FAILED: not_found]",
     "instagramStatus": "failed"
   },
@@ -3263,8 +2921,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "/avatars/your_celebration.com.pl.jpg",
     "instagramTitle": "аніматори | організація свят | your_celebration 🤍🎉",
-    "instagramFollowers": "157",
-    "instagramFollowing": "5",
     "instagramBio": "АНІМАТОРИ КАТОВІЦЕ 🥳 аніматори та ведучі 🤍 організуємо свято для дорослих і маленьких 📍Katowice, Poland | МАЙСТЕР-КЛАСИ | MINECRAFT | PAW ПАТРУЛЬ | МІКІ МАУС | ЕЛЬФИ",
     "instagramStatus": "ok"
   },
@@ -3282,8 +2938,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3301,8 +2955,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3320,8 +2972,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3337,12 +2987,10 @@ export const specialists: Specialist[] = [
     "instagram": "dr.sistalyuk",
     "description": "В тексте прямо: \"З України\", ездит в Катовице и Краков, 8 лет практики",
     "communityMatch": true,
-    "avatar": "",
-    "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
-    "instagramBio": "",
-    "instagramStatus": ""
+    "avatar": "/avatars/dr.sistalyuk.jpg",
+    "instagramTitle": "Катерина| Лікар-косметолог•Львів•Europe",
+    "instagramBio": "Катерина| Лікар-косметолог•Львів•Europe. 📍 EU 🇪🇺|UA 🇺🇦 🎓 Вища медична освіта • 10 років досвіду 💉 Інʼєкційна косметологія | Full Face 🎓 Навчання косметологів •...",
+    "instagramStatus": "ok"
   },
   {
     "id": 176,
@@ -3358,8 +3006,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3377,8 +3023,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3394,12 +3038,10 @@ export const specialists: Specialist[] = [
     "instagram": "campscouting",
     "description": "В тексте прямо: \"наш український\"; дочь ездила на 14 дней, понравилось",
     "communityMatch": true,
-    "avatar": "",
-    "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
-    "instagramBio": "",
-    "instagramStatus": ""
+    "avatar": "/avatars/campscouting.jpg",
+    "instagramTitle": "ТАБІР ДЛЯ ДІТЕЙ| ВІДПОЧИНОК| ШКОЛА ВОЖАТИХ| КАНІКУЛИ| ПОЛЬЩА",
+    "instagramBio": "ТАБІР ДЛЯ ДІТЕЙ| ВІДПОЧИНОК| ШКОЛА ВОЖАТИХ| КАНІКУЛИ| ПОЛЬЩА. ❤️ 10 років творимо відпочинкові та наметові табори 💌 оргпитання і співпраця @campscout_org",
+    "instagramStatus": "ok"
   },
   {
     "id": 179,
@@ -3415,8 +3057,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3434,8 +3074,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3453,8 +3091,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3472,8 +3108,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3491,8 +3125,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3510,8 +3142,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3529,8 +3159,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3548,8 +3176,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3567,8 +3193,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3586,8 +3210,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3605,8 +3227,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3623,11 +3243,9 @@ export const specialists: Specialist[] = [
     "description": "В тексте прямо: \"Лікар з України\"",
     "communityMatch": true,
     "avatar": "",
-    "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
-    "instagramBio": "",
-    "instagramStatus": ""
+    "instagramTitle": "Profile isn't available • Instagram",
+    "instagramBio": "[FAILED: not_found]",
+    "instagramStatus": "failed"
   },
   {
     "id": 191,
@@ -3643,8 +3261,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3662,8 +3278,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3681,15 +3295,13 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
   {
     "id": 194,
     "name": "",
-    "title": "Магазин вишиванок (Katowice)",
+    "title": "Haftowane Unikaty",
     "category": "Послуги",
     "subcategory": "Магазин (вышиванки, бисер, хендмейд)",
     "phone": "",
@@ -3700,8 +3312,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3719,8 +3329,6 @@ export const specialists: Specialist[] = [
     "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
     "instagramBio": "",
     "instagramStatus": ""
   },
@@ -3736,10 +3344,552 @@ export const specialists: Specialist[] = [
     "instagram": "logoped_inna_poland",
     "description": "В тексте прямо: \"З українкою працювали цією\"",
     "communityMatch": true,
+    "avatar": "/avatars/logoped_inna_poland.jpg",
+    "instagramTitle": "Inna Kuzmenkova",
+    "instagramBio": "Inna Kuzmenkova. 🗣️Logoped Inna || Speech therapist 🥇20 years of experience 👩‍🏫 with love for your children 📍Poland, Katowice,...",
+    "instagramStatus": "ok"
+  },
+  {
+    "id": 197,
+    "name": "",
+    "title": "Домашні пельмені/вареники",
+    "category": "Послуги",
+    "subcategory": "Еда домашняя (на заказ)",
+    "phone": "+48694709243",
+    "website": "",
+    "social": "Viber: +380976383799",
+    "instagram": "",
+    "description": "На заказ, украинский номер Viber",
+    "communityMatch": true,
     "avatar": "",
     "instagramTitle": "",
-    "instagramFollowers": "",
-    "instagramFollowing": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 198,
+    "name": "",
+    "title": "Каритас (Центр для мигрантов, Jordana 18)",
+    "category": "Юридичні послуги",
+    "subcategory": "Юрист (бесплатно)",
+    "phone": "",
+    "website": "",
+    "social": "",
+    "instagram": "",
+    "description": "В тексте прямо: \"безкоштовно приймає кожен день український юрист\"; приём с 9 до 16 по будням без записи",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 199,
+    "name": "Євгенія Гергель",
+    "title": "Dr. Gergel Cosmetology",
+    "category": "Краса",
+    "subcategory": "Косметолог",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/dr.gergel_cosmetology",
+    "instagram": "dr.gergel_cosmetology",
+    "description": "Доктор, высшее мед. образование, в Украине — профессор мед. университета",
+    "communityMatch": true,
+    "avatar": "/avatars/dr.gergel_cosmetology.jpg",
+    "instagramTitle": "Косметологія | терапія шкіри | Katowice 🇵🇱",
+    "instagramBio": "Євгенія Гергель. ▫️ Аналіз шкіри + підбір догляду ▫️ Акне • пігментація • розацеа • anti-age ▫️ Мед.освіта • PhD 📩 Direct [private account, posts not visible]",
+    "instagramStatus": "ok"
+  },
+  {
+    "id": 200,
+    "name": "",
+    "title": "Twins (зал, Катовице)",
+    "category": "Заклади",
+    "subcategory": "Фитнес-студия",
+    "phone": "",
+    "website": "",
+    "social": "",
+    "instagram": "",
+    "description": "Основательницы — сёстры из Днепра; High Heels, фитнес, растяжка, детская гимнастика",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 201,
+    "name": "Катя",
+    "title": "Катя",
+    "category": "Послуги",
+    "subcategory": "Танцы (High Heels)",
+    "phone": "",
+    "website": "",
+    "social": "",
+    "instagram": "",
+    "description": "Хореограф из Харькова, 3 года в Катовице",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 202,
+    "name": "",
+    "title": "So Sushi (Мысловице)",
+    "category": "Заклади",
+    "subcategory": "Ресторан (суши)",
+    "phone": "",
+    "website": "",
+    "social": "",
+    "instagram": "",
+    "description": "В тексте прямо: \"украинский ресторан\"",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 203,
+    "name": "",
+    "title": "Football School Temp",
+    "category": "Заклади",
+    "subcategory": "Футбольная школа (дети)",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/football_school_temp",
+    "instagram": "football_school_temp",
+    "description": "В тексте прямо: \"засновники українці\"",
+    "communityMatch": true,
+    "avatar": "/avatars/football_school_temp.jpg",
+    "instagramTitle": "Футбольна школа “TEMP”|Szkółka Piłkarska „TEMP |Kraków📍",
+    "instagramBio": "Футбольна школа “TEMP”|Szkółka Piłkarska „TEMP\"|Kraków📍. 🏆 Тренери UEFA 🏆 Індивідуальні і групові тренування 🏆 Діти віком 3,5-14 років 📍Kraków, Grzegórzecka 24 🇺🇦🇵...",
+    "instagramStatus": "ok"
+  },
+  {
+    "id": 204,
+    "name": "",
+    "title": "Lampart Studio",
+    "category": "Послуги",
+    "subcategory": "Груминг для собак",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/lampart.studio",
+    "instagram": "lampart.studio",
+    "description": "В тексте прямо: \"Дівчата українки\"",
+    "communityMatch": true,
+    "avatar": "/avatars/lampart.studio.jpg",
+    "instagramTitle": "pielęgnacja zwierząt groomer KATOWICE",
+    "instagramBio": "pielęgnacja zwierząt groomer KATOWICE. 🐾profesjonalna pielęgnacja zwierząt🐾 🛁Kąpiele 🐩Czesanie ✂️Strzyżenie i trymowanie 🧴Pi...",
+    "instagramStatus": "ok"
+  },
+  {
+    "id": 205,
+    "name": "",
+    "title": "Harmoniya Balans",
+    "category": "Послуги",
+    "subcategory": "Фитнес-тренер",
+    "phone": "+48880462920",
+    "website": "",
+    "social": "https://www.instagram.com/harmoniya_balans",
+    "instagram": "harmoniya_balans",
+    "description": "В названии/тексте флаг 🇺🇦, мини-группы и индивидуальные занятия, Катовице",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 206,
+    "name": "Julia",
+    "title": "Julia Online Coach",
+    "category": "Послуги",
+    "subcategory": "Фитнес-тренер (онлайн и очно)",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/julia_online_coach",
+    "instagram": "julia_online_coach",
+    "description": "Самопост: \"Я з Вінниці\", 12 лет опыта, функциональные тренировки, работа с РПП",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 207,
+    "name": "Альона",
+    "title": "Альона",
+    "category": "Краса",
+    "subcategory": "Визаж",
+    "phone": "",
+    "website": "",
+    "social": "http://instagram.com/alyona_mua",
+    "instagram": "alyona_mua",
+    "description": "Самопост: \"з Харківської області, місто Чугуїв\"",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 208,
+    "name": "",
+    "title": "Anet Brows",
+    "category": "Краса",
+    "subcategory": "Брови и ресницы",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/anet__brows",
+    "instagram": "anet__brows",
+    "description": "Самопост: \"Я из Одессы, живу в Хожуве\"",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 209,
+    "name": "",
+    "title": "Sunshine Sweets Zefir",
+    "category": "Послуги",
+    "subcategory": "Кондитер (зефир ручной работы)",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/sunshine_sweets_zefir_",
+    "instagram": "sunshine_sweets_zefir_",
+    "description": "Самопост: \"Я з Харкова\", живёт у Тарновских Гур",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 210,
+    "name": "Наталія",
+    "title": "Gordi Nails Natali",
+    "category": "Краса",
+    "subcategory": "Нігті",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/gordi_nails.natali",
+    "instagram": "gordi_nails.natali",
+    "description": "Самопост: \"Я з Херсона\", живёт в Катовице",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 211,
+    "name": "Галина",
+    "title": "Mamonovaa Photo",
+    "category": "Послуги",
+    "subcategory": "Фотограф",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/mamonovaa_photo",
+    "instagram": "mamonovaa_photo",
+    "description": "Самопост: \"Я з Чернігова\", живёт в Катовице",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 212,
+    "name": "Богдана",
+    "title": "Bogdana Borisovna",
+    "category": "Послуги",
+    "subcategory": "Копирайтер / таргетолог",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/bogdana_borisovna",
+    "instagram": "bogdana_borisovna",
+    "description": "Самопост: \"я з Києва\", живёт в Катовице",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 213,
+    "name": "Ліза",
+    "title": "E_levytska",
+    "category": "Освіта",
+    "subcategory": "Репетитор английского (онлайн)",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/e_levytska",
+    "instagram": "e_levytska",
+    "description": "Самопост: \"з Одеси\", живёт в Катовице",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 214,
+    "name": "Дарʼя",
+    "title": "Barber Dar",
+    "category": "Краса",
+    "subcategory": "Барбер",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/_barber_dar_",
+    "instagram": "_barber_dar_",
+    "description": "Самопост: \"з Маріуполя\", салон в Катовице, район Бажантово",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 215,
+    "name": "Яна",
+    "title": "Яна",
+    "category": "Краса",
+    "subcategory": "Тату / пирсинг",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/yana_ms24",
+    "instagram": "yana_ms24",
+    "description": "Самопост: \"з Кам'янського\", живёт в Сосновце",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 216,
+    "name": "Ольга",
+    "title": "Vorona Studio",
+    "category": "Краса",
+    "subcategory": "Брови / перманентный макияж",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/vorona_studio",
+    "instagram": "vorona_studio",
+    "description": "Самопост: \"В Україні з Вінницької області\", живёт в Хожуве 6+ лет",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 217,
+    "name": "",
+    "title": "Ksiazki po Ukrainsku",
+    "category": "Послуги",
+    "subcategory": "Магазин детских книг (укр. язык)",
+    "phone": "",
+    "website": "",
+    "social": "https://instagram.com/ksiazki_po_ukrainsku",
+    "instagram": "ksiazki_po_ukrainsku",
+    "description": "Личный подбор в Катовице, Сосновце, скидка 5%",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 218,
+    "name": "Alina",
+    "title": "Eposylka",
+    "category": "Послуги",
+    "subcategory": "Доставка посылок (Украина-Польша)",
+    "phone": "+380665320690",
+    "website": "",
+    "social": "Telegram: @Adm_Eposylka / @Eposylka_PL",
+    "instagram": "",
+    "description": "Расчёт стоимости посылок в обе стороны",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 219,
+    "name": "Женя",
+    "title": "Magiczne Dłonie (Sosnowiec)",
+    "category": "Краса",
+    "subcategory": "Салон краси",
+    "phone": "+48 889 203 137",
+    "website": "",
+    "social": "",
+    "instagram": "",
+    "description": "В тексте прямо: \"работают 3 украинки\"; 2 остановки от плазы",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 220,
+    "name": "",
+    "title": "Podolog Gliwice",
+    "category": "Здоровʼя",
+    "subcategory": "Подолог",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/podolog_gliwice",
+    "instagram": "podolog_gliwice",
+    "description": "В тексте прямо: \"лікар подолог, українка\"",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 221,
+    "name": "Олена",
+    "title": "Your Beauty Place Studio",
+    "category": "Здоровʼя",
+    "subcategory": "Косметолог",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/your_beauty_place_studio",
+    "instagram": "your_beauty_place_studio",
+    "description": "В тексте прямо: \"дівчинки з України\", центр Катовице; также на Sienkiewicza 45",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 222,
+    "name": "",
+    "title": "Кілограм Суші",
+    "category": "Заклади",
+    "subcategory": "Доставка суши",
+    "phone": "",
+    "website": "",
+    "social": "",
+    "instagram": "",
+    "description": "Украинская доставка суши (упомянута как \"з доставок укр\")",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 223,
+    "name": "",
+    "title": "Осама Суші",
+    "category": "Заклади",
+    "subcategory": "Доставка суши",
+    "phone": "",
+    "website": "",
+    "social": "",
+    "instagram": "",
+    "description": "Украинская доставка суши (упомянута как \"з доставок укр\")",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 224,
+    "name": "",
+    "title": "Smoke Hause",
+    "category": "Заклади",
+    "subcategory": "Кальянная",
+    "phone": "",
+    "website": "",
+    "social": "",
+    "instagram": "",
+    "description": "Упомянута как \"укр кальяна\"",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 225,
+    "name": "",
+    "title": "Urban Coffee",
+    "category": "Заклади",
+    "subcategory": "Кафе",
+    "phone": "",
+    "website": "",
+    "social": "",
+    "instagram": "",
+    "description": "В тексте прямо: \"кав'ярня українських власників\"",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 226,
+    "name": "",
+    "title": "Міх маркет",
+    "category": "Послуги",
+    "subcategory": "Магазин продуктов",
+    "phone": "",
+    "website": "",
+    "social": "",
+    "instagram": "",
+    "description": "В тексте прямо: \"Український магазин\"",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 227,
+    "name": "",
+    "title": "Alchemia Bar Katowice",
+    "category": "Заклади",
+    "subcategory": "Бар",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/alchemia_bar_katowice",
+    "instagram": "alchemia_bar_katowice",
+    "description": "Упомянут в списке \"укр закладів у місті\"",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
+    "instagramBio": "",
+    "instagramStatus": ""
+  },
+  {
+    "id": 228,
+    "name": "",
+    "title": "Bavovna Katowice",
+    "category": "Заклади",
+    "subcategory": "Кафе/бар",
+    "phone": "",
+    "website": "",
+    "social": "https://www.instagram.com/bavovna_katowice",
+    "instagram": "bavovna_katowice",
+    "description": "Упомянут в списке \"укр закладів у місті\"",
+    "communityMatch": true,
+    "avatar": "",
+    "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": ""
   }

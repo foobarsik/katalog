@@ -320,22 +320,6 @@ h1 {
   line-height: 1.5;
 }
 
-.instagram-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.instagram-stats span {
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.78);
-  color: var(--blue);
-  padding: 5px 8px;
-  font-size: 0.78rem;
-  font-weight: 800;
-}
-
 .card-actions {
   display: flex;
   flex-wrap: wrap;

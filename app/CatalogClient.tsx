@@ -67,7 +67,7 @@ function ContactLink({
 
 function SpecialistCard({ item }: { item: Specialist }) {
   const instagramUrl = getInstagramUrl(item);
-  const hasInstagramDetails = Boolean(item.instagramFollowers || item.instagramBio);
+  const hasInstagramDetails = Boolean(item.instagramTitle || item.instagramBio);
 
   return (
     <article className="specialist-card">
@@ -94,10 +94,6 @@ function SpecialistCard({ item }: { item: Specialist }) {
         <div className="instagram-panel">
           {item.instagramTitle ? <p className="instagram-title">{item.instagramTitle}</p> : null}
           {item.instagramBio ? <p className="instagram-bio">{item.instagramBio}</p> : null}
-          <div className="instagram-stats">
-            {item.instagramFollowers ? <span>{item.instagramFollowers} підписників</span> : null}
-            {item.instagramFollowing ? <span>{item.instagramFollowing} підписок</span> : null}
-          </div>
         </div>
       ) : null}
 
@@ -141,7 +137,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     const needle = query.trim().toLocaleLowerCase("uk-UA");
     return specialists
       .filter((item) => (category === "Усі" ? true : item.category === category))
-      .filter((item) => (onlyInstagram ? Boolean(item.instagramBio || item.instagramFollowers) : true))
+      .filter((item) => (onlyInstagram ? Boolean(item.instagramTitle || item.instagramBio) : true))
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true))
       .sort((a, b) => {
         const aRank = Number(Boolean(a.avatar)) + Number(Boolean(a.instagramBio)) + Number(Boolean(a.phone));

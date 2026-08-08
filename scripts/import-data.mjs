@@ -202,8 +202,6 @@ function buildInstagramMap(rows) {
     if (!username) continue;
     map.set(username, {
       instagramTitle: stripInstagramTitle(row.title),
-      instagramFollowers: (row.followers || "").trim(),
-      instagramFollowing: (row.following || "").trim(),
       instagramBio: (row.bio || "").trim(),
       instagramStatus: (row.status || "").trim(),
     });
@@ -226,8 +224,6 @@ function renderDataFile(items) {
   communityMatch: boolean;
   avatar: string;
   instagramTitle: string;
-  instagramFollowers: string;
-  instagramFollowing: string;
   instagramBio: string;
   instagramStatus: string;
 };
@@ -265,8 +261,6 @@ const specialists = catalogRows.map((row, index) => {
     communityMatch: Boolean((row["Национальность (для сомнительных случаев)"] || "").trim()),
     avatar: avatarFile ? `/avatars/${avatarFile}` : "",
     instagramTitle: extra.instagramTitle || "",
-    instagramFollowers: extra.instagramFollowers || "",
-    instagramFollowing: extra.instagramFollowing || "",
     instagramBio: extra.instagramBio || "",
     instagramStatus: extra.instagramStatus || "",
   };
@@ -275,7 +269,7 @@ const specialists = catalogRows.map((row, index) => {
 writeFileSync(outputPath, renderDataFile(specialists), "utf8");
 
 const enrichedCount = specialists.filter(
-  (item) => item.instagramBio || item.instagramFollowers || item.instagramTitle,
+  (item) => item.instagramBio || item.instagramTitle,
 ).length;
 const avatarCount = specialists.filter((item) => item.avatar).length;
 
