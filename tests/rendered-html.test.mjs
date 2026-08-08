@@ -86,6 +86,7 @@ test("exposes quick filters from the search bar", async () => {
   assert.match(client, /aria-label="Відкрити фільтри"/);
   assert.match(client, /Є відгук/);
   assert.match(client, /Є Instagram/);
+  assert.match(client, /Є телефон/);
   assert.match(client, /Є контакт/);
-  assert.match(client, /Очікують перевірки/);
+  assert.doesNotMatch(client, /Очікують перевірки/);
 });

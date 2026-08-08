@@ -637,8 +637,8 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const [filterPanelOpen, setFilterPanelOpen] = useState(false);
   const [onlyReviewed, setOnlyReviewed] = useState(false);
   const [onlyInstagram, setOnlyInstagram] = useState(false);
+  const [onlyPhone, setOnlyPhone] = useState(false);
   const [onlyContacted, setOnlyContacted] = useState(false);
-  const [reviewState, setReviewState] = useState<"all" | "verified" | "pending">("all");
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [visible, setVisible] = useState(PAGE_SIZE);
   const searchRef = useRef<HTMLInputElement | null>(null);
@@ -695,12 +695,8 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       .filter((item) => (profession ? item.subcategory === profession : true))
       .filter((item) => (onlyReviewed ? Boolean(item.review) : true))
       .filter((item) => (onlyInstagram ? Boolean(getInstagramUrl(item)) : true))
+      .filter((item) => (onlyPhone ? Boolean(item.phone) : true))
       .filter((item) => (onlyContacted ? hasAnyContact(item) : true))
-      .filter((item) => {
-        if (reviewState === "verified") return !item.needsReview;
-        if (reviewState === "pending") return item.needsReview;
-        return true;
-      })
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true))
       .sort(
         (a, b) =>
@@ -711,9 +707,9 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
           getLocationRank(b) - getLocationRank(a) ||
           getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
       );
-  }, [category, onlyContacted, onlyInstagram, onlyReviewed, profession, query, reviewState, specialists]);
+  }, [category, onlyContacted, onlyInstagram, onlyPhone, onlyReviewed, profession, query, specialists]);
 
-  const filterKey = `${category} ${profession} ${query} ${onlyReviewed} ${onlyInstagram} ${onlyContacted} ${reviewState}`;
+  const filterKey = `${category}|${profession}|${query}|${onlyReviewed}|${onlyInstagram}|${onlyPhone}|${onlyContacted}`;
   const [lastFilterKey, setLastFilterKey] = useState(filterKey);
   if (lastFilterKey !== filterKey) {
     setLastFilterKey(filterKey);
@@ -744,8 +740,8 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     Number(Boolean(profession)) +
     Number(onlyReviewed) +
     Number(onlyInstagram) +
-    Number(onlyContacted) +
-    Number(reviewState !== "all");
+    Number(onlyPhone) +
+    Number(onlyContacted);
   const hasFilters = Boolean(query || activeFilterCount);
 
   const reset = useCallback(() => {
@@ -754,8 +750,8 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     setProfession("");
     setOnlyReviewed(false);
     setOnlyInstagram(false);
+    setOnlyPhone(false);
     setOnlyContacted(false);
-    setReviewState("all");
     searchRef.current?.focus();
   }, []);
 
@@ -810,7 +806,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
             </div>
 
             <div className="filter-group">
-              <p>Якість запису</p>
+              <p>Якість</p>
               <div className="filter-options">
                 <button
                   aria-pressed={onlyReviewed}
@@ -829,6 +825,14 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
                   Є Instagram
                 </button>
                 <button
+                  aria-pressed={onlyPhone}
+                  className={onlyPhone ? "filter-chip on" : "filter-chip"}
+                  type="button"
+                  onClick={() => setOnlyPhone((current) => !current)}
+                >
+                  Є телефон
+                </button>
+                <button
                   aria-pressed={onlyContacted}
                   className={onlyContacted ? "filter-chip on" : "filter-chip"}
                   type="button"
@@ -836,27 +840,6 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
                 >
                   Є контакт
                 </button>
-              </div>
-            </div>
-
-            <div className="filter-group">
-              <p>Перевірка</p>
-              <div className="filter-options">
-                {[
-                  ["all", "Усі"],
-                  ["verified", "Перевірені"],
-                  ["pending", "Очікують перевірки"],
-                ].map(([value, label]) => (
-                  <button
-                    aria-pressed={reviewState === value}
-                    className={reviewState === value ? "filter-chip on" : "filter-chip"}
-                    key={value}
-                    type="button"
-                    onClick={() => setReviewState(value as "all" | "verified" | "pending")}
-                  >
-                    {label}
-                  </button>
-                ))}
               </div>
             </div>
           </div>
