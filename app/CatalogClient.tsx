@@ -277,6 +277,8 @@ function SpecialistCard({
         </div>
       </div>
 
+      {instagramUnavailable ? <span className="inactive-badge">Контакти застарілі або неперевірені</span> : null}
+
       <div className="card-meta">
         {item.subcategory ? <span>{item.subcategory}</span> : null}
       </div>

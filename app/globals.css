@@ -514,6 +514,22 @@ p {
   color: #5f5a50;
 }
 
+.inactive-badge {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 12px;
+  border: 1px solid #b9b09d;
+  border-radius: 999px;
+  background: #ded8cb;
+  color: #5b554b;
+  padding: 5px 9px;
+  font-size: 0.68rem;
+  font-weight: 850;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
 .card-topline {
   display: grid;
   grid-template-columns: 54px 1fr;
