@@ -59,3 +59,18 @@ test("keeps location classification in the importer, data, and UI", async () => 
   assert.doesNotMatch(client, /Локація не підтверджена/);
   assert.doesNotMatch(client, /Локація не вказана/);
 });
+
+test("marks contacts that still need review", async () => {
+  const [importer, data, client] = await Promise.all([
+    readFile(new URL("../scripts/import-data.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(importer, /needsReview:/);
+  assert.match(data, /needsReview: boolean/);
+  assert.match(data, /"needsReview": true/);
+  assert.match(client, /Очікує нашої перевірки/);
+  assert.match(client, /needs-review/);
+  assert.match(client, /Number\(a\.needsReview\) - Number\(b\.needsReview\)/);
+});

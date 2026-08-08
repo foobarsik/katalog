@@ -13,6 +13,15 @@ type SocialContact = {
   type: "facebook" | "telegram" | "viber" | "whatsapp" | "link";
 };
 
+type ContactAction = {
+  href: string;
+  label: string;
+  icon: React.ReactNode;
+  ariaLabel: string;
+  tone?: "instagram";
+  external?: boolean;
+};
+
 const ALL = "Усі";
 const PAGE_SIZE = 36;
 
@@ -174,8 +183,68 @@ function getSocialContact(item: Specialist): SocialContact | null {
   return null;
 }
 
+function normalizeContactHref(href: string) {
+  if (/^tel:/i.test(href)) return href.replace(/[^\d+]/g, "");
+
+  try {
+    const url = new URL(href);
+    url.hash = "";
+    url.search = "";
+    url.hostname = url.hostname.toLowerCase().replace(/^www\./, "");
+    url.pathname = url.pathname.replace(/\/+$/, "");
+    return url.toString().toLowerCase();
+  } catch {
+    return href.trim().replace(/\/+$/, "").toLowerCase();
+  }
+}
+
+function uniqueContactActions(actions: ContactAction[]) {
+  const seen = new Set<string>();
+  return actions.filter((action) => {
+    const key = normalizeContactHref(action.href);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function getContactActions(item: Specialist) {
+  const instagramUrl = getInstagramUrl(item);
+  const social = getSocialContact(item);
+
+  return uniqueContactActions([
+    ...(instagramUrl
+      ? [
+          {
+            href: instagramUrl,
+            label: "Написати в Instagram",
+            ariaLabel: "Відкрити Instagram",
+            icon: <InstagramIcon />,
+            tone: "instagram" as const,
+          },
+        ]
+      : []),
+    ...(item.phone
+      ? [{ href: telHref(item.phone), label: item.phone, ariaLabel: "Подзвонити", icon: <PhoneIcon />, external: false }]
+      : []),
+    ...(item.website
+      ? [{ href: item.website, label: "Сайт", ariaLabel: "Відкрити сайт", icon: <WebsiteIcon /> }]
+      : []),
+    ...(social
+      ? [
+          {
+            href: social.href,
+            label: social.label,
+            ariaLabel: `Відкрити ${social.label}`,
+            icon: <SocialIcon type={social.type} />,
+          },
+        ]
+      : []),
+  ]);
+}
+
 function hasAnyContact(item: Specialist) {
-  return Boolean(getInstagramUrl(item) || item.phone || item.website || getSocialContact(item));
+  return getContactActions(item).length > 0;
 }
 
 /** Every entry is a community contact; a written review is the extra signal worth surfacing first. */
@@ -292,54 +361,24 @@ function ContactLink({
 }
 
 function ContactRow({ item, verbose }: { item: Specialist; verbose: boolean }) {
-  const instagramUrl = getInstagramUrl(item);
-  const social = getSocialContact(item);
-  const hasContacts = Boolean(instagramUrl || item.phone || social || item.website);
+  const actions = getContactActions(item);
+  const hasContacts = actions.length > 0;
 
   return (
     <>
-      {instagramUrl ? (
+      {actions.map((action) => (
         <ContactLink
-          ariaLabel={verbose ? undefined : "Відкрити Instagram"}
-          href={instagramUrl}
+          ariaLabel={verbose ? undefined : action.ariaLabel}
+          external={action.external}
+          href={action.href}
           iconOnly={!verbose}
-          tone="instagram"
+          key={`${action.label}:${action.href}`}
+          tone={action.tone}
         >
-          <InstagramIcon />
-          {verbose ? "Написати в Instagram" : null}
+          {action.icon}
+          {verbose ? action.label : null}
         </ContactLink>
-      ) : null}
-      {item.phone ? (
-        <ContactLink
-          ariaLabel={verbose ? undefined : "Подзвонити"}
-          external={false}
-          href={telHref(item.phone)}
-          iconOnly={!verbose}
-        >
-          <PhoneIcon />
-          {verbose ? item.phone : null}
-        </ContactLink>
-      ) : null}
-      {social ? (
-        <ContactLink
-          ariaLabel={verbose ? undefined : `Відкрити ${social.label}`}
-          href={social.href}
-          iconOnly={!verbose}
-        >
-          <SocialIcon type={social.type} />
-          {verbose ? social.label : null}
-        </ContactLink>
-      ) : null}
-      {item.website ? (
-        <ContactLink
-          ariaLabel={verbose ? undefined : "Відкрити сайт"}
-          href={item.website}
-          iconOnly={!verbose}
-        >
-          <WebsiteIcon />
-          {verbose ? "Сайт" : null}
-        </ContactLink>
-      ) : null}
+      ))}
       {!hasContacts ? (
         <ContactLink
           ariaLabel={verbose ? undefined : "Знайти в Google"}
@@ -378,11 +417,26 @@ function LocationStatus({ item }: { item: Specialist }) {
   );
 }
 
+function ReviewStatus({ item, verbose = false }: { item: Specialist; verbose?: boolean }) {
+  if (!item.needsReview) return null;
+
+  return (
+    <span className="review-status" title={verbose ? item.reviewReason || undefined : undefined}>
+      Очікує нашої перевірки
+    </span>
+  );
+}
+
 function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Specialist) => void }) {
   const unavailable = isInstagramUnavailable(item);
   const secondaryName = getSecondaryName(item);
   const bio = unavailable ? "" : cleanBio(item.instagramBio || item.instagramTitle);
-  const className = ["card", item.review ? "has-review" : "", unavailable ? "dimmed" : ""]
+  const className = [
+    "card",
+    item.review ? "has-review" : "",
+    unavailable ? "dimmed" : "",
+    item.needsReview ? "needs-review" : "",
+  ]
     .filter(Boolean)
     .join(" ");
 
@@ -421,6 +475,7 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
 
       <div className="card-actions">
         <ContactRow item={item} verbose={false} />
+        <ReviewStatus item={item} />
         <LocationStatus item={item} />
       </div>
     </article>
@@ -486,7 +541,7 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
       <div
         aria-labelledby="detail-title"
         aria-modal="true"
-        className="panel"
+        className={`panel${item.needsReview ? " needs-review" : ""}`}
         ref={panelRef}
         role="dialog"
         style={{ "--cat": getCategoryColor(item.category) } as React.CSSProperties}
@@ -507,6 +562,7 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
               <span className="cat-dot" aria-hidden="true" />
               {item.category}
             </p>
+            <ReviewStatus item={item} verbose />
             <LocationStatus item={item} />
           </div>
         </div>
@@ -612,7 +668,10 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       .filter((item) => (profession ? item.subcategory === profession : true))
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true))
       .sort(
-        (a, b) => getRank(b) - getRank(a) || getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
+        (a, b) =>
+          Number(a.needsReview) - Number(b.needsReview) ||
+          getRank(b) - getRank(a) ||
+          getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
       );
   }, [category, profession, query, specialists]);
 

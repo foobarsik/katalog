@@ -451,6 +451,36 @@ ul {
   opacity: 0.72;
 }
 
+.card.needs-review {
+  border-color: #d6dbe4;
+  background: #f5f6f8;
+  color: #4b5563;
+}
+
+.card.needs-review .avatar {
+  background: #8b95a5;
+  color: #fff;
+  filter: grayscale(1);
+}
+
+.card.needs-review .profession,
+.card.needs-review .person,
+.card.needs-review .card-bio,
+.card.needs-review .card-details p {
+  color: #687386;
+}
+
+.card.needs-review .action {
+  background: #fff;
+  color: #4b5563;
+}
+
+.card.needs-review .action:hover {
+  border-color: #9aa4b2;
+  background: #eef1f5;
+  color: #1f2937;
+}
+
 .profession {
   display: flex;
   align-items: center;
@@ -496,6 +526,29 @@ ul {
 
 .panel-titles .location-status {
   margin-top: 10px;
+}
+
+.review-status {
+  display: inline-flex;
+  min-height: 24px;
+  flex: none;
+  align-items: center;
+  border: 1px solid #c8ced8;
+  border-radius: 999px;
+  background: #eef1f5;
+  color: #4b5563;
+  padding: 3px 9px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.panel-titles .review-status {
+  margin-top: 10px;
+}
+
+.panel-titles .review-status + .location-status {
+  margin-left: 8px;
 }
 
 .card-identity {
@@ -640,7 +693,7 @@ ul {
   z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 8px 10px;
   margin-top: auto;
   padding-top: 4px;
 }
@@ -651,6 +704,10 @@ ul {
 
 .card-actions .location-status {
   margin-left: auto;
+}
+
+.card-actions .review-status + .location-status {
+  margin-left: 2px;
 }
 
 .action {
@@ -799,6 +856,23 @@ ul {
   box-shadow: 0 30px 70px rgba(15, 20, 30, 0.3);
   padding: 26px;
   animation: rise 160ms ease;
+}
+
+.panel.needs-review {
+  border-top-color: #8b95a5;
+  background: #f7f8fa;
+}
+
+.panel.needs-review .avatar {
+  background: #8b95a5;
+  filter: grayscale(1);
+}
+
+.panel.needs-review .profession,
+.panel.needs-review .person,
+.panel.needs-review .panel-category,
+.panel.needs-review .panel-body p {
+  color: #687386;
 }
 
 .panel-close {

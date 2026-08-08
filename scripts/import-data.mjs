@@ -196,6 +196,8 @@ function renderDataFile(items) {
   instagramTitle: string;
   instagramBio: string;
   instagramStatus: string;
+  needsReview: boolean;
+  reviewReason: string;
   locationStatus: "confirmed" | "unknown" | "unconfirmed";
   locationEvidence: string;
 };
@@ -265,6 +267,8 @@ const specialists = catalogRows.map((row, index) => {
     instagramTitle: extra.instagramTitle || "",
     instagramBio: extra.instagramBio || "",
     instagramStatus: extra.instagramStatus || "",
+    needsReview: /^так|yes|true|1$/i.test(pick(row, ["Проблемна", "Проблемная", "Problem"])),
+    reviewReason: pick(row, ["Причина проблеми", "Причина проблемы", "Problem reason"]),
     ...location,
   };
 });

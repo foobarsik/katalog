@@ -16,6 +16,8 @@ export type Specialist = {
   instagramTitle: string;
   instagramBio: string;
   instagramStatus: string;
+  needsReview: boolean;
+  reviewReason: string;
   locationStatus: "confirmed" | "unknown" | "unconfirmed";
   locationEvidence: string;
 };
@@ -39,6 +41,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "КЕРАТИН БОТОКС ОБУЧЕНИЕ КАТОВИЦЕ |KERATYNA KATOWICE",
     "instagramBio": "Бережно сохраняю прикорневой объём Эффект 4–6 месяцев без утяжеления Уютная студия в центре Катовице Обучение с нуля,...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -60,6 +64,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "ПАРИКМАХЕР КОЛОРИСТ Катовице Перукар Колорист Катовіце",
     "instagramBio": "Дарʼя Колорист Перукар| UGC 🤍Створюю шедеври на волоссі☞ Виправлю усе⁣⁣ 🎓Колористика Навчання ☞ Найскладніші фарбування...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -81,6 +87,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Масаж Катовіце | Masaż Katowice | Навчання масажу Катовіце",
     "instagramBio": "🔹 12 років досвіду 🔹 Дипломований спеціаліст по масажу 🔹 Медична освіта 🔹 -5 кг після курсу антицелюлітного масажу...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -102,6 +110,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Elena Neskorodieva",
     "instagramBio": "Elena Neskorodieva - Paznokcie Katowice - Manikiur hybrydowy - Manikiur żelowy - Pedikiur",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -123,6 +133,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -144,6 +156,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "VEAN TATTOO",
     "instagramBio": "VEAN TATTOO - Największa sieć tattoo-studio w Europie - Tattoo Piercing Szkolenia Laser...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -165,6 +179,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -186,6 +202,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "БРОВИ ЛАМІ ВІЙ КУРСИ КАТОВІЦЕ | BRWI LAMINACJA RZĘS KATOWICE",
     "instagramBio": "Даяна майстер брів & ламі, чую що хочеш - навіть якщо сама ще не знаєш, своя UA у Katowice, 6 років в beauty...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -207,6 +225,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -228,6 +248,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Manicure Pedicure Katowice Манікюр Педікюр Навчання Катовіце",
     "instagramBio": "Idealny manicure w 1,5 godziny - 6 lat doświadczenia - Trwałość i jakość aż do 3 tygodni - Pracuję 7 dni w tygodniu...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -249,6 +271,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Майя Руселевич • АЛЕРГОЛОГ • ПЕДІАТР • ПУЛЬМОНОЛОГ",
     "instagramBio": "Кандидатка медичних наук; 20 років досвіду - Консультую в Direct - Healthy lifestyle doctor @dr.maya_lifestyle...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -270,6 +294,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Педіатр онлайн.Атопічний дерматит.Кашель.Прикорм.ГВ",
     "instagramBio": "Педіатр онлайн, досвід 10+ років - Здобуваю другу вищу магістр нутріціології - Здоров’я дитини без паніки...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -291,6 +317,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -312,6 +340,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "LadnaJa • studio pięknego ciała • Katowice, Łódź",
     "instagramBio": "Modelujemy ciało z precyzją i pasją - Kriolipoliza, Kawitacja ultradźwiękowа, Zabiegi wyszczuplające, Nowoczesna...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -333,6 +363,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "KOSMETYCZNA STUDIA | SOSNOWIEC",
     "instagramBio": "twój wygląd w rękach mistrza - paznokcie ta brwi za 2 godziny - gwarancja na usługi 5 dni",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Sosnowiec"
   },
@@ -354,6 +386,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -375,6 +409,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Эхсан Юсефиан",
     "instagramBio": "Др.Эхсан Юсефиан - Детский стоматолог - Главный врач клиники Kids Dental - Лечение зубов во сне - Лечение детей от 0 [PRIVATE PROFILE - posts not visible]",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -396,6 +432,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Ruda Śląska"
   },
@@ -417,6 +455,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -438,6 +478,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -459,6 +501,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -480,6 +524,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": true,
+    "reviewReason": "категорія неочевидна",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -501,6 +547,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -522,6 +570,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -543,6 +593,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Romashkova Skin Aesthetics Clinic | Anti-age & Laser Clinic",
     "instagramBio": "Estetyczna i iniekcyjna kosmetologia - Laser CO2 IPL Morpheus8 - Anti-age терапії та сучасні методики - 10+...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -564,6 +616,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": true,
+    "reviewReason": "немає публічного контакту в CSV і в тексті повідомлення; джерело пропонує контакт лише через особисті повідомлення",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -585,6 +639,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -606,6 +662,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -627,6 +685,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Yanina Shymanska",
     "instagramBio": "Акушер-гінеколог, Статеве виховання - УЗД, Питання про гормони - Online консультації - Katowice...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -648,6 +708,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -669,6 +731,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -690,6 +754,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -711,6 +777,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Kosmetologist 📍Odesa-Katowice",
     "instagramBio": "Высшее медицинское образование ОНМедУ - Аппаратная и инъекционная косметология - Ботокс Филлеры Биоревитализация...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -732,6 +800,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "ПЕРУКАР | Fryzjer | 🇵🇱 Katowice",
     "instagramBio": "Засновниця: @vedantahair - Стрижки Фарбування СПА-догляд - Працюю з текстурою - Відновлюю структуру, створюю форму",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -753,6 +823,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "SALON BEAUTY KATOWICE • fryzjer • paznokcie • kosmetologia",
     "instagramBio": "Sztuka piękna dopracowanego w każdym detalu - Zadbamy o Twój wygląd od stóp do głów - Sprawdź naszą ofertę i umów...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -774,6 +846,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "FRYZJER-KOLORYSTA •TRWAŁA Ondulacja 📍KATOWICE🇺🇦🇵🇱",
     "instagramBio": "Dbam o zdrowie włosów i pełne zadowolenie klientów - Farbowanie, total blond, trwała ondulacja, odbudowa włosów",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -795,6 +869,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -816,6 +892,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Дмитро | лікар в Польщі| Лодзь | Варшава",
     "instagramBio": "Швидкий прийом пацієнтів без тривалих черг - Languages: українська, русский, polski, english - Консультації онлайн...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unconfirmed",
     "locationEvidence": "Warszawa"
   },
@@ -837,6 +915,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "ДЕРМАТОЛОГ | ЛЬВІВ | ОНЛАЙН",
     "instagramBio": "Дитячий та дорослий дерматолог, трихолог - Доказова медицина - Міжнародна сертифікація - Школа атопічного дерматиту",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unconfirmed",
     "locationEvidence": "Lviv"
   },
@@ -858,6 +938,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -879,6 +961,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -900,6 +984,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "DEPILACJA CIAŁA ZA 1 GODZINĘ•PRZEDŁUŻANIE RZĘS ZA 110 MIN",
     "instagramBio": "Hejka, jestem Julia - Depilacja ciała za 1 godzinę - Przedłużania rzęs 110 min - Aby dokonać rezerwacji napisz do Direct",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -921,6 +1007,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -942,6 +1030,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -963,6 +1053,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -984,6 +1076,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1005,6 +1099,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "PODOLOGIA MANICURE PEDICURE KATOWICE",
     "instagramBio": "YOUR BEAUTY PLACE STUDIO - про роботу та особисте - PODOLOGIA/Подологія MANICURE/Манікюр PEDICURE/Педикюр",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1026,6 +1122,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Александра Торговцова",
     "instagramBio": "ponad 15 lat w podologii - Terapia wrastających paznokci bez bólu - Pedicure, opracowanie...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1047,6 +1145,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Natalia Levchenko | Hair • Makeup • Color | Katowice",
     "instagramBio": "Hair & Makeup Artist - Bridal Event Colorist - Milan Fashion Week 2023 Team - Katowice",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1068,6 +1168,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1089,6 +1191,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "KOLORIST | KATOWICE | ВІДНОВЛЕННЯ ВОЛОССЯ",
     "instagramBio": "Specjalistka od strzyżenia, koloryzacji i regeneracji włosów - 16 lat doświadczenia - Efekt zdrowych, lśniących...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1110,6 +1214,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": true,
+    "reviewReason": "немає публічного контакту в CSV і в тексті повідомлення; немає імені/бренду, назва сформована як заглушка",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1131,6 +1237,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "Kosmetyczki & akcesoria do włosów - Zamówienia przez Direct - Based in Poland",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1152,6 +1260,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": true,
+    "reviewReason": "немає публічного контакту в CSV і в тексті повідомлення",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1173,6 +1283,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1194,6 +1306,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "DEPILACJA| LASER | ELEKTROLIZA | SZKOLENIE | GLIWICE",
     "instagramBio": "Depilacja cukrem, woskiem, elektroliza - Laserowa epilacja - Trener szkoły PANDHY’S @pandhys_poland - Zaufaj...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Gliwice"
   },
@@ -1215,6 +1329,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "✈️🌍Тури • Готелі • Круїзи|Travelagent",
     "instagramBio": "PolFunTravel - Твій персональний турагент - Підберу тур, як для себе - Mikołów(Jana Pawła II 20)",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1236,6 +1352,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Поїхали з нами 🌍 Турагентство",
     "instagramBio": "Працюємо онлайн - зручно і швидко - З вами на звʼязку Наталія і Яна - 10 років досвіду в туризмі - Більше тисячі...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1257,6 +1375,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1278,6 +1398,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1299,6 +1421,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1320,6 +1444,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1341,6 +1467,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Yuliia hairdresser ✂️",
     "instagramBio": "Колорист стилист - 15 лет в сфере красоты - Индивидуальные стрижки - Все виды окрашивания...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1362,6 +1490,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1383,6 +1513,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Chorzów"
   },
@@ -1404,6 +1536,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "КВИТКИ НА АВТОБУС | СТРАХУВАННЯ | УКРАЇНА - ЄВРОПА",
     "instagramBio": "Квитки та страховка в одному місці - Рейси до 25+ країн Європи - Оплата при посадці, купівля...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1425,6 +1559,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Tychy"
   },
@@ -1446,6 +1582,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1467,6 +1605,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1488,6 +1628,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Професійна кравчиня з дуже великим досвідом 🪡",
     "instagramBio": "Katowice/Sosnowiec - Кравчиня з 40+ років досвіду - Індивідуальний підхід до кожної ситуації - Зручна локалізація",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1509,6 +1651,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1530,6 +1674,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1551,6 +1697,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1572,6 +1720,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "CZAS studio fitness Katowice",
     "instagramBio": "Po raz pierwszy w Katowicach - Rewolucyjne podejście do fitnessu: AERIAL YOGA, LATINA...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1593,6 +1743,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1614,6 +1766,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1635,6 +1789,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1656,6 +1812,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1677,6 +1835,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1698,6 +1858,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "MAKEUP | HAIR KATOWICE | МАКИЯЖ • ОБУЧЕНИЕ КАТОВИЦЕ",
     "instagramBio": "ANASTASIA KOTS - Brides Evening Makeup Artist - Hairstylist - Базовый курс Визажист с 0...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1719,6 +1881,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "KATRIN | MAKE UP KATOWICE | HAIR | EDUCATION",
     "instagramBio": "Курс Визажист с 0 - Evening Wedding Make Up Hairstyle - Makeup Artist and Hairstylist - Katowice, Poland",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1740,6 +1904,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "ФІЗИЧНИЙ РОЗВИТОК ПЛАВАННЯ НЕМОВЛЯТ | Тихи | Катовіце",
     "instagramBio": "Фізичний розвиток Плавання - 15+ років досвіду - працюю з немовлятами 0+ - Онлайн-консультація та супровід",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1761,6 +1927,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Svitlana Savenko - АДВОКАТ ОНЛАЙН ЮРИСТ ПОМОЩЬ БИЗНЕСУ",
     "instagramBio": "Развод, алименты, раздел имущества, наследство, кредиты - Новая основная страница @advokat_law_for_all_",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1782,6 +1950,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1803,6 +1973,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "ЛЕГАЛИЗАЦИЯ | ЮРИДИЧЕСКИЕ УСЛУГИ | ПОЛЬША МЕЖДУНАРОДНАЯ ЗАЩИТА",
     "instagramBio": "Бессрочное право пребывания в Польше на основании международной защиты - За 4+ года 1987 дел - Оформим гражданство без ПМ...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1824,6 +1996,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1845,6 +2019,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Sonia Dei / Tattoo / Katowice",
     "instagramBio": "TATTOO w Katowice @astattookatowice - Z dbałością o detale przeniosę Twój pomysł na skórę - masz pytania napisz...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1866,6 +2042,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1887,6 +2065,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1908,6 +2088,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Трихолог /Варшава Уляна Ерстенюк",
     "instagramBio": "Лікування волосся та шкіри голови - Ліцензія PST 074 - Засновниця @tress_therapy_centr",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unconfirmed",
     "locationEvidence": "Warszawa"
   },
@@ -1929,6 +2111,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Карта Побыту|Легализация в Польше Katowice",
     "instagramBio": "Полное сопровождение по Карте Побыту - Бесплатная консультация - ul.Przemysłowa 10/226, Katowice",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -1950,6 +2134,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1971,6 +2157,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -1992,6 +2180,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2013,6 +2203,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2034,6 +2226,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Profile isn't available • Instagram",
     "instagramBio": "[FAILED: profile_not_available]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2055,6 +2249,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Автобусні квитки до Європи | TOURUKRAINE",
     "instagramBio": "Надійні рейси щодня - Квитки онлайн за 2 хвилини - Підтримка з 08:00 до 23:00 - Бронюй вже зараз",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -2076,6 +2272,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2097,6 +2295,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2118,6 +2318,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2139,6 +2341,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Druki Druk | DTF Print Polska",
     "instagramBio": "Profesjonalny DTF Druk od 1 sztuki - Twój projekt lub nasza grafika - Szybka dostawa w całej Polsce - Jakość premium...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2160,6 +2364,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2181,6 +2387,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "ведучий Варшава • Краків • Вроцлав • Євгеній Жарков",
     "instagramBio": "ведучий, за якого не соромно перед батьками, без шаблону і крінжа, створюю романтичні церемонії з гумором...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Kraków"
   },
@@ -2202,6 +2410,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2223,6 +2433,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2244,6 +2456,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2265,6 +2479,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2286,6 +2502,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2307,6 +2525,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2328,6 +2548,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -2349,6 +2571,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -2370,6 +2594,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2391,6 +2617,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Tattoo Katowice",
     "instagramBio": "Tattoo Katowice 9 lat doświadczenia Katowice Owner @tattoo_katowice_ tattoo tattoo Malta 🇲🇹 Gozo обучение",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -2412,6 +2640,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Tychy"
   },
@@ -2433,6 +2663,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2454,6 +2686,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2475,6 +2709,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Profile isn't available • Instagram",
     "instagramBio": "[FAILED: not_found]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2496,6 +2732,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2517,6 +2755,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Лілія Нікуліна ▫️гастроентеролог▫️",
     "instagramBio": "👩🏼‍⚕️Лікар-гастроентеролог 🥗Консультант з харчування 🩺Консультую в @panaceanova /online 👩🏼‍🏫Викладач НМУ імені О.О... f3.cool/Lilinjka/?hl=uk",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2538,6 +2778,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "ГАСТРОЕНТЕРОЛОГ | АЛЕРГОЛОГ | ТИХИ",
     "instagramBio": "👩‍⚕️Гастроентеролог Польща 🇺🇦Прийом для українців 🔹Офлайн консультації українською 🔹Без страху й сорому 🔹Пояснюю... Алергія Запитання Прайс Відгуки Консультації",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Tychy"
   },
@@ -2559,6 +2801,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -2580,6 +2824,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -2601,6 +2847,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2622,6 +2870,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2643,6 +2893,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Адвокат & Медіатор | 20+ років у праві",
     "instagramBio": "💼Веду юридичні справи 🇺🇦українців у Польщі🇵🇱 📌 Вирішую складні питання просто та зрозуміло:легалізація, бізнес,... Клієнтів ПІД КЛЮЧ Освіта Консультац 2026",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2664,6 +2916,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "SKUP•SPRZEDAŻ•ZAMIANA•KOMIS Bytom | Ruda Śląska",
     "instagramBio": "🚗 Skup•Sprzedaż•Zamiana 👍🏻 1000+ zadowolonych klientów 📂 auta z OC i przeglądem 📍 Bytom & Ruda Śląska 🕐 pn-sb 10-19 |... m.olx.pl/oferty/uzytkownik/1JGmfY",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Bytom"
   },
@@ -2685,6 +2939,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2706,6 +2962,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Sosnowiec"
   },
@@ -2727,6 +2985,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2748,6 +3008,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2769,6 +3031,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2790,6 +3054,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Grawerowanie laserowe | Prezenty z drzewa | Skarbonka | Katowice",
     "instagramBio": "● Ekskluzywne pomysły z drewna, skarbonka ● Wyjątkowe prezenty i dekoracje z drewnа ● Szybka realizacja zamówień 🇵🇱🇺🇦 business.allegro.pl/uzytkownik/Brigadir and 1 more",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -2811,6 +3077,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": true,
+    "reviewReason": "немає публічного контакту в CSV і в тексті повідомлення; джерело пропонує контакт лише через особисті повідомлення",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2832,6 +3100,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Helena Tarasova🇺🇦🇵🇱",
     "instagramBio": "Допоможу зберегти красу і молодість вашої шкіри👌 За здоровою шкірою голови і міцним волоссям - також до мене🌹 ☎️ +48... helena3.booksy.com",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -2853,6 +3123,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Beauty Atelier | Kosmetologia Estetyczna | Powiększenie ust",
     "instagramBio": "• Kosmetologia estetyczna • Szkolenia | Zabiegi • Modelowanie twarzy – bez skalpela! • Autorskie techniki beautyatelierbylenashynderuk.booksy.com/h",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2874,6 +3146,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "NAILS • GEMS | Katowice",
     "instagramBio": "hejka🌸 na razie jestem na wyjeździe w Korei do środka września 🇰🇷 second account @aleks.yashchuk_ zapisy przez dm 👇🏻",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -2895,6 +3169,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2916,6 +3192,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "ZIN Tetiana Katowice",
     "instagramBio": "Tetiana Metokhir Certyfikowany Instruktor Zumba Katowice 💃🏼 Zapis na treningi poprzez direct 💌",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -2937,6 +3215,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2958,6 +3238,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -2979,6 +3261,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Siemianowice Śląskie"
   },
@@ -3000,6 +3284,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -3021,6 +3307,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3042,6 +3330,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "РІЄЛТОР 📌КАТОВІЦЕ | •КУПІВЛЯ •ОРЕНДА •ІНВЕСТИЦІЇ 🏡🔑",
     "instagramBio": "ELENA | Real Estate🤍 Уяви ранок у квартирі мрії… Я зроблю це реальністю- швидко та вигідно❕ 🗣️UA|RU|ENG|PL t.me/elena_realestatee and 1 more",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -3063,6 +3353,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "СТОМАТОЛОГІЯ | ВІНІРИ | БРЕКЕТИ | ІМПЛАНТАЦІЯ | КРАКІВ",
     "instagramBio": "Естетика та здоров'я для всiєї родини 📍 Kraków, Romanowicza 1 і 4B 📲 +48 576 676 266 ⌚️ Пн-Пт: 8-20 / Сб: 8-14 ✉️... dynastystomatology.pl/uk and 1 more",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Kraków"
   },
@@ -3084,6 +3376,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "RECORDS Męskie Strzyżenie |Strzyżenie brody |Szkolenie fryzjerów",
     "instagramBio": "profesjonalizm, doświadczenie, komfort ⭐️⭐️⭐️⭐️⭐️ 📞 799 090 303 - 🇵🇱🇺🇦🇬🇧 🕰️ codziennie 10-20 recordskatowice.booksy.com/a and 1 more",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -3105,6 +3399,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3126,6 +3422,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Ruda Śląska"
   },
@@ -3147,6 +3445,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3168,6 +3468,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3189,6 +3491,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": true,
+    "reviewReason": "немає публічного контакту в CSV і в тексті повідомлення",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -3210,6 +3514,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3231,6 +3537,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3252,6 +3560,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3273,6 +3583,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3294,6 +3606,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Soul Jewelry • Obrączki ślubne • Pierścionki zaręczynowe • Inne",
     "instagramBio": "💍Produkcja i sprzedaż biżuterii złotej 🤍Unikalne wyroby jubilerskie stworzone z miłością 💌Indywidualne zamówienia... www.souljewelry.pl",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Kraków"
   },
@@ -3315,6 +3629,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "𝑇𝐻𝐸 𝐺𝐴𝑅𝐷𝐸𝑁 𝐿𝑂𝑈𝑁𝐺𝐸 𝐵𝐴𝑅 & 𝑇𝐸𝑅𝑅𝐴𝐶𝐸 ⚜️𝐊𝐀𝐓𝐎𝐖𝐈𝐂𝐄⚜️",
     "instagramBio": "[FAILED: login_wall]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -3336,6 +3652,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": true,
+    "reviewReason": "немає публічного контакту в CSV і в тексті повідомлення",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3357,6 +3675,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": true,
+    "reviewReason": "немає публічного контакту в CSV і в тексті повідомлення",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3378,6 +3698,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "ДЕРМАТОЛОГ | КОСМЕТОЛОГ | ТРИХОЛОГ Катовіце, Польща📍",
     "instagramBio": "-Лікар-косметолог з вищою медичною освітою. -24роки досвіду 👩‍🎓Навчання -Підбір косметичних засобів ✍🏻Запис... online-zapis.com/online/01538",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -3399,6 +3721,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3420,6 +3744,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3441,6 +3767,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3462,6 +3790,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3483,6 +3813,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3504,6 +3836,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "vektor_24Poland 🇺🇦 Кривий Ріг-Польща 🇵🇱",
     "instagramBio": "ПАСАЖИРСЬКІ ПЕРЕВЕЗЕННЯ 🇺🇦Кривий Ріг,Кропивницький,Умань 🇵🇱Жешув,Краків,Катовіце,Глівіце,Ополе, Вроцлав... vektor24.com.ua/ua/napravleniya.html",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -3525,6 +3859,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "vektor_24Poland 🇺🇦 Кривий Ріг-Польща 🇵🇱",
     "instagramBio": "ПАСАЖИРСЬКІ ПЕРЕВЕЗЕННЯ 🇺🇦Кривий Ріг,Кропивницький,Умань 🇵🇱Жешув,Краків,Катовіце,Глівіце,Ополе, Вроцлав... vektor24.com.ua/ua/napravleniya.html",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -3546,6 +3882,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "ПОСТІЛЬНА БІЛИЗНА 🖤 УКРАЇНА 🇺🇦 І 🌍",
     "instagramBio": "🖤Шию будь-який колір та розмір за 5 днів 🖤Простирадло на резинці без доплат 🖤Подарункова упаковка 🖤Дитяча білизна... ВІДГУКИ-2 ТЕНСЕЛ ПАЛІТРА ЦІНИ І РОЗМІРИ АКТУАЛЬНЕ",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3567,6 +3905,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Dr.Eugenia|DERMATOLOG&KOSMETOLOG| KATOWICE 🇵🇱|PHATTAYA🇹🇭",
     "instagramBio": "[FAILED: login_wall]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -3588,6 +3928,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Profile isn't available • Instagram",
     "instagramBio": "[FAILED: not_found]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unconfirmed",
     "locationEvidence": "Kharkiv"
   },
@@ -3609,6 +3951,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "аніматори | організація свят | your_celebration 🤍🎉",
     "instagramBio": "АНІМАТОРИ КАТОВІЦЕ 🥳 аніматори та ведучі 🤍 організуємо свято для дорослих і маленьких 📍Katowice, Poland | МАЙСТЕР-КЛАСИ | MINECRAFT | PAW ПАТРУЛЬ | МІКІ МАУС | ЕЛЬФИ",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -3630,6 +3974,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3651,6 +3997,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3672,6 +4020,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Gliwice"
   },
@@ -3693,6 +4043,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Катерина| Лікар-косметолог•Львів•Europe",
     "instagramBio": "Катерина| Лікар-косметолог•Львів•Europe. 📍 EU 🇪🇺|UA 🇺🇦 🎓 Вища медична освіта • 10 років досвіду 💉 Інʼєкційна косметологія | Full Face 🎓 Навчання косметологів •...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unconfirmed",
     "locationEvidence": "Lviv"
   },
@@ -3714,6 +4066,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3735,6 +4089,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -3756,6 +4112,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "ТАБІР ДЛЯ ДІТЕЙ| ВІДПОЧИНОК| ШКОЛА ВОЖАТИХ| КАНІКУЛИ| ПОЛЬЩА",
     "instagramBio": "ТАБІР ДЛЯ ДІТЕЙ| ВІДПОЧИНОК| ШКОЛА ВОЖАТИХ| КАНІКУЛИ| ПОЛЬЩА. ❤️ 10 років творимо відпочинкові та наметові табори 💌 оргпитання і співпраця @campscout_org",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3777,6 +4135,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3798,6 +4158,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unconfirmed",
     "locationEvidence": "Warszawa"
   },
@@ -3819,6 +4181,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3840,6 +4204,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3861,6 +4227,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3882,6 +4250,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3903,6 +4273,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3924,6 +4296,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -3945,6 +4319,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3966,6 +4342,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -3987,6 +4365,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4008,6 +4388,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Profile isn't available • Instagram",
     "instagramBio": "[FAILED: not_found]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4029,6 +4411,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4050,6 +4434,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Gliwice"
   },
@@ -4071,6 +4457,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4092,6 +4480,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4113,6 +4503,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": true,
+    "reviewReason": "немає публічного контакту в CSV і в тексті повідомлення",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4134,6 +4526,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Inna Kuzmenkova",
     "instagramBio": "Inna Kuzmenkova. 🗣️Logoped Inna || Speech therapist 🥇20 years of experience 👩‍🏫 with love for your children 📍Poland, Katowice,...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4155,6 +4549,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4176,6 +4572,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4197,6 +4595,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Косметологія | терапія шкіри | Katowice 🇵🇱",
     "instagramBio": "Євгенія Гергель. ▫️ Аналіз шкіри + підбір догляду ▫️ Акне • пігментація • розацеа • anti-age ▫️ Мед.освіта • PhD 📩 Direct [private account, posts not visible]",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4218,6 +4618,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4239,6 +4641,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4260,6 +4664,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4281,6 +4687,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Футбольна школа “TEMP”|Szkółka Piłkarska „TEMP |Kraków📍",
     "instagramBio": "Футбольна школа “TEMP”|Szkółka Piłkarska „TEMP\"|Kraków📍. 🏆 Тренери UEFA 🏆 Індивідуальні і групові тренування 🏆 Діти віком 3,5-14 років 📍Kraków, Grzegórzecka 24 🇺🇦🇵...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Kraków"
   },
@@ -4302,6 +4710,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "pielęgnacja zwierząt groomer KATOWICE",
     "instagramBio": "pielęgnacja zwierząt groomer KATOWICE. 🐾profesjonalna pielęgnacja zwierząt🐾 🛁Kąpiele 🐩Czesanie ✂️Strzyżenie i trymowanie 🧴Pi...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4323,6 +4733,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Profile isn't available • Instagram",
     "instagramBio": "[FAILED: not_found]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4344,6 +4756,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Юлія | тренер онлайн & нутриціолог 🗺️",
     "instagramBio": "Юлія | тренер онлайн & нутриціолог 🗺️. Онлайн-тренування вдома без залу Індивідуальний раціон Особистий супровід і підтримка 🏆 14 років допомагаю жінкам бути... mssg.me/information77",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4365,6 +4779,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "MAKEUP HAIRSTYLES МАКІЯЖ ЛОКОНИ MAKIJAŻ LOKI KATOWICE",
     "instagramBio": "MAKEUP HAIRSTYLES МАКІЯЖ ЛОКОНИ MAKIJAŻ LOKI KATOWICE. Olena Savchenko 💄 Makijaż & włosy | Naturalna kobiecość 📍Katowice | 8 lat doświadczenia ✉️ Rezerwacje → DM Personal...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4386,6 +4802,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Profile isn't available • Instagram",
     "instagramBio": "[FAILED: not_found]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4407,6 +4825,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Profile isn't available • Instagram",
     "instagramBio": "[FAILED: not_found]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4428,6 +4848,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Profile isn't available • Instagram",
     "instagramBio": "[FAILED: not_found]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4449,6 +4871,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Фотограф Катовіце🇵🇱/Чернігів🇺🇦 | Fotograf Katowice",
     "instagramBio": "Фотограф Катовіце🇵🇱/Чернігів🇺🇦 | Fotograf Katowice. me: @g_mamonova 📸індивідуальні 📸love story 📸сімейні ✨",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4470,6 +4894,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Bogdana Pastushenko",
     "instagramBio": "Bogdana Pastushenko. bogdana_borisovna Українка. Амбасадор речей, які робить моя мама Виховую котиків і собаку.",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4491,6 +4917,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Liza 🌻",
     "instagramBio": "Liza 🌻. we speak here @sokiable.waw @ph.levytska • @elavxart savelife.in.ua/donate [private account, posts not visible]",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4512,6 +4940,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Barber | 𝑫𝒂𝒓𝒊𝒂 𝑺𝒗𝒚𝒓𝒚𝒅𝒐𝒗𝒂 | Katowice",
     "instagramBio": "Barber | 𝑫𝒂𝒓𝒊𝒂 𝑺𝒗𝒚𝒓𝒚𝒅𝒐𝒗𝒂 | Katowice. _barber_dar_ 𝐁𝐄 𝐘𝐎𝐔𝐑 𝐎𝐖𝐍 𝐁𝐎𝐒𝐒 💈𝐁𝐚𝐫𝐛𝐞𝐫 - 𝐓𝐞𝐚𝐜𝐡𝐞𝐫 🩵𝐎𝐰𝐧𝐞𝐫 @_barber_dar_salon 📍𝐊𝐚𝐭𝐨𝐰𝐢𝐜𝐞 🎓𝗞𝗨𝗥𝗦𝐘 “𝐁𝐚𝐫𝐛𝐞𝐫 𝐏𝐫𝐨𝐦𝐨” “𝐇𝐨𝐦𝐞 𝐁𝐚𝐫𝐛𝐞𝐫” “𝐁𝐚𝐫𝐛𝐞𝐫 od...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4533,6 +4963,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "𝒴𝒶𝓃𝒶 🦋",
     "instagramBio": "𝒴𝒶𝓃𝒶 🦋. yana_ms24 • Cosmetology💉 • Ukraine|Poland🤍 • Kamenskoe|Katowice📍",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4554,6 +4986,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Profile isn't available • Instagram",
     "instagramBio": "[FAILED: not_found]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4575,6 +5009,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Дитячі книги/Дитяча література в Польщі🇺🇦🇵🇱Katowice",
     "instagramBio": "Дитячі книги/Дитяча література в Польщі🇺🇦🇵🇱Katowice. ksiazki_po_ukrainsku 📚Українські дитячі книги в Польщі 🚚Доставка по всій Польщі 🎁Безкоштовно від 150zł ✨Казки•Прописи•Абетки...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4596,6 +5032,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4617,6 +5055,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Sosnowiec"
   },
@@ -4638,6 +5078,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "👣 PODOLOG | GLIWICE | MARYNA LINENKO 👣",
     "instagramBio": "👣 PODOLOG | GLIWICE | MARYNA LINENKO 👣. 🌀Wrastające paznokcie 💥Modzele 🌀Pękające pięty 💥Medyczny pedicure 🌀Po...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Gliwice"
   },
@@ -4659,6 +5101,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Profile isn't available • Instagram",
     "instagramBio": "[FAILED: not_found]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4680,6 +5124,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4701,6 +5147,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4722,6 +5170,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4743,6 +5193,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4764,6 +5216,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4785,6 +5239,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "ALCHEMIA Lounge & Oyster Bar",
     "instagramBio": "ALCHEMIA Lounge & Oyster Bar. Lokal zamknięty",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4806,6 +5262,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "LOUNGE BAR BAVOVNA • SHISHA • COCKTAILS • KATOWICE",
     "instagramBio": "[FAILED: login_wall]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4827,6 +5285,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4848,6 +5308,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "MAKIJAZ KATOWICE | KURSY |",
     "instagramBio": "MAKIJAZ KATOWICE | KURSY |. Jestem teraz na macierzyńskim🤰🏼 Twoja twarz — Twój arcydzieło 💄Autor kursu „Sam sobie wizażystą” 500+ udanych...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4869,6 +5331,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Кератинове вирівнювання ✨Ботокс✨Холодне відновлення✨",
     "instagramBio": "Кератинове вирівнювання ✨Ботокс✨Холодне відновлення✨. Зроблю ваше волосся слухняним✌️ Підберу процедуру індивідуально🤗 Запис в дірект 📩",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4890,6 +5354,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Profile isn't available • Instagram",
     "instagramBio": "[FAILED: not_found]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -4911,6 +5377,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Juliia |Fotograf Katowice KrakówlIndywidual|LoveStory|ślubny",
     "instagramBio": "Juliia |Fotograf Katowice KrakówlIndywidual|LoveStory|ślubny. PL /UA /RU Portrety Content dla marek love story śluby @romanova.wedding_ szkolenie•chrzest Owner @inside.fotostudio...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4932,6 +5400,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Profile isn't available • Instagram",
     "instagramBio": "[FAILED: not_found]",
     "instagramStatus": "failed",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4953,6 +5423,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "НАРОЩУВАННЯ ВОЛОССЯ КИЇВ ALISA HAIR EXTENSIONS MANILA🇵🇭",
     "instagramBio": "НАРОЩУВАННЯ ВОЛОССЯ КИЇВ ALISA HAIR EXTENSIONS MANILA🇵🇭. КИЇВ, ПОЗНЯКИ ✨ Наращивание,Продажа волос & Обучение 🌍 Манила 🇵🇭 Варшава 🇵🇱 Киев 🇺🇦 💻 Курсы ONLINE и OFFLINE Научу...",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unconfirmed",
     "locationEvidence": "Warszawa"
   },
@@ -4974,6 +5446,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Зоя | СММ | Консультації | Оформлення Інстаграм | UGC Katowice",
     "instagramBio": "Зоя | СММ | Консультації | Оформлення Інстаграм | UGC Katowice. SMM • Target • розпаковка Допомагаю продавати через блог без хаосу 📩 Консультації / оформлення профілю",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -4995,6 +5469,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "Sofiia Musiienko 💙💛",
     "instagramBio": "Sofiia Musiienko 💙💛. Співаю в душІ, в дУші і в проєктах @agencja_brussa Україномовний кавер на пісню «Flowers»",
     "instagramStatus": "ok",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   },
@@ -5016,6 +5492,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "confirmed",
     "locationEvidence": "Katowice"
   },
@@ -5037,6 +5515,8 @@ export const specialists: Specialist[] = [
     "instagramTitle": "",
     "instagramBio": "",
     "instagramStatus": "",
+    "needsReview": false,
+    "reviewReason": "",
     "locationStatus": "unknown",
     "locationEvidence": ""
   }
