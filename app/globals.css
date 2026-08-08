@@ -464,8 +464,8 @@ ul {
 
 .profession::before {
   content: "";
-  width: 14px;
-  height: 3px;
+  width: 12px;
+  height: 2px;
   flex: none;
   border-radius: 2px;
   background: currentColor;
