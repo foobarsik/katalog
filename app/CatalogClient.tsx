@@ -193,6 +193,12 @@ function telHref(phone: string) {
   return `tel:${phone.replace(/[^\d+]/g, "")}`;
 }
 
+function getGoogleSearchUrl(item: Specialist) {
+  const terms = [getDisplayName(item), item.subcategory || item.category, "Katowice"];
+  const query = terms.filter((term, index) => term && terms.indexOf(term) === index).join(" ");
+  return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+}
+
 function InstagramIcon() {
   return (
     <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
@@ -288,6 +294,7 @@ function ContactLink({
 function ContactRow({ item, verbose }: { item: Specialist; verbose: boolean }) {
   const instagramUrl = getInstagramUrl(item);
   const social = getSocialContact(item);
+  const hasContacts = Boolean(instagramUrl || item.phone || social || item.website);
 
   return (
     <>
@@ -331,6 +338,16 @@ function ContactRow({ item, verbose }: { item: Specialist; verbose: boolean }) {
         >
           <WebsiteIcon />
           {verbose ? "Сайт" : null}
+        </ContactLink>
+      ) : null}
+      {!hasContacts ? (
+        <ContactLink
+          ariaLabel={verbose ? undefined : "Знайти в Google"}
+          href={getGoogleSearchUrl(item)}
+          iconOnly={!verbose}
+        >
+          <SearchIcon />
+          {verbose ? "Знайти в Google" : null}
         </ContactLink>
       ) : null}
     </>
