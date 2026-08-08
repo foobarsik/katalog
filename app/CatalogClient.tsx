@@ -40,6 +40,8 @@ function makeSearchText(item: Specialist) {
     item.category,
     item.subcategory,
     item.description,
+    item.review,
+    item.comment,
     item.instagram,
     item.instagramTitle,
     item.instagramBio,
@@ -78,6 +80,18 @@ function InstagramIcon() {
   );
 }
 
+function WebsiteIcon() {
+  return (
+    <svg aria-hidden="true" className="website-icon" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3.6 9h16.8" />
+      <path d="M3.6 15h16.8" />
+      <path d="M12 3c2.2 2.5 3.4 5.5 3.4 9s-1.2 6.5-3.4 9" />
+      <path d="M12 3c-2.2 2.5-3.4 5.5-3.4 9s1.2 6.5 3.4 9" />
+    </svg>
+  );
+}
+
 function ContactLink({
   href,
   children,
@@ -110,7 +124,7 @@ function SpecialistCard({
 }) {
   const instagramUrl = getInstagramUrl(item);
   const hasInstagramDetails = Boolean(item.instagramTitle || item.instagramBio);
-  const summary = item.description || item.instagramBio || "Опис буде доповнено.";
+  const hasCatalogText = Boolean(item.review || item.comment);
 
   return (
     <article className="specialist-card">
@@ -130,7 +144,11 @@ function SpecialistCard({
 
       {item.name && item.name !== item.title ? <p className="person">{item.name}</p> : null}
 
-      <p className="description">{summary}</p>
+      {item.review ? <blockquote className="review-quote">{item.review}</blockquote> : null}
+
+      {item.comment ? <p className="catalog-comment">{item.comment}</p> : null}
+
+      {!hasCatalogText && !hasInstagramDetails ? <p className="description">Опис буде доповнено.</p> : null}
 
       {hasInstagramDetails ? (
         <div className="instagram-preview">
@@ -145,7 +163,12 @@ function SpecialistCard({
             <InstagramIcon />
           </ContactLink>
         ) : null}
-        {item.website ? <ContactLink href={item.website}>Сайт</ContactLink> : null}
+        {item.website ? (
+          <ContactLink href={item.website}>
+            <span className="visually-hidden">Сайт</span>
+            <WebsiteIcon />
+          </ContactLink>
+        ) : null}
         {item.phone ? (
           <ContactLink href={`tel:${item.phone.replace(/\s+/g, "")}`} external={false}>
             Телефон
@@ -171,13 +194,13 @@ function DetailModal({
   const instagramUrl = getInstagramUrl(item);
 
   return (
-    <div className="modal-backdrop" role="presentation" onMouseDown={onClose}>
+    <div className="modal-backdrop">
+      <button aria-label="Закрити деталі" className="modal-dismiss" type="button" onClick={onClose} />
       <article
         aria-labelledby="specialist-dialog-title"
         aria-modal="true"
         className="detail-modal"
         role="dialog"
-        onMouseDown={(event) => event.stopPropagation()}
       >
         <button aria-label="Закрити" className="modal-close" type="button" onClick={onClose}>
           ×
@@ -201,10 +224,16 @@ function DetailModal({
               <p>{item.name}</p>
             </section>
           ) : null}
-          {item.description ? (
+          {item.review ? (
             <section>
-              <h3>Опис із каталогу</h3>
-              <p>{item.description}</p>
+              <h3>Відгук</h3>
+              <blockquote className="review-quote modal-review">{item.review}</blockquote>
+            </section>
+          ) : null}
+          {item.comment ? (
+            <section>
+              <h3>Коментар</h3>
+              <p className="catalog-comment full">{item.comment}</p>
             </section>
           ) : null}
           {item.instagramTitle || item.instagramBio ? (

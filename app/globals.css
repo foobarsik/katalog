@@ -448,17 +448,38 @@ p {
 }
 
 .description,
-.instagram-preview p {
+.instagram-preview p,
+.review-quote,
+.catalog-comment {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
   line-height: 1.48;
+  white-space: pre-line;
 }
 
 .description {
   margin: 12px 0 0;
   color: #2f3835;
   font-size: 0.94rem;
+  -webkit-line-clamp: 3;
+}
+
+.review-quote {
+  margin: 12px 0 0;
+  border-left: 3px solid rgba(189, 90, 69, 0.58);
+  background: rgba(189, 90, 69, 0.07);
+  color: #2f3835;
+  padding: 10px 12px;
+  font-size: 0.94rem;
+  font-style: italic;
+  -webkit-line-clamp: 4;
+}
+
+.catalog-comment {
+  margin: 10px 0 0;
+  color: var(--muted-strong);
+  font-size: 0.9rem;
   -webkit-line-clamp: 3;
 }
 
@@ -507,6 +528,7 @@ p {
 }
 
 .contact-link.secondary {
+  min-width: 43px;
   border: 1px solid var(--line);
   background: var(--surface-warm);
   color: var(--foreground);
@@ -517,7 +539,8 @@ p {
   color: var(--green-dark);
 }
 
-.instagram-icon {
+.instagram-icon,
+.website-icon {
   width: 20px;
   height: 20px;
   fill: none;
@@ -555,8 +578,17 @@ p {
   padding: 18px;
 }
 
+.modal-dismiss {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
 .detail-modal {
   position: relative;
+  z-index: 1;
   width: min(720px, 100%);
   max-height: min(760px, calc(100vh - 36px));
   overflow: auto;
@@ -610,6 +642,18 @@ p {
 .modal-content p {
   margin: 0;
   line-height: 1.55;
+}
+
+.modal-content .review-quote,
+.modal-content .catalog-comment {
+  margin-top: 0;
+}
+
+.modal-review,
+.catalog-comment.full {
+  display: block;
+  overflow: visible;
+  -webkit-line-clamp: unset;
 }
 
 .modal-strong {
