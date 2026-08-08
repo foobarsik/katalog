@@ -247,10 +247,11 @@ function hasAnyContact(item: Specialist) {
   return getContactActions(item).length > 0;
 }
 
-/** Every entry is a community contact; a written review is the extra signal worth surfacing first. */
+/** Review is the strongest signal, then a verified Instagram presence, then the remaining quality cues. */
 function getRank(item: Specialist) {
   return (
-    Number(Boolean(item.review)) * 16 +
+    Number(Boolean(item.review)) * 32 +
+    Number(Boolean(getInstagramUrl(item))) * 16 +
     Number(Boolean(item.comment)) * 8 +
     Number(hasAnyContact(item)) * 4 +
     Number(Boolean(item.avatar)) * 2 +

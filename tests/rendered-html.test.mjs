@@ -73,4 +73,6 @@ test("marks contacts that still need review", async () => {
   assert.match(client, /Очікує нашої перевірки/);
   assert.match(client, /needs-review/);
   assert.match(client, /Number\(a\.needsReview\) - Number\(b\.needsReview\)/);
+  assert.match(client, /Number\(Boolean\(item\.review\)\) \* 32/);
+  assert.match(client, /Number\(Boolean\(getInstagramUrl\(item\)\)\) \* 16/);
 });
