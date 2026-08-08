@@ -11,12 +11,16 @@ type SortMode = "recommended" | "contacts" | "title";
 
 const priorityCategories = [
   "Усі",
-  "Здоровʼя",
+  "Здоров'я",
   "Краса",
   "Послуги",
   "Юридичні послуги",
   "Заклади",
 ];
+
+function normalizeCategory(value: string) {
+  return value.replace(/[ʼ’]/g, "'");
+}
 
 function getInitials(item: Specialist) {
   const source = item.name || item.title || item.instagram || "S";
@@ -231,17 +235,21 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const [selected, setSelected] = useState<Specialist | null>(null);
 
   const categories = useMemo(() => {
-    const unique = Array.from(new Set(specialists.map((item) => item.category))).sort((a, b) =>
-      a.localeCompare(b, "uk-UA"),
-    );
-    return priorityCategories.concat(unique.filter((item) => !priorityCategories.includes(item)));
+    const byNormalizedName = new Map<string, string>();
+    for (const item of specialists) {
+      byNormalizedName.set(normalizeCategory(item.category), item.category);
+    }
+    const unique = Array.from(byNormalizedName.values()).sort((a, b) => a.localeCompare(b, "uk-UA"));
+    const priorityKeys = new Set(priorityCategories.map(normalizeCategory));
+    return priorityCategories.concat(unique.filter((item) => !priorityKeys.has(normalizeCategory(item))));
   }, [specialists]);
 
   const categoryCounts = useMemo(() => {
     return specialists.reduce<Record<string, number>>(
       (acc, item) => {
         acc["Усі"] += 1;
-        acc[item.category] = (acc[item.category] || 0) + 1;
+        const normalized = normalizeCategory(item.category);
+        acc[normalized] = (acc[normalized] || 0) + 1;
         return acc;
       },
       { Усі: 0 },
@@ -251,7 +259,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const filtered = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase("uk-UA");
     const result = specialists
-      .filter((item) => (category === "Усі" ? true : item.category === category))
+      .filter((item) => (category === "Усі" ? true : normalizeCategory(item.category) === normalizeCategory(category)))
       .filter((item) => (onlyInstagram ? Boolean(item.instagramTitle || item.instagramBio) : true))
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true));
 
@@ -308,7 +316,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
             <select value={category} onChange={(event) => setCategory(event.target.value)}>
               {categories.map((item) => (
                 <option key={item} value={item}>
-                  {item} ({categoryCounts[item] || 0})
+                  {item} ({categoryCounts[normalizeCategory(item)] || 0})
                 </option>
               ))}
             </select>
@@ -347,10 +355,10 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
                 key={item}
                 type="button"
                 onClick={() => setCategory(item)}
-              >
-                <span>{item}</span>
-                <em>{categoryCounts[item] || 0}</em>
-              </button>
+            >
+              <span>{item}</span>
+              <em>{categoryCounts[normalizeCategory(item)] || 0}</em>
+            </button>
             ))}
           </div>
         </aside>
