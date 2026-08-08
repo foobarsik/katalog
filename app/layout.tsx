@@ -19,8 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Каталог спеціалістів у Катовіце",
     description:
-      "174 контакти з локального каталогу, доповнені Instagram-даними для швидкого пошуку.",
-    images: [{ url: "/og.png", width: 1200, height: 630 }],
+      "Локальний каталог спеціалістів, сервісів і закладів, доповнений Instagram-даними для швидкого пошуку.",
     locale: "uk_UA",
     type: "website",
   },
@@ -29,7 +28,6 @@ export const metadata: Metadata = {
     title: "Каталог спеціалістів у Катовіце",
     description:
       "Український каталог спеціалістів, сервісів і закладів у Катовіце.",
-    images: ["/og.png"],
   },
   icons: {
     icon: "/favicon.svg",

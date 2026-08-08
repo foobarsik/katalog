@@ -12,70 +12,6 @@ const sourceAvatarsDir = resolve(process.env.INSTAGRAM_AVATARS_DIR || join(sourc
 const publicAvatarsDir = resolve(projectRoot, "public", "avatars");
 const outputPath = resolve(projectRoot, "app", "specialists-data.ts");
 
-const CATEGORY_MAP = {
-  "": "Інше",
-  "Еда": "Їжа",
-  "Заведения": "Заклади",
-  "Здоровье": "Здоровʼя",
-  "Красота": "Краса",
-  "Недвижимость": "Нерухомість",
-  "Образование": "Освіта",
-  "Транспорт": "Транспорт",
-  "Услуги": "Послуги",
-  "Финансы": "Фінанси",
-  "Юридические услуги": "Юридичні послуги",
-};
-
-const SUBCATEGORY_MAP = {
-  "": "Не вказано",
-  "Автомеханик": "Автомеханік",
-  "Автосервис": "Автосервіс",
-  "Брови": "Брови",
-  "Бухгалтер": "Бухгалтер",
-  "Визаж (макияж)": "Візаж (макіяж)",
-  "Волосы": "Волосся",
-  "Врач": "Лікар",
-  "Врач общей практики": "Лікар загальної практики",
-  "Гинеколог": "Гінеколог",
-  "Детский сад": "Дитячий садок",
-  "Кафе": "Кафе",
-  "Кондитер": "Кондитер",
-  "Косметолог": "Косметолог",
-  "Легализация / карта побыту": "Легалізація / карта побиту",
-  "Массаж": "Масаж",
-  "Не указана": "Не вказано",
-  "Ногти": "Нігті",
-  "Нотариус": "Нотаріус",
-  "Онлайн-рецепты": "Онлайн-рецепти",
-  "Педиатр": "Педіатр",
-  "Переводчик": "Перекладач",
-  "Пирсинг / тату": "Пірсинг / тату",
-  "Подолог": "Подолог",
-  "Психиатр": "Психіатр",
-  "Психолог": "Психолог",
-  "Ремонт кофемашин": "Ремонт кавомашин",
-  "Репетитор английского": "Репетитор англійської",
-  "Репетитор английского языка": "Репетитор англійської мови",
-  "Репетитор польского языка": "Репетитор польської мови",
-  "Ресницы": "Вії",
-  "Риелтор": "Рієлтор",
-  "Салон красоты": "Салон краси",
-  "Стоматолог": "Стоматолог",
-  "Танцевальная студия": "Танцювальна студія",
-  "Тату": "Тату",
-  "Турагент": "Турагент",
-  "Туроператор": "Туроператор",
-  "УЗИ (диагностика)": "УЗД (діагностика)",
-  "Увеличение губ": "Збільшення губ",
-  "Украинская школа": "Українська школа",
-  "Физиотерапевт": "Фізіотерапевт",
-  "Швея": "Швачка",
-  "Эвакуатор": "Евакуатор",
-  "Электрик": "Електрик",
-  "Эпиляция": "Епіляція",
-  "Юрист": "Юрист",
-};
-
 function parseCsv(text) {
   const rows = [];
   let row = [];
@@ -152,36 +88,6 @@ function stripInstagramTitle(title) {
     .trim();
 }
 
-function loadExistingSpecialists() {
-  if (!existsSync(outputPath)) return [];
-  const text = readFileSync(outputPath, "utf8");
-  const match = text.match(/export const specialists: Specialist\[\] = (\[[\s\S]*\]);\s*$/);
-  if (!match) return [];
-  try {
-    return JSON.parse(match[1]);
-  } catch {
-    return [];
-  }
-}
-
-function buildLearnedTranslationMaps(catalogRows, existingRows) {
-  const categories = new Map(Object.entries(CATEGORY_MAP));
-  const subcategories = new Map(Object.entries(SUBCATEGORY_MAP));
-
-  for (const source of catalogRows) {
-    const existing = existingRows.find((item) => String(item.id) === String(source["№"]));
-    if (!existing) continue;
-
-    const rawCategory = (source["Категория"] || "").trim();
-    const rawSubcategory = (source["Подкатегория"] || "").trim();
-
-    if (rawCategory && existing.category) categories.set(rawCategory, existing.category);
-    if (rawSubcategory && existing.subcategory) subcategories.set(rawSubcategory, existing.subcategory);
-  }
-
-  return { categories, subcategories };
-}
-
 function copyAvatars() {
   mkdirSync(publicAvatarsDir, { recursive: true });
   if (!existsSync(sourceAvatarsDir)) return new Map();
@@ -232,33 +138,42 @@ export const specialists: Specialist[] = ${JSON.stringify(items, null, 2)};
 `;
 }
 
+function pick(row, keys) {
+  for (const key of keys) {
+    const value = row[key];
+    if (value != null && String(value).trim()) return String(value).trim();
+  }
+  return "";
+}
+
 const catalogRows = readCsv(catalogPath);
 const instagramRows = readCsv(instagramPath, false);
-const existingRows = loadExistingSpecialists();
-const { categories, subcategories } = buildLearnedTranslationMaps(catalogRows, existingRows);
 const avatars = copyAvatars();
 const instagram = buildInstagramMap(instagramRows);
 
 const specialists = catalogRows.map((row, index) => {
-  const social = (row["Соц сети"] || "").trim();
+  const social = pick(row, ["Соцмережі", "Соц сети"]);
   const username = instagramUsername(social);
   const extra = instagram.get(username) || {};
   const avatarFile = avatars.get(username);
-  const id = Number.parseInt(row["№"], 10);
+  const id = Number.parseInt(pick(row, ["№", "id"]), 10);
+  const name = pick(row, ["Ім'я", "Ім’я", "Имя"]);
+  const title = pick(row, ["Назва", "Название", "Ім'я", "Ім’я", "Имя"]);
+  const category = pick(row, ["Категорія", "Категория"]);
+  const subcategory = pick(row, ["Підкатегорія", "Подкатегория"]);
 
   return {
     id: Number.isFinite(id) ? id : index + 1,
-    name: (row["Имя"] || "").trim(),
-    title: (row["Название"] || row["Имя"] || "Без назви").trim(),
-    category: categories.get((row["Категория"] || "").trim()) || (row["Категория"] || "Інше").trim(),
-    subcategory:
-      subcategories.get((row["Подкатегория"] || "").trim()) || (row["Подкатегория"] || "Не вказано").trim(),
-    phone: (row["Телефон"] || "").trim(),
-    website: normalizeUrl(row["Сайт"]),
+    name,
+    title: title || "Без назви",
+    category: category || "Інше",
+    subcategory: subcategory || "Не вказано",
+    phone: pick(row, ["Телефон"]),
+    website: normalizeUrl(pick(row, ["Сайт"])),
     social,
     instagram: username,
-    description: (row["Описание"] || "").trim(),
-    communityMatch: Boolean((row["Национальность (для сомнительных случаев)"] || "").trim()),
+    description: pick(row, ["Опис", "Описание"]),
+    communityMatch: Boolean(pick(row, ["Національність (для сумнівних випадків)", "Национальность (для сомнительных случаев)"])),
     avatar: avatarFile ? `/avatars/${avatarFile}` : "",
     instagramTitle: extra.instagramTitle || "",
     instagramBio: extra.instagramBio || "",
