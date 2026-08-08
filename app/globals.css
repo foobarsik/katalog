@@ -447,18 +447,11 @@ p {
   font-weight: 800;
 }
 
-.description,
 .instagram-preview p,
 .review-quote,
 .catalog-comment {
   line-height: 1.48;
   white-space: pre-line;
-}
-
-.description {
-  margin: 12px 0 0;
-  color: #2f3835;
-  font-size: 0.94rem;
 }
 
 .review-quote {

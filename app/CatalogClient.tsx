@@ -126,7 +126,6 @@ function SpecialistCard({
 }) {
   const instagramUrl = getInstagramUrl(item);
   const hasInstagramDetails = Boolean(item.instagramTitle || item.instagramBio);
-  const hasCatalogText = Boolean(item.review || item.comment);
 
   return (
     <article className="specialist-card">
@@ -166,8 +165,6 @@ function SpecialistCard({
           <p className="catalog-comment">{item.comment}</p>
         </div>
       ) : null}
-
-      {!hasCatalogText && !hasInstagramDetails ? <p className="description">Опис буде доповнено.</p> : null}
 
       <div className="card-actions">
         {instagramUrl ? (
