@@ -485,6 +485,35 @@ p {
   outline: none;
 }
 
+.specialist-card.instagram-unavailable {
+  --cat-color: #9a9384;
+  background: #f0eee7;
+  border-color: #d3ccbd;
+  border-left-color: #9a9384;
+  box-shadow: none;
+  color: #4d4a42;
+}
+
+.specialist-card.instagram-unavailable:hover {
+  border-color: #c8c0af;
+  border-left-color: #8a8375;
+  box-shadow: 0 10px 24px rgba(77, 74, 66, 0.08);
+}
+
+.specialist-card.instagram-unavailable .avatar {
+  background: linear-gradient(135deg, #8f8879, #58554e);
+}
+
+.specialist-card.instagram-unavailable .category,
+.specialist-card.instagram-unavailable .person {
+  color: #6f695c;
+}
+
+.specialist-card.instagram-unavailable .card-meta span {
+  background: #e8e4d9;
+  color: #5f5a50;
+}
+
 .card-topline {
   display: grid;
   grid-template-columns: 54px 1fr;

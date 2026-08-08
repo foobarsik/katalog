@@ -74,7 +74,21 @@ function makeSearchText(item: Specialist) {
     .toLocaleLowerCase("uk-UA");
 }
 
+function hasInstagramFailureText(item: Specialist) {
+  return /\[FAILED:\s*not_found\]/i.test(`${item.instagramTitle} ${item.instagramBio}`);
+}
+
+function isInstagramUnavailable(item: Specialist) {
+  return item.instagramStatus === "failed" || hasInstagramFailureText(item);
+}
+
+function isInstagramSocialValue(value: string) {
+  return /instagram\.com|^instagram\s*:/i.test(value.trim());
+}
+
 function getInstagramUrl(item: Specialist) {
+  if (isInstagramUnavailable(item)) return "";
+
   const social = item.social.trim();
   const instagramLink = social.match(/https?:\/\/(?:www\.)?instagram\.com\/([^/?#\s]+)/i);
   if (instagramLink) return instagramLink[0];
@@ -93,6 +107,7 @@ function getExternalSocialUrl(item: Specialist) {
 function getSocialContact(item: Specialist): SocialContact | null {
   const social = item.social.trim();
   if (!social || getInstagramUrl(item)) return null;
+  if (isInstagramSocialValue(social)) return null;
 
   if (/^https?:\/\//i.test(social)) {
     if (/facebook\.com/i.test(social)) return { href: social, label: "Facebook", type: "facebook" };
@@ -133,7 +148,7 @@ function getSocialContact(item: Specialist): SocialContact | null {
 function getRank(item: Specialist) {
   return (
     Number(Boolean(item.avatar)) +
-    Number(Boolean(item.instagramBio)) +
+    Number(!isInstagramUnavailable(item) && Boolean(item.instagramBio)) +
     Number(Boolean(item.phone)) +
     Number(Boolean(item.website))
   );
@@ -233,7 +248,8 @@ function SpecialistCard({
 }) {
   const instagramUrl = getInstagramUrl(item);
   const socialContact = getSocialContact(item);
-  const hasInstagramDetails = Boolean(item.instagramTitle || item.instagramBio);
+  const instagramUnavailable = isInstagramUnavailable(item);
+  const hasInstagramDetails = !instagramUnavailable && Boolean(item.instagramTitle || item.instagramBio);
 
   function openFromKeyboard(event: React.KeyboardEvent<HTMLElement>) {
     if (event.key !== "Enter" && event.key !== " ") return;
@@ -244,7 +260,7 @@ function SpecialistCard({
   return (
     <article
       aria-label={`Відкрити деталі: ${item.title}`}
-      className="specialist-card"
+      className={instagramUnavailable ? "specialist-card instagram-unavailable" : "specialist-card"}
       onClick={() => onOpen(item)}
       onKeyDown={openFromKeyboard}
       role="button"
@@ -329,6 +345,7 @@ function DetailModal({
 
   const instagramUrl = getInstagramUrl(item);
   const socialContact = getSocialContact(item);
+  const instagramUnavailable = isInstagramUnavailable(item);
 
   return (
     <div className="modal-backdrop">
@@ -374,7 +391,7 @@ function DetailModal({
               <p className="catalog-comment full">{item.comment}</p>
             </section>
           ) : null}
-          {item.instagramTitle || item.instagramBio ? (
+          {!instagramUnavailable && (item.instagramTitle || item.instagramBio) ? (
             <section>
               <h3>Instagram</h3>
               {item.instagramTitle ? <p className="modal-strong">{item.instagramTitle}</p> : null}
