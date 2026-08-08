@@ -7,8 +7,6 @@ type CatalogClientProps = {
   specialists: Specialist[];
 };
 
-type SortMode = "recommended" | "contacts" | "title";
-
 const priorityCategories = [
   "Усі",
   "Здоров'я",
@@ -55,10 +53,6 @@ function getInstagramUrl(item: Specialist) {
   if (item.social) return item.social;
   if (item.instagram) return `https://www.instagram.com/${item.instagram}`;
   return "";
-}
-
-function hasContact(item: Specialist) {
-  return Boolean(item.phone || item.website || getInstagramUrl(item));
 }
 
 function getRank(item: Specialist) {
@@ -272,8 +266,9 @@ function DetailModal({
 export function CatalogClient({ specialists }: CatalogClientProps) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("Усі");
-  const [onlyInstagram, setOnlyInstagram] = useState(false);
-  const [sortMode, setSortMode] = useState<SortMode>("recommended");
+  const [withInstagram, setWithInstagram] = useState(false);
+  const [withWebsite, setWithWebsite] = useState(false);
+  const [withReviews, setWithReviews] = useState(false);
   const [selected, setSelected] = useState<Specialist | null>(null);
 
   const categories = useMemo(() => {
@@ -302,25 +297,22 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     const needle = query.trim().toLocaleLowerCase("uk-UA");
     const result = specialists
       .filter((item) => (category === "Усі" ? true : normalizeCategory(item.category) === normalizeCategory(category)))
-      .filter((item) => (onlyInstagram ? Boolean(item.instagramTitle || item.instagramBio) : true))
+      .filter((item) => (withInstagram ? Boolean(getInstagramUrl(item)) : true))
+      .filter((item) => (withWebsite ? Boolean(item.website) : true))
+      .filter((item) => (withReviews ? Boolean(item.review) : true))
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true));
 
-    return result.sort((a, b) => {
-      if (sortMode === "title") return a.title.localeCompare(b.title, "uk-UA");
-      if (sortMode === "contacts") {
-        return Number(hasContact(b)) - Number(hasContact(a)) || b.id - a.id;
-      }
-      return getRank(b) - getRank(a) || a.title.localeCompare(b.title, "uk-UA");
-    });
-  }, [category, onlyInstagram, query, sortMode, specialists]);
+    return result.sort((a, b) => getRank(b) - getRank(a) || a.title.localeCompare(b.title, "uk-UA"));
+  }, [category, query, specialists, withInstagram, withReviews, withWebsite]);
 
-  const hasActiveFilters = query || category !== "Усі" || onlyInstagram || sortMode !== "recommended";
+  const hasActiveFilters = query || category !== "Усі" || withInstagram || withWebsite || withReviews;
 
   function clearFilters() {
     setQuery("");
     setCategory("Усі");
-    setOnlyInstagram(false);
-    setSortMode("recommended");
+    setWithInstagram(false);
+    setWithWebsite(false);
+    setWithReviews(false);
   }
 
   return (
@@ -357,22 +349,23 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
             </select>
           </label>
 
-          <label className="select-field">
-            <span>Сортування</span>
-            <select value={sortMode} onChange={(event) => setSortMode(event.target.value as SortMode)}>
-              <option value="recommended">Спочатку найповніші</option>
-              <option value="contacts">Спочатку з контактами</option>
-              <option value="title">За назвою</option>
-            </select>
-          </label>
-
           <label className="toggle">
             <input
               type="checkbox"
-              checked={onlyInstagram}
-              onChange={(event) => setOnlyInstagram(event.target.checked)}
+              checked={withInstagram}
+              onChange={(event) => setWithInstagram(event.target.checked)}
             />
-            <span>З Instagram-описом</span>
+            <span>Instagram</span>
+          </label>
+
+          <label className="toggle">
+            <input type="checkbox" checked={withWebsite} onChange={(event) => setWithWebsite(event.target.checked)} />
+            <span>Сайт</span>
+          </label>
+
+          <label className="toggle">
+            <input type="checkbox" checked={withReviews} onChange={(event) => setWithReviews(event.target.checked)} />
+            <span>Відгуки</span>
           </label>
         </div>
       </section>
