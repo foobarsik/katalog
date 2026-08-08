@@ -267,6 +267,8 @@ function SpecialistCard({
       style={{ "--cat-color": getCategoryColor(item.category) } as React.CSSProperties}
       tabIndex={0}
     >
+      {instagramUnavailable ? <span className="inactive-badge">Контакти застарілі або неперевірені</span> : null}
+
       <div className="card-topline">
         <div className="avatar" aria-hidden="true">
           {item.avatar ? <img src={item.avatar} alt="" loading="lazy" /> : <span>{getInitials(item)}</span>}
@@ -276,8 +278,6 @@ function SpecialistCard({
           <h2>{item.title}</h2>
         </div>
       </div>
-
-      {instagramUnavailable ? <span className="inactive-badge">Контакти застарілі або неперевірені</span> : null}
 
       <div className="card-meta">
         {item.subcategory ? <span>{item.subcategory}</span> : null}
@@ -466,7 +466,12 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       .filter((item) => (withReviews ? Boolean(item.review) : true))
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true));
 
-    return result.sort((a, b) => getRank(b) - getRank(a) || a.title.localeCompare(b.title, "uk-UA"));
+    return result.sort(
+      (a, b) =>
+        Number(isInstagramUnavailable(a)) - Number(isInstagramUnavailable(b)) ||
+        getRank(b) - getRank(a) ||
+        a.title.localeCompare(b.title, "uk-UA"),
+    );
   }, [category, query, specialists, withInstagram, withReviews, withWebsite]);
 
   const hasActiveFilters = query || category !== "Усі" || withInstagram || withWebsite || withReviews;

@@ -452,6 +452,7 @@ p {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
+  padding-top: 12px;
 }
 
 .specialist-card {
@@ -515,19 +516,28 @@ p {
 }
 
 .inactive-badge {
+  position: absolute;
+  top: -12px;
+  right: 12px;
   display: inline-flex;
-  width: fit-content;
+  width: max-content;
   max-width: 100%;
-  margin-top: 12px;
-  border: 1px solid #b9b09d;
-  border-radius: 999px;
-  background: #ded8cb;
-  color: #5b554b;
-  padding: 5px 9px;
+  transform: rotate(1.5deg);
+  border: 1.5px solid #a69a83;
+  border-radius: 3px;
+  background: #d8cfbd;
+  box-shadow: 0 4px 0 rgba(91, 85, 75, 0.12);
+  color: #504a41;
+  padding: 6px 10px;
   font-size: 0.68rem;
   font-weight: 850;
   line-height: 1;
   text-transform: uppercase;
+  z-index: 2;
+}
+
+.specialist-card.instagram-unavailable .card-topline {
+  padding-top: 8px;
 }
 
 .card-topline {
@@ -959,6 +969,17 @@ p {
 }
 
 @media (max-width: 520px) {
+  .inactive-badge {
+    right: 8px;
+    max-width: calc(100% - 24px);
+    white-space: normal;
+    line-height: 1.15;
+  }
+
+  .specialist-card.instagram-unavailable .card-topline {
+    padding-top: 18px;
+  }
+
   .top-controls {
     grid-template-columns: 1fr;
   }
