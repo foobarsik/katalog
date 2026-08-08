@@ -613,6 +613,26 @@ ul {
   text-transform: uppercase;
 }
 
+.card-details {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+.card-details h4 {
+  margin-bottom: 5px;
+  color: var(--ink-faint);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.card-details p {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.48;
+}
+
 .flag {
   color: var(--ink-faint);
   font-size: 0.78rem;

@@ -355,6 +355,13 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
         <p className="card-bio">{bio}</p>
       ) : null}
 
+      {item.comment ? (
+        <section className="card-details">
+          <h4>Деталі</h4>
+          <p>{item.comment}</p>
+        </section>
+      ) : null}
+
       {unavailable ? <p className="flag">Контакти застарілі або неперевірені</p> : null}
 
       <div className="card-actions">
