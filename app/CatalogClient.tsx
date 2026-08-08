@@ -278,6 +278,7 @@ function ContactLink({
       href={href}
       rel={external ? "noreferrer" : undefined}
       target={external ? "_blank" : undefined}
+      title={iconOnly ? ariaLabel : undefined}
     >
       {children}
     </a>
@@ -302,21 +303,34 @@ function ContactRow({ item, verbose }: { item: Specialist; verbose: boolean }) {
         </ContactLink>
       ) : null}
       {item.phone ? (
-        <ContactLink href={telHref(item.phone)} external={false}>
+        <ContactLink
+          ariaLabel={verbose ? undefined : "Подзвонити"}
+          external={false}
+          href={telHref(item.phone)}
+          iconOnly={!verbose}
+        >
           <PhoneIcon />
-          {verbose ? item.phone : "Подзвонити"}
+          {verbose ? item.phone : null}
         </ContactLink>
       ) : null}
       {social ? (
-        <ContactLink href={social.href}>
+        <ContactLink
+          ariaLabel={verbose ? undefined : `Відкрити ${social.label}`}
+          href={social.href}
+          iconOnly={!verbose}
+        >
           <SocialIcon type={social.type} />
-          {social.label}
+          {verbose ? social.label : null}
         </ContactLink>
       ) : null}
       {item.website ? (
-        <ContactLink href={item.website}>
+        <ContactLink
+          ariaLabel={verbose ? undefined : "Відкрити сайт"}
+          href={item.website}
+          iconOnly={!verbose}
+        >
           <WebsiteIcon />
-          Сайт
+          {verbose ? "Сайт" : null}
         </ContactLink>
       ) : null}
     </>
