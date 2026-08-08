@@ -366,6 +366,18 @@ function Avatar({ item, size }: { item: Specialist; size: "sm" | "lg" }) {
   );
 }
 
+function LocationStatus({ item }: { item: Specialist }) {
+  const status = item.locationStatus || "unknown";
+  if (status === "unknown") return null;
+  const label = item.locationEvidence;
+
+  return (
+    <span className={`location-status ${status}`}>
+      <span>{label}</span>
+    </span>
+  );
+}
+
 function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Specialist) => void }) {
   const unavailable = isInstagramUnavailable(item);
   const secondaryName = getSecondaryName(item);
@@ -376,7 +388,10 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
 
   return (
     <article className={className} style={{ "--cat": getCategoryColor(item.category) } as React.CSSProperties}>
-      <p className="profession">{item.subcategory || item.category}</p>
+      <div className="card-meta">
+        <p className="profession">{item.subcategory || item.category}</p>
+        <LocationStatus item={item} />
+      </div>
 
       <div className="card-identity">
         <Avatar item={item} size="sm" />
@@ -494,6 +509,7 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
               <span className="cat-dot" aria-hidden="true" />
               {item.category}
             </p>
+            <LocationStatus item={item} />
           </div>
         </div>
 
@@ -543,12 +559,16 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const [category, setCategory] = useState(ALL);
   const [profession, setProfession] = useState("");
   const [reviewedOnly, setReviewedOnly] = useState(false);
-  const [selected, setSelected] = useState<Specialist | null>(null);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   const [visible, setVisible] = useState(PAGE_SIZE);
   const searchRef = useRef<HTMLInputElement | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   const reviewCount = useMemo(() => specialists.filter((item) => item.review).length, [specialists]);
+  const selected = useMemo(
+    () => specialists.find((item) => item.id === selectedId) || null,
+    [selectedId, specialists],
+  );
 
   const categories = useMemo(() => {
     const counts = new Map<string, number>();
@@ -642,7 +662,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   return (
     <main className="shell">
       <header className="masthead">
-        <p className="wordmark">Каталог · Катовіце</p>
+        <p className="wordmark">Каталог · Катовіце та поруч</p>
         <h1>Свої люди поруч</h1>
         <p className="lede">{specialists.length} контактів, зібраних українською спільнотою.</p>
       </header>
@@ -745,7 +765,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
         <>
           <div className="grid">
             {shown.map((item) => (
-              <SpecialistCard item={item} key={item.id} onOpen={setSelected} />
+              <SpecialistCard item={item} key={item.id} onOpen={(entry) => setSelectedId(entry.id)} />
             ))}
           </div>
 
@@ -770,7 +790,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
         </div>
       )}
 
-      <DetailDialog item={selected} onClose={() => setSelected(null)} />
+      <DetailDialog item={selected} onClose={() => setSelectedId(null)} />
     </main>
   );
 }

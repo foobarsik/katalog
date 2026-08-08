@@ -88,6 +88,68 @@ function stripInstagramTitle(title) {
     .trim();
 }
 
+const acceptedLocations = [
+  ["Katowice", /katowic|катов[іи]ц/u],
+  ["Kraków", /krakow|крак[іо]в/u],
+  ["Sosnowiec", /sosnowiec|сосновец|сосновець/u],
+  ["Gliwice", /gliwic|гл[іи]в[іи]ц/u],
+  ["Tychy", /\btychy\b|тихи/u],
+  ["Mikołów", /mikolow|м[іи]кол[ув]в/u],
+  ["Bytom", /\bbytom\b|битом/u],
+  ["Ruda Śląska", /ruda slaska|руда сл[еє]нска/u],
+  ["Chorzów", /chorzow|хожув|хоржув/u],
+  ["Zabrze", /\bzabrze\b|забже/u],
+  ["Mysłowice", /myslowic|мисловиц/u],
+  ["Siemianowice Śląskie", /siemianowic|семяновиц/u],
+  ["Dąbrowa Górnicza", /dabrowa gornicza|домброва гурнича/u],
+  ["Czeladź", /czeladz|челядз/u],
+  ["Będzin", /bedzin|бендзин/u],
+  ["Piekary Śląskie", /piekary slaskie|пекари сл[еє]нске/u],
+  ["Świętochłowice", /swietochlowic|свентохловиц/u],
+  ["Jaworzno", /jaworzno|явожно/u],
+  ["Tarnowskie Góry", /tarnowskie gory|тарновске гуры/u],
+];
+
+const distantLocations = [
+  ["Warszawa", /warszaw|warsaw|варшав/u],
+  ["Łódź", /\blodz\b|лодз/u],
+  ["Wrocław", /wroclaw|вроцлав/u],
+  ["Poznań", /poznan|познан/u],
+  ["Gdańsk", /gdansk|гданьск/u],
+  ["Lublin", /\blublin\b|люблін|люблин/u],
+  ["Rzeszów", /rzeszow|жешув/u],
+  ["Opole", /\bopole\b|ополе/u],
+  ["Bielsko-Biała", /bielsko[ -]biala|бельско[ -]бяла/u],
+  ["Lviv", /\blviv\b|\blwow\b|льв[іи]в|львов/u],
+  ["Kyiv", /\bkyiv\b|\bkiev\b|ки[їе]в/u],
+  ["Odesa", /odesa|odessa|одес[аы]/u],
+  ["Kharkiv", /kharkiv|kharkov|харк[іи]в|харьков/u],
+  ["Dnipro", /\bdnipro\b|дн[іи]про/u],
+  ["Chernihiv", /chernihiv|chernigov|черн[іи]г[іо]в/u],
+  ["Kryvyi Rih", /kryvyi rih|кривий р[іи]г|кривой рог/u],
+  ["Manila", /manila|ман[іи]ла/u],
+];
+
+function normalizeLocationText(parts) {
+  return parts
+    .filter(Boolean)
+    .join(" ")
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .toLocaleLowerCase("uk-UA");
+}
+
+function inferLocation(parts) {
+  const text = normalizeLocationText(parts);
+  const accepted = acceptedLocations.find(([, pattern]) => pattern.test(text));
+  if (accepted) return { locationStatus: "confirmed", locationEvidence: accepted[0] };
+
+  const distant = distantLocations.find(([, pattern]) => pattern.test(text));
+  if (distant) return { locationStatus: "unconfirmed", locationEvidence: distant[0] };
+
+  return { locationStatus: "unknown", locationEvidence: "" };
+}
+
 function copyAvatars() {
   mkdirSync(publicAvatarsDir, { recursive: true });
   if (!existsSync(sourceAvatarsDir)) return new Map();
@@ -134,6 +196,8 @@ function renderDataFile(items) {
   instagramTitle: string;
   instagramBio: string;
   instagramStatus: string;
+  locationStatus: "confirmed" | "unknown" | "unconfirmed";
+  locationEvidence: string;
 };
 
 export const specialists: Specialist[] = ${JSON.stringify(items, null, 2)};
@@ -170,6 +234,15 @@ const specialists = catalogRows.map((row, index) => {
   const subcategory = pick(row, ["Підкатегорія", "Подкатегория"]);
   const review = pick(row, ["Відгук", "Отзыв"]);
   const comment = pick(row, ["Коментар", "Кометар", "Комментарий"]);
+  const location = inferLocation([
+    title,
+    name,
+    comment,
+    social,
+    username,
+    extra.instagramTitle,
+    extra.instagramBio,
+  ]);
 
   return {
     id: Number.isFinite(id) ? id : index + 1,
@@ -192,6 +265,7 @@ const specialists = catalogRows.map((row, index) => {
     instagramTitle: extra.instagramTitle || "",
     instagramBio: extra.instagramBio || "",
     instagramStatus: extra.instagramStatus || "",
+    ...location,
   };
 });
 
@@ -201,7 +275,11 @@ const enrichedCount = specialists.filter(
   (item) => item.instagramBio || item.instagramTitle,
 ).length;
 const avatarCount = specialists.filter((item) => item.avatar).length;
+const locationCounts = Object.groupBy(specialists, (item) => item.locationStatus);
 
 console.log(`Imported ${specialists.length} specialists.`);
 console.log(`Instagram-enriched profiles: ${enrichedCount}.`);
 console.log(`Matched avatars: ${avatarCount}.`);
+console.log(
+  `Locations: ${locationCounts.confirmed?.length || 0} confirmed, ${locationCounts.unknown?.length || 0} unknown, ${locationCounts.unconfirmed?.length || 0} unconfirmed.`,
+);

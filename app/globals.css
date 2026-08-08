@@ -483,6 +483,13 @@ ul {
   opacity: 0.72;
 }
 
+.card-meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
 .profession {
   display: flex;
   align-items: center;
@@ -501,6 +508,38 @@ ul {
   flex: none;
   border-radius: 2px;
   background: currentColor;
+}
+
+.location-status {
+  display: inline-flex;
+  min-height: 24px;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface-sunk);
+  color: var(--ink-soft);
+  padding: 3px 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.location-status.confirmed {
+  border-color: #a9cfc2;
+  background: #edf8f4;
+  color: #236454;
+}
+
+.location-status.unconfirmed {
+  border-color: #e2b5ad;
+  background: #fff2ef;
+  color: #8b3d36;
+}
+
+.panel-titles .location-status {
+  margin-top: 10px;
 }
 
 .card-identity {
