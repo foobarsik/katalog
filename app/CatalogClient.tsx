@@ -109,6 +109,7 @@ function ContactLink({
     <a
       className={`contact-link ${variant}`}
       href={href}
+      onClick={(event) => event.stopPropagation()}
       rel={external ? "noreferrer" : undefined}
       target={external ? "_blank" : undefined}
     >
@@ -127,8 +128,21 @@ function SpecialistCard({
   const instagramUrl = getInstagramUrl(item);
   const hasInstagramDetails = Boolean(item.instagramTitle || item.instagramBio);
 
+  function openFromKeyboard(event: React.KeyboardEvent<HTMLElement>) {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    onOpen(item);
+  }
+
   return (
-    <article className="specialist-card">
+    <article
+      aria-label={`Відкрити деталі: ${item.title}`}
+      className="specialist-card"
+      onClick={() => onOpen(item)}
+      onKeyDown={openFromKeyboard}
+      role="button"
+      tabIndex={0}
+    >
       <div className="card-topline">
         <div className="avatar" aria-hidden="true">
           {item.avatar ? <img src={item.avatar} alt="" loading="lazy" /> : <span>{getInitials(item)}</span>}
@@ -185,9 +199,6 @@ function SpecialistCard({
             <PhoneIcon />
           </ContactLink>
         ) : null}
-        <button className="details-button" type="button" onClick={() => onOpen(item)}>
-          Детальніше
-        </button>
       </div>
     </article>
   );
