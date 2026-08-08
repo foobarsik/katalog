@@ -195,7 +195,6 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
           <p className="eyebrow">Результати</p>
           <h2>{filtered.length} карток знайдено</h2>
         </div>
-        <p>Дані з каталогу та спарсених Instagram-профілів, доступні для швидкого перегляду.</p>
       </section>
 
       <section className="catalog-grid" aria-label="Список спеціалістів">
