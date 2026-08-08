@@ -483,13 +483,6 @@ ul {
   opacity: 0.72;
 }
 
-.card-meta {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-}
-
 .profession {
   display: flex;
   align-items: center;
@@ -522,20 +515,15 @@ ul {
   color: var(--ink-soft);
   padding: 3px 8px;
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.2;
-}
-
-.location-status.confirmed {
-  border-color: #a9cfc2;
-  background: #edf8f4;
-  color: #236454;
 }
 
 .location-status.unconfirmed {
   border-color: #e2b5ad;
   background: #fff2ef;
   color: #8b3d36;
+  font-weight: 700;
 }
 
 .panel-titles .location-status {
@@ -687,6 +675,14 @@ ul {
   gap: 8px;
   margin-top: auto;
   padding-top: 4px;
+}
+
+.card-actions {
+  align-items: center;
+}
+
+.card-actions .location-status {
+  margin-left: auto;
 }
 
 .action {

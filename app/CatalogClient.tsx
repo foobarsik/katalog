@@ -388,10 +388,7 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
 
   return (
     <article className={className} style={{ "--cat": getCategoryColor(item.category) } as React.CSSProperties}>
-      <div className="card-meta">
-        <p className="profession">{item.subcategory || item.category}</p>
-        <LocationStatus item={item} />
-      </div>
+      <p className="profession">{item.subcategory || item.category}</p>
 
       <div className="card-identity">
         <Avatar item={item} size="sm" />
@@ -424,6 +421,7 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
 
       <div className="card-actions">
         <ContactRow item={item} verbose={false} />
+        <LocationStatus item={item} />
       </div>
     </article>
   );
