@@ -258,16 +258,23 @@ function ContactLink({
   href,
   children,
   variant = "ghost",
+  tone,
+  iconOnly = false,
+  ariaLabel,
   external = true,
 }: {
   href: string;
   children: React.ReactNode;
   variant?: "solid" | "ghost";
+  tone?: "instagram";
+  iconOnly?: boolean;
+  ariaLabel?: string;
   external?: boolean;
 }) {
   return (
     <a
-      className={`action ${variant}`}
+      aria-label={ariaLabel}
+      className={`action ${variant}${tone ? ` ${tone}` : ""}${iconOnly ? " icon-only" : ""}`}
       href={href}
       rel={external ? "noreferrer" : undefined}
       target={external ? "_blank" : undefined}
@@ -284,9 +291,14 @@ function ContactRow({ item, verbose }: { item: Specialist; verbose: boolean }) {
   return (
     <>
       {instagramUrl ? (
-        <ContactLink href={instagramUrl} variant="solid">
+        <ContactLink
+          ariaLabel={verbose ? undefined : "Відкрити Instagram"}
+          href={instagramUrl}
+          iconOnly={!verbose}
+          tone="instagram"
+        >
           <InstagramIcon />
-          {verbose ? "Написати в Instagram" : "Instagram"}
+          {verbose ? "Написати в Instagram" : null}
         </ContactLink>
       ) : null}
       {item.phone ? (

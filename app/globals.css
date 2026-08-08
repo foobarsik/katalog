@@ -673,6 +673,25 @@ ul {
   color: var(--accent-deep);
 }
 
+.action.instagram {
+  border-color: var(--line-strong);
+  background: transparent;
+  color: var(--ink-soft);
+}
+
+.action.instagram:hover {
+  border-color: #d08aa7;
+  background: #fdf1f6;
+  color: #9b315d;
+}
+
+.action.icon-only {
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
+
 .action.solid {
   border-color: var(--accent);
   background: var(--accent);
