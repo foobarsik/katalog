@@ -265,6 +265,10 @@ function getLocationRank(item: Specialist) {
   return 1;
 }
 
+function hasUnconfirmedLocation(item: Specialist) {
+  return item.locationStatus === "unconfirmed";
+}
+
 function telHref(phone: string) {
   return `tel:${phone.replace(/[^\d+]/g, "")}`;
 }
@@ -701,6 +705,8 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       .sort(
         (a, b) =>
           Number(a.needsReview) - Number(b.needsReview) ||
+          Number(isInstagramUnavailable(a)) - Number(isInstagramUnavailable(b)) ||
+          Number(hasUnconfirmedLocation(a)) - Number(hasUnconfirmedLocation(b)) ||
           getRank(b) - getRank(a) ||
           getLocationRank(b) - getLocationRank(a) ||
           getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
