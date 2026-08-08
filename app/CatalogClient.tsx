@@ -556,13 +556,11 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState(ALL);
   const [profession, setProfession] = useState("");
-  const [reviewedOnly, setReviewedOnly] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [visible, setVisible] = useState(PAGE_SIZE);
   const searchRef = useRef<HTMLInputElement | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
-  const reviewCount = useMemo(() => specialists.filter((item) => item.review).length, [specialists]);
   const selected = useMemo(
     () => specialists.find((item) => item.id === selectedId) || null,
     [selectedId, specialists],
@@ -612,14 +610,13 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
         category === ALL ? true : normalizeCategory(item.category) === normalizeCategory(category),
       )
       .filter((item) => (profession ? item.subcategory === profession : true))
-      .filter((item) => (reviewedOnly ? Boolean(item.review) : true))
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true))
       .sort(
         (a, b) => getRank(b) - getRank(a) || getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
       );
-  }, [category, profession, query, specialists, reviewedOnly]);
+  }, [category, profession, query, specialists]);
 
-  const filterKey = `${category} ${profession} ${query} ${reviewedOnly}`;
+  const filterKey = `${category} ${profession} ${query}`;
   const [lastFilterKey, setLastFilterKey] = useState(filterKey);
   if (lastFilterKey !== filterKey) {
     setLastFilterKey(filterKey);
@@ -645,13 +642,12 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     return () => observer.disconnect();
   }, [filtered.length]);
 
-  const hasFilters = Boolean(query || category !== ALL || profession || reviewedOnly);
+  const hasFilters = Boolean(query || category !== ALL || profession);
 
   const reset = useCallback(() => {
     setQuery("");
     setCategory(ALL);
     setProfession("");
-    setReviewedOnly(false);
     searchRef.current?.focus();
   }, []);
 
@@ -709,15 +705,6 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
           ))}
         </ul>
 
-        <button
-          aria-pressed={reviewedOnly}
-          className={reviewedOnly ? "review-filter on" : "review-filter"}
-          type="button"
-          onClick={() => setReviewedOnly(!reviewedOnly)}
-        >
-          Лише з відгуком
-          <em>{reviewCount}</em>
-        </button>
       </div>
 
       {topProfessions.length > 0 ? (
