@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Specialist } from "./specialists-data";
 
 type CatalogClientProps = {
@@ -13,18 +13,10 @@ type SocialContact = {
   type: "facebook" | "telegram" | "viber" | "whatsapp" | "link";
 };
 
-const priorityCategories = [
-  "Усі",
-  "Здоров'я",
-  "Краса",
-  "Послуги",
-  "Юридичні послуги",
-  "Заклади",
-];
+const ALL = "Усі";
+const PAGE_SIZE = 36;
 
-function normalizeCategory(value: string) {
-  return value.replace(/[ʼ’]/g, "'");
-}
+const priorityCategories = [ALL, "Здоров'я", "Краса", "Послуги", "Юридичні послуги", "Заклади"];
 
 const categoryColors: Record<string, string> = {
   "Здоров'я": "var(--cat-health)",
@@ -40,19 +32,60 @@ const categoryColors: Record<string, string> = {
   Інше: "var(--cat-other)",
 };
 
+function normalizeCategory(value: string) {
+  return value.replace(/[ʼ’]/g, "'");
+}
+
 function getCategoryColor(category: string) {
   return categoryColors[normalizeCategory(category)] || "var(--cat-other)";
 }
 
+/** Scraper status markers leak into the bio fields and must never reach a reader. */
+function cleanBio(text: string) {
+  return text
+    .replace(/\[[^\]]*(?:PRIVATE|private|FAILED|not visible|not_found|no posts)[^\]]*\]/g, "")
+    .replace(/\s*\.\.\.\s*$/, "…")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
+
+function looksLikeHandle(item: Specialist) {
+  const title = item.title.trim();
+  if (!title) return true;
+  if (item.instagram && title.toLowerCase() === item.instagram.toLowerCase()) return true;
+  return /^[a-z0-9._@-]+$/i.test(title) && !/\s/.test(title);
+}
+
+/** A raw Instagram handle reads as a database dump; recover a human name where the data holds one. */
+function getDisplayName(item: Specialist) {
+  if (!looksLikeHandle(item)) return item.title;
+  if (item.name) return item.name;
+
+  const lead = cleanBio(item.instagramTitle).split(/[•|·]/)[0].trim();
+  const words = lead.split(/\s+/).filter(Boolean);
+  const isShouting = lead === lead.toLocaleUpperCase("uk-UA") && words.length > 2;
+  if (lead && lead.length <= 40 && words.length <= 4 && !isShouting) return lead;
+
+  // No human name in the record, so present the handle as one rather than as a broken name.
+  const handle = item.instagram || item.title;
+  return item.instagram && item.title.toLowerCase() === item.instagram.toLowerCase()
+    ? `@${handle}`
+    : item.title || `@${handle}`;
+}
+
+function getSecondaryName(item: Specialist) {
+  const display = getDisplayName(item);
+  return item.name && item.name !== display ? item.name : "";
+}
+
 function getInitials(item: Specialist) {
-  const source = item.name || item.title || item.instagram || "S";
-  return source
+  return (getDisplayName(item) || "?")
     .split(/\s+/)
     .filter(Boolean)
     .slice(0, 2)
     .map((part) => part[0])
     .join("")
-    .toUpperCase();
+    .toLocaleUpperCase("uk-UA");
 }
 
 function makeSearchText(item: Specialist) {
@@ -93,15 +126,11 @@ function getInstagramUrl(item: Specialist) {
   const instagramLink = social.match(/https?:\/\/(?:www\.)?instagram\.com\/([^/?#\s]+)/i);
   if (instagramLink) return instagramLink[0];
 
-  const labeledHandle = social.match(/(?:^|[\/\s])instagram\s*:\s*@?([a-z0-9._]+)/i);
+  const labeledHandle = social.match(/(?:^|[/\s])instagram\s*:\s*@?([a-z0-9._]+)/i);
   if (labeledHandle?.[1]) return `https://www.instagram.com/${labeledHandle[1]}`;
 
   if (item.instagram) return `https://www.instagram.com/${item.instagram}`;
   return "";
-}
-
-function getExternalSocialUrl(item: Specialist) {
-  return getSocialContact(item)?.href || "";
 }
 
 function getSocialContact(item: Specialist): SocialContact | null {
@@ -111,7 +140,7 @@ function getSocialContact(item: Specialist): SocialContact | null {
 
   if (/^https?:\/\//i.test(social)) {
     if (/facebook\.com/i.test(social)) return { href: social, label: "Facebook", type: "facebook" };
-    if (/(?:^https?:\/\/)?t\.me\//i.test(social)) return { href: social, label: "Telegram", type: "telegram" };
+    if (/t\.me\//i.test(social)) return { href: social, label: "Telegram", type: "telegram" };
     return { href: social, label: "Посилання", type: "link" };
   }
 
@@ -145,18 +174,28 @@ function getSocialContact(item: Specialist): SocialContact | null {
   return null;
 }
 
+function hasAnyContact(item: Specialist) {
+  return Boolean(getInstagramUrl(item) || item.phone || item.website || getSocialContact(item));
+}
+
+/** A vouched entry outranks all else: it is why this list exists rather than a map search. */
 function getRank(item: Specialist) {
   return (
-    Number(Boolean(item.avatar)) +
-    Number(!isInstagramUnavailable(item) && Boolean(item.instagramBio)) +
-    Number(Boolean(item.phone)) +
-    Number(Boolean(item.website))
+    Number(Boolean(item.review)) * 16 +
+    Number(Boolean(item.comment)) * 8 +
+    Number(hasAnyContact(item)) * 4 +
+    Number(Boolean(item.avatar)) * 2 +
+    Number(!isInstagramUnavailable(item))
   );
+}
+
+function telHref(phone: string) {
+  return `tel:${phone.replace(/[^\d+]/g, "")}`;
 }
 
 function InstagramIcon() {
   return (
-    <svg aria-hidden="true" className="instagram-icon" viewBox="0 0 24 24">
+    <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
       <rect x="3" y="3" width="18" height="18" rx="5" />
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.5" cy="6.5" r="1.2" />
@@ -166,7 +205,7 @@ function InstagramIcon() {
 
 function WebsiteIcon() {
   return (
-    <svg aria-hidden="true" className="website-icon" viewBox="0 0 24 24">
+    <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="9" />
       <path d="M3.6 9h16.8" />
       <path d="M3.6 15h16.8" />
@@ -178,7 +217,7 @@ function WebsiteIcon() {
 
 function PhoneIcon() {
   return (
-    <svg aria-hidden="true" className="phone-icon" viewBox="0 0 24 24">
+    <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
       <path d="M6.6 4.4 9 3.7l2.1 4.7-1.5 1.1c.9 1.9 2.3 3.3 4.2 4.2l1.1-1.5 4.7 2.1-.7 2.4c-.3 1-1.2 1.7-2.2 1.6C10.5 18 6 13.5 5.7 7.3c-.1-1 .6-1.9 1.6-2.2Z" />
     </svg>
   );
@@ -186,7 +225,7 @@ function PhoneIcon() {
 
 function TelegramIcon() {
   return (
-    <svg aria-hidden="true" className="telegram-icon" viewBox="0 0 24 24">
+    <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
       <path d="M4 11.4 20 4.8l-3 14.4-4.8-3.7-2.8 2.7.4-4.3 7.9-7.1-10 6.1L4 11.4Z" />
     </svg>
   );
@@ -194,7 +233,7 @@ function TelegramIcon() {
 
 function FacebookIcon() {
   return (
-    <svg aria-hidden="true" className="facebook-icon" viewBox="0 0 24 24">
+    <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
       <path d="M14 8.1h2.1V4.6c-.4-.1-1.7-.2-3.2-.2-3.2 0-5.3 1.9-5.3 5.4v3H4.1v3.9h3.5v8h4.3v-8h3.4l.5-3.9h-3.9v-2.6c0-1.1.3-2.1 2.1-2.1Z" />
     </svg>
   );
@@ -208,7 +247,7 @@ function SocialIcon({ type }: { type: SocialContact["type"] }) {
 
 function SearchIcon() {
   return (
-    <svg aria-hidden="true" className="search-icon" viewBox="0 0 24 24">
+    <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
       <circle cx="11" cy="11" r="7" />
       <path d="m20.5 20.5-3.9-3.9" />
     </svg>
@@ -218,19 +257,18 @@ function SearchIcon() {
 function ContactLink({
   href,
   children,
-  variant = "secondary",
+  variant = "ghost",
   external = true,
 }: {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "secondary";
+  variant?: "solid" | "ghost";
   external?: boolean;
 }) {
   return (
     <a
-      className={`contact-link ${variant}`}
+      className={`action ${variant}`}
       href={href}
-      onClick={(event) => event.stopPropagation()}
       rel={external ? "noreferrer" : undefined}
       target={external ? "_blank" : undefined}
     >
@@ -239,373 +277,422 @@ function ContactLink({
   );
 }
 
-function SpecialistCard({
-  item,
-  onOpen,
-}: {
-  item: Specialist;
-  onOpen: (item: Specialist) => void;
-}) {
+function ContactRow({ item, verbose }: { item: Specialist; verbose: boolean }) {
   const instagramUrl = getInstagramUrl(item);
-  const socialContact = getSocialContact(item);
-  const instagramUnavailable = isInstagramUnavailable(item);
-  const hasInstagramDetails = !instagramUnavailable && Boolean(item.instagramTitle || item.instagramBio);
-
-  function openFromKeyboard(event: React.KeyboardEvent<HTMLElement>) {
-    if (event.key !== "Enter" && event.key !== " ") return;
-    event.preventDefault();
-    onOpen(item);
-  }
+  const social = getSocialContact(item);
 
   return (
-    <article
-      aria-label={`Відкрити деталі: ${item.title}`}
-      className={instagramUnavailable ? "specialist-card instagram-unavailable" : "specialist-card"}
-      onClick={() => onOpen(item)}
-      onKeyDown={openFromKeyboard}
-      role="button"
-      style={{ "--cat-color": getCategoryColor(item.category) } as React.CSSProperties}
-      tabIndex={0}
-    >
-      {instagramUnavailable ? <span className="inactive-badge">Контакти застарілі або неперевірені</span> : null}
-
-      <div className="card-topline">
-        <div className="avatar" aria-hidden="true">
-          {item.avatar ? <img src={item.avatar} alt="" loading="lazy" /> : <span>{getInitials(item)}</span>}
-        </div>
-        <div className="identity">
-          <p className="category">{item.category}</p>
-          <h2>{item.title}</h2>
-        </div>
-      </div>
-
-      <div className="card-meta">
-        {item.subcategory ? <span>{item.subcategory}</span> : null}
-      </div>
-
-      {item.name && item.name !== item.title ? <p className="person">{item.name}</p> : null}
-
-      {hasInstagramDetails ? (
-        <div className="instagram-preview">
-          <span className="content-label">Instagram</span>
-          <p>{item.instagramBio || item.instagramTitle}</p>
-        </div>
+    <>
+      {instagramUrl ? (
+        <ContactLink href={instagramUrl} variant="solid">
+          <InstagramIcon />
+          {verbose ? "Написати в Instagram" : "Instagram"}
+        </ContactLink>
       ) : null}
+      {item.phone ? (
+        <ContactLink href={telHref(item.phone)} external={false}>
+          <PhoneIcon />
+          {verbose ? item.phone : "Подзвонити"}
+        </ContactLink>
+      ) : null}
+      {social ? (
+        <ContactLink href={social.href}>
+          <SocialIcon type={social.type} />
+          {social.label}
+        </ContactLink>
+      ) : null}
+      {item.website ? (
+        <ContactLink href={item.website}>
+          <WebsiteIcon />
+          Сайт
+        </ContactLink>
+      ) : null}
+    </>
+  );
+}
+
+function Avatar({ item, size }: { item: Specialist; size: "sm" | "lg" }) {
+  return (
+    <span className={`avatar ${size}`} aria-hidden="true">
+      {item.avatar ? (
+        <img src={item.avatar} alt="" loading="lazy" decoding="async" />
+      ) : (
+        <span>{getInitials(item)}</span>
+      )}
+    </span>
+  );
+}
+
+function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Specialist) => void }) {
+  const unavailable = isInstagramUnavailable(item);
+  const secondaryName = getSecondaryName(item);
+  const bio = unavailable ? "" : cleanBio(item.instagramBio || item.instagramTitle);
+  const className = ["card", item.review ? "vouched" : "", unavailable ? "dimmed" : ""]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <article className={className} style={{ "--cat": getCategoryColor(item.category) } as React.CSSProperties}>
+      <p className="profession">{item.subcategory || item.category}</p>
+
+      <div className="card-identity">
+        <Avatar item={item} size="sm" />
+        <div className="card-names">
+          <h3>
+            <button className="card-open" type="button" onClick={() => onOpen(item)}>
+              {getDisplayName(item)}
+            </button>
+          </h3>
+          {secondaryName ? <p className="person">{secondaryName}</p> : null}
+        </div>
+      </div>
 
       {item.review ? (
-        <div className="review-block">
-          <span className="content-label">Відгук</span>
-          <blockquote className="review-quote">{item.review}</blockquote>
-        </div>
+        <blockquote className="vouch">
+          <p>{item.review}</p>
+        </blockquote>
+      ) : bio ? (
+        <p className="card-bio">{bio}</p>
       ) : null}
 
-      {item.comment ? (
-        <div className="comment-block">
-          <span className="content-label">Коментар</span>
-          <p className="catalog-comment">{item.comment}</p>
-        </div>
-      ) : null}
+      {unavailable ? <p className="flag">Контакти застарілі або неперевірені</p> : null}
 
       <div className="card-actions">
-        {instagramUrl ? (
-          <ContactLink href={instagramUrl} variant="primary">
-            <span className="visually-hidden">Instagram</span>
-            <InstagramIcon />
-          </ContactLink>
-        ) : null}
-        {item.website ? (
-          <ContactLink href={item.website}>
-            <span className="visually-hidden">Сайт</span>
-            <WebsiteIcon />
-          </ContactLink>
-        ) : null}
-        {socialContact ? (
-          <ContactLink href={socialContact.href}>
-            <span className="visually-hidden">{socialContact.label}</span>
-            <SocialIcon type={socialContact.type} />
-          </ContactLink>
-        ) : null}
-        {item.phone ? (
-          <ContactLink href={`tel:${item.phone.replace(/\s+/g, "")}`} external={false}>
-            <span className="visually-hidden">Телефон</span>
-            <PhoneIcon />
-          </ContactLink>
-        ) : null}
+        <ContactRow item={item} verbose={false} />
       </div>
     </article>
   );
 }
 
-function DetailModal({
-  item,
-  onClose,
-}: {
-  item: Specialist | null;
-  onClose: () => void;
-}) {
+function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () => void }) {
+  const panelRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!item) return;
+
+    const restoreTo = document.activeElement as HTMLElement | null;
+    const { body } = document;
+    const previousOverflow = body.style.overflow;
+    body.style.overflow = "hidden";
+
+    const panel = panelRef.current;
+    panel?.querySelector<HTMLElement>("[data-autofocus]")?.focus();
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        onClose();
+        return;
+      }
+      if (event.key !== "Tab" || !panel) return;
+
+      const focusable = panel.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      body.style.overflow = previousOverflow;
+      restoreTo?.focus();
+    };
+  }, [item, onClose]);
+
   if (!item) return null;
 
-  const instagramUrl = getInstagramUrl(item);
-  const socialContact = getSocialContact(item);
-  const instagramUnavailable = isInstagramUnavailable(item);
+  const unavailable = isInstagramUnavailable(item);
+  const secondaryName = getSecondaryName(item);
+  const bio = unavailable ? "" : cleanBio(item.instagramBio);
+  const bioTitle = unavailable ? "" : cleanBio(item.instagramTitle);
 
   return (
-    <div className="modal-backdrop">
-      <button aria-label="Закрити деталі" className="modal-dismiss" type="button" onClick={onClose} />
-      <article
-        aria-labelledby="specialist-dialog-title"
+    <div className="overlay">
+      <button aria-label="Закрити" className="overlay-dismiss" type="button" onClick={onClose} />
+      <div
+        aria-labelledby="detail-title"
         aria-modal="true"
-        className="detail-modal"
+        className="panel"
+        ref={panelRef}
         role="dialog"
-        style={{ "--cat-color": getCategoryColor(item.category) } as React.CSSProperties}
+        style={{ "--cat": getCategoryColor(item.category) } as React.CSSProperties}
       >
-        <button aria-label="Закрити" className="modal-close" type="button" onClick={onClose}>
-          ×
+        <button aria-label="Закрити" className="panel-close" data-autofocus type="button" onClick={onClose}>
+          <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
+            <path d="m6 6 12 12M18 6 6 18" />
+          </svg>
         </button>
 
-        <div className="modal-header">
-          <div className="avatar large" aria-hidden="true">
-            {item.avatar ? <img src={item.avatar} alt="" /> : <span>{getInitials(item)}</span>}
-          </div>
-          <div>
-            <p className="category">{item.category}</p>
-            <h2 id="specialist-dialog-title">{item.title}</h2>
-            <p className="subcategory">{item.subcategory}</p>
+        <div className="panel-head">
+          <Avatar item={item} size="lg" />
+          <div className="panel-titles">
+            <p className="profession">{item.subcategory || item.category}</p>
+            <h2 id="detail-title">{getDisplayName(item)}</h2>
+            {secondaryName ? <p className="person">{secondaryName}</p> : null}
+            <p className="panel-category">
+              <span className="cat-dot" aria-hidden="true" />
+              {item.category}
+            </p>
           </div>
         </div>
 
-        <div className="modal-content">
-          {item.name && item.name !== item.title ? (
-            <section>
-              <h3>Контакт</h3>
-              <p>{item.name}</p>
-            </section>
-          ) : null}
-          {item.review ? (
-            <section>
-              <h3>Відгук</h3>
-              <blockquote className="review-quote modal-review">{item.review}</blockquote>
-            </section>
-          ) : null}
-          {item.comment ? (
-            <section>
-              <h3>Коментар</h3>
-              <p className="catalog-comment full">{item.comment}</p>
-            </section>
-          ) : null}
-          {!instagramUnavailable && (item.instagramTitle || item.instagramBio) ? (
-            <section>
-              <h3>Instagram</h3>
-              {item.instagramTitle ? <p className="modal-strong">{item.instagramTitle}</p> : null}
-              {item.instagramBio ? <p>{item.instagramBio}</p> : null}
-            </section>
-          ) : null}
-          {item.phone ? (
-            <section>
-              <h3>Телефон</h3>
-              <p>{item.phone}</p>
-            </section>
-          ) : null}
+        <div className="panel-actions">
+          <ContactRow item={item} verbose />
         </div>
 
-        <div className="modal-actions">
-          {instagramUrl ? (
-            <ContactLink href={instagramUrl} variant="primary">
-              Відкрити Instagram
-            </ContactLink>
-          ) : null}
-          {item.website ? <ContactLink href={item.website}>Відкрити сайт</ContactLink> : null}
-          {socialContact ? <ContactLink href={socialContact.href}>Відкрити {socialContact.label}</ContactLink> : null}
-          {item.phone ? (
-            <ContactLink href={`tel:${item.phone.replace(/\s+/g, "")}`} external={false}>
-              Подзвонити
-            </ContactLink>
-          ) : null}
-        </div>
-      </article>
+        {item.review ? (
+          <blockquote className="vouch">
+            <p>{item.review}</p>
+            <cite>Рекомендація спільноти</cite>
+          </blockquote>
+        ) : null}
+
+        {item.comment || bioTitle || bio || unavailable ? (
+          <div className="panel-body">
+            {item.comment ? (
+              <section>
+                <h4>Деталі</h4>
+                <p>{item.comment}</p>
+              </section>
+            ) : null}
+
+            {bioTitle || bio ? (
+              <section>
+                <h4>З профілю Instagram</h4>
+                {bioTitle ? <p className="bio-title">{bioTitle}</p> : null}
+                {bio ? <p>{bio}</p> : null}
+              </section>
+            ) : null}
+
+            {unavailable ? (
+              <section>
+                <h4>Instagram</h4>
+                <p className="muted">Профіль не вдалося перевірити. Скористайтеся іншими контактами.</p>
+              </section>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
 
 export function CatalogClient({ specialists }: CatalogClientProps) {
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("Усі");
-  const [withInstagram, setWithInstagram] = useState(false);
-  const [withWebsite, setWithWebsite] = useState(false);
-  const [withReviews, setWithReviews] = useState(false);
+  const [category, setCategory] = useState(ALL);
+  const [profession, setProfession] = useState("");
+  const [vouchedOnly, setVouchedOnly] = useState(false);
   const [selected, setSelected] = useState<Specialist | null>(null);
+  const [visible, setVisible] = useState(PAGE_SIZE);
+  const searchRef = useRef<HTMLInputElement | null>(null);
+
+  const vouchedCount = useMemo(() => specialists.filter((item) => item.review).length, [specialists]);
 
   const categories = useMemo(() => {
-    const byNormalizedName = new Map<string, string>();
+    const counts = new Map<string, number>();
     for (const item of specialists) {
-      byNormalizedName.set(normalizeCategory(item.category), item.category);
+      const key = normalizeCategory(item.category);
+      counts.set(key, (counts.get(key) || 0) + 1);
     }
-    const unique = Array.from(byNormalizedName.values()).sort((a, b) => a.localeCompare(b, "uk-UA"));
-    const priorityKeys = new Set(priorityCategories.map(normalizeCategory));
-    return priorityCategories.concat(unique.filter((item) => !priorityKeys.has(normalizeCategory(item))));
+    const known = new Set(priorityCategories.map(normalizeCategory));
+    const rest = Array.from(counts.keys())
+      .filter((name) => !known.has(name))
+      .sort((a, b) => (counts.get(b) || 0) - (counts.get(a) || 0));
+
+    return [...priorityCategories, ...rest].map((name) => ({
+      name,
+      count: name === ALL ? specialists.length : counts.get(normalizeCategory(name)) || 0,
+    }));
   }, [specialists]);
 
-  const categoryCounts = useMemo(() => {
-    return specialists.reduce<Record<string, number>>(
-      (acc, item) => {
-        acc["Усі"] += 1;
-        const normalized = normalizeCategory(item.category);
-        acc[normalized] = (acc[normalized] || 0) + 1;
-        return acc;
-      },
-      { Усі: 0 },
-    );
+  /** Subcategory is the taxonomy readers scan for — 165 distinct values across the list. */
+  const topProfessions = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const item of specialists) {
+      if (!item.subcategory) continue;
+      counts.set(item.subcategory, (counts.get(item.subcategory) || 0) + 1);
+    }
+    return Array.from(counts.entries())
+      .filter(([, count]) => count >= 3)
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "uk-UA"))
+      .slice(0, 10)
+      .map(([name, count]) => ({ name, count }));
   }, [specialists]);
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase("uk-UA");
-    const result = specialists
-      .filter((item) => (category === "Усі" ? true : normalizeCategory(item.category) === normalizeCategory(category)))
-      .filter((item) => (withInstagram ? Boolean(getInstagramUrl(item)) : true))
-      .filter((item) => (withWebsite ? Boolean(item.website || getExternalSocialUrl(item)) : true))
-      .filter((item) => (withReviews ? Boolean(item.review) : true))
-      .filter((item) => (needle ? makeSearchText(item).includes(needle) : true));
+    return specialists
+      .filter((item) =>
+        category === ALL ? true : normalizeCategory(item.category) === normalizeCategory(category),
+      )
+      .filter((item) => (profession ? item.subcategory === profession : true))
+      .filter((item) => (vouchedOnly ? Boolean(item.review) : true))
+      .filter((item) => (needle ? makeSearchText(item).includes(needle) : true))
+      .sort(
+        (a, b) => getRank(b) - getRank(a) || getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
+      );
+  }, [category, profession, query, specialists, vouchedOnly]);
 
-    return result.sort(
-      (a, b) =>
-        Number(isInstagramUnavailable(a)) - Number(isInstagramUnavailable(b)) ||
-        getRank(b) - getRank(a) ||
-        a.title.localeCompare(b.title, "uk-UA"),
-    );
-  }, [category, query, specialists, withInstagram, withReviews, withWebsite]);
-
-  const hasActiveFilters = query || category !== "Усі" || withInstagram || withWebsite || withReviews;
-
-  function clearFilters() {
-    setQuery("");
-    setCategory("Усі");
-    setWithInstagram(false);
-    setWithWebsite(false);
-    setWithReviews(false);
+  const filterKey = `${category} ${profession} ${query} ${vouchedOnly}`;
+  const [lastFilterKey, setLastFilterKey] = useState(filterKey);
+  if (lastFilterKey !== filterKey) {
+    setLastFilterKey(filterKey);
+    setVisible(PAGE_SIZE);
   }
 
+  const hasFilters = Boolean(query || category !== ALL || profession || vouchedOnly);
+
+  const reset = useCallback(() => {
+    setQuery("");
+    setCategory(ALL);
+    setProfession("");
+    setVouchedOnly(false);
+    searchRef.current?.focus();
+  }, []);
+
+  const shown = filtered.slice(0, visible);
+
   return (
-    <main className="site-shell">
-      <header className="app-header">
-        <div className="brand">
-          <div>
-            <span className="eyebrow">
-              <em>{specialists.length}</em>Катовіце та околиці
-            </span>
-            <h1>Каталог спеціалістів</h1>
-            <ul className="category-legend">
-              {categories
-                .filter((item) => item !== "Усі")
-                .map((item) => (
-                  <li key={item}>
-                    <span className="dot" style={{ background: getCategoryColor(item) }} aria-hidden="true" />
-                    {item}
-                  </li>
-                ))}
-            </ul>
-          </div>
-        </div>
+    <main className="shell">
+      <header className="masthead">
+        <p className="wordmark">Каталог · Катовіце</p>
+        <h1>Свої люди поруч</h1>
+        <p className="lede">
+          {specialists.length} контактів, зібраних українською спільнотою. {vouchedCount} із них
+          прийшли з особистою рекомендацією.
+        </p>
       </header>
 
-      <section className="search-panel" aria-label="Пошук">
-        <label className="search-field">
-          <span>Пошук</span>
-          <span className="search-input-wrap">
-            <SearchIcon />
-            <input
-              type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Послуга, імʼя, Instagram, район або опис"
-            />
-          </span>
-        </label>
-
-        <div className="top-controls">
-          <label className="select-field mobile-category">
-            <span>Категорія</span>
-            <select value={category} onChange={(event) => setCategory(event.target.value)}>
-              {categories.map((item) => (
-                <option key={item} value={item}>
-                  {item} ({categoryCounts[normalizeCategory(item)] || 0})
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label className="toggle">
-            <input
-              type="checkbox"
-              checked={withInstagram}
-              onChange={(event) => setWithInstagram(event.target.checked)}
-            />
-            <span>Instagram</span>
-          </label>
-
-          <label className="toggle">
-            <input type="checkbox" checked={withWebsite} onChange={(event) => setWithWebsite(event.target.checked)} />
-            <span>Сайт</span>
-          </label>
-
-          <label className="toggle">
-            <input type="checkbox" checked={withReviews} onChange={(event) => setWithReviews(event.target.checked)} />
-            <span>Відгуки</span>
-          </label>
+      <section className="finder" aria-label="Пошук спеціаліста">
+        <div className="search">
+          <SearchIcon />
+          <input
+            aria-label="Пошук спеціаліста"
+            autoComplete="off"
+            enterKeyHint="search"
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Кого шукаєте? Стоматолог, юрист, манікюр…"
+            ref={searchRef}
+            type="search"
+            value={query}
+          />
+          {query ? (
+            <button className="search-clear" type="button" onClick={() => setQuery("")}>
+              Очистити
+            </button>
+          ) : null}
         </div>
+
+        <ul className="professions">
+          {topProfessions.map((entry) => (
+            <li key={entry.name}>
+              <button
+                aria-pressed={profession === entry.name}
+                className={profession === entry.name ? "chip on" : "chip"}
+                type="button"
+                onClick={() => setProfession(profession === entry.name ? "" : entry.name)}
+              >
+                {entry.name}
+                <em>{entry.count}</em>
+              </button>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      <div className="catalog-layout">
-        <aside className="sidebar" aria-label="Категорії">
-          <div className="sidebar-heading">
-            <h2>Категорії</h2>
-            <span>{categories.length - 1}</span>
-          </div>
-          <div className="category-list">
-            {categories.map((item) => (
+      <div className="filters">
+        <ul className="categories">
+          {categories.map((entry) => (
+            <li key={entry.name}>
               <button
-                className={item === category ? "category-button active" : "category-button"}
-                key={item}
-                style={item === "Усі" ? undefined : ({ "--cat-color": getCategoryColor(item) } as React.CSSProperties)}
+                aria-pressed={category === entry.name}
+                className={category === entry.name ? "tab on" : "tab"}
+                style={
+                  entry.name === ALL
+                    ? undefined
+                    : ({ "--cat": getCategoryColor(entry.name) } as React.CSSProperties)
+                }
                 type="button"
-                onClick={() => setCategory(item)}
+                onClick={() => setCategory(entry.name)}
               >
-                <span className="dot" aria-hidden="true" />
-                <span>{item}</span>
-                <em>{categoryCounts[normalizeCategory(item)] || 0}</em>
+                <span className="cat-dot" aria-hidden="true" />
+                {entry.name}
+                <em>{entry.count}</em>
               </button>
-            ))}
-          </div>
-        </aside>
+            </li>
+          ))}
+        </ul>
 
-        <section className="results-area">
-          <div className="results-toolbar" aria-live="polite">
-            <div>
-              <p>Результати</p>
-              <h2>{filtered.length} спеціалістів</h2>
-            </div>
-            {hasActiveFilters ? (
-              <button className="clear-button" type="button" onClick={clearFilters}>
-                Скинути
-              </button>
-            ) : null}
-          </div>
-
-          <section className="catalog-grid" aria-label="Список спеціалістів">
-            {filtered.map((item) => (
-              <SpecialistCard item={item} key={item.id} onOpen={setSelected} />
-            ))}
-          </section>
-
-          {filtered.length === 0 ? (
-            <section className="empty-state">
-              <h2>Нічого не знайдено</h2>
-              <p>Спробуйте змінити запит, вимкнути Instagram-фільтр або вибрати іншу категорію.</p>
-            </section>
-          ) : null}
-        </section>
+        <button
+          aria-pressed={vouchedOnly}
+          className={vouchedOnly ? "vouch-toggle on" : "vouch-toggle"}
+          type="button"
+          onClick={() => setVouchedOnly(!vouchedOnly)}
+        >
+          Лише з рекомендацією
+          <em>{vouchedCount}</em>
+        </button>
       </div>
 
-      <DetailModal item={selected} onClose={() => setSelected(null)} />
+      <div className="results-bar" aria-live="polite">
+        <p>
+          <strong>{filtered.length}</strong> {filtered.length === 1 ? "спеціаліст" : "спеціалістів"}
+        </p>
+        {profession ? (
+          <button className="applied" type="button" onClick={() => setProfession("")}>
+            {profession}
+            <span aria-hidden="true">×</span>
+            <span className="visually-hidden">Прибрати фільтр</span>
+          </button>
+        ) : null}
+        {hasFilters ? (
+          <button className="reset" type="button" onClick={reset}>
+            Скинути все
+          </button>
+        ) : null}
+      </div>
+
+      {filtered.length > 0 ? (
+        <>
+          <div className="grid">
+            {shown.map((item) => (
+              <SpecialistCard item={item} key={item.id} onOpen={setSelected} />
+            ))}
+          </div>
+
+          {visible < filtered.length ? (
+            <div className="more">
+              <button type="button" onClick={() => setVisible(visible + PAGE_SIZE)}>
+                Показати ще {Math.min(PAGE_SIZE, filtered.length - visible)}
+              </button>
+              <p>
+                Показано {shown.length} з {filtered.length}
+              </p>
+            </div>
+          ) : null}
+        </>
+      ) : (
+        <div className="empty">
+          <h2>Нікого не знайшли</h2>
+          <p>Спробуйте інше слово або зніміть частину фільтрів.</p>
+          <button type="button" onClick={reset}>
+            Скинути фільтри
+          </button>
+        </div>
+      )}
+
+      <DetailDialog item={selected} onClose={() => setSelected(null)} />
     </main>
   );
 }
