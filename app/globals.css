@@ -698,14 +698,26 @@ p {
 
 .instagram-icon,
 .website-icon,
-.phone-icon {
+.phone-icon,
+.telegram-icon,
+.facebook-icon {
   width: 20px;
   height: 20px;
+}
+
+.instagram-icon,
+.website-icon,
+.phone-icon,
+.telegram-icon {
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 1.9;
+}
+
+.facebook-icon {
+  fill: currentColor;
 }
 
 .empty-state {

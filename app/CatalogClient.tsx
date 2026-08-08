@@ -7,6 +7,12 @@ type CatalogClientProps = {
   specialists: Specialist[];
 };
 
+type SocialContact = {
+  href: string;
+  label: string;
+  type: "facebook" | "telegram" | "viber" | "whatsapp" | "link";
+};
+
 const priorityCategories = [
   "Усі",
   "Здоров'я",
@@ -59,6 +65,7 @@ function makeSearchText(item: Specialist) {
     item.review,
     item.comment,
     item.instagram,
+    item.social,
     item.instagramTitle,
     item.instagramBio,
     item.phone,
@@ -80,18 +87,47 @@ function getInstagramUrl(item: Specialist) {
 }
 
 function getExternalSocialUrl(item: Specialist) {
-  const social = item.social.trim();
-  if (!social || getInstagramUrl(item)) return "";
+  return getSocialContact(item)?.href || "";
+}
 
-  if (/^https?:\/\//i.test(social)) return social;
+function getSocialContact(item: Specialist): SocialContact | null {
+  const social = item.social.trim();
+  if (!social || getInstagramUrl(item)) return null;
+
+  if (/^https?:\/\//i.test(social)) {
+    if (/facebook\.com/i.test(social)) return { href: social, label: "Facebook", type: "facebook" };
+    if (/(?:^https?:\/\/)?t\.me\//i.test(social)) return { href: social, label: "Telegram", type: "telegram" };
+    return { href: social, label: "Посилання", type: "link" };
+  }
 
   const telegram = social.match(/^telegram\s*:\s*@?([a-z0-9_]+)/i);
-  if (telegram?.[1]) return `https://t.me/${telegram[1]}`;
+  if (telegram?.[1]) return { href: `https://t.me/${telegram[1]}`, label: "Telegram", type: "telegram" };
 
   const telegramUrl = social.match(/(?:^|\s)(?:https?:\/\/)?t\.me\/([a-z0-9_]+)/i);
-  if (telegramUrl?.[1]) return `https://t.me/${telegramUrl[1]}`;
+  if (telegramUrl?.[1]) return { href: `https://t.me/${telegramUrl[1]}`, label: "Telegram", type: "telegram" };
 
-  return "";
+  const facebook = social.match(/^facebook\s*:\s*(.+)$/i);
+  if (facebook?.[1]) {
+    return {
+      href: `https://www.facebook.com/search/top?q=${encodeURIComponent(facebook[1].trim())}`,
+      label: "Facebook",
+      type: "facebook",
+    };
+  }
+
+  const viber = social.match(/^viber\s*:?\s*(\+?\d[\d\s()-]{6,})?$/i);
+  if (viber) {
+    const phone = (viber[1] || item.phone).replace(/[^\d+]/g, "");
+    if (phone) return { href: `viber://chat?number=${encodeURIComponent(phone)}`, label: "Viber", type: "viber" };
+  }
+
+  const whatsapp = social.match(/^whatsapp\s*:?\s*(\+?\d[\d\s()-]{6,})?$/i);
+  if (whatsapp) {
+    const phone = (whatsapp[1] || item.phone).replace(/[^\d]/g, "");
+    if (phone) return { href: `https://wa.me/${phone}`, label: "WhatsApp", type: "whatsapp" };
+  }
+
+  return null;
 }
 
 function getRank(item: Specialist) {
@@ -131,6 +167,28 @@ function PhoneIcon() {
       <path d="M6.6 4.4 9 3.7l2.1 4.7-1.5 1.1c.9 1.9 2.3 3.3 4.2 4.2l1.1-1.5 4.7 2.1-.7 2.4c-.3 1-1.2 1.7-2.2 1.6C10.5 18 6 13.5 5.7 7.3c-.1-1 .6-1.9 1.6-2.2Z" />
     </svg>
   );
+}
+
+function TelegramIcon() {
+  return (
+    <svg aria-hidden="true" className="telegram-icon" viewBox="0 0 24 24">
+      <path d="M4 11.4 20 4.8l-3 14.4-4.8-3.7-2.8 2.7.4-4.3 7.9-7.1-10 6.1L4 11.4Z" />
+    </svg>
+  );
+}
+
+function FacebookIcon() {
+  return (
+    <svg aria-hidden="true" className="facebook-icon" viewBox="0 0 24 24">
+      <path d="M14 8.1h2.1V4.6c-.4-.1-1.7-.2-3.2-.2-3.2 0-5.3 1.9-5.3 5.4v3H4.1v3.9h3.5v8h4.3v-8h3.4l.5-3.9h-3.9v-2.6c0-1.1.3-2.1 2.1-2.1Z" />
+    </svg>
+  );
+}
+
+function SocialIcon({ type }: { type: SocialContact["type"] }) {
+  if (type === "telegram") return <TelegramIcon />;
+  if (type === "facebook") return <FacebookIcon />;
+  return <WebsiteIcon />;
 }
 
 function SearchIcon() {
@@ -174,7 +232,7 @@ function SpecialistCard({
   onOpen: (item: Specialist) => void;
 }) {
   const instagramUrl = getInstagramUrl(item);
-  const externalSocialUrl = getExternalSocialUrl(item);
+  const socialContact = getSocialContact(item);
   const hasInstagramDetails = Boolean(item.instagramTitle || item.instagramBio);
 
   function openFromKeyboard(event: React.KeyboardEvent<HTMLElement>) {
@@ -243,10 +301,10 @@ function SpecialistCard({
             <WebsiteIcon />
           </ContactLink>
         ) : null}
-        {externalSocialUrl ? (
-          <ContactLink href={externalSocialUrl}>
-            <span className="visually-hidden">Посилання</span>
-            <WebsiteIcon />
+        {socialContact ? (
+          <ContactLink href={socialContact.href}>
+            <span className="visually-hidden">{socialContact.label}</span>
+            <SocialIcon type={socialContact.type} />
           </ContactLink>
         ) : null}
         {item.phone ? (
@@ -270,7 +328,7 @@ function DetailModal({
   if (!item) return null;
 
   const instagramUrl = getInstagramUrl(item);
-  const externalSocialUrl = getExternalSocialUrl(item);
+  const socialContact = getSocialContact(item);
 
   return (
     <div className="modal-backdrop">
@@ -338,7 +396,7 @@ function DetailModal({
             </ContactLink>
           ) : null}
           {item.website ? <ContactLink href={item.website}>Відкрити сайт</ContactLink> : null}
-          {externalSocialUrl ? <ContactLink href={externalSocialUrl}>Відкрити посилання</ContactLink> : null}
+          {socialContact ? <ContactLink href={socialContact.href}>Відкрити {socialContact.label}</ContactLink> : null}
           {item.phone ? (
             <ContactLink href={`tel:${item.phone.replace(/\s+/g, "")}`} external={false}>
               Подзвонити
