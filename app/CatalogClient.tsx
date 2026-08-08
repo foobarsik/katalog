@@ -94,6 +94,15 @@ function PhoneIcon() {
   );
 }
 
+function SearchIcon() {
+  return (
+    <svg aria-hidden="true" className="search-icon" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="7" />
+      <path d="m20.5 20.5-3.9-3.9" />
+    </svg>
+  );
+}
+
 function ContactLink({
   href,
   children,
@@ -357,12 +366,15 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       <section className="search-panel" aria-label="Пошук">
         <label className="search-field">
           <span>Пошук</span>
-          <input
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Послуга, імʼя, Instagram, район або опис"
-          />
+          <span className="search-input-wrap">
+            <SearchIcon />
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Послуга, імʼя, Instagram, район або опис"
+            />
+          </span>
         </label>
 
         <div className="top-controls">
