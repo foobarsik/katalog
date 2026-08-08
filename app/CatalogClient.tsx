@@ -178,7 +178,7 @@ function hasAnyContact(item: Specialist) {
   return Boolean(getInstagramUrl(item) || item.phone || item.website || getSocialContact(item));
 }
 
-/** A vouched entry outranks all else: it is why this list exists rather than a map search. */
+/** Every entry is a community contact; a written review is the extra signal worth surfacing first. */
 function getRank(item: Specialist) {
   return (
     Number(Boolean(item.review)) * 16 +
@@ -327,7 +327,7 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
   const unavailable = isInstagramUnavailable(item);
   const secondaryName = getSecondaryName(item);
   const bio = unavailable ? "" : cleanBio(item.instagramBio || item.instagramTitle);
-  const className = ["card", item.review ? "vouched" : "", unavailable ? "dimmed" : ""]
+  const className = ["card", item.review ? "has-review" : "", unavailable ? "dimmed" : ""]
     .filter(Boolean)
     .join(" ");
 
@@ -348,7 +348,7 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
       </div>
 
       {item.review ? (
-        <blockquote className="vouch">
+        <blockquote className="review-note">
           <p>{item.review}</p>
         </blockquote>
       ) : bio ? (
@@ -452,9 +452,9 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
         </div>
 
         {item.review ? (
-          <blockquote className="vouch">
+          <blockquote className="review-note">
             <p>{item.review}</p>
-            <cite>Рекомендація спільноти</cite>
+            <cite>Відгук спільноти</cite>
           </blockquote>
         ) : null}
 
@@ -492,12 +492,12 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState(ALL);
   const [profession, setProfession] = useState("");
-  const [vouchedOnly, setVouchedOnly] = useState(false);
+  const [reviewedOnly, setReviewedOnly] = useState(false);
   const [selected, setSelected] = useState<Specialist | null>(null);
   const [visible, setVisible] = useState(PAGE_SIZE);
   const searchRef = useRef<HTMLInputElement | null>(null);
 
-  const vouchedCount = useMemo(() => specialists.filter((item) => item.review).length, [specialists]);
+  const reviewCount = useMemo(() => specialists.filter((item) => item.review).length, [specialists]);
 
   const categories = useMemo(() => {
     const counts = new Map<string, number>();
@@ -516,19 +516,25 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     }));
   }, [specialists]);
 
-  /** Subcategory is the taxonomy readers scan for — 165 distinct values across the list. */
+  /** Professions narrow the chosen category rather than competing with it: subcategory ⊂ category. */
   const topProfessions = useMemo(() => {
     const counts = new Map<string, number>();
     for (const item of specialists) {
       if (!item.subcategory) continue;
+      if (category !== ALL && normalizeCategory(item.category) !== normalizeCategory(category)) continue;
       counts.set(item.subcategory, (counts.get(item.subcategory) || 0) + 1);
     }
     return Array.from(counts.entries())
-      .filter(([, count]) => count >= 3)
+      .filter(([, count]) => count >= (category === ALL ? 3 : 2))
       .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "uk-UA"))
       .slice(0, 10)
       .map(([name, count]) => ({ name, count }));
-  }, [specialists]);
+  }, [category, specialists]);
+
+  function chooseCategory(name: string) {
+    setCategory(name);
+    setProfession("");
+  }
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase("uk-UA");
@@ -537,27 +543,27 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
         category === ALL ? true : normalizeCategory(item.category) === normalizeCategory(category),
       )
       .filter((item) => (profession ? item.subcategory === profession : true))
-      .filter((item) => (vouchedOnly ? Boolean(item.review) : true))
+      .filter((item) => (reviewedOnly ? Boolean(item.review) : true))
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true))
       .sort(
         (a, b) => getRank(b) - getRank(a) || getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
       );
-  }, [category, profession, query, specialists, vouchedOnly]);
+  }, [category, profession, query, specialists, reviewedOnly]);
 
-  const filterKey = `${category} ${profession} ${query} ${vouchedOnly}`;
+  const filterKey = `${category} ${profession} ${query} ${reviewedOnly}`;
   const [lastFilterKey, setLastFilterKey] = useState(filterKey);
   if (lastFilterKey !== filterKey) {
     setLastFilterKey(filterKey);
     setVisible(PAGE_SIZE);
   }
 
-  const hasFilters = Boolean(query || category !== ALL || profession || vouchedOnly);
+  const hasFilters = Boolean(query || category !== ALL || profession || reviewedOnly);
 
   const reset = useCallback(() => {
     setQuery("");
     setCategory(ALL);
     setProfession("");
-    setVouchedOnly(false);
+    setReviewedOnly(false);
     searchRef.current?.focus();
   }, []);
 
@@ -568,10 +574,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       <header className="masthead">
         <p className="wordmark">Каталог · Катовіце</p>
         <h1>Свої люди поруч</h1>
-        <p className="lede">
-          {specialists.length} контактів, зібраних українською спільнотою. {vouchedCount} із них
-          прийшли з особистою рекомендацією.
-        </p>
+        <p className="lede">{specialists.length} контактів, зібраних українською спільнотою.</p>
       </header>
 
       <section className="finder" aria-label="Пошук спеціаліста">
@@ -593,22 +596,6 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
             </button>
           ) : null}
         </div>
-
-        <ul className="professions">
-          {topProfessions.map((entry) => (
-            <li key={entry.name}>
-              <button
-                aria-pressed={profession === entry.name}
-                className={profession === entry.name ? "chip on" : "chip"}
-                type="button"
-                onClick={() => setProfession(profession === entry.name ? "" : entry.name)}
-              >
-                {entry.name}
-                <em>{entry.count}</em>
-              </button>
-            </li>
-          ))}
-        </ul>
       </section>
 
       <div className="filters">
@@ -624,7 +611,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
                     : ({ "--cat": getCategoryColor(entry.name) } as React.CSSProperties)
                 }
                 type="button"
-                onClick={() => setCategory(entry.name)}
+                onClick={() => chooseCategory(entry.name)}
               >
                 <span className="cat-dot" aria-hidden="true" />
                 {entry.name}
@@ -635,15 +622,36 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
         </ul>
 
         <button
-          aria-pressed={vouchedOnly}
-          className={vouchedOnly ? "vouch-toggle on" : "vouch-toggle"}
+          aria-pressed={reviewedOnly}
+          className={reviewedOnly ? "review-filter on" : "review-filter"}
           type="button"
-          onClick={() => setVouchedOnly(!vouchedOnly)}
+          onClick={() => setReviewedOnly(!reviewedOnly)}
         >
-          Лише з рекомендацією
-          <em>{vouchedCount}</em>
+          Лише з відгуком
+          <em>{reviewCount}</em>
         </button>
       </div>
+
+      {topProfessions.length > 0 ? (
+        <div className="refine">
+          <span className="refine-label">Уточнити</span>
+          <ul>
+            {topProfessions.map((entry) => (
+              <li key={entry.name}>
+                <button
+                  aria-pressed={profession === entry.name}
+                  className={profession === entry.name ? "chip on" : "chip"}
+                  type="button"
+                  onClick={() => setProfession(profession === entry.name ? "" : entry.name)}
+                >
+                  {entry.name}
+                  <em>{entry.count}</em>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       <div className="results-bar" aria-live="polite">
         <p>

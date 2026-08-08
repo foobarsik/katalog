@@ -14,9 +14,9 @@
   --accent-deep: #0f2f66;
   --accent-wash: #eaf0fa;
 
-  --vouch: #a8741a;
-  --vouch-line: #e2c68a;
-  --vouch-wash: #fdf6e7;
+  --review: #a8741a;
+  --review-line: #e2c68a;
+  --review-wash: #fdf6e7;
 
   --cat-health: #2f7a6b;
   --cat-beauty: #a83a5c;
@@ -214,26 +214,41 @@ ul {
   color: var(--accent-deep);
 }
 
-.professions {
+/* Subordinate to the category tabs above: a refinement, not a second competing taxonomy. */
+.refine {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
+  align-items: baseline;
+  gap: 6px 10px;
+  padding: 14px 0 0;
+}
+
+.refine-label {
+  color: var(--ink-faint);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.refine ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 6px;
 }
 
 .chip {
   display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--surface);
+  align-items: baseline;
+  gap: 5px;
+  border: 0;
+  border-radius: 7px;
+  background: none;
   color: var(--ink-soft);
-  padding: 8px 14px;
-  font-size: 0.9rem;
+  padding: 4px 8px;
+  font-size: 0.88rem;
   font-weight: 600;
   transition:
-    border-color 140ms ease,
     background 140ms ease,
     color 140ms ease;
 }
@@ -241,17 +256,16 @@ ul {
 .chip em {
   color: var(--ink-faint);
   font-style: normal;
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   font-weight: 600;
 }
 
 .chip:hover {
-  border-color: var(--line-strong);
+  background: var(--surface);
   color: var(--ink);
 }
 
 .chip.on {
-  border-color: var(--accent);
   background: var(--accent);
   color: #fff;
 }
@@ -329,14 +343,14 @@ ul {
   color: rgba(255, 255, 255, 0.66);
 }
 
-.vouch-toggle {
+.review-filter {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid var(--vouch-line);
+  border: 1px solid var(--review-line);
   border-radius: 999px;
-  background: var(--vouch-wash);
-  color: var(--vouch);
+  background: var(--review-wash);
+  color: var(--review);
   padding: 8px 14px;
   font-size: 0.88rem;
   font-weight: 700;
@@ -345,19 +359,19 @@ ul {
     color 140ms ease;
 }
 
-.vouch-toggle em {
+.review-filter em {
   font-style: normal;
   font-size: 0.8rem;
   opacity: 0.75;
 }
 
-.vouch-toggle:hover {
+.review-filter:hover {
   background: #f8edd6;
 }
 
-.vouch-toggle.on {
-  border-color: var(--vouch);
-  background: var(--vouch);
+.review-filter.on {
+  border-color: var(--review);
+  background: var(--review);
   color: #fff;
 }
 
@@ -455,9 +469,9 @@ ul {
   box-shadow: var(--ring);
 }
 
-/* A community vouch is the strongest signal in the data, so it earns the only warm accent. */
-.card.vouched {
-  border-color: var(--vouch-line);
+/* A written review is the rarest, most useful field, so it earns the only warm accent. */
+.card.has-review {
+  border-color: var(--review-line);
 }
 
 .card.dimmed {
@@ -571,14 +585,14 @@ ul {
   line-height: 1.5;
 }
 
-.vouch {
-  border-left: 3px solid var(--vouch-line);
+.review-note {
+  border-left: 3px solid var(--review-line);
   border-radius: 0 8px 8px 0;
-  background: var(--vouch-wash);
+  background: var(--review-wash);
   padding: 11px 14px;
 }
 
-.vouch p {
+.review-note p {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
@@ -588,10 +602,10 @@ ul {
   line-height: 1.5;
 }
 
-.vouch cite {
+.review-note cite {
   display: block;
   margin-top: 8px;
-  color: var(--vouch);
+  color: var(--review);
   font-size: 0.74rem;
   font-style: normal;
   font-weight: 700;
@@ -792,7 +806,7 @@ ul {
   font-size: 0.86rem;
 }
 
-.panel .vouch p {
+.panel .review-note p {
   -webkit-line-clamp: unset;
   font-size: 1rem;
 }
@@ -861,20 +875,21 @@ ul {
   }
 
   .categories,
-  .professions {
+  .refine ul {
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
-    margin: 12px -16px 0;
+    margin: 0 -16px;
     padding: 0 16px;
   }
 
-  .categories {
-    margin-top: 0;
+  .refine {
+    display: grid;
+    gap: 6px;
   }
 
   .categories::-webkit-scrollbar,
-  .professions::-webkit-scrollbar {
+  .refine ul::-webkit-scrollbar {
     display: none;
   }
 
