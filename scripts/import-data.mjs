@@ -236,15 +236,7 @@ const specialists = catalogRows.map((row, index) => {
   const subcategory = pick(row, ["Підкатегорія", "Подкатегория"]);
   const review = pick(row, ["Відгук", "Отзыв"]);
   const comment = pick(row, ["Коментар", "Кометар", "Комментарий"]);
-  const location = inferLocation([
-    title,
-    name,
-    comment,
-    social,
-    username,
-    extra.instagramTitle,
-    extra.instagramBio,
-  ]);
+  const location = inferLocation([extra.instagramTitle, extra.instagramBio]);
 
   return {
     id: Number.isFinite(id) ? id : index + 1,
