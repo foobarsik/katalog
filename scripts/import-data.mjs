@@ -141,6 +141,7 @@ function normalizeLocationText(parts) {
     .join(" ")
     .normalize("NFD")
     .replace(/\p{M}/gu, "")
+    .replace(/[łŁ]/gu, "l")
     .toLocaleLowerCase("uk-UA");
 }
 
@@ -285,6 +286,8 @@ function renderDataFile(items) {
   sourceInfo: string;
   sourceStatus: string;
   foundAutomatically: boolean;
+  confidenceScore: number;
+  confidenceReason: string;
   needsReview: boolean;
   reviewReason: string;
   locationStatus: "confirmed" | "unknown" | "unconfirmed";
@@ -337,6 +340,12 @@ const specialists = catalogRows.map((row, index) => {
     /^(?:true|так|yes|1)$/i.test(source?.found_automatically || "") ||
     automaticDiscoveryPattern.test(source?.info || "") ||
     automaticDiscoveryPattern.test(`${rawReview} ${rawComment}`);
+  const confidenceScore = Number.parseInt(
+    pick(row, ["Впевненість знайденої інформації", "Confidence score"]) ||
+      source?.confidence_score ||
+      "0",
+    10,
+  );
   const review = stripAutomaticDiscoveryNotice(rawReview);
   const comment = stripAutomaticDiscoveryNotice(rawComment);
   const sourceReviewWarning = getSourceReviewWarning(source);
@@ -366,6 +375,8 @@ const specialists = catalogRows.map((row, index) => {
     sourceInfo,
     sourceStatus: source?.status || "",
     foundAutomatically,
+    confidenceScore: Number.isFinite(confidenceScore) ? confidenceScore : 0,
+    confidenceReason: (source?.confidence_reason || "").trim(),
     needsReview:
       /^так|yes|true|1$/i.test(pick(row, ["Проблемна", "Проблемная", "Problem"])) ||
       Boolean(sourceReviewWarning),

@@ -46,6 +46,7 @@ test("keeps location classification in the importer, data, and UI", async () => 
 
   assert.match(packageJson, /"import-data": "node scripts\/import-data\.mjs"/);
   assert.match(importer, /function inferLocation\(parts\)/);
+  assert.match(importer, /replace\(\/\[łŁ\]\/gu, "l"\)/);
   assert.match(importer, /locationStatus: "confirmed"/);
   assert.match(importer, /locationStatus: "unconfirmed"/);
   assert.match(importer, /locationStatus: "unknown"/);
@@ -73,12 +74,17 @@ test("imports profile details from the combined sources file", async () => {
   assert.match(data, /sourceType: string/);
   assert.match(data, /sourceInfo: string/);
   assert.match(data, /foundAutomatically: boolean/);
+  assert.match(data, /confidenceScore: number/);
+  assert.match(data, /confidenceReason: string/);
   assert.match(data, /"foundAutomatically": true/);
+  assert.match(data, /"confidenceScore": 100/);
+  assert.match(data, /"confidenceReason": "Точний/);
   assert.match(data, /"sourceType": "(?:instagram|booksy|website|facebook|telegram)"/);
   assert.doesNotMatch(data, /Подписчики\s*:/i);
   assert.doesNotMatch(data, /Знайдено автоматично через веб-пошук/);
   assert.match(client, /item\.sourceInfo/);
   assert.doesNotMatch(client, /foundAutomatically/);
+  assert.doesNotMatch(client, /confidenceScore|confidenceReason/);
   assert.match(client, /З профілю Booksy/);
   assert.match(client, /Інформація із сайту/);
 });
