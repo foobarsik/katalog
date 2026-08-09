@@ -716,6 +716,7 @@ ul {
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
 }
 
 .card-open {
@@ -724,6 +725,7 @@ ul {
   padding: 0;
   font: inherit;
   text-align: left;
+  overflow-wrap: anywhere;
 }
 
 .card-open::after {
@@ -799,6 +801,39 @@ ul {
   color: var(--ink-soft);
   font-size: 0.9rem;
   line-height: 1.48;
+  white-space: pre-line;
+}
+
+.card-details .details-text.collapsed {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
+
+.details-toggle {
+  position: relative;
+  z-index: 2;
+  margin-top: 8px;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.details-toggle:hover,
+.details-toggle:focus-visible {
+  color: var(--accent);
+}
+
+.details-toggle:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent), transparent 65%);
+  outline-offset: 3px;
 }
 
 .flag {
@@ -1085,6 +1120,7 @@ ul {
   color: var(--ink);
   font-size: 0.96rem;
   line-height: 1.55;
+  white-space: pre-line;
 }
 
 .bio-title {

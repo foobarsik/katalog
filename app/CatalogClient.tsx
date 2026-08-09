@@ -533,10 +533,13 @@ function ReviewStatus({ item, verbose = false }: { item: Specialist; verbose?: b
 }
 
 function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Specialist) => void }) {
+  const [detailsExpanded, setDetailsExpanded] = useState(false);
   const unavailable = isInstagramUnavailable(item);
   const secondaryName = getSecondaryName(item);
   const sourceUnavailable = item.sourceType === "instagram" && unavailable;
   const bio = sourceUnavailable ? "" : cleanBio(item.sourceInfo || item.instagramBio);
+  const hasLongDetails = item.comment.length > 280;
+  const detailsId = `card-details-${item.id}`;
   const className = [
     "card",
     item.review ? "has-review" : "",
@@ -572,7 +575,20 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
       {item.comment ? (
         <section className="card-details">
           <h4>Деталі</h4>
-          <p>{item.comment}</p>
+          <p className={hasLongDetails && !detailsExpanded ? "details-text collapsed" : "details-text"} id={detailsId}>
+            {item.comment}
+          </p>
+          {hasLongDetails ? (
+            <button
+              aria-controls={detailsId}
+              aria-expanded={detailsExpanded}
+              className="details-toggle"
+              type="button"
+              onClick={() => setDetailsExpanded((current) => !current)}
+            >
+              {detailsExpanded ? "Згорнути" : "Показати більше"}
+            </button>
+          ) : null}
         </section>
       ) : null}
 

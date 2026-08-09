@@ -212,3 +212,17 @@ test("uses Angela's provided Instagram profile", async () => {
   assert.match(data, /"id": 270,[\s\S]*?"sourceUrl": "https:\/\/www\.instagram\.com\/angelayatsenko\/"/);
   assert.match(data, /"id": 270,[\s\S]*?"needsReview": false/);
 });
+
+test("collapses only long details on catalog previews", async () => {
+  const [client, styles] = await Promise.all([
+    readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(client, /const hasLongDetails = item\.comment\.length > 280/);
+  assert.match(client, /detailsExpanded \? "Згорнути" : "Показати більше"/);
+  assert.match(client, /aria-expanded=\{detailsExpanded\}/);
+  assert.match(styles, /\.card-details \.details-text\.collapsed/);
+  assert.match(styles, /-webkit-line-clamp: 5/);
+  assert.doesNotMatch(client, /className="panel-body"[\s\S]{0,500}details-text collapsed/);
+});
