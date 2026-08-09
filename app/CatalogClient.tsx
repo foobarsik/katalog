@@ -143,8 +143,8 @@ function getInstagramUrl(item: Specialist) {
   if (isInstagramUnavailable(item)) return "";
 
   const social = item.social.trim();
-  const instagramLink = social.match(/https?:\/\/(?:www\.)?instagram\.com\/([^/?#\s]+)/i);
-  if (instagramLink) return instagramLink[0];
+  const instagramLink = social.match(/(?:https?:\/\/)?(?:www\.)?instagram\.com\/([^/?#\s]+)/i);
+  if (instagramLink?.[1]) return `https://www.instagram.com/${instagramLink[1]}`;
 
   const labeledHandle = social.match(/(?:^|[/\s])instagram\s*:\s*@?([a-z0-9._]+)/i);
   if (labeledHandle?.[1]) return `https://www.instagram.com/${labeledHandle[1]}`;
@@ -495,7 +495,7 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
   const unavailable = isInstagramUnavailable(item);
   const secondaryName = getSecondaryName(item);
   const sourceUnavailable = item.sourceType === "instagram" && unavailable;
-  const bio = sourceUnavailable ? "" : cleanBio(item.sourceInfo || item.instagramBio || item.instagramTitle);
+  const bio = sourceUnavailable ? "" : cleanBio(item.sourceInfo || item.instagramBio);
   const className = [
     "card",
     item.review ? "has-review" : "",

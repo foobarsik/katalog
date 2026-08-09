@@ -84,6 +84,9 @@ test("imports profile details from the combined sources file", async () => {
   assert.doesNotMatch(data, /Подписчики\s*:/i);
   assert.doesNotMatch(data, /Знайдено автоматично через веб-пошук/);
   assert.match(client, /item\.sourceInfo/);
+  assert.match(client, /item\.sourceInfo \|\| item\.instagramBio/);
+  assert.doesNotMatch(client, /item\.sourceInfo \|\| item\.instagramBio \|\| item\.instagramTitle/);
+  assert.match(client, /\(\?:https\?:\\\/\\\/\)\?/);
   assert.doesNotMatch(client, /foundAutomatically/);
   assert.doesNotMatch(client, /confidenceScore|confidenceReason/);
   assert.match(client, /З профілю Booksy/);
