@@ -174,10 +174,13 @@ function comparableUrl(value) {
 
   try {
     const url = new URL(normalized);
+    /** facebook.com/profile.php carries the whole identity in ?id=, so dropping the query would equate every such profile. */
+    const profileId = url.searchParams.get("id");
     url.hash = "";
     url.search = "";
     url.pathname = url.pathname.replace(/\/+$/, "");
-    return `${url.origin}${url.pathname}`.toLowerCase();
+    const base = `${url.origin}${url.pathname}`.toLowerCase();
+    return profileId ? `${base}?id=${profileId}` : base;
   } catch {
     return normalized.replace(/\/+$/, "").toLowerCase();
   }

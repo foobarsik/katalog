@@ -184,11 +184,13 @@ test("exposes quick filters from the search bar", async () => {
 });
 
 test("keeps tagged Facebook profiles and contradictory recommendations", async () => {
-  const [data, client] = await Promise.all([
+  const [data, client, importer] = await Promise.all([
     readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../scripts/import-data.mjs", import.meta.url), "utf8"),
   ]);
 
+  assert.match(importer, /searchParams\.get\("id"\)/);
   assert.match(data, /"id": 291,[\s\S]*?facebook\.com\/profile\.php\?id=61574615980220/);
   assert.match(data, /"id": 300,[\s\S]*?instagram\.com\/psiholog\.t\.vashchenko[\\n\s\S]*?facebook\.com\/profile\.php\?id=100001980136154/);
   assert.match(data, /"id": 304,[\s\S]*?10 із 10 людей відгукнулися дуже погано/);
@@ -197,7 +199,10 @@ test("keeps tagged Facebook profiles and contradictory recommendations", async (
   assert.match(data, /"id": 18,[\s\S]*?Яніна Шиманська[\s\S]*?"hasNegativeReview": false/);
   assert.match(client, /Є негативні відгуки/);
   assert.match(data, /"id": 148,[\s\S]*?Рекомендую, Паляныця\./);
-  assert.match(data, /"id": 307,[\s\S]*?facebook\.com\/profile\.php\?id=100065051783764/);
+  const tbilisuri = data.match(/"id": 307,[\s\S]*?\n  },\n  \{/)[0];
+  assert.match(tbilisuri, /tbilisuri\.eatbu\.com/);
+  assert.match(tbilisuri, /"needsReview": false/);
+  assert.doesNotMatch(tbilisuri, /facebook\.com\/profile\.php\?id=100065051783764/);
   assert.match(data, /"id": 55,[\s\S]*?Гарний лікар, і ціни адекватні/);
   assert.match(data, /"id": 312,[\s\S]*?Przychodnia Weterynaryjna Centrum[\s\S]*?Świętochłowice/);
   assert.match(data, /"id": 312,[\s\S]*?weterynarz\.pl\/Glowna\.is\.przychodnia-weterynaryjna-centrum/);
