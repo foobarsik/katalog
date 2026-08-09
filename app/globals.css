@@ -609,21 +609,11 @@ ul {
 .profession {
   display: flex;
   align-items: center;
-  gap: 8px;
   color: var(--cat, var(--ink-soft));
   font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-}
-
-.profession::before {
-  content: "";
-  width: 12px;
-  height: 2px;
-  flex: none;
-  border-radius: 2px;
-  background: currentColor;
 }
 
 .location-status {
@@ -678,7 +668,7 @@ ul {
 
 .card-identity {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
 }
 
@@ -694,16 +684,16 @@ ul {
 }
 
 .avatar.sm {
-  width: 52px;
-  height: 52px;
-  font-size: 0.94rem;
+  width: 96px;
+  height: 96px;
+  font-size: 1.7rem;
 }
 
 .avatar.lg {
-  width: 96px;
-  height: 96px;
+  width: 130px;
+  height: 130px;
   border-radius: 16px;
-  font-size: 1.7rem;
+  font-size: 2.1rem;
 }
 
 .avatar img {
@@ -714,6 +704,11 @@ ul {
 
 .card-names {
   min-width: 0;
+  padding-top: 2px;
+}
+
+.card-names .profession {
+  margin-bottom: 8px;
 }
 
 .card-names h3 {

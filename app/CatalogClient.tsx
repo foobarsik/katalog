@@ -515,11 +515,10 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
 
   return (
     <article className={className} style={{ "--cat": getCategoryColor(item.category) } as React.CSSProperties}>
-      <p className="profession">{item.subcategory || item.category}</p>
-
       <div className="card-identity">
         <Avatar item={item} size="sm" />
         <div className="card-names">
+          <p className="profession">{item.subcategory || item.category}</p>
           <h3>
             <button className="card-open" type="button" onClick={() => onOpen(item)}>
               {getDisplayName(item)}
