@@ -113,6 +113,7 @@ function makeSearchText(item: Specialist) {
     item.instagramTitle,
     item.instagramBio,
     item.phone,
+    item.email,
   ]
     .join(" ")
     .toLocaleLowerCase("uk-UA");
@@ -239,7 +240,6 @@ function uniqueContactActions(actions: ContactAction[]) {
 function getContactActions(item: Specialist) {
   const instagramUrl = getInstagramUrl(item);
   const socialContacts = getSocialContacts(item);
-  const websiteIsEmail = /^mailto:/i.test(item.website);
 
   return uniqueContactActions([
     ...(instagramUrl
@@ -256,16 +256,19 @@ function getContactActions(item: Specialist) {
     ...(item.phone
       ? [{ href: telHref(item.phone), label: item.phone, ariaLabel: "Подзвонити", icon: <PhoneIcon />, external: false }]
       : []),
-    ...(item.website
+    ...(item.email
       ? [
           {
-            href: item.website,
-            label: websiteIsEmail ? item.website.replace(/^mailto:/i, "") : "Сайт",
-            ariaLabel: websiteIsEmail ? "Написати email" : "Відкрити сайт",
-            icon: websiteIsEmail ? <EmailIcon /> : <WebsiteIcon />,
-            external: !websiteIsEmail,
+            href: `mailto:${item.email}`,
+            label: item.email,
+            ariaLabel: "Написати email",
+            icon: <EmailIcon />,
+            external: false,
           },
         ]
+      : []),
+    ...(item.website
+      ? [{ href: item.website, label: "Сайт", ariaLabel: "Відкрити сайт", icon: <WebsiteIcon /> }]
       : []),
     ...socialContacts.map((social) => ({
       href: social.href,
@@ -281,15 +284,22 @@ function hasAnyContact(item: Specialist) {
   return getContactActions(item).length > 0;
 }
 
-function hasSocialContact(item: Specialist) {
-  return Boolean(getInstagramUrl(item) || isFacebookSocialValue(item.social));
+function getContactCount(item: Specialist) {
+  return getContactActions(item).length;
 }
 
-/** Secondary quality cues run only after review, location, avatar, and social presence have tied. */
+function hasSocialContact(item: Specialist) {
+  return Boolean(getInstagramUrl(item) || getSocialContacts(item).length);
+}
+
+function hasSocialOrWebsiteContact(item: Specialist) {
+  return hasSocialContact(item) || Boolean(item.website);
+}
+
+/** Secondary quality cues run only after review, location, avatar, and contact richness have tied. */
 function getRank(item: Specialist) {
   return (
     Number(Boolean(item.comment)) * 8 +
-    Number(hasAnyContact(item)) * 4 +
     Number(!isInstagramUnavailable(item))
   );
 }
@@ -787,8 +797,8 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
           Number(Boolean(b.review)) - Number(Boolean(a.review)) ||
           getLocationRank(b) - getLocationRank(a) ||
           Number(hasAvatarImage(b)) - Number(hasAvatarImage(a)) ||
-          Number(Boolean(getInstagramUrl(b))) - Number(Boolean(getInstagramUrl(a))) ||
-          Number(hasSocialContact(b)) - Number(hasSocialContact(a)) ||
+          Number(hasSocialOrWebsiteContact(b)) - Number(hasSocialOrWebsiteContact(a)) ||
+          getContactCount(b) - getContactCount(a) ||
           getRank(b) - getRank(a) ||
           getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
       );

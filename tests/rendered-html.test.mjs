@@ -73,6 +73,7 @@ test("imports profile details from the combined sources file", async () => {
   assert.match(importer, /function selectSource\(rows, contacts\)/);
   assert.match(importer, /function sourceMatchesCatalog\(row/);
   assert.match(data, /sourceType: string/);
+  assert.match(data, /email: string/);
   assert.match(data, /sourceInfo: string/);
   assert.match(data, /foundAutomatically: boolean/);
   assert.match(data, /confidenceScore: number/);
@@ -119,8 +120,8 @@ test("marks contacts that still need review", async () => {
   assert.match(client, /Number\(Boolean\(b\.review\)\) - Number\(Boolean\(a\.review\)\)/);
   assert.match(client, /getLocationRank\(b\) - getLocationRank\(a\)/);
   assert.match(client, /Number\(hasAvatarImage\(b\)\) - Number\(hasAvatarImage\(a\)\)/);
-  assert.match(client, /Number\(Boolean\(getInstagramUrl\(b\)\)\) - Number\(Boolean\(getInstagramUrl\(a\)\)\)/);
-  assert.match(client, /Number\(hasSocialContact\(b\)\) - Number\(hasSocialContact\(a\)\)/);
+  assert.match(client, /Number\(hasSocialOrWebsiteContact\(b\)\) - Number\(hasSocialOrWebsiteContact\(a\)\)/);
+  assert.match(client, /getContactCount\(b\) - getContactCount\(a\)/);
 });
 
 test("exposes quick filters from the search bar", async () => {
@@ -131,8 +132,7 @@ test("exposes quick filters from the search bar", async () => {
   assert.match(client, /Є відгук/);
   assert.match(client, /Є соцмережі/);
   assert.match(client, /function hasSocialContact\(item: Specialist\)/);
-  assert.match(client, /isFacebookSocialValue\(item\.social\)/);
-  assert.doesNotMatch(client, /hasSocialContact\(item: Specialist\)[\s\S]*getSocialContacts\(item\)\.length/);
+  assert.match(client, /getSocialContacts\(item\)\.length/);
   assert.match(client, /availabilityFiltersActive/);
   assert.match(client, /onlySocial && hasSocialContact\(item\)/);
   assert.match(client, /Є сайт/);
@@ -150,14 +150,16 @@ test("uses messenger-specific contact icons", async () => {
   assert.match(client, /function ViberIcon\(\)/);
   assert.match(client, /function WhatsAppIcon\(\)/);
   assert.match(client, /function EmailIcon\(\)/);
-  assert.match(client, /websiteIsEmail/);
+  assert.match(client, /item\.email/);
+  assert.match(client, /mailto:\$\{item\.email\}/);
   assert.match(client, /type === "viber"/);
   assert.match(client, /type === "whatsapp"/);
   assert.match(client, /https:\/\/wa\.me/);
   assert.match(client, /viber:\/\/chat\?number=/);
   assert.match(client, /\(\?:\^\|\[\/\\s\]\)facebook\\s\*:/);
   assert.match(client, /https:\/\/www\.facebook\.com\/\$\{handle\}/);
-  assert.match(importer, /mailto:/);
+  assert.match(importer, /return "";/);
+  assert.doesNotMatch(importer, /\?:https\?:\\\/\\\/\|mailto:/);
   assert.doesNotMatch(client, /!social \|\| getInstagramUrl\(item\)/);
   assert.match(client, /if \(\/instagram\\\.com\/i\.test\(social\)\) return \[\];/);
 });

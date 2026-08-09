@@ -820,6 +820,8 @@ ul {
 
 .card-actions {
   align-items: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
 .card-actions .location-status {
@@ -831,12 +833,20 @@ ul {
   white-space: nowrap;
 }
 
+.card-actions .review-status {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .card-actions .review-status + .location-status {
   margin-left: 2px;
 }
 
 .action {
   display: inline-flex;
+  flex: none;
   align-items: center;
   gap: 7px;
   border: 1px solid var(--line);

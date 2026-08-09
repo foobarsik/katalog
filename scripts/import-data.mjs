@@ -90,7 +90,8 @@ function telegramUsername(value) {
 function normalizeUrl(url) {
   const cleaned = (url || "").trim();
   if (!cleaned) return "";
-  return /^(?:https?:\/\/|mailto:)/i.test(cleaned) ? cleaned : `https://${cleaned}`;
+  if (/^(?:mailto:)?[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(cleaned)) return "";
+  return /^https?:\/\//i.test(cleaned) ? cleaned : `https://${cleaned}`;
 }
 
 const acceptedLocations = [
@@ -285,6 +286,7 @@ function renderDataFile(items) {
   category: string;
   subcategory: string;
   phone: string;
+  email: string;
   website: string;
   social: string;
   instagram: string;
@@ -343,6 +345,7 @@ const specialists = activeCatalogRows.map((row, index) => {
   const social = pick(row, ["Соцмережі", "Соц сети"]);
   const username = instagramUsername(social);
   const id = Number.parseInt(pick(row, ["№", "id"]), 10);
+  const email = pick(row, ["Email", "Емейл", "Електронна пошта"]);
   const website = normalizeUrl(pick(row, ["Сайт"]));
   const name = pick(row, ["Ім'я", "Ім’я", "Имя"]);
   const title = pick(row, ["Назва", "Название", "Ім'я", "Ім’я", "Имя"]);
@@ -384,6 +387,7 @@ const specialists = activeCatalogRows.map((row, index) => {
     category: category || "Інше",
     subcategory: subcategory || "Не вказано",
     phone: pick(row, ["Телефон"]),
+    email,
     website,
     social,
     instagram: username,
