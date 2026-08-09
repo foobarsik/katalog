@@ -109,6 +109,8 @@ test("marks contacts that still need review", async () => {
   assert.match(importer, /activeCatalogRows/);
   assert.match(data, /needsReview: boolean/);
   assert.match(data, /"needsReview": true/);
+  assert.match(data, /"id": 118,[\s\S]*?"title": "Приватний дитячий садок"[\s\S]*?"needsReview": true/);
+  assert.match(data, /"id": 190,[\s\S]*?"title": "Harmoniya Balans"[\s\S]*?"needsReview": true/);
   assert.match(data, /"id": 19,[\s\S]*"title": "Massage Studio by Iryna Metokhir"/);
   assert.doesNotMatch(data, /"id": 31,[\s\S]*Massage Studio by Iryna Metokhir/);
   assert.doesNotMatch(data, /"id": 77,[\s\S]*Massage Studio by Iryna Metokhir/);
@@ -134,7 +136,8 @@ test("exposes quick filters from the search bar", async () => {
   assert.match(client, /Є відгук/);
   assert.match(client, /Є соцмережі/);
   assert.match(client, /function hasSocialContact\(item: Specialist\)/);
-  assert.match(client, /getSocialContacts\(item\)\.length/);
+  assert.match(client, /isPublicSocialValue\(item\.social\)/);
+  assert.doesNotMatch(client, /hasSocialContact\(item: Specialist\)[\s\S]*getSocialContacts\(item\)\.length/);
   assert.match(client, /availabilityFiltersActive/);
   assert.match(client, /onlySocial && hasSocialContact\(item\)/);
   assert.match(client, /Є сайт/);

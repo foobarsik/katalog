@@ -140,6 +140,10 @@ function isFacebookSocialValue(value: string) {
   return /facebook\.com|(?:^|[/\s])facebook\s*:/i.test(value.trim());
 }
 
+function isPublicSocialValue(value: string) {
+  return /facebook\.com|tiktok\.com|(?:^|[/\s])(?:facebook|tiktok)\s*:/i.test(value.trim());
+}
+
 function getInstagramUrl(item: Specialist) {
   if (isInstagramUnavailable(item)) return "";
 
@@ -289,7 +293,7 @@ function getContactCount(item: Specialist) {
 }
 
 function hasSocialContact(item: Specialist) {
-  return Boolean(getInstagramUrl(item) || getSocialContacts(item).length);
+  return Boolean(getInstagramUrl(item) || isPublicSocialValue(item.social));
 }
 
 function hasSocialOrWebsiteContact(item: Specialist) {
