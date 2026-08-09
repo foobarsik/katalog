@@ -45,8 +45,9 @@ test("keeps location classification in the importer, data, and UI", async () => 
   ]);
 
   assert.match(packageJson, /"import-data": "node scripts\/import-data\.mjs"/);
-  assert.match(importer, /function inferLocation\(parts\)/);
-  assert.match(importer, /replace\(\/\[łŁ\]\/gu, "l"\)/);
+  assert.match(importer, /function inferLocationFromCities\(value\)/);
+  assert.match(importer, /Міста з опису джерела/);
+  assert.doesNotMatch(importer, /inferLocation\(\[source\?\.name, sourceInfo\]\)/);
   assert.match(importer, /locationStatus: "confirmed"/);
   assert.match(importer, /locationStatus: "unconfirmed"/);
   assert.match(importer, /locationStatus: "unknown"/);

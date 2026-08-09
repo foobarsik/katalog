@@ -117,8 +117,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 4,
@@ -687,8 +687,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 23,
@@ -747,8 +747,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 25,
@@ -1018,7 +1018,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Tychy, Mikołów"
   },
   {
     "id": 34,
@@ -1617,8 +1617,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Tychy"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 54,
@@ -1708,7 +1708,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Sosnowiec"
   },
   {
     "id": 57,
@@ -1797,8 +1797,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 60,
@@ -2518,7 +2518,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Chorzów"
   },
   {
     "id": 84,
@@ -2788,7 +2788,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Zabrze"
   },
   {
     "id": 93,
@@ -2997,8 +2997,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Tychy"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 100,
@@ -3208,7 +3208,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Lublin"
   },
   {
     "id": 107,
@@ -3358,7 +3358,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Bytom"
+    "locationEvidence": "Bytom, Ruda Śląska"
   },
   {
     "id": 112,
@@ -3418,7 +3418,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Sosnowiec"
   },
   {
     "id": 114,
@@ -3597,8 +3597,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 120,
@@ -3838,7 +3838,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Ruda Śląska, Chorzów"
   },
   {
     "id": 128,
@@ -3897,8 +3897,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 130,
@@ -4018,7 +4018,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Ruda Śląska"
+    "locationEvidence": "Ruda Śląska, Warszawa"
   },
   {
     "id": 134,
@@ -4107,8 +4107,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": true,
     "reviewReason": "немає публічного контакту в CSV і в тексті повідомлення",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 137,
@@ -4287,8 +4287,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 143,
@@ -4558,7 +4558,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Kraków, Gliwice, Wrocław, Rzeszów, Opole"
   },
   {
     "id": 152,
@@ -4588,7 +4588,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Kraków, Gliwice, Wrocław, Rzeszów, Opole"
   },
   {
     "id": 153,
@@ -4677,8 +4677,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "unconfirmed",
-    "locationEvidence": "Kharkiv"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 156,
@@ -4888,7 +4888,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Gliwice"
   },
   {
     "id": 163,
@@ -5158,7 +5158,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Wrocław"
   },
   {
     "id": 172,
@@ -5218,7 +5218,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Kraków, Sosnowiec, Warszawa, Lublin"
   },
   {
     "id": 174,
@@ -5908,7 +5908,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Chernihiv"
   },
   {
     "id": 197,
@@ -6238,7 +6238,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Jaworzno"
   },
   {
     "id": 208,
@@ -6268,7 +6268,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Gliwice"
   },
   {
     "id": 209,
@@ -6328,7 +6328,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Kraków, Warszawa"
   },
   {
     "id": 211,
@@ -6387,8 +6387,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 213,
@@ -6417,8 +6417,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 214,
@@ -6568,7 +6568,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Kraków"
   },
   {
     "id": 219,
@@ -6597,8 +6597,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 220,
@@ -6628,7 +6628,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "unconfirmed",
-    "locationEvidence": "Warszawa"
+    "locationEvidence": "Warszawa, Manila"
   },
   {
     "id": 221,
@@ -6807,8 +6807,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Sosnowiec"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 227,
@@ -6867,8 +6867,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 229,
@@ -7107,8 +7107,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Sosnowiec"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 237,
@@ -7138,7 +7138,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Kraków, Dąbrowa Górnicza, Lviv"
   },
   {
     "id": 238,
@@ -7618,7 +7618,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Kraków"
   },
   {
     "id": 254,
@@ -7858,7 +7858,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Zabrze"
   },
   {
     "id": 262,
@@ -7888,7 +7888,7 @@ export const specialists: Specialist[] = [
     "needsReview": false,
     "reviewReason": "",
     "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationEvidence": "Katowice, Zabrze"
   },
   {
     "id": 263,
@@ -8157,8 +8157,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 272,
@@ -8247,8 +8247,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "unknown",
-    "locationEvidence": ""
+    "locationStatus": "confirmed",
+    "locationEvidence": "Katowice"
   },
   {
     "id": 275,
@@ -8307,8 +8307,8 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "confirmed",
-    "locationEvidence": "Katowice"
+    "locationStatus": "unknown",
+    "locationEvidence": ""
   },
   {
     "id": 277,
@@ -8667,7 +8667,7 @@ export const specialists: Specialist[] = [
     "confidenceReason": "",
     "needsReview": false,
     "reviewReason": "",
-    "locationStatus": "unknown",
-    "locationEvidence": ""
+    "locationStatus": "confirmed",
+    "locationEvidence": "Mikołów"
   }
 ];

@@ -135,23 +135,20 @@ const distantLocations = [
   ["Manila", /manila|ман[іи]ла/u],
 ];
 
-function normalizeLocationText(parts) {
-  return parts
-    .filter(Boolean)
-    .join(" ")
-    .normalize("NFD")
-    .replace(/\p{M}/gu, "")
-    .replace(/[łŁ]/gu, "l")
-    .toLocaleLowerCase("uk-UA");
-}
+const acceptedLocationNames = new Set(acceptedLocations.map(([name]) => name));
+const distantLocationNames = new Set(distantLocations.map(([name]) => name));
 
-function inferLocation(parts) {
-  const text = normalizeLocationText(parts);
-  const accepted = acceptedLocations.find(([, pattern]) => pattern.test(text));
-  if (accepted) return { locationStatus: "confirmed", locationEvidence: accepted[0] };
+function inferLocationFromCities(value) {
+  const cities = [...new Set((value || "").split(/[,;]+/u).map((city) => city.trim()).filter(Boolean))];
+  if (!cities.length) return { locationStatus: "unknown", locationEvidence: "" };
 
-  const distant = distantLocations.find(([, pattern]) => pattern.test(text));
-  if (distant) return { locationStatus: "unconfirmed", locationEvidence: distant[0] };
+  if (cities.some((city) => acceptedLocationNames.has(city))) {
+    return { locationStatus: "confirmed", locationEvidence: cities.join(", ") };
+  }
+
+  if (cities.some((city) => distantLocationNames.has(city))) {
+    return { locationStatus: "unconfirmed", locationEvidence: cities.join(", ") };
+  }
 
   return { locationStatus: "unknown", locationEvidence: "" };
 }
@@ -350,7 +347,8 @@ const specialists = catalogRows.map((row, index) => {
   const comment = stripAutomaticDiscoveryNotice(rawComment);
   const sourceReviewWarning = getSourceReviewWarning(source);
   const catalogReviewReason = pick(row, ["Причина проблеми", "Причина проблемы", "Problem reason"]);
-  const location = inferLocation([source?.name, sourceInfo]);
+  const sourceCities = pick(row, ["Міста з опису джерела", "Source cities"]) || (source?.cities || "").trim();
+  const location = inferLocationFromCities(sourceCities);
 
   return {
     id: Number.isFinite(id) ? id : index + 1,
