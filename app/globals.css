@@ -658,6 +658,15 @@ ul {
   line-height: 1.2;
 }
 
+.phone-search-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--accent-strong);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .panel-titles .review-status {
   margin-top: 10px;
 }

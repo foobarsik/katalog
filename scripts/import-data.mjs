@@ -102,6 +102,10 @@ function normalizePhone(value) {
   return digits ? `${text.startsWith("+") ? "+" : ""}${digits}` : "";
 }
 
+function normalizeComparableText(value) {
+  return (value || "").replace(/\s+/gu, " ").trim().toLocaleLowerCase("uk-UA");
+}
+
 const acceptedLocations = [
   ["Katowice", /katowic|катов[іи]ц/u],
   ["Kraków", /krakow|крак[іо]в/u],
@@ -122,6 +126,7 @@ const acceptedLocations = [
   ["Świętochłowice", /swietochlowic|свентохловиц/u],
   ["Jaworzno", /jaworzno|явожно/u],
   ["Tarnowskie Góry", /tarnowskie gory|тарновске гуры/u],
+  ["Żory", /\bzory\b|жор[ыи]/u],
 ];
 
 const distantLocations = [
@@ -213,13 +218,14 @@ function getSourcePriority(row) {
 }
 
 function selectSource(rows, contacts) {
-  const matching = rows.filter((row) => sourceMatchesCatalog(row, contacts));
+  const profileRows = rows.filter((row) => row.source_type !== "phonesearch");
+  const matching = profileRows.filter((row) => sourceMatchesCatalog(row, contacts));
   const catalogNames = new Set(
     contacts.names
       .map(normalizeSourceName)
       .filter((name) => name.length >= 8 && name.split(" ").length >= 2),
   );
-  const nameMatches = rows.filter((row) => catalogNames.has(normalizeSourceName(row.name)));
+  const nameMatches = profileRows.filter((row) => catalogNames.has(normalizeSourceName(row.name)));
   const candidates = matching.length ? matching : nameMatches.length === 1 ? nameMatches : [];
   const normalizedContactNames = contacts.names.map(normalizeSourceName).filter((name) => name.length >= 4);
 
@@ -294,6 +300,9 @@ function renderDataFile(items) {
   sourceUrl: string;
   sourceInfo: string;
   sourceStatus: string;
+  phoneSearchStatus: string;
+  phoneSearchUrl: string;
+  phoneSearchInfo: string;
   foundAutomatically: boolean;
   confidenceScore: number;
   confidenceReason: string;
@@ -348,6 +357,9 @@ const specialists = activeCatalogRows.map((row, index) => {
   const name = pick(row, ["Ім'я", "Ім’я", "Имя"]);
   const title = pick(row, ["Назва", "Название", "Ім'я", "Ім’я", "Имя"]);
   const source = selectSource(sourceRows, { instagram: username, social, website, names: [title, name] });
+  const phoneSearchSource = sourceRows.find(
+    (candidate) => candidate.source_type === "phonesearch" && String(candidate.id) === String(id),
+  );
   const instagramSource = sourceRows.find(
     (candidate) =>
       candidate.source_type === "instagram" &&
@@ -371,10 +383,15 @@ const specialists = activeCatalogRows.map((row, index) => {
     10,
   );
   const review = stripAutomaticDiscoveryNotice(rawReview);
-  const comment = stripAutomaticDiscoveryNotice(rawComment);
+  const importedComment = stripAutomaticDiscoveryNotice(rawComment);
+  const comment =
+    normalizeComparableText(importedComment) === normalizeComparableText(sourceInfo) ? "" : importedComment;
   const catalogReviewReason = pick(row, ["Причина проблеми", "Причина проблемы", "Problem reason"]);
   const catalogNeedsReview = isCatalogProblem(row);
-  const sourceCities = pick(row, ["Міста з опису джерела", "Source cities"]) || (source?.cities || "").trim();
+  const sourceCities =
+    pick(row, ["Міста з опису джерела", "Source cities"]) ||
+    (source?.cities || "").trim() ||
+    (phoneSearchSource?.cities || "").trim();
   const location = inferLocationFromCities(sourceCities);
 
   return {
@@ -400,6 +417,9 @@ const specialists = activeCatalogRows.map((row, index) => {
     sourceUrl: normalizeUrl(source?.identifier || ""),
     sourceInfo,
     sourceStatus: source?.status || "",
+    phoneSearchStatus: phoneSearchSource?.status || "",
+    phoneSearchUrl: normalizeUrl(phoneSearchSource?.identifier || ""),
+    phoneSearchInfo: (phoneSearchSource?.info || "").trim(),
     foundAutomatically,
     confidenceScore: Number.isFinite(confidenceScore) ? confidenceScore : 0,
     confidenceReason: (source?.confidence_reason || "").trim(),

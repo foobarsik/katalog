@@ -91,6 +91,12 @@ test("imports profile details from the combined sources file", async () => {
   assert.doesNotMatch(client, /foundAutomatically|confidenceReason/);
   assert.match(client, /З профілю Booksy/);
   assert.match(client, /Інформація із сайту/);
+  assert.match(importer, /normalizeComparableText\(importedComment\) === normalizeComparableText\(sourceInfo\)/);
+  assert.equal(
+    data.match(/OSAMA Sushi, ul\. Gliwicka 113, Katowice\. Актуальна сторінка замовлення веде на філію Gliwicka\./g)
+      ?.length,
+    1,
+  );
 });
 
 test("normalizes imported phone numbers to digits with an optional leading plus", async () => {
@@ -130,13 +136,28 @@ test("marks contacts that still need review", async () => {
   assert.match(client, /needs-review/);
   assert.match(client, /Number\(a\.needsReview\) - Number\(b\.needsReview\)/);
   assert.match(client, /Number\(hasUnconfirmedLocation\(a\)\) - Number\(hasUnconfirmedLocation\(b\)\)/);
-  assert.match(client, /Number\(isInstagramUnavailable\(a\)\) - Number\(isInstagramUnavailable\(b\)\)/);
   assert.match(client, /Number\(Boolean\(b\.review\)\) - Number\(Boolean\(a\.review\)\)/);
-  assert.match(client, /getLocationRank\(b\) - getLocationRank\(a\)/);
+  assert.match(client, /Number\(hasSocialContact\(b\)\) - Number\(hasSocialContact\(a\)\)/);
   assert.match(client, /Number\(hasAvatarImage\(b\)\) - Number\(hasAvatarImage\(a\)\)/);
-  assert.match(client, /Number\(hasSocialOrWebsiteContact\(b\)\) - Number\(hasSocialOrWebsiteContact\(a\)\)/);
+  assert.match(client, /Number\(Boolean\(b\.website\)\) - Number\(Boolean\(a\.website\)\)/);
+  assert.match(client, /Number\(hasConfirmedLocation\(b\)\) - Number\(hasConfirmedLocation\(a\)\)/);
+  assert.match(client, /Number\(isInstagramUnavailable\(a\)\) - Number\(isInstagramUnavailable\(b\)\)/);
+  assert.match(client, /getLocationRank\(b\) - getLocationRank\(a\)/);
   assert.match(client, /getContactCount\(b\) - getContactCount\(a\)/);
   assert.match(client, /getRank\(b\) - getRank\(a\) \|\|\s+b\.confidenceScore - a\.confidenceScore \|\|\s+getDisplayName/);
+});
+
+test("keeps phone lookup results separate from the manual review state", async () => {
+  const importer = await readFile(new URL("../scripts/import-data.mjs", import.meta.url), "utf8");
+  const client = await readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8");
+  const data = await readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8");
+
+  assert.match(importer, /phoneSearchSource/);
+  assert.match(importer, /row\.source_type !== "phonesearch"/);
+  assert.match(data, /phoneSearchStatus: string/);
+  assert.doesNotMatch(client, /За номером нічого не знайдено/);
+  assert.doesNotMatch(client, /PhoneSearchStatus/);
+  assert.match(client, /item\.phoneSearchInfo/);
 });
 
 test("exposes quick filters from the search bar", async () => {
@@ -147,7 +168,7 @@ test("exposes quick filters from the search bar", async () => {
   assert.match(client, /Є відгук/);
   assert.match(client, /Є соцмережі/);
   assert.match(client, /function hasSocialContact\(item: Specialist\)/);
-  assert.match(client, /isPublicSocialValue\(item\.social\)/);
+  assert.match(client, /isFacebookSocialValue\(item\.social\)/);
   assert.doesNotMatch(client, /hasSocialContact\(item: Specialist\)[\s\S]*getSocialContacts\(item\)\.length/);
   assert.match(client, /availabilityFiltersActive/);
   assert.match(client, /onlySocial && hasSocialContact\(item\)/);

@@ -140,10 +140,6 @@ function isFacebookSocialValue(value: string) {
   return /facebook\.com|(?:^|[/\s])facebook\s*:/i.test(value.trim());
 }
 
-function isPublicSocialValue(value: string) {
-  return /facebook\.com|tiktok\.com|(?:^|[/\s])(?:facebook|tiktok)\s*:/i.test(value.trim());
-}
-
 function getInstagramUrl(item: Specialist) {
   if (isInstagramUnavailable(item)) return "";
 
@@ -293,14 +289,10 @@ function getContactCount(item: Specialist) {
 }
 
 function hasSocialContact(item: Specialist) {
-  return Boolean(getInstagramUrl(item) || isPublicSocialValue(item.social));
+  return Boolean(getInstagramUrl(item) || isFacebookSocialValue(item.social));
 }
 
-function hasSocialOrWebsiteContact(item: Specialist) {
-  return hasSocialContact(item) || Boolean(item.website);
-}
-
-/** Secondary quality cues run only after review, location, avatar, and contact richness have tied. */
+/** Secondary quality cues run only after the main publication/contact priorities have tied. */
 function getRank(item: Specialist) {
   return (
     Number(Boolean(item.comment)) * 8 +
@@ -316,6 +308,10 @@ function getLocationRank(item: Specialist) {
 
 function hasUnconfirmedLocation(item: Specialist) {
   return item.locationStatus === "unconfirmed";
+}
+
+function hasConfirmedLocation(item: Specialist) {
+  return item.locationStatus === "confirmed";
 }
 
 function hasAvatarImage(item: Specialist) {
@@ -704,6 +700,20 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
           </div>
         ) : null}
 
+        {item.phoneSearchInfo ? (
+          <div className="panel-body">
+            <section>
+              <h4>Перевірка номера</h4>
+              <p>{item.phoneSearchInfo}</p>
+              {item.phoneSearchUrl ? (
+                <a className="phone-search-link" href={item.phoneSearchUrl} rel="noreferrer" target="_blank">
+                  Відкрити джерело
+                </a>
+              ) : null}
+            </section>
+          </div>
+        ) : null}
+
         {item.review ? (
           <blockquote className="review-note">
             <p>{item.review}</p>
@@ -813,11 +823,13 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
         (a, b) =>
           Number(a.needsReview) - Number(b.needsReview) ||
           Number(hasUnconfirmedLocation(a)) - Number(hasUnconfirmedLocation(b)) ||
-          Number(isInstagramUnavailable(a)) - Number(isInstagramUnavailable(b)) ||
           Number(Boolean(b.review)) - Number(Boolean(a.review)) ||
-          getLocationRank(b) - getLocationRank(a) ||
+          Number(hasSocialContact(b)) - Number(hasSocialContact(a)) ||
           Number(hasAvatarImage(b)) - Number(hasAvatarImage(a)) ||
-          Number(hasSocialOrWebsiteContact(b)) - Number(hasSocialOrWebsiteContact(a)) ||
+          Number(Boolean(b.website)) - Number(Boolean(a.website)) ||
+          Number(hasConfirmedLocation(b)) - Number(hasConfirmedLocation(a)) ||
+          Number(isInstagramUnavailable(a)) - Number(isInstagramUnavailable(b)) ||
+          getLocationRank(b) - getLocationRank(a) ||
           getContactCount(b) - getContactCount(a) ||
           getRank(b) - getRank(a) ||
           b.confidenceScore - a.confidenceScore ||
