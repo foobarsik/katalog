@@ -257,8 +257,7 @@ const candidates = [
   { id: "317", name: "Iryna Zavorotna", category: "Здоров'я", subcategory: "Психолог, психотерапевт, сексолог", social: "https://www.instagram.com/iryna_zavorotna", problem: "так", confidence: "75", reason: "Самопрезентація без незалежного відгуку; місто прийому не вказане у профілі.", comments: ["Психотерапевтка та сексологиня; пропонує звертатися на консультацію."], evidence: [["Психотерапевтка. Сексологиня. Звертайтеся.", "2667492470297858", "2668349466878825"]] },
   { id: "318", name: "Bartosz Macionczyk", title: "LiftMed", category: "Здоров'я", subcategory: "ЛОР, хірург голови та шиї", phone: "+48324408899", website: "https://www.liftmed.pl/specjalista/lek-bartosz-macionczyk", problem: "ні", confidence: "90", cities: "Rybnik", reviews: [["Чоловікові видаляли мигдалики та робили пластику м'якого піднебіння у LiftMed. Лікар Bartosz Macionczyk. Усе пройшло чудово, наступного дня він уже був удома.", "2827002227680214", "2828982250815545"]] },
   { id: "320", name: "Władimir Malarenko", title: "Polis Clinic", category: "Здоров'я", subcategory: "Невролог", website: "https://www.znanylekarz.pl/wladimir-malarenko/neurolog/lazy", problem: "ні", confidence: "90", cities: "Katowice", reviews: [["Władimir Malarenko, дуже хороший лікар.", "2755946361452468", "2756025174777920"]], comments: ["Український невролог у Polis Clinic, Mickiewicza 26/2, Katowice."], mentions: [["Władimir Malarenko, український невролог у Polis Clinic, Mickiewicza 26/2, Katowice.", "2755946361452468", "2756781131368991"]] },
-  { id: "321", title: "Górnośląskie Centrum Zdrowia Dziecka", category: "Здоров'я", subcategory: "Дитяча ендокринологія", phone: "+48322071654", website: "https://gczd.katowice.pl/index.php/home/jednostki-szpitala/oddzialy/oddzial-pediatrii-endokrynologii-dzieciecej-z-pododdzialem-zaburzen-rozwoju-plci/", problem: "так", confidence: "85", cities: "Katowice", reason: "Відділення та контакти підтверджено, але у рекомендаціях не названо конкретного лікаря і немає оцінки якості прийому.", comments: ["Відділення педіатрії та дитячої ендокринології GCZD, ul. Medyków 16, Katowice. Телефон секретаріату: 32 207 16 54."], mentions: [["Учасниця групи порадила відділення педіатрії та дитячої ендокринології GCZD у Катовіце.", "2830393764007727", "2830493583997745"], ["У групі вказали, що дитячий ендокринолог приймає у лікарні на ul. Medyków у Катовіце.", "2830393764007727", "2830463400667430"]] },
-  { id: "322", name: "Tetiana Kryvenko", category: "Здоров'я", subcategory: "Алерголог, гастроентеролог", website: "https://telemedi.com/pl/lekarze/tetiana-kryvenko", problem: "так", confidence: "70", cities: "Tychy", reason: "У свіжій рекомендації лікарку названо алергологинею у Tychy, але актуальний польський профіль Telemedi вказує загальну медицину, а Facebook — місце проживання Kyiv. Потрібно підтвердити адресу та поточну спеціалізацію.", comments: ["Прийом у Tychy; українські медичні профілі вказують спеціалізації з алергології та гастроентерології."], mentions: [["У Tychy порадили лікарку Tetiana Kryvenko у відповідь на запит про алерголога.", "2781652822215155", "2782584672121970"]] },
+  { id: "322", name: "Tetiana Kryvenko", category: "Здоров'я", subcategory: "Алерголог, гастроентеролог", website: "https://telemedi.com/pl/lekarze/tetiana-kryvenko", problem: "ні", confidence: "80", cities: "Tychy", reason: "", comments: ["Польський реєстровий профіль підтверджує практику в Tychy за адресою Cicha 27 і спеціальність лікаря загальної практики. Український медичний профіль підтверджує кваліфікації з алергології та гастроентерології."], mentions: [["У Tychy порадили лікарку Tetiana Kryvenko у відповідь на запит про алерголога.", "2781652822215155", "2782584672121970"]] },
   { id: "323", name: "Kateryna Stankevych", title: "Caritas", category: "Здоров'я", subcategory: "Психолог", problem: "ні", confidence: "85", cities: "Katowice", reviews: [["Рекомендую Kateryna Stankevych із власного досвіду.", "2760256704354767", "2763910943989343"]], comments: ["Психологиня в Caritas; у Facebook-профілі вказано місце проживання Katowice."], mentions: [["У рекомендації позначено особистий Facebook-профіль Kateryna Stankevych.", "2760256704354767", "2763910943989343"]] },
   { id: "324", name: "Inna Loitra", category: "Здоров'я", subcategory: "Психолог-консультант", problem: "ні", confidence: "55", cities: "Katowice", comments: ["Facebook-профіль підтверджує роботу психологинею-консультанткою та проживання в Katowice."], mentions: [["Inna Loitra", "2760256704354767", "2761682434212194"], ["Inna Loitra", "2726639941049777", "2726694561044315"]] },
   { id: "325", name: "Інна Москалюк", category: "Здоров'я", subcategory: "Дитячий психіатр", website: "https://innamoskaliuk.pp.ua/", social: "https://www.instagram.com/doc_moskaliuk", problem: "ні", confidence: "90", reviews: [["Приймає в Лодзі й онлайн. Рекомендую.", "2509673646079742", "2509896412724132"]], comments: ["Консультує дітей і підлітків з аутизмом, РДУГ та іншими розладами; доступні онлайн- й офлайн-консультації."], mentions: [["У рекомендації збережено пряме посилання на Instagram дитячої психіатрині.", "2509673646079742", "2509896412724132"]] },
@@ -408,8 +407,8 @@ const supportingSources = [
     info: "Польський профіль лікарки Tetiana Kryvenko у Telemedi вказує прийом у Tychy та спеціальність загальної медицини.",
     photo_file: "",
     found_automatically: "false",
-    confidence_score: "70",
-    confidence_reason: "Ім'я, професію та місто підтверджено у польському медичному профілі; алергологічну спеціалізацію потрібно уточнити.",
+    confidence_score: "80",
+    confidence_reason: "Польський реєстровий профіль підтверджує ім'я, загальну медицину та практику в Tychy; український медичний профіль окремо підтверджує алергологію та гастроентерологію.",
     cities: "Tychy",
   },
   {
@@ -435,21 +434,8 @@ const supportingSources = [
     photo_file: "",
     found_automatically: "false",
     confidence_score: "65",
-    confidence_reason: "Спеціалізацію підтверджено, але актуальність польського місця прийому потрібно перевірити.",
+    confidence_reason: "Українські спеціалізації підтверджено медичним профілем; практику в Tychy окремо підтверджено польським реєстровим профілем.",
     cities: "",
-  },
-  {
-    id: "321",
-    name: "Górnośląskie Centrum Zdrowia Dziecka",
-    source_type: "website",
-    identifier: "https://gczd.katowice.pl/index.php/home/jednostki-szpitala/oddzialy/oddzial-pediatrii-endokrynologii-dzieciecej-z-pododdzialem-zaburzen-rozwoju-plci/",
-    status: "ok",
-    info: "Офіційне відділення педіатрії та дитячої ендокринології GCZD у Katowice, ul. Medyków 16. Керівниця відділення: prof. Aneta Gawlik-Starzyk. Телефон секретаріату: 32 207 16 54.",
-    photo_file: "",
-    found_automatically: "false",
-    confidence_score: "90",
-    confidence_reason: "Профіль відділення, адресу та телефон підтверджено на офіційному сайті GCZD.",
-    cities: "Katowice",
   },
   {
     id: "320",
@@ -611,7 +597,7 @@ const supportingSources = [
 
 const catalog = parseCsv(readFileSync(catalogPath, "utf8"));
 const sources = parseCsv(readFileSync(sourcesPath, "utf8"));
-const removedIds = new Set(["31", "77", "295", "319"]);
+const removedIds = new Set(["31", "77", "295", "319", "321"]);
 catalog.records = catalog.records.filter((row) => !removedIds.has(row["№"]));
 sources.records = sources.records.filter(
   (row) => !removedIds.has(row.id) && !(row.id === "307" && row.source_type === "facebook"),
