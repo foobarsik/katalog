@@ -118,7 +118,11 @@ test("exposes quick filters from the search bar", async () => {
 
   assert.match(client, /aria-label="Відкрити фільтри"/);
   assert.match(client, /Є відгук/);
-  assert.match(client, /Є Instagram/);
+  assert.match(client, /Є соцмережі/);
+  assert.match(client, /function hasSocialContact\(item: Specialist\)/);
+  assert.match(client, /isFacebookSocialValue\(item\.social\)/);
+  assert.doesNotMatch(client, /hasSocialContact\(item: Specialist\)[\s\S]*getSocialContacts\(item\)\.length/);
+  assert.match(client, /onlySocial \? hasSocialContact\(item\) : true/);
   assert.match(client, /Є телефон/);
   assert.match(client, /Є контакт/);
   assert.doesNotMatch(client, /Очікують перевірки/);

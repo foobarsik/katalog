@@ -139,6 +139,10 @@ function isInstagramSocialValue(value: string) {
   return /instagram\.com|^instagram\s*:/i.test(value.trim());
 }
 
+function isFacebookSocialValue(value: string) {
+  return /facebook\.com|^facebook\s*:/i.test(value.trim());
+}
+
 function getInstagramUrl(item: Specialist) {
   if (isInstagramUnavailable(item)) return "";
 
@@ -266,6 +270,10 @@ function getContactActions(item: Specialist) {
 
 function hasAnyContact(item: Specialist) {
   return getContactActions(item).length > 0;
+}
+
+function hasSocialContact(item: Specialist) {
+  return Boolean(getInstagramUrl(item) || isFacebookSocialValue(item.social));
 }
 
 /** Review is the strongest signal, then a verified Instagram presence, then the remaining quality cues. */
@@ -683,7 +691,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const [profession, setProfession] = useState("");
   const [filterPanelOpen, setFilterPanelOpen] = useState(false);
   const [onlyReviewed, setOnlyReviewed] = useState(false);
-  const [onlyInstagram, setOnlyInstagram] = useState(false);
+  const [onlySocial, setOnlySocial] = useState(false);
   const [onlyPhone, setOnlyPhone] = useState(false);
   const [onlyContacted, setOnlyContacted] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -741,7 +749,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       )
       .filter((item) => (profession ? item.subcategory === profession : true))
       .filter((item) => (onlyReviewed ? Boolean(item.review) : true))
-      .filter((item) => (onlyInstagram ? Boolean(getInstagramUrl(item)) : true))
+      .filter((item) => (onlySocial ? hasSocialContact(item) : true))
       .filter((item) => (onlyPhone ? Boolean(item.phone) : true))
       .filter((item) => (onlyContacted ? hasAnyContact(item) : true))
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true))
@@ -754,9 +762,9 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
           getLocationRank(b) - getLocationRank(a) ||
           getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
       );
-  }, [category, onlyContacted, onlyInstagram, onlyPhone, onlyReviewed, profession, query, specialists]);
+  }, [category, onlyContacted, onlyPhone, onlyReviewed, onlySocial, profession, query, specialists]);
 
-  const filterKey = `${category}|${profession}|${query}|${onlyReviewed}|${onlyInstagram}|${onlyPhone}|${onlyContacted}`;
+  const filterKey = `${category}|${profession}|${query}|${onlyReviewed}|${onlySocial}|${onlyPhone}|${onlyContacted}`;
   const [lastFilterKey, setLastFilterKey] = useState(filterKey);
   if (lastFilterKey !== filterKey) {
     setLastFilterKey(filterKey);
@@ -786,7 +794,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     Number(category !== ALL) +
     Number(Boolean(profession)) +
     Number(onlyReviewed) +
-    Number(onlyInstagram) +
+    Number(onlySocial) +
     Number(onlyPhone) +
     Number(onlyContacted);
   const hasFilters = Boolean(query || activeFilterCount);
@@ -796,7 +804,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     setCategory(ALL);
     setProfession("");
     setOnlyReviewed(false);
-    setOnlyInstagram(false);
+    setOnlySocial(false);
     setOnlyPhone(false);
     setOnlyContacted(false);
     searchRef.current?.focus();
@@ -864,12 +872,12 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
                   Є відгук
                 </button>
                 <button
-                  aria-pressed={onlyInstagram}
-                  className={onlyInstagram ? "filter-chip on" : "filter-chip"}
+                  aria-pressed={onlySocial}
+                  className={onlySocial ? "filter-chip on" : "filter-chip"}
                   type="button"
-                  onClick={() => setOnlyInstagram((current) => !current)}
+                  onClick={() => setOnlySocial((current) => !current)}
                 >
-                  Є Instagram
+                  Є соцмережі
                 </button>
                 <button
                   aria-pressed={onlyPhone}
