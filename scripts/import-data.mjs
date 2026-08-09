@@ -90,7 +90,7 @@ function telegramUsername(value) {
 function normalizeUrl(url) {
   const cleaned = (url || "").trim();
   if (!cleaned) return "";
-  return /^https?:\/\//i.test(cleaned) ? cleaned : `https://${cleaned}`;
+  return /^(?:https?:\/\/|mailto:)/i.test(cleaned) ? cleaned : `https://${cleaned}`;
 }
 
 const acceptedLocations = [
@@ -212,12 +212,18 @@ function selectSource(rows, contacts) {
   );
   const nameMatches = rows.filter((row) => catalogNames.has(normalizeSourceName(row.name)));
   const candidates = matching.length ? matching : nameMatches.length === 1 ? nameMatches : [];
+  const normalizedContactNames = contacts.names.map(normalizeSourceName).filter((name) => name.length >= 4);
 
   return [...candidates].sort((a, b) => {
     const aOk = a.status === "ok" || a.status === "no_public_data" ? 0 : 1;
     const bOk = b.status === "ok" || b.status === "no_public_data" ? 0 : 1;
+    const aName = normalizeSourceName(a.name);
+    const bName = normalizeSourceName(b.name);
+    const aNameMatch = normalizedContactNames.some((name) => aName.includes(name)) ? 0 : 1;
+    const bNameMatch = normalizedContactNames.some((name) => bName.includes(name)) ? 0 : 1;
     return (
       aOk - bOk ||
+      aNameMatch - bNameMatch ||
       getSourcePriority(a) - getSourcePriority(b)
     );
   })[0];
@@ -240,6 +246,17 @@ function cleanSourceInfo(row) {
 function getSourceReviewWarning(row) {
   const match = (row?.info || "").match(/\[(?:ПОДОЗРИТЕЛЬНО|SUSPICIOUS)\s*:?\s*([^\]]*)\]/iu);
   return match?.[1]?.trim() || "";
+}
+
+function getSourceQualityWarning(row, foundAutomatically, confidenceScore) {
+  const status = (row?.status || "").trim().toLowerCase();
+  if (status && !["ok", "no_public_data"].includes(status)) {
+    return "Джерело або контакт недоступні чи більше не актуальні.";
+  }
+  if (foundAutomatically && confidenceScore < 70) {
+    return "Автоматично знайдені дані потребують ручної перевірки.";
+  }
+  return "";
 }
 
 function copySourcePhoto(row) {
@@ -311,10 +328,18 @@ function stripAutomaticDiscoveryNotice(value) {
     .trim();
 }
 
+function isDuplicateCatalogRow(row) {
+  return /^\s*(?:дублікат|дубликат|duplicate)(?:\s|$)/iu.test(
+    pick(row, ["Дія після перевірки", "Action after review"]),
+  );
+}
+
 const catalogRows = readCsv(catalogPath);
 const sourceRows = readCsv(sourcesPath, false);
 
-const specialists = catalogRows.map((row, index) => {
+const activeCatalogRows = catalogRows.filter((row) => !isDuplicateCatalogRow(row));
+
+const specialists = activeCatalogRows.map((row, index) => {
   const social = pick(row, ["Соцмережі", "Соц сети"]);
   const username = instagramUsername(social);
   const id = Number.parseInt(pick(row, ["№", "id"]), 10);
@@ -347,6 +372,7 @@ const specialists = catalogRows.map((row, index) => {
   const review = stripAutomaticDiscoveryNotice(rawReview);
   const comment = stripAutomaticDiscoveryNotice(rawComment);
   const sourceReviewWarning = getSourceReviewWarning(source);
+  const sourceQualityWarning = getSourceQualityWarning(source, foundAutomatically, confidenceScore);
   const catalogReviewReason = pick(row, ["Причина проблеми", "Причина проблемы", "Problem reason"]);
   const sourceCities = pick(row, ["Міста з опису джерела", "Source cities"]) || (source?.cities || "").trim();
   const location = inferLocationFromCities(sourceCities);
@@ -378,8 +404,9 @@ const specialists = catalogRows.map((row, index) => {
     confidenceReason: (source?.confidence_reason || "").trim(),
     needsReview:
       /^так|yes|true|1$/i.test(pick(row, ["Проблемна", "Проблемная", "Problem"])) ||
-      Boolean(sourceReviewWarning),
-    reviewReason: catalogReviewReason || sourceReviewWarning,
+      Boolean(sourceReviewWarning) ||
+      Boolean(sourceQualityWarning),
+    reviewReason: catalogReviewReason || sourceReviewWarning || sourceQualityWarning,
     ...location,
   };
 });

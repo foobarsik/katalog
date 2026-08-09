@@ -239,6 +239,7 @@ function uniqueContactActions(actions: ContactAction[]) {
 function getContactActions(item: Specialist) {
   const instagramUrl = getInstagramUrl(item);
   const socialContacts = getSocialContacts(item);
+  const websiteIsEmail = /^mailto:/i.test(item.website);
 
   return uniqueContactActions([
     ...(instagramUrl
@@ -256,7 +257,15 @@ function getContactActions(item: Specialist) {
       ? [{ href: telHref(item.phone), label: item.phone, ariaLabel: "Подзвонити", icon: <PhoneIcon />, external: false }]
       : []),
     ...(item.website
-      ? [{ href: item.website, label: "Сайт", ariaLabel: "Відкрити сайт", icon: <WebsiteIcon /> }]
+      ? [
+          {
+            href: item.website,
+            label: websiteIsEmail ? item.website.replace(/^mailto:/i, "") : "Сайт",
+            ariaLabel: websiteIsEmail ? "Написати email" : "Відкрити сайт",
+            icon: websiteIsEmail ? <EmailIcon /> : <WebsiteIcon />,
+            external: !websiteIsEmail,
+          },
+        ]
       : []),
     ...socialContacts.map((social) => ({
       href: social.href,
@@ -276,14 +285,11 @@ function hasSocialContact(item: Specialist) {
   return Boolean(getInstagramUrl(item) || isFacebookSocialValue(item.social));
 }
 
-/** Review is the strongest signal, then a verified Instagram presence, then the remaining quality cues. */
+/** Secondary quality cues run only after review, location, avatar, and social presence have tied. */
 function getRank(item: Specialist) {
   return (
-    Number(Boolean(item.review)) * 32 +
-    Number(Boolean(getInstagramUrl(item))) * 16 +
     Number(Boolean(item.comment)) * 8 +
     Number(hasAnyContact(item)) * 4 +
-    Number(Boolean(item.avatar)) * 2 +
     Number(!isInstagramUnavailable(item))
   );
 }
@@ -296,6 +302,10 @@ function getLocationRank(item: Specialist) {
 
 function hasUnconfirmedLocation(item: Specialist) {
   return item.locationStatus === "unconfirmed";
+}
+
+function hasAvatarImage(item: Specialist) {
+  return Boolean(item.avatar);
 }
 
 function telHref(phone: string) {
@@ -326,6 +336,15 @@ function WebsiteIcon() {
       <path d="M3.6 15h16.8" />
       <path d="M12 3c2.2 2.5 3.4 5.5 3.4 9s-1.2 6.5-3.4 9" />
       <path d="M12 3c-2.2 2.5-3.4 5.5-3.4 9s1.2 6.5 3.4 9" />
+    </svg>
+  );
+}
+
+function EmailIcon() {
+  return (
+    <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m4 7 8 6 8-6" />
     </svg>
   );
 }
@@ -765,8 +784,12 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
           Number(a.needsReview) - Number(b.needsReview) ||
           Number(isInstagramUnavailable(a)) - Number(isInstagramUnavailable(b)) ||
           Number(hasUnconfirmedLocation(a)) - Number(hasUnconfirmedLocation(b)) ||
-          getRank(b) - getRank(a) ||
+          Number(Boolean(b.review)) - Number(Boolean(a.review)) ||
           getLocationRank(b) - getLocationRank(a) ||
+          Number(hasAvatarImage(b)) - Number(hasAvatarImage(a)) ||
+          Number(Boolean(getInstagramUrl(b))) - Number(Boolean(getInstagramUrl(a))) ||
+          Number(hasSocialContact(b)) - Number(hasSocialContact(a)) ||
+          getRank(b) - getRank(a) ||
           getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
       );
   }, [category, onlyContacted, onlyPhone, onlyReviewed, onlySocial, onlyWebsite, profession, query, specialists]);

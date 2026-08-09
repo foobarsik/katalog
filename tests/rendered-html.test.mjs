@@ -101,16 +101,26 @@ test("marks contacts that still need review", async () => {
   ]);
 
   assert.match(importer, /needsReview:/);
+  assert.match(importer, /function isDuplicateCatalogRow\(row\)/);
+  assert.match(importer, /function getSourceQualityWarning\(row, foundAutomatically, confidenceScore\)/);
+  assert.match(importer, /aNameMatch - bNameMatch/);
+  assert.match(importer, /activeCatalogRows/);
   assert.match(data, /needsReview: boolean/);
   assert.match(data, /"needsReview": true/);
+  assert.match(data, /"id": 19,[\s\S]*"title": "Massage Studio by Iryna Metokhir"/);
+  assert.doesNotMatch(data, /"id": 31,[\s\S]*Massage Studio by Iryna Metokhir/);
+  assert.doesNotMatch(data, /"id": 77,[\s\S]*Massage Studio by Iryna Metokhir/);
+  assert.doesNotMatch(data, /Та сама сторінка Facebook, що й у id 30 та id 91/);
   assert.match(client, /Очікує нашої перевірки/);
   assert.match(client, /needs-review/);
   assert.match(client, /Number\(a\.needsReview\) - Number\(b\.needsReview\)/);
   assert.match(client, /Number\(isInstagramUnavailable\(a\)\) - Number\(isInstagramUnavailable\(b\)\)/);
   assert.match(client, /Number\(hasUnconfirmedLocation\(a\)\) - Number\(hasUnconfirmedLocation\(b\)\)/);
-  assert.match(client, /Number\(Boolean\(item\.review\)\) \* 32/);
-  assert.match(client, /Number\(Boolean\(getInstagramUrl\(item\)\)\) \* 16/);
+  assert.match(client, /Number\(Boolean\(b\.review\)\) - Number\(Boolean\(a\.review\)\)/);
   assert.match(client, /getLocationRank\(b\) - getLocationRank\(a\)/);
+  assert.match(client, /Number\(hasAvatarImage\(b\)\) - Number\(hasAvatarImage\(a\)\)/);
+  assert.match(client, /Number\(Boolean\(getInstagramUrl\(b\)\)\) - Number\(Boolean\(getInstagramUrl\(a\)\)\)/);
+  assert.match(client, /Number\(hasSocialContact\(b\)\) - Number\(hasSocialContact\(a\)\)/);
 });
 
 test("exposes quick filters from the search bar", async () => {
@@ -134,16 +144,20 @@ test("exposes quick filters from the search bar", async () => {
 
 test("uses messenger-specific contact icons", async () => {
   const client = await readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8");
+  const importer = await readFile(new URL("../scripts/import-data.mjs", import.meta.url), "utf8");
 
   assert.match(client, /function getSocialContacts\(item: Specialist\)/);
   assert.match(client, /function ViberIcon\(\)/);
   assert.match(client, /function WhatsAppIcon\(\)/);
+  assert.match(client, /function EmailIcon\(\)/);
+  assert.match(client, /websiteIsEmail/);
   assert.match(client, /type === "viber"/);
   assert.match(client, /type === "whatsapp"/);
   assert.match(client, /https:\/\/wa\.me/);
   assert.match(client, /viber:\/\/chat\?number=/);
   assert.match(client, /\(\?:\^\|\[\/\\s\]\)facebook\\s\*:/);
   assert.match(client, /https:\/\/www\.facebook\.com\/\$\{handle\}/);
+  assert.match(importer, /mailto:/);
   assert.doesNotMatch(client, /!social \|\| getInstagramUrl\(item\)/);
   assert.match(client, /if \(\/instagram\\\.com\/i\.test\(social\)\) return \[\];/);
 });

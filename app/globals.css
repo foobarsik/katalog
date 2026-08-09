@@ -824,6 +824,11 @@ ul {
 
 .card-actions .location-status {
   margin-left: auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card-actions .review-status + .location-status {
