@@ -94,6 +94,14 @@ function normalizeUrl(url) {
   return /^https?:\/\//i.test(cleaned) ? cleaned : `https://${cleaned}`;
 }
 
+function normalizePhone(value) {
+  const text = (value || "").trim();
+  if (!text) return "";
+
+  const digits = text.replace(/\D/g, "");
+  return digits ? `${text.startsWith("+") ? "+" : ""}${digits}` : "";
+}
+
 const acceptedLocations = [
   ["Katowice", /katowic|катов[іи]ц/u],
   ["Kraków", /krakow|крак[іо]в/u],
@@ -375,7 +383,7 @@ const specialists = activeCatalogRows.map((row, index) => {
     title: title || "Без назви",
     category: category || "Інше",
     subcategory: subcategory || "Не вказано",
-    phone: pick(row, ["Телефон"]),
+    phone: normalizePhone(pick(row, ["Телефон"])),
     email,
     website,
     social,

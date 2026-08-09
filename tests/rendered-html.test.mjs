@@ -93,6 +93,17 @@ test("imports profile details from the combined sources file", async () => {
   assert.match(client, /Інформація із сайту/);
 });
 
+test("normalizes imported phone numbers to digits with an optional leading plus", async () => {
+  const [importer, data] = await Promise.all([
+    readFile(new URL("../scripts/import-data.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(importer, /function normalizePhone\(value\)/);
+  assert.match(importer, /phone: normalizePhone\(pick\(row, \["Телефон"\]\)\)/);
+  assert.doesNotMatch(data, /"phone": "[^"\r\n]*[ ()-][^"\r\n]*"/);
+});
+
 test("marks contacts that still need review", async () => {
   const [importer, data, client] = await Promise.all([
     readFile(new URL("../scripts/import-data.mjs", import.meta.url), "utf8"),
@@ -175,4 +186,29 @@ test("keeps punctuation out of generated avatar initials", async () => {
 
   assert.match(client, /\.split\(\/\[\^\\p\{L\}\\p\{N\}\]\+\/u\)/);
   assert.match(data, /"title": "Хірург \(Сосновець\)"/);
+});
+
+test("uses the corrected Instagram profile for Olena Lahutina", async () => {
+  const data = await readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8");
+
+  assert.match(data, /"id": 132,[\s\S]*?"social": "Instagram: @olena_travel\.pl"/);
+  assert.match(data, /"id": 132,[\s\S]*?"sourceUrl": "https:\/\/www\.instagram\.com\/olena_travel\.pl\/"/);
+  assert.doesNotMatch(data, /"id": 132,[\s\S]*?instagram\.com\/olenalahutina/);
+});
+
+test("uses the updated electrician contacts and details", async () => {
+  const data = await readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8");
+
+  assert.match(data, /"id": 271,[\s\S]*?"phone": "\+48539423524"/);
+  assert.match(data, /"id": 271,[\s\S]*?"social": "Viber: \+48539423524"/);
+  assert.match(data, /"id": 271,[\s\S]*?Telegram: \+48668567920/);
+  assert.match(data, /"id": 271,[\s\S]*?"needsReview": false/);
+});
+
+test("uses Angela's provided Instagram profile", async () => {
+  const data = await readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8");
+
+  assert.match(data, /"id": 270,[\s\S]*?"social": "Instagram: @angelayatsenko"/);
+  assert.match(data, /"id": 270,[\s\S]*?"sourceUrl": "https:\/\/www\.instagram\.com\/angelayatsenko\/"/);
+  assert.match(data, /"id": 270,[\s\S]*?"needsReview": false/);
 });
