@@ -305,6 +305,7 @@ function renderDataFile(items) {
   foundAutomatically: boolean;
   confidenceScore: number;
   confidenceReason: string;
+  hasNegativeReview: boolean;
   needsReview: boolean;
   reviewReason: string;
   locationStatus: "confirmed" | "unknown" | "unconfirmed";
@@ -387,6 +388,18 @@ const specialists = activeCatalogRows.map((row, index) => {
     normalizeComparableText(importedComment) === normalizeComparableText(sourceInfo) ? "" : importedComment;
   const catalogReviewReason = pick(row, ["Причина проблеми", "Причина проблемы", "Problem reason"]);
   const catalogNeedsReview = isCatalogProblem(row);
+  const catalogSourceNames = new Set(
+    [title, name].map(normalizeSourceName).filter(Boolean),
+  );
+  const hasNegativeReview = /негатив|поган|суперечлив/iu.test(catalogReviewReason) ||
+    sourceRows.some(
+      (candidate) =>
+        (candidate === source ||
+          candidate === instagramSource ||
+          (String(candidate.id) === String(id) &&
+            catalogSourceNames.has(normalizeSourceName(candidate.name)))) &&
+        /негатив|поган|суперечлив/iu.test(`${candidate.info || ""} ${candidate.confidence_reason || ""}`),
+    );
   const sourceCities =
     pick(row, ["Міста з опису джерела", "Source cities"]) ||
     (source?.cities || "").trim() ||
@@ -417,8 +430,11 @@ const specialists = activeCatalogRows.map((row, index) => {
     sourceInfo,
     sourceStatus: source?.status || "",
     foundAutomatically,
-    confidenceScore: Number.isFinite(confidenceScore) ? confidenceScore : 0,
+    confidenceScore: hasNegativeReview
+      ? Math.min(Number.isFinite(confidenceScore) ? confidenceScore : 0, 40)
+      : Number.isFinite(confidenceScore) ? confidenceScore : 0,
     confidenceReason: (source?.confidence_reason || "").trim(),
+    hasNegativeReview,
     needsReview: catalogNeedsReview,
     reviewReason: catalogNeedsReview ? catalogReviewReason : "",
     ...location,

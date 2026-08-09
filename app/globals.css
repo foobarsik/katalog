@@ -658,6 +658,19 @@ ul {
   line-height: 1.2;
 }
 
+.negative-review-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 4px 9px;
+  border: 1px solid #dc9b9b;
+  border-radius: 6px;
+  color: #9d2525;
+  background: #fff1f1;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
 .panel-titles .review-status {
   margin-top: 10px;
 }

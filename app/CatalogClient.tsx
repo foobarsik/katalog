@@ -158,14 +158,19 @@ function getSocialContacts(item: Specialist): SocialContact[] {
   const social = item.social.trim();
   if (!social) return [];
 
+  const contacts: SocialContact[] = [];
+  const facebookUrl = social.match(/https?:\/\/(?:www\.)?facebook\.com\/[^\s,;]+/i)?.[0];
+  if (facebookUrl) {
+    contacts.push({ href: facebookUrl, label: "Facebook", type: "facebook" });
+  }
+
   if (/^https?:\/\//i.test(social)) {
-    if (/instagram\.com/i.test(social)) return [];
-    if (/facebook\.com/i.test(social)) return [{ href: social, label: "Facebook", type: "facebook" }];
+    if (/instagram\.com/i.test(social)) return contacts;
+    if (/facebook\.com/i.test(social)) return contacts;
     if (/t\.me\//i.test(social)) return [{ href: social, label: "Telegram", type: "telegram" }];
     return [{ href: social, label: "Посилання", type: "link" }];
   }
 
-  const contacts: SocialContact[] = [];
   const telegram = social.match(
     /\btelegram(?:\/viber)?\s*:\s*(?!https?:|t\.me\/)@?([a-z][a-z0-9_]{3,})/i,
   );
@@ -528,6 +533,12 @@ function ReviewStatus({ item, verbose = false }: { item: Specialist; verbose?: b
   );
 }
 
+function NegativeReviewStatus({ item }: { item: Specialist }) {
+  if (!item.hasNegativeReview) return null;
+
+  return <span className="negative-review-status">Є негативні відгуки</span>;
+}
+
 function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Specialist) => void }) {
   const [detailsExpanded, setDetailsExpanded] = useState(false);
   const unavailable = isInstagramUnavailable(item);
@@ -592,6 +603,7 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
 
       <div className="card-actions">
         <ContactRow item={item} verbose={false} />
+        <NegativeReviewStatus item={item} />
         <ReviewStatus item={item} />
         <LocationStatus item={item} />
       </div>
@@ -681,6 +693,7 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
               <span className="cat-dot" aria-hidden="true" />
               {item.category}
             </p>
+            <NegativeReviewStatus item={item} />
             <ReviewStatus item={item} verbose />
             <LocationStatus item={item} />
           </div>

@@ -172,6 +172,7 @@ test("exposes quick filters from the search bar", async () => {
   assert.match(client, /Є соцмережі/);
   assert.match(client, /function hasSocialContact\(item: Specialist\)/);
   assert.match(client, /isFacebookSocialValue\(item\.social\)/);
+  assert.match(client, /const facebookUrl = social\.match/);
   assert.doesNotMatch(client, /hasSocialContact\(item: Specialist\)[\s\S]*getSocialContacts\(item\)\.length/);
   assert.match(client, /availabilityFiltersActive/);
   assert.match(client, /onlySocial && hasSocialContact\(item\)/);
@@ -180,6 +181,38 @@ test("exposes quick filters from the search bar", async () => {
   assert.match(client, /Є телефон/);
   assert.match(client, /Є контакт/);
   assert.doesNotMatch(client, /Очікують перевірки/);
+});
+
+test("keeps tagged Facebook profiles and contradictory recommendations", async () => {
+  const [data, client] = await Promise.all([
+    readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(data, /"id": 291,[\s\S]*?facebook\.com\/profile\.php\?id=61574615980220/);
+  assert.match(data, /"id": 300,[\s\S]*?instagram\.com\/psiholog\.t\.vashchenko[\\n\s\S]*?facebook\.com\/profile\.php\?id=100001980136154/);
+  assert.match(data, /"id": 304,[\s\S]*?10 із 10 людей відгукнулися дуже погано/);
+  assert.match(data, /hasNegativeReview: boolean/);
+  assert.match(data, /"id": 304,[\s\S]*?"confidenceScore": 35[\s\S]*?"hasNegativeReview": true/);
+  assert.match(data, /"id": 18,[\s\S]*?Яніна Шиманська[\s\S]*?"hasNegativeReview": false/);
+  assert.match(client, /Є негативні відгуки/);
+  assert.match(data, /"id": 148,[\s\S]*?Рекомендую, Паляныця\./);
+  assert.match(data, /"id": 307,[\s\S]*?facebook\.com\/profile\.php\?id=100065051783764/);
+  assert.match(data, /"id": 55,[\s\S]*?Гарний лікар, і ціни адекватні/);
+  assert.match(data, /"id": 312,[\s\S]*?Przychodnia Weterynaryjna Centrum[\s\S]*?Świętochłowice/);
+  assert.match(data, /"id": 312,[\s\S]*?weterynarz\.pl\/Glowna\.is\.przychodnia-weterynaryjna-centrum/);
+  assert.match(data, /"id": 313,[\s\S]*?Galina Derevianko[\s\S]*?facebook\.com\/GalynaDerevianko/);
+  assert.match(data, /"id": 313,[\s\S]*?відмінний лікар[\s\S]*?"locationEvidence": "Kraków"/);
+  assert.match(data, /"id": 96,[\s\S]*?чудова спеціалістка і чудова людина/);
+  assert.match(data, /"id": 314,[\s\S]*?З власного досвіду рекомендую Вікторію Загородню/);
+  assert.match(data, /"id": 314,[\s\S]*?facebook\.com\/viktoriia\.zagorodnia/);
+  assert.match(data, /"id": 18,[\s\S]*?Рекомендую Яніну Шиманську/);
+  assert.match(data, /"id": 315,[\s\S]*?Доула та медична перекладачка/);
+  assert.match(data, /"id": 315,[\s\S]*?facebook\.com\/maria\.egorova\.923[\s\S]*?Mysłowice/);
+  assert.match(data, /"id": 316,[\s\S]*?Рекомендую подологиню Тетяну[\s\S]*?Chełmek/);
+  assert.match(data, /"id": 316,[\s\S]*?facebook\.com\/tetyana\.shlikhutka/);
+  assert.match(data, /"id": 317,[\s\S]*?Психотерапевтка та сексологиня/);
+  assert.match(data, /"id": 317,[\s\S]*?facebook\.com\/Iryna\.Zavorotna/);
 });
 
 test("uses messenger-specific contact icons", async () => {
@@ -201,7 +234,7 @@ test("uses messenger-specific contact icons", async () => {
   assert.match(importer, /return "";/);
   assert.doesNotMatch(importer, /\?:https\?:\\\/\\\/\|mailto:/);
   assert.doesNotMatch(client, /!social \|\| getInstagramUrl\(item\)/);
-  assert.match(client, /if \(\/instagram\\\.com\/i\.test\(social\)\) return \[\];/);
+  assert.match(client, /if \(\/instagram\\\.com\/i\.test\(social\)\) return contacts;/);
 });
 
 test("keeps punctuation out of generated avatar initials", async () => {
