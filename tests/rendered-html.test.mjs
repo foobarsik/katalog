@@ -88,8 +88,7 @@ test("imports profile details from the combined sources file", async () => {
   assert.match(client, /item\.sourceInfo \|\| item\.instagramBio/);
   assert.doesNotMatch(client, /item\.sourceInfo \|\| item\.instagramBio \|\| item\.instagramTitle/);
   assert.match(client, /\(\?:https\?:\\\/\\\/\)\?/);
-  assert.doesNotMatch(client, /foundAutomatically/);
-  assert.doesNotMatch(client, /confidenceScore|confidenceReason/);
+  assert.doesNotMatch(client, /foundAutomatically|confidenceReason/);
   assert.match(client, /З профілю Booksy/);
   assert.match(client, /Інформація із сайту/);
 });
@@ -103,7 +102,9 @@ test("marks contacts that still need review", async () => {
 
   assert.match(importer, /needsReview:/);
   assert.match(importer, /function isDuplicateCatalogRow\(row\)/);
-  assert.match(importer, /function getSourceQualityWarning\(row, foundAutomatically, confidenceScore\)/);
+  assert.match(importer, /function isCatalogProblem\(row\)/);
+  assert.doesNotMatch(importer, /getSourceQualityWarning|getSourceReviewWarning/);
+  assert.doesNotMatch(importer, /confidenceScore < 70/);
   assert.match(importer, /aNameMatch - bNameMatch/);
   assert.match(importer, /activeCatalogRows/);
   assert.match(data, /needsReview: boolean/);
@@ -115,13 +116,14 @@ test("marks contacts that still need review", async () => {
   assert.match(client, /Очікує нашої перевірки/);
   assert.match(client, /needs-review/);
   assert.match(client, /Number\(a\.needsReview\) - Number\(b\.needsReview\)/);
-  assert.match(client, /Number\(isInstagramUnavailable\(a\)\) - Number\(isInstagramUnavailable\(b\)\)/);
   assert.match(client, /Number\(hasUnconfirmedLocation\(a\)\) - Number\(hasUnconfirmedLocation\(b\)\)/);
+  assert.match(client, /Number\(isInstagramUnavailable\(a\)\) - Number\(isInstagramUnavailable\(b\)\)/);
   assert.match(client, /Number\(Boolean\(b\.review\)\) - Number\(Boolean\(a\.review\)\)/);
   assert.match(client, /getLocationRank\(b\) - getLocationRank\(a\)/);
   assert.match(client, /Number\(hasAvatarImage\(b\)\) - Number\(hasAvatarImage\(a\)\)/);
   assert.match(client, /Number\(hasSocialOrWebsiteContact\(b\)\) - Number\(hasSocialOrWebsiteContact\(a\)\)/);
   assert.match(client, /getContactCount\(b\) - getContactCount\(a\)/);
+  assert.match(client, /getRank\(b\) - getRank\(a\) \|\|\s+b\.confidenceScore - a\.confidenceScore \|\|\s+getDisplayName/);
 });
 
 test("exposes quick filters from the search bar", async () => {

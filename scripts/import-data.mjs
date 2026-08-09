@@ -244,22 +244,6 @@ function cleanSourceInfo(row) {
     .trim();
 }
 
-function getSourceReviewWarning(row) {
-  const match = (row?.info || "").match(/\[(?:ПОДОЗРИТЕЛЬНО|SUSPICIOUS)\s*:?\s*([^\]]*)\]/iu);
-  return match?.[1]?.trim() || "";
-}
-
-function getSourceQualityWarning(row, foundAutomatically, confidenceScore) {
-  const status = (row?.status || "").trim().toLowerCase();
-  if (status && !["ok", "no_public_data"].includes(status)) {
-    return "Джерело або контакт недоступні чи більше не актуальні.";
-  }
-  if (foundAutomatically && confidenceScore < 70) {
-    return "Автоматично знайдені дані потребують ручної перевірки.";
-  }
-  return "";
-}
-
 function copySourcePhoto(row) {
   const photoFile = (row?.photo_file || "").trim();
   if (!photoFile) return "";
@@ -336,6 +320,12 @@ function isDuplicateCatalogRow(row) {
   );
 }
 
+function isCatalogProblem(row) {
+  return /^так|yes|true|1$/i.test(
+    pick(row, ["Проблемна", "Проблемная", "Problem"]),
+  );
+}
+
 const catalogRows = readCsv(catalogPath);
 const sourceRows = readCsv(sourcesPath, false);
 
@@ -374,9 +364,8 @@ const specialists = activeCatalogRows.map((row, index) => {
   );
   const review = stripAutomaticDiscoveryNotice(rawReview);
   const comment = stripAutomaticDiscoveryNotice(rawComment);
-  const sourceReviewWarning = getSourceReviewWarning(source);
-  const sourceQualityWarning = getSourceQualityWarning(source, foundAutomatically, confidenceScore);
   const catalogReviewReason = pick(row, ["Причина проблеми", "Причина проблемы", "Problem reason"]);
+  const catalogNeedsReview = isCatalogProblem(row);
   const sourceCities = pick(row, ["Міста з опису джерела", "Source cities"]) || (source?.cities || "").trim();
   const location = inferLocationFromCities(sourceCities);
 
@@ -406,11 +395,8 @@ const specialists = activeCatalogRows.map((row, index) => {
     foundAutomatically,
     confidenceScore: Number.isFinite(confidenceScore) ? confidenceScore : 0,
     confidenceReason: (source?.confidence_reason || "").trim(),
-    needsReview:
-      /^так|yes|true|1$/i.test(pick(row, ["Проблемна", "Проблемная", "Problem"])) ||
-      Boolean(sourceReviewWarning) ||
-      Boolean(sourceQualityWarning),
-    reviewReason: catalogReviewReason || sourceReviewWarning || sourceQualityWarning,
+    needsReview: catalogNeedsReview,
+    reviewReason: catalogNeedsReview ? catalogReviewReason : "",
     ...location,
   };
 });

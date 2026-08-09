@@ -792,14 +792,15 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       .sort(
         (a, b) =>
           Number(a.needsReview) - Number(b.needsReview) ||
-          Number(isInstagramUnavailable(a)) - Number(isInstagramUnavailable(b)) ||
           Number(hasUnconfirmedLocation(a)) - Number(hasUnconfirmedLocation(b)) ||
+          Number(isInstagramUnavailable(a)) - Number(isInstagramUnavailable(b)) ||
           Number(Boolean(b.review)) - Number(Boolean(a.review)) ||
           getLocationRank(b) - getLocationRank(a) ||
           Number(hasAvatarImage(b)) - Number(hasAvatarImage(a)) ||
           Number(hasSocialOrWebsiteContact(b)) - Number(hasSocialOrWebsiteContact(a)) ||
           getContactCount(b) - getContactCount(a) ||
           getRank(b) - getRank(a) ||
+          b.confidenceScore - a.confidenceScore ||
           getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
       );
   }, [category, onlyContacted, onlyPhone, onlyReviewed, onlySocial, onlyWebsite, profession, query, specialists]);
