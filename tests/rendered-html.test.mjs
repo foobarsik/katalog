@@ -85,7 +85,8 @@ test("imports profile details from the combined sources file", async () => {
   assert.doesNotMatch(data, /Подписчики\s*:/i);
   assert.doesNotMatch(data, /Знайдено автоматично через веб-пошук/);
   assert.doesNotMatch(data, /Знайдено автоматично за номером телефону/);
-  assert.doesNotMatch(data, /Знайдено за номером телефону, але це оголошення у групі/);
+  assert.doesNotMatch(data, /"comment": "[^"]*Знайдено за номером телефону/);
+  assert.doesNotMatch(data, /"comment": "[^"]*(?:слабке підтвердження|рекомендується перевірити|видалено з поля Соцмережі)/);
   assert.match(client, /item\.sourceInfo/);
   assert.match(client, /item\.sourceInfo \|\| item\.instagramBio/);
   assert.doesNotMatch(client, /item\.sourceInfo \|\| item\.instagramBio \|\| item\.instagramTitle/);
@@ -155,11 +156,11 @@ test("keeps phone lookup results separate from the manual review state", async (
   const data = await readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8");
 
   assert.match(importer, /phoneSearchSource/);
-  assert.match(importer, /row\.source_type !== "phonesearch"/);
-  assert.match(data, /phoneSearchStatus: string/);
+  assert.match(importer, /facebook_recommendation/);
+  assert.doesNotMatch(data, /phoneSearchStatus|phoneSearchUrl|phoneSearchInfo/);
   assert.doesNotMatch(client, /За номером нічого не знайдено/);
   assert.doesNotMatch(client, /PhoneSearchStatus/);
-  assert.match(client, /item\.phoneSearchInfo/);
+  assert.doesNotMatch(client, /item\.phoneSearchInfo|Перевірка номера/);
 });
 
 test("exposes quick filters from the search bar", async () => {
@@ -247,5 +248,6 @@ test("collapses only long details on catalog previews", async () => {
   assert.match(client, /aria-expanded=\{detailsExpanded\}/);
   assert.match(styles, /\.card-details \.details-text\.collapsed/);
   assert.match(styles, /-webkit-line-clamp: 5/);
+  assert.match(styles, /\.review-note p[\s\S]*white-space: pre-line/);
   assert.doesNotMatch(client, /className="panel-body"[\s\S]{0,500}details-text collapsed/);
 });

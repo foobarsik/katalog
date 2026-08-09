@@ -210,7 +210,7 @@ function sourceMatchesCatalog(row, { instagram, social, website }) {
 
 const sourcePriority = ["instagram", "booksy", "website", "facebook", "telegram"];
 const automaticDiscoveryPattern =
-  /\s*(?:\|\s*)?\[?Знайдено (?:(?:автоматично (?:через веб-пошук|за номером телефону)(?:\s*\([^)]+\))?\s*[—-]\s*рекомендується перевірити відповідність\.?)|(?:за номером телефону,\s*але це оголошення у групі\s*[—-]\s*слабке підтвердження,\s*перевірити вручну\.?))\]?/iu;
+  /\s*(?:\|\s*)?\[?Знайдено (?:(?:автоматично (?:через веб-пошук|за номером телефону)(?:\s*\([^)]+\))?\s*[—-]\s*рекомендується перевірити відповідність\.?)|(?:за номером телефону(?:\s*\([^)]+\))?,?\s*але це оголошення у групі,?\s*не бізнес-сторінка\s*[—-]\s*слабке підтвердження,?\s*(?:обов[ʼ']язково )?перевірити вручну\.?))\]?/iu;
 
 function getSourcePriority(row) {
   const priority = sourcePriority.indexOf((row.source_type || "").trim().toLowerCase());
@@ -218,7 +218,9 @@ function getSourcePriority(row) {
 }
 
 function selectSource(rows, contacts) {
-  const profileRows = rows.filter((row) => row.source_type !== "phonesearch");
+  const profileRows = rows.filter(
+    (row) => !["phonesearch", "facebook_recommendation"].includes(row.source_type),
+  );
   const matching = profileRows.filter((row) => sourceMatchesCatalog(row, contacts));
   const catalogNames = new Set(
     contacts.names
@@ -300,9 +302,6 @@ function renderDataFile(items) {
   sourceUrl: string;
   sourceInfo: string;
   sourceStatus: string;
-  phoneSearchStatus: string;
-  phoneSearchUrl: string;
-  phoneSearchInfo: string;
   foundAutomatically: boolean;
   confidenceScore: number;
   confidenceReason: string;
@@ -417,9 +416,6 @@ const specialists = activeCatalogRows.map((row, index) => {
     sourceUrl: normalizeUrl(source?.identifier || ""),
     sourceInfo,
     sourceStatus: source?.status || "",
-    phoneSearchStatus: phoneSearchSource?.status || "",
-    phoneSearchUrl: normalizeUrl(phoneSearchSource?.identifier || ""),
-    phoneSearchInfo: phoneSearchSource?.status === "not_found" ? "" : (phoneSearchSource?.info || "").trim(),
     foundAutomatically,
     confidenceScore: Number.isFinite(confidenceScore) ? confidenceScore : 0,
     confidenceReason: (source?.confidence_reason || "").trim(),

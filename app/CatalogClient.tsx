@@ -700,20 +700,6 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
           </div>
         ) : null}
 
-        {item.phoneSearchInfo ? (
-          <div className="panel-body">
-            <section>
-              <h4>Перевірка номера</h4>
-              <p>{item.phoneSearchInfo}</p>
-              {item.phoneSearchUrl ? (
-                <a className="phone-search-link" href={item.phoneSearchUrl} rel="noreferrer" target="_blank">
-                  Відкрити джерело
-                </a>
-              ) : null}
-            </section>
-          </div>
-        ) : null}
-
         {item.review ? (
           <blockquote className="review-note">
             <p>{item.review}</p>
