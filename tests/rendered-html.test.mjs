@@ -123,6 +123,8 @@ test("exposes quick filters from the search bar", async () => {
   assert.match(client, /isFacebookSocialValue\(item\.social\)/);
   assert.doesNotMatch(client, /hasSocialContact\(item: Specialist\)[\s\S]*getSocialContacts\(item\)\.length/);
   assert.match(client, /onlySocial \? hasSocialContact\(item\) : true/);
+  assert.match(client, /Є сайт/);
+  assert.match(client, /onlyWebsite \? Boolean\(item\.website\) : true/);
   assert.match(client, /Є телефон/);
   assert.match(client, /Є контакт/);
   assert.doesNotMatch(client, /Очікують перевірки/);

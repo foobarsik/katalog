@@ -692,6 +692,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const [filterPanelOpen, setFilterPanelOpen] = useState(false);
   const [onlyReviewed, setOnlyReviewed] = useState(false);
   const [onlySocial, setOnlySocial] = useState(false);
+  const [onlyWebsite, setOnlyWebsite] = useState(false);
   const [onlyPhone, setOnlyPhone] = useState(false);
   const [onlyContacted, setOnlyContacted] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -750,6 +751,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       .filter((item) => (profession ? item.subcategory === profession : true))
       .filter((item) => (onlyReviewed ? Boolean(item.review) : true))
       .filter((item) => (onlySocial ? hasSocialContact(item) : true))
+      .filter((item) => (onlyWebsite ? Boolean(item.website) : true))
       .filter((item) => (onlyPhone ? Boolean(item.phone) : true))
       .filter((item) => (onlyContacted ? hasAnyContact(item) : true))
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true))
@@ -762,9 +764,9 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
           getLocationRank(b) - getLocationRank(a) ||
           getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
       );
-  }, [category, onlyContacted, onlyPhone, onlyReviewed, onlySocial, profession, query, specialists]);
+  }, [category, onlyContacted, onlyPhone, onlyReviewed, onlySocial, onlyWebsite, profession, query, specialists]);
 
-  const filterKey = `${category}|${profession}|${query}|${onlyReviewed}|${onlySocial}|${onlyPhone}|${onlyContacted}`;
+  const filterKey = `${category}|${profession}|${query}|${onlyReviewed}|${onlySocial}|${onlyWebsite}|${onlyPhone}|${onlyContacted}`;
   const [lastFilterKey, setLastFilterKey] = useState(filterKey);
   if (lastFilterKey !== filterKey) {
     setLastFilterKey(filterKey);
@@ -795,6 +797,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     Number(Boolean(profession)) +
     Number(onlyReviewed) +
     Number(onlySocial) +
+    Number(onlyWebsite) +
     Number(onlyPhone) +
     Number(onlyContacted);
   const hasFilters = Boolean(query || activeFilterCount);
@@ -805,6 +808,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     setProfession("");
     setOnlyReviewed(false);
     setOnlySocial(false);
+    setOnlyWebsite(false);
     setOnlyPhone(false);
     setOnlyContacted(false);
     searchRef.current?.focus();
@@ -878,6 +882,14 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
                   onClick={() => setOnlySocial((current) => !current)}
                 >
                   Є соцмережі
+                </button>
+                <button
+                  aria-pressed={onlyWebsite}
+                  className={onlyWebsite ? "filter-chip on" : "filter-chip"}
+                  type="button"
+                  onClick={() => setOnlyWebsite((current) => !current)}
+                >
+                  Є сайт
                 </button>
                 <button
                   aria-pressed={onlyPhone}
