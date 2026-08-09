@@ -210,7 +210,7 @@ function sourceMatchesCatalog(row, { instagram, social, website }) {
 
 const sourcePriority = ["instagram", "booksy", "website", "facebook", "telegram"];
 const automaticDiscoveryPattern =
-  /\s*\[?Знайдено автоматично через веб-пошук(?:\s*\([^)]+\))?\s*[—-]\s*рекомендується перевірити відповідність\.?\]?/iu;
+  /\s*(?:\|\s*)?\[?Знайдено (?:(?:автоматично (?:через веб-пошук|за номером телефону)(?:\s*\([^)]+\))?\s*[—-]\s*рекомендується перевірити відповідність\.?)|(?:за номером телефону,\s*але це оголошення у групі\s*[—-]\s*слабке підтвердження,\s*перевірити вручну\.?))\]?/iu;
 
 function getSourcePriority(row) {
   const priority = sourcePriority.indexOf((row.source_type || "").trim().toLowerCase());
@@ -419,7 +419,7 @@ const specialists = activeCatalogRows.map((row, index) => {
     sourceStatus: source?.status || "",
     phoneSearchStatus: phoneSearchSource?.status || "",
     phoneSearchUrl: normalizeUrl(phoneSearchSource?.identifier || ""),
-    phoneSearchInfo: (phoneSearchSource?.info || "").trim(),
+    phoneSearchInfo: phoneSearchSource?.status === "not_found" ? "" : (phoneSearchSource?.info || "").trim(),
     foundAutomatically,
     confidenceScore: Number.isFinite(confidenceScore) ? confidenceScore : 0,
     confidenceReason: (source?.confidence_reason || "").trim(),

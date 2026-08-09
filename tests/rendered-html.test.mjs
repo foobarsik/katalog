@@ -84,6 +84,8 @@ test("imports profile details from the combined sources file", async () => {
   assert.match(data, /"sourceType": "(?:instagram|booksy|website|facebook|telegram)"/);
   assert.doesNotMatch(data, /Подписчики\s*:/i);
   assert.doesNotMatch(data, /Знайдено автоматично через веб-пошук/);
+  assert.doesNotMatch(data, /Знайдено автоматично за номером телефону/);
+  assert.doesNotMatch(data, /Знайдено за номером телефону, але це оголошення у групі/);
   assert.match(client, /item\.sourceInfo/);
   assert.match(client, /item\.sourceInfo \|\| item\.instagramBio/);
   assert.doesNotMatch(client, /item\.sourceInfo \|\| item\.instagramBio \|\| item\.instagramTitle/);
