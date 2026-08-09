@@ -527,7 +527,7 @@ function ReviewStatus({ item, verbose = false }: { item: Specialist; verbose?: b
 
   return (
     <span className="review-status" title={verbose ? item.reviewReason || undefined : undefined}>
-      Очікує нашої перевірки
+      Очікує перевірки
     </span>
   );
 }

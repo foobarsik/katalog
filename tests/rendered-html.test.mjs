@@ -126,7 +126,7 @@ test("marks contacts that still need review", async () => {
   assert.doesNotMatch(data, /"id": 31,[\s\S]*Massage Studio by Iryna Metokhir/);
   assert.doesNotMatch(data, /"id": 77,[\s\S]*Massage Studio by Iryna Metokhir/);
   assert.doesNotMatch(data, /Та сама сторінка Facebook, що й у id 30 та id 91/);
-  assert.match(client, /Очікує нашої перевірки/);
+  assert.match(client, /Очікує перевірки/);
   assert.match(client, /needs-review/);
   assert.match(client, /Number\(a\.needsReview\) - Number\(b\.needsReview\)/);
   assert.match(client, /Number\(hasUnconfirmedLocation\(a\)\) - Number\(hasUnconfirmedLocation\(b\)\)/);
