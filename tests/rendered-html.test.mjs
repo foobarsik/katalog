@@ -117,14 +117,16 @@ test("exposes quick filters from the search bar", async () => {
   const client = await readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8");
 
   assert.match(client, /aria-label="Відкрити фільтри"/);
+  assert.match(client, /Будь-яка вибрана умова/);
   assert.match(client, /Є відгук/);
   assert.match(client, /Є соцмережі/);
   assert.match(client, /function hasSocialContact\(item: Specialist\)/);
   assert.match(client, /isFacebookSocialValue\(item\.social\)/);
   assert.doesNotMatch(client, /hasSocialContact\(item: Specialist\)[\s\S]*getSocialContacts\(item\)\.length/);
-  assert.match(client, /onlySocial \? hasSocialContact\(item\) : true/);
+  assert.match(client, /availabilityFiltersActive/);
+  assert.match(client, /onlySocial && hasSocialContact\(item\)/);
   assert.match(client, /Є сайт/);
-  assert.match(client, /onlyWebsite \? Boolean\(item\.website\) : true/);
+  assert.match(client, /onlyWebsite && Boolean\(item\.website\)/);
   assert.match(client, /Є телефон/);
   assert.match(client, /Є контакт/);
   assert.doesNotMatch(client, /Очікують перевірки/);
@@ -140,4 +142,16 @@ test("uses messenger-specific contact icons", async () => {
   assert.match(client, /type === "whatsapp"/);
   assert.match(client, /https:\/\/wa\.me/);
   assert.match(client, /viber:\/\/chat\?number=/);
+  assert.match(client, /\(\?:\^\|\[\/\\s\]\)facebook\\s\*:/);
+  assert.match(client, /https:\/\/www\.facebook\.com\/\$\{handle\}/);
+  assert.doesNotMatch(client, /!social \|\| getInstagramUrl\(item\)/);
+  assert.match(client, /if \(\/instagram\\\.com\/i\.test\(social\)\) return \[\];/);
+});
+
+test("keeps punctuation out of generated avatar initials", async () => {
+  const client = await readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8");
+  const data = await readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8");
+
+  assert.match(client, /\.split\(\/\[\^\\p\{L\}\\p\{N\}\]\+\/u\)/);
+  assert.match(data, /"title": "Хірург \(Сосновець\)"/);
 });

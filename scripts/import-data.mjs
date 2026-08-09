@@ -131,6 +131,7 @@ const distantLocations = [
   ["Kharkiv", /kharkiv|kharkov|харк[іи]в|харьков/u],
   ["Dnipro", /\bdnipro\b|дн[іи]про/u],
   ["Chernihiv", /chernihiv|chernigov|черн[іи]г[іо]в/u],
+  ["Сміла", /\bsmila\b|см[іе]ла/u],
   ["Kryvyi Rih", /kryvyi rih|кривий р[іи]г|кривой рог/u],
   ["Manila", /manila|ман[іи]ла/u],
 ];

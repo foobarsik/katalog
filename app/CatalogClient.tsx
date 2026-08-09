@@ -89,7 +89,7 @@ function getSecondaryName(item: Specialist) {
 
 function getInitials(item: Specialist) {
   return (getDisplayName(item) || "?")
-    .split(/\s+/)
+    .split(/[^\p{L}\p{N}]+/u)
     .filter(Boolean)
     .slice(0, 2)
     .map((part) => part[0])
@@ -135,12 +135,8 @@ function getSourceHeading(sourceType: string) {
   return "Інформація з відкритого джерела";
 }
 
-function isInstagramSocialValue(value: string) {
-  return /instagram\.com|^instagram\s*:/i.test(value.trim());
-}
-
 function isFacebookSocialValue(value: string) {
-  return /facebook\.com|^facebook\s*:/i.test(value.trim());
+  return /facebook\.com|(?:^|[/\s])facebook\s*:/i.test(value.trim());
 }
 
 function getInstagramUrl(item: Specialist) {
@@ -159,10 +155,10 @@ function getInstagramUrl(item: Specialist) {
 
 function getSocialContacts(item: Specialist): SocialContact[] {
   const social = item.social.trim();
-  if (!social || getInstagramUrl(item)) return [];
-  if (isInstagramSocialValue(social)) return [];
+  if (!social) return [];
 
   if (/^https?:\/\//i.test(social)) {
+    if (/instagram\.com/i.test(social)) return [];
     if (/facebook\.com/i.test(social)) return [{ href: social, label: "Facebook", type: "facebook" }];
     if (/t\.me\//i.test(social)) return [{ href: social, label: "Telegram", type: "telegram" }];
     return [{ href: social, label: "Посилання", type: "link" }];
@@ -181,10 +177,14 @@ function getSocialContacts(item: Specialist): SocialContact[] {
     contacts.push({ href: `https://t.me/${telegramUrl[1]}`, label: "Telegram", type: "telegram" });
   }
 
-  const facebook = social.match(/^facebook\s*:\s*(.+)$/i);
+  const facebook = social.match(/(?:^|[/\s])facebook\s*:\s*(.+)$/i);
   if (facebook?.[1]) {
+    const value = facebook[1].trim().replace(/^@/, "");
+    const handle = /^[a-z0-9._-]+$/i.test(value) ? value : "";
     contacts.push({
-      href: `https://www.facebook.com/search/top?q=${encodeURIComponent(facebook[1].trim())}`,
+      href: handle
+        ? `https://www.facebook.com/${handle}`
+        : `https://www.facebook.com/search/top?q=${encodeURIComponent(value)}`,
       label: "Facebook",
       type: "facebook",
     });
@@ -744,16 +744,22 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase("uk-UA");
+    const availabilityFiltersActive = onlyReviewed || onlySocial || onlyWebsite || onlyPhone || onlyContacted;
+
     return specialists
       .filter((item) =>
         category === ALL ? true : normalizeCategory(item.category) === normalizeCategory(category),
       )
       .filter((item) => (profession ? item.subcategory === profession : true))
-      .filter((item) => (onlyReviewed ? Boolean(item.review) : true))
-      .filter((item) => (onlySocial ? hasSocialContact(item) : true))
-      .filter((item) => (onlyWebsite ? Boolean(item.website) : true))
-      .filter((item) => (onlyPhone ? Boolean(item.phone) : true))
-      .filter((item) => (onlyContacted ? hasAnyContact(item) : true))
+      .filter((item) =>
+        availabilityFiltersActive
+          ? (onlyReviewed && Boolean(item.review)) ||
+            (onlySocial && hasSocialContact(item)) ||
+            (onlyWebsite && Boolean(item.website)) ||
+            (onlyPhone && Boolean(item.phone)) ||
+            (onlyContacted && hasAnyContact(item))
+          : true,
+      )
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true))
       .sort(
         (a, b) =>
@@ -865,7 +871,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
             </div>
 
             <div className="filter-group">
-              <p>Якість</p>
+              <p>Будь-яка вибрана умова</p>
               <div className="filter-options">
                 <button
                   aria-pressed={onlyReviewed}
