@@ -108,6 +108,8 @@ function makeSearchText(item: Specialist) {
     item.comment,
     item.instagram,
     item.social,
+    item.sourceType,
+    item.sourceInfo,
     item.instagramTitle,
     item.instagramBio,
     item.phone,
@@ -122,6 +124,15 @@ function hasInstagramFailureText(item: Specialist) {
 
 function isInstagramUnavailable(item: Specialist) {
   return item.instagramStatus === "failed" || hasInstagramFailureText(item);
+}
+
+function getSourceHeading(sourceType: string) {
+  if (sourceType === "instagram") return "З профілю Instagram";
+  if (sourceType === "booksy") return "З профілю Booksy";
+  if (sourceType === "facebook") return "З профілю Facebook";
+  if (sourceType === "telegram") return "З профілю Telegram";
+  if (sourceType === "website") return "Інформація із сайту";
+  return "Інформація з відкритого джерела";
 }
 
 function isInstagramSocialValue(value: string) {
@@ -142,45 +153,58 @@ function getInstagramUrl(item: Specialist) {
   return "";
 }
 
-function getSocialContact(item: Specialist): SocialContact | null {
+function getSocialContacts(item: Specialist): SocialContact[] {
   const social = item.social.trim();
-  if (!social || getInstagramUrl(item)) return null;
-  if (isInstagramSocialValue(social)) return null;
+  if (!social || getInstagramUrl(item)) return [];
+  if (isInstagramSocialValue(social)) return [];
 
   if (/^https?:\/\//i.test(social)) {
-    if (/facebook\.com/i.test(social)) return { href: social, label: "Facebook", type: "facebook" };
-    if (/t\.me\//i.test(social)) return { href: social, label: "Telegram", type: "telegram" };
-    return { href: social, label: "Посилання", type: "link" };
+    if (/facebook\.com/i.test(social)) return [{ href: social, label: "Facebook", type: "facebook" }];
+    if (/t\.me\//i.test(social)) return [{ href: social, label: "Telegram", type: "telegram" }];
+    return [{ href: social, label: "Посилання", type: "link" }];
   }
 
-  const telegram = social.match(/^telegram\s*:\s*@?([a-z0-9_]+)/i);
-  if (telegram?.[1]) return { href: `https://t.me/${telegram[1]}`, label: "Telegram", type: "telegram" };
+  const contacts: SocialContact[] = [];
+  const telegram = social.match(
+    /\btelegram(?:\/viber)?\s*:\s*(?!https?:|t\.me\/)@?([a-z][a-z0-9_]{3,})/i,
+  );
+  if (telegram?.[1]) {
+    contacts.push({ href: `https://t.me/${telegram[1]}`, label: "Telegram", type: "telegram" });
+  }
 
   const telegramUrl = social.match(/(?:^|\s)(?:https?:\/\/)?t\.me\/([a-z0-9_]+)/i);
-  if (telegramUrl?.[1]) return { href: `https://t.me/${telegramUrl[1]}`, label: "Telegram", type: "telegram" };
+  if (telegramUrl?.[1]) {
+    contacts.push({ href: `https://t.me/${telegramUrl[1]}`, label: "Telegram", type: "telegram" });
+  }
 
   const facebook = social.match(/^facebook\s*:\s*(.+)$/i);
   if (facebook?.[1]) {
-    return {
+    contacts.push({
       href: `https://www.facebook.com/search/top?q=${encodeURIComponent(facebook[1].trim())}`,
       label: "Facebook",
       type: "facebook",
-    };
+    });
   }
 
-  const viber = social.match(/^viber\s*:?\s*(\+?\d[\d\s()-]{6,})?$/i);
+  const viber = social.match(/\bviber\b(?:\s*:\s*(\+?\d[\d\s()-]{6,}))?/i);
   if (viber) {
     const phone = (viber[1] || item.phone).replace(/[^\d+]/g, "");
-    if (phone) return { href: `viber://chat?number=${encodeURIComponent(phone)}`, label: "Viber", type: "viber" };
+    if (phone) {
+      contacts.push({
+        href: `viber://chat?number=${encodeURIComponent(phone)}`,
+        label: "Viber",
+        type: "viber",
+      });
+    }
   }
 
-  const whatsapp = social.match(/^whatsapp\s*:?\s*(\+?\d[\d\s()-]{6,})?$/i);
+  const whatsapp = social.match(/\bwhats\s*app\b(?:\s*:\s*(\+?\d[\d\s()-]{6,}))?/i);
   if (whatsapp) {
     const phone = (whatsapp[1] || item.phone).replace(/[^\d]/g, "");
-    if (phone) return { href: `https://wa.me/${phone}`, label: "WhatsApp", type: "whatsapp" };
+    if (phone) contacts.push({ href: `https://wa.me/${phone}`, label: "WhatsApp", type: "whatsapp" });
   }
 
-  return null;
+  return contacts;
 }
 
 function normalizeContactHref(href: string) {
@@ -210,7 +234,7 @@ function uniqueContactActions(actions: ContactAction[]) {
 
 function getContactActions(item: Specialist) {
   const instagramUrl = getInstagramUrl(item);
-  const social = getSocialContact(item);
+  const socialContacts = getSocialContacts(item);
 
   return uniqueContactActions([
     ...(instagramUrl
@@ -230,16 +254,13 @@ function getContactActions(item: Specialist) {
     ...(item.website
       ? [{ href: item.website, label: "Сайт", ariaLabel: "Відкрити сайт", icon: <WebsiteIcon /> }]
       : []),
-    ...(social
-      ? [
-          {
-            href: social.href,
-            label: social.label,
-            ariaLabel: `Відкрити ${social.label}`,
-            icon: <SocialIcon type={social.type} />,
-          },
-        ]
-      : []),
+    ...socialContacts.map((social) => ({
+      href: social.href,
+      label: social.label,
+      ariaLabel: `Відкрити ${social.label}`,
+      icon: <SocialIcon type={social.type} />,
+      external: social.type !== "viber",
+    })),
   ]);
 }
 
@@ -325,9 +346,30 @@ function FacebookIcon() {
   );
 }
 
+function ViberIcon() {
+  return (
+    <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
+      <path d="M5.4 4.7A10 10 0 0 1 19.1 5c2.4 2.5 2.5 8.5.3 11.2-1.2 1.4-3 2.3-5 2.7L10 21v-1.9c-2.7-.4-4.8-1.3-5.8-3-1.6-2.7-1.1-8.8 1.2-11.4Z" />
+      <path d="M8.2 7.8c.4-.4 1.1-.3 1.4.2l1 1.8c.2.4.1.9-.2 1.2l-.7.6c.6 1.3 1.6 2.3 2.9 2.9l.6-.7c.3-.4.8-.4 1.2-.2l1.8 1c.5.3.6 1 .2 1.4-.6.7-1.4 1-2.3.8-3.5-.8-6.2-3.5-7-7-.1-.8.3-1.6 1.1-2Z" />
+      <path d="M13.4 7.5c1.7.4 2.8 1.6 3.1 3.2M13.5 5.5c2.8.4 4.7 2.4 5 5.2" />
+    </svg>
+  );
+}
+
+function WhatsAppIcon() {
+  return (
+    <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
+      <path d="M20 11.6a8 8 0 0 1-11.8 7L4 20l1.4-4.1A8 8 0 1 1 20 11.6Z" />
+      <path d="M8.3 7.8c.4-.4 1-.3 1.3.2l1 1.8c.2.4.1.8-.2 1.1l-.7.7c.6 1.3 1.6 2.3 2.9 2.9l.7-.7c.3-.3.8-.4 1.1-.2l1.8 1c.5.3.6.9.2 1.3-.6.7-1.5 1-2.4.8-3.4-.8-6.1-3.5-6.9-6.9-.1-.7.3-1.5 1.2-2Z" />
+    </svg>
+  );
+}
+
 function SocialIcon({ type }: { type: SocialContact["type"] }) {
   if (type === "telegram") return <TelegramIcon />;
   if (type === "facebook") return <FacebookIcon />;
+  if (type === "viber") return <ViberIcon />;
+  if (type === "whatsapp") return <WhatsAppIcon />;
   return <WebsiteIcon />;
 }
 
@@ -452,7 +494,8 @@ function ReviewStatus({ item, verbose = false }: { item: Specialist; verbose?: b
 function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Specialist) => void }) {
   const unavailable = isInstagramUnavailable(item);
   const secondaryName = getSecondaryName(item);
-  const bio = unavailable ? "" : cleanBio(item.instagramBio || item.instagramTitle);
+  const sourceUnavailable = item.sourceType === "instagram" && unavailable;
+  const bio = sourceUnavailable ? "" : cleanBio(item.sourceInfo || item.instagramBio || item.instagramTitle);
   const className = [
     "card",
     item.review ? "has-review" : "",
@@ -478,12 +521,12 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
         </div>
       </div>
 
+      {bio ? <p className="card-bio">{bio}</p> : null}
+
       {item.review ? (
         <blockquote className="review-note">
           <p>{item.review}</p>
         </blockquote>
-      ) : bio ? (
-        <p className="card-bio">{bio}</p>
       ) : null}
 
       {item.comment ? (
@@ -554,8 +597,10 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
 
   const unavailable = isInstagramUnavailable(item);
   const secondaryName = getSecondaryName(item);
-  const bio = unavailable ? "" : cleanBio(item.instagramBio);
-  const bioTitle = unavailable ? "" : cleanBio(item.instagramTitle);
+  const sourceUnavailable = item.sourceType === "instagram" && unavailable;
+  const bio = sourceUnavailable ? "" : cleanBio(item.sourceInfo || item.instagramBio);
+  const bioTitle = item.sourceInfo || sourceUnavailable ? "" : cleanBio(item.instagramTitle);
+  const sourceHeading = getSourceHeading(item.sourceType);
 
   return (
     <div className="overlay">
@@ -593,6 +638,16 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
           <ContactRow item={item} verbose />
         </div>
 
+        {bioTitle || bio ? (
+          <div className="panel-body">
+            <section>
+              <h4>{sourceHeading}</h4>
+              {bioTitle ? <p className="bio-title">{bioTitle}</p> : null}
+              {bio ? <p>{bio}</p> : null}
+            </section>
+          </div>
+        ) : null}
+
         {item.review ? (
           <blockquote className="review-note">
             <p>{item.review}</p>
@@ -600,20 +655,12 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
           </blockquote>
         ) : null}
 
-        {item.comment || bioTitle || bio || unavailable ? (
+        {item.comment || unavailable ? (
           <div className="panel-body">
             {item.comment ? (
               <section>
                 <h4>Деталі</h4>
                 <p>{item.comment}</p>
-              </section>
-            ) : null}
-
-            {bioTitle || bio ? (
-              <section>
-                <h4>З профілю Instagram</h4>
-                {bioTitle ? <p className="bio-title">{bioTitle}</p> : null}
-                {bio ? <p>{bio}</p> : null}
               </section>
             ) : null}
 

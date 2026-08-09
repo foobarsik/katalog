@@ -1,5 +1,5 @@
-import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { basename, dirname, extname, join, resolve } from "node:path";
+import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { basename, dirname, extname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
@@ -7,8 +7,7 @@ const projectRoot = resolve(scriptDir, "..");
 const sourceRoot = resolve(projectRoot, "..");
 
 const catalogPath = resolve(process.env.CATALOG_CSV || join(sourceRoot, "каталог_специалистов.csv"));
-const instagramPath = resolve(process.env.INSTAGRAM_CSV || join(sourceRoot, "instagram_results.csv"));
-const sourceAvatarsDir = resolve(process.env.INSTAGRAM_AVATARS_DIR || join(sourceRoot, "instagram_avatars"));
+const sourcesPath = resolve(process.env.ALL_SOURCES_CSV || join(sourceRoot, "all_sources_results_ua.csv"));
 const publicAvatarsDir = resolve(projectRoot, "public", "avatars");
 const outputPath = resolve(projectRoot, "app", "specialists-data.ts");
 
@@ -70,22 +69,28 @@ function readCsv(path, required = true) {
   return parseCsv(readFileSync(path, "utf8"));
 }
 
-function instagramUsername(url) {
-  const match = (url || "").match(/instagram\.com\/([^/?#\s]+)/i);
-  return match ? match[1].replace(/\/$/, "").toLowerCase() : "";
+function instagramUsername(value) {
+  const text = (value || "").trim();
+  const urlMatch = text.match(/instagram\.com\/([^/?#\s]+)/i);
+  if (urlMatch) return urlMatch[1].replace(/\/$/, "").toLowerCase();
+
+  const labeledMatch = text.match(/instagram(?:\/facebook)?\s*:\s*@?([a-z0-9._]+)/i);
+  return labeledMatch?.[1]?.toLowerCase() || "";
+}
+
+function telegramUsername(value) {
+  const text = (value || "").trim();
+  const urlMatch = text.match(/t\.me\/([a-z0-9_]+)/i);
+  if (urlMatch) return urlMatch[1].toLowerCase();
+
+  const labeledMatch = text.match(/telegram\s*:\s*@?([a-z0-9_]+)/i);
+  return labeledMatch?.[1]?.toLowerCase() || "";
 }
 
 function normalizeUrl(url) {
   const cleaned = (url || "").trim();
   if (!cleaned) return "";
   return /^https?:\/\//i.test(cleaned) ? cleaned : `https://${cleaned}`;
-}
-
-function stripInstagramTitle(title) {
-  return (title || "")
-    .trim()
-    .replace(/\s*\([^()]+\)\s*•\s*Instagram photos and videos\s*$/u, "")
-    .trim();
 }
 
 const acceptedLocations = [
@@ -150,31 +155,110 @@ function inferLocation(parts) {
   return { locationStatus: "unknown", locationEvidence: "" };
 }
 
-function copyAvatars() {
-  mkdirSync(publicAvatarsDir, { recursive: true });
-  if (!existsSync(sourceAvatarsDir)) return new Map();
+function comparableUrl(value) {
+  const normalized = normalizeUrl(value);
+  if (!normalized) return "";
 
-  const avatars = new Map();
-  for (const file of readdirSync(sourceAvatarsDir)) {
-    if (![".jpg", ".jpeg", ".png", ".webp"].includes(extname(file).toLowerCase())) continue;
-    copyFileSync(join(sourceAvatarsDir, file), join(publicAvatarsDir, file));
-    avatars.set(basename(file, extname(file)).toLowerCase(), file);
+  try {
+    const url = new URL(normalized);
+    url.hash = "";
+    url.search = "";
+    url.pathname = url.pathname.replace(/\/+$/, "");
+    return `${url.origin}${url.pathname}`.toLowerCase();
+  } catch {
+    return normalized.replace(/\/+$/, "").toLowerCase();
   }
-  return avatars;
 }
 
-function buildInstagramMap(rows) {
-  const map = new Map();
-  for (const row of rows) {
-    const username = (row.username || "").trim().toLowerCase();
-    if (!username) continue;
-    map.set(username, {
-      instagramTitle: stripInstagramTitle(row.title),
-      instagramBio: (row.bio || "").trim(),
-      instagramStatus: (row.status || "").trim(),
-    });
+function normalizeSourceName(value) {
+  return (value || "")
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .toLocaleLowerCase("uk-UA")
+    .replace(/[^a-zа-яіїєґ0-9]+/giu, " ")
+    .trim();
+}
+
+function sourceMatchesCatalog(row, { instagram, social, website }) {
+  const sourceType = (row.source_type || "").trim().toLowerCase();
+  if (sourceType === "instagram") {
+    return Boolean(instagram && instagramUsername(row.identifier) === instagram);
   }
-  return map;
+  if (sourceType === "telegram") {
+    const catalogUsername = telegramUsername(social);
+    return Boolean(catalogUsername && telegramUsername(row.identifier) === catalogUsername);
+  }
+
+  const identifier = comparableUrl(row.identifier);
+  return Boolean(
+    identifier && [comparableUrl(social), comparableUrl(website)].filter(Boolean).includes(identifier),
+  );
+}
+
+const sourcePriority = ["instagram", "booksy", "website", "facebook", "telegram"];
+const automaticDiscoveryPattern =
+  /\s*\[?Знайдено автоматично через веб-пошук(?:\s*\([^)]+\))?\s*[—-]\s*рекомендується перевірити відповідність\.?\]?/iu;
+
+function getSourcePriority(row) {
+  const priority = sourcePriority.indexOf((row.source_type || "").trim().toLowerCase());
+  return priority === -1 ? sourcePriority.length : priority;
+}
+
+function selectSource(rows, contacts) {
+  const matching = rows.filter((row) => sourceMatchesCatalog(row, contacts));
+  const catalogNames = new Set(
+    contacts.names
+      .map(normalizeSourceName)
+      .filter((name) => name.length >= 8 && name.split(" ").length >= 2),
+  );
+  const nameMatches = rows.filter((row) => catalogNames.has(normalizeSourceName(row.name)));
+  const candidates = matching.length ? matching : nameMatches.length === 1 ? nameMatches : [];
+
+  return [...candidates].sort((a, b) => {
+    const aOk = a.status === "ok" || a.status === "no_public_data" ? 0 : 1;
+    const bOk = b.status === "ok" || b.status === "no_public_data" ? 0 : 1;
+    return (
+      aOk - bOk ||
+      getSourcePriority(a) - getSourcePriority(b)
+    );
+  })[0];
+}
+
+function cleanSourceInfo(row) {
+  if (!row || row.status !== "ok") return "";
+  const info = (row.info || "").trim();
+  return info
+    .replace(
+      /^(?:Подписчики|Підписники|Followers|Obserwujący)\s*:[^|]*\|\s*(?:Подписки|Підписки|Following|Obserwowani)\s*:[^|]*\|\s*/iu,
+      "",
+    )
+    .replace(/\s*\(\s*[\d.,\s]+\s+(?:followers|subscribers|підписників|подписчиков|obserwujących)\s*\)/giu, "")
+    .replace(/\s*\[(?:ПОДОЗРИТЕЛЬНО|SUSPICIOUS)[^\]]*\]/giu, "")
+    .replace(automaticDiscoveryPattern, "")
+    .trim();
+}
+
+function getSourceReviewWarning(row) {
+  const match = (row?.info || "").match(/\[(?:ПОДОЗРИТЕЛЬНО|SUSPICIOUS)\s*:?\s*([^\]]*)\]/iu);
+  return match?.[1]?.trim() || "";
+}
+
+function copySourcePhoto(row) {
+  const photoFile = (row?.photo_file || "").trim();
+  if (!photoFile) return "";
+
+  const sourcePath = resolve(sourceRoot, photoFile);
+  const relativePath = relative(sourceRoot, sourcePath);
+  const extension = extname(sourcePath).toLowerCase();
+  if (relativePath.startsWith("..") || ![".jpg", ".jpeg", ".png", ".webp"].includes(extension)) {
+    return "";
+  }
+  if (!existsSync(sourcePath)) return "";
+
+  mkdirSync(publicAvatarsDir, { recursive: true });
+  const file = basename(sourcePath);
+  copyFileSync(sourcePath, join(publicAvatarsDir, file));
+  return `/avatars/${file}`;
 }
 
 function renderDataFile(items) {
@@ -196,6 +280,11 @@ function renderDataFile(items) {
   instagramTitle: string;
   instagramBio: string;
   instagramStatus: string;
+  sourceType: string;
+  sourceUrl: string;
+  sourceInfo: string;
+  sourceStatus: string;
+  foundAutomatically: boolean;
   needsReview: boolean;
   reviewReason: string;
   locationStatus: "confirmed" | "unknown" | "unconfirmed";
@@ -214,29 +303,45 @@ function pick(row, keys) {
   return "";
 }
 
-function combineText(row, keyGroups) {
-  const values = keyGroups.map((keys) => pick(row, keys)).filter(Boolean);
-  return [...new Set(values)].join("\n\n");
+function stripAutomaticDiscoveryNotice(value) {
+  return value
+    .replace(automaticDiscoveryPattern, "")
+    .replace(/\s*\|\s*$/u, "")
+    .trim();
 }
 
 const catalogRows = readCsv(catalogPath);
-const instagramRows = readCsv(instagramPath, false);
-const avatars = copyAvatars();
-const instagram = buildInstagramMap(instagramRows);
+const sourceRows = readCsv(sourcesPath, false);
 
 const specialists = catalogRows.map((row, index) => {
   const social = pick(row, ["Соцмережі", "Соц сети"]);
   const username = instagramUsername(social);
-  const extra = instagram.get(username) || {};
-  const avatarFile = avatars.get(username);
   const id = Number.parseInt(pick(row, ["№", "id"]), 10);
+  const website = normalizeUrl(pick(row, ["Сайт"]));
   const name = pick(row, ["Ім'я", "Ім’я", "Имя"]);
   const title = pick(row, ["Назва", "Название", "Ім'я", "Ім’я", "Имя"]);
+  const source = selectSource(sourceRows, { instagram: username, social, website, names: [title, name] });
+  const instagramSource = sourceRows.find(
+    (candidate) =>
+      candidate.source_type === "instagram" &&
+      sourceMatchesCatalog(candidate, { instagram: username, social, website }),
+  );
+  const sourceInfo = cleanSourceInfo(source);
+  const instagramBio = cleanSourceInfo(instagramSource);
   const category = pick(row, ["Категорія", "Категория"]);
   const subcategory = pick(row, ["Підкатегорія", "Подкатегория"]);
-  const review = pick(row, ["Відгук", "Отзыв"]);
-  const comment = pick(row, ["Коментар", "Кометар", "Комментарий"]);
-  const location = inferLocation([extra.instagramTitle, extra.instagramBio]);
+  const rawReview = pick(row, ["Відгук", "Отзыв"]);
+  const rawComment = pick(row, ["Коментар", "Кометар", "Комментарий"]);
+  const foundAutomatically =
+    /^(?:true|так|yes|1)$/i.test(pick(row, ["Знайдено автоматично", "Found automatically"])) ||
+    /^(?:true|так|yes|1)$/i.test(source?.found_automatically || "") ||
+    automaticDiscoveryPattern.test(source?.info || "") ||
+    automaticDiscoveryPattern.test(`${rawReview} ${rawComment}`);
+  const review = stripAutomaticDiscoveryNotice(rawReview);
+  const comment = stripAutomaticDiscoveryNotice(rawComment);
+  const sourceReviewWarning = getSourceReviewWarning(source);
+  const catalogReviewReason = pick(row, ["Причина проблеми", "Причина проблемы", "Problem reason"]);
+  const location = inferLocation([source?.name, sourceInfo]);
 
   return {
     id: Number.isFinite(id) ? id : index + 1,
@@ -245,36 +350,38 @@ const specialists = catalogRows.map((row, index) => {
     category: category || "Інше",
     subcategory: subcategory || "Не вказано",
     phone: pick(row, ["Телефон"]),
-    website: normalizeUrl(pick(row, ["Сайт"])),
+    website,
     social,
     instagram: username,
-    description: combineText(row, [
-      ["Відгук", "Отзыв"],
-      ["Коментар", "Кометар", "Комментарий"],
-    ]),
+    description: [...new Set([review, comment].filter(Boolean))].join("\n\n"),
     review,
     comment,
     communityMatch: Boolean(pick(row, ["Національність (для сумнівних випадків)", "Национальность (для сомнительных случаев)"])),
-    avatar: avatarFile ? `/avatars/${avatarFile}` : "",
-    instagramTitle: extra.instagramTitle || "",
-    instagramBio: extra.instagramBio || "",
-    instagramStatus: extra.instagramStatus || "",
-    needsReview: /^так|yes|true|1$/i.test(pick(row, ["Проблемна", "Проблемная", "Problem"])),
-    reviewReason: pick(row, ["Причина проблеми", "Причина проблемы", "Problem reason"]),
+    avatar: copySourcePhoto(source),
+    instagramTitle: instagramSource?.name || "",
+    instagramBio,
+    instagramStatus: instagramSource?.status || "",
+    sourceType: source?.source_type || "",
+    sourceUrl: normalizeUrl(source?.identifier || ""),
+    sourceInfo,
+    sourceStatus: source?.status || "",
+    foundAutomatically,
+    needsReview:
+      /^так|yes|true|1$/i.test(pick(row, ["Проблемна", "Проблемная", "Problem"])) ||
+      Boolean(sourceReviewWarning),
+    reviewReason: catalogReviewReason || sourceReviewWarning,
     ...location,
   };
 });
 
 writeFileSync(outputPath, renderDataFile(specialists), "utf8");
 
-const enrichedCount = specialists.filter(
-  (item) => item.instagramBio || item.instagramTitle,
-).length;
+const enrichedCount = specialists.filter((item) => item.sourceInfo).length;
 const avatarCount = specialists.filter((item) => item.avatar).length;
 const locationCounts = Object.groupBy(specialists, (item) => item.locationStatus);
 
 console.log(`Imported ${specialists.length} specialists.`);
-console.log(`Instagram-enriched profiles: ${enrichedCount}.`);
+console.log(`Source-enriched profiles: ${enrichedCount}.`);
 console.log(`Matched avatars: ${avatarCount}.`);
 console.log(
   `Locations: ${locationCounts.confirmed?.length || 0} confirmed, ${locationCounts.unknown?.length || 0} unknown, ${locationCounts.unconfirmed?.length || 0} unconfirmed.`,

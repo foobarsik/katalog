@@ -90,6 +90,7 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 ## Useful Commands
 
 - `npm run dev`: start local development
+- `npm run import-data`: rebuild `app/specialists-data.ts` from `../каталог_специалистов.csv` and `../all_sources_results_ua.csv`
 - `npm run build`: verify the vinext build output
 - `npm test`: build the starter and verify its rendered loading skeleton
 - `npm run db:generate`: generate Drizzle migrations after schema changes

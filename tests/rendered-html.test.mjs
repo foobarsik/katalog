@@ -60,6 +60,29 @@ test("keeps location classification in the importer, data, and UI", async () => 
   assert.doesNotMatch(client, /Локація не вказана/);
 });
 
+test("imports profile details from the combined sources file", async () => {
+  const [importer, data, client] = await Promise.all([
+    readFile(new URL("../scripts/import-data.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(importer, /all_sources_results_ua\.csv/);
+  assert.match(importer, /function selectSource\(rows, contacts\)/);
+  assert.match(importer, /function sourceMatchesCatalog\(row/);
+  assert.match(data, /sourceType: string/);
+  assert.match(data, /sourceInfo: string/);
+  assert.match(data, /foundAutomatically: boolean/);
+  assert.match(data, /"foundAutomatically": true/);
+  assert.match(data, /"sourceType": "(?:instagram|booksy|website|facebook|telegram)"/);
+  assert.doesNotMatch(data, /Подписчики\s*:/i);
+  assert.doesNotMatch(data, /Знайдено автоматично через веб-пошук/);
+  assert.match(client, /item\.sourceInfo/);
+  assert.doesNotMatch(client, /foundAutomatically/);
+  assert.match(client, /З профілю Booksy/);
+  assert.match(client, /Інформація із сайту/);
+});
+
 test("marks contacts that still need review", async () => {
   const [importer, data, client] = await Promise.all([
     readFile(new URL("../scripts/import-data.mjs", import.meta.url), "utf8"),
@@ -89,4 +112,16 @@ test("exposes quick filters from the search bar", async () => {
   assert.match(client, /Є телефон/);
   assert.match(client, /Є контакт/);
   assert.doesNotMatch(client, /Очікують перевірки/);
+});
+
+test("uses messenger-specific contact icons", async () => {
+  const client = await readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8");
+
+  assert.match(client, /function getSocialContacts\(item: Specialist\)/);
+  assert.match(client, /function ViberIcon\(\)/);
+  assert.match(client, /function WhatsAppIcon\(\)/);
+  assert.match(client, /type === "viber"/);
+  assert.match(client, /type === "whatsapp"/);
+  assert.match(client, /https:\/\/wa\.me/);
+  assert.match(client, /viber:\/\/chat\?number=/);
 });
