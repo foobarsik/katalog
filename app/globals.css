@@ -675,6 +675,37 @@ ul {
   line-height: 1.2;
 }
 
+.book-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: -2px 0 2px;
+}
+
+.book-facts div {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid color-mix(in srgb, var(--cat, var(--accent)) 24%, var(--line));
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--cat, var(--accent)) 6%, var(--surface));
+  padding: 4px 7px;
+}
+
+.book-facts dt {
+  color: var(--ink-faint);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.book-facts dd {
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
 .negative-review-status {
   display: inline-flex;
   align-items: center;

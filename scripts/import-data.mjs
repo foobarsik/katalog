@@ -7,6 +7,7 @@ const projectRoot = resolve(scriptDir, "..");
 const sourceRoot = resolve(projectRoot, "..");
 
 const catalogPath = resolve(process.env.CATALOG_CSV || join(sourceRoot, "каталог_специалистов.csv"));
+const booksPath = resolve(process.env.BOOKS_CSV || join(sourceRoot, "книги_olx.csv"));
 const sourcesPath = resolve(process.env.ALL_SOURCES_CSV || join(sourceRoot, "all_sources_results_ua.csv"));
 const publicAvatarsDir = resolve(projectRoot, "public", "avatars");
 const outputPath = resolve(projectRoot, "app", "specialists-data.ts");
@@ -100,6 +101,13 @@ function normalizePhone(value) {
 
   const digits = text.replace(/\D/g, "");
   return digits ? `${text.startsWith("+") ? "+" : ""}${digits}` : "";
+}
+
+function parseOptionalNumber(value) {
+  const normalized = (value || "").replace(",", ".").trim();
+  if (!normalized) return null;
+  const number = Number.parseFloat(normalized);
+  return Number.isFinite(number) ? number : null;
 }
 
 function normalizeComparableText(value) {
@@ -289,6 +297,11 @@ function renderDataFile(items) {
   category: string;
   subcategory: string;
   bookLanguage: string;
+  bookListingDate: string;
+  bookPrice: string;
+  bookPricePln: number | null;
+  bookQualityScore: number;
+  bookCondition: string;
   phone: string;
   email: string;
   website: string;
@@ -347,7 +360,7 @@ function isCatalogProblem(row) {
   );
 }
 
-const catalogRows = readCsv(catalogPath);
+const catalogRows = [...readCsv(catalogPath), ...readCsv(booksPath, false)];
 const sourceRows = readCsv(sourcesPath, false);
 
 const activeCatalogRows = catalogRows.filter((row) => !isDuplicateCatalogRow(row));
@@ -374,6 +387,11 @@ const specialists = activeCatalogRows.map((row, index) => {
   const category = pick(row, ["Категорія", "Категория"]);
   const subcategory = pick(row, ["Підкатегорія", "Подкатегория"]);
   const bookLanguage = pick(row, ["Мова книги", "Язык книги", "Book language"]);
+  const bookListingDate = pick(row, ["Дата оголошення", "Дата объявления", "Listing date"]);
+  const bookPrice = pick(row, ["Ціна", "Цена", "Price"]);
+  const bookPricePln = parseOptionalNumber(pick(row, ["Ціна PLN", "Цена PLN", "Price PLN"]));
+  const bookQualityScore = Number.parseInt(pick(row, ["Score книги", "Book score"]) || "0", 10);
+  const bookCondition = pick(row, ["Стан книги", "Состояние книги", "Book condition"]);
   const rawReview = pick(row, ["Відгук", "Отзыв"]);
   const rawComment = pick(row, ["Коментар", "Кометар", "Комментарий"]);
   const foundAutomatically =
@@ -418,6 +436,11 @@ const specialists = activeCatalogRows.map((row, index) => {
     category: category || "Інше",
     subcategory: subcategory || "Не вказано",
     bookLanguage,
+    bookListingDate,
+    bookPrice,
+    bookPricePln,
+    bookQualityScore: Number.isFinite(bookQualityScore) ? bookQualityScore : 0,
+    bookCondition,
     phone: normalizePhone(pick(row, ["Телефон"])),
     email,
     website,

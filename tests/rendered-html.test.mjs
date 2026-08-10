@@ -291,22 +291,40 @@ test("collapses only long details on catalog previews", async () => {
 });
 
 test("includes OLX Ukrainian book listings as a separate catalog section", async () => {
-  const [data, client, styles] = await Promise.all([
+  const [data, client, styles, importer, bookCsv, catalogCsv] = await Promise.all([
     readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+    readFile(new URL("../scripts/import-data.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../../книги_olx.csv", import.meta.url), "utf8"),
+    readFile(new URL("../../каталог_специалистов.csv", import.meta.url), "utf8"),
   ]);
 
+  assert.match(importer, /книги_olx\.csv/);
+  assert.match(bookCsv, /Score книги/);
+  assert.match(bookCsv, /Ціна PLN/);
+  assert.match(bookCsv, /Продам книгу «Мистецтво стратегії» українською/);
+  assert.match(bookCsv, /Психологія \/ саморозвиток/);
+  assert.doesNotMatch(catalogCsv, /,Книжки,/);
   assert.match(data, /"category": "Книжки"/);
-  assert.match(data, /"subcategory": "Українські книжки"/);
+  assert.match(data, /"subcategory": "Детективи \/ трилери"/);
   assert.match(data, /bookLanguage: string/);
+  assert.match(data, /bookListingDate: string/);
+  assert.match(data, /bookPricePln: number \| null/);
+  assert.match(data, /bookQualityScore: number/);
   assert.match(data, /"bookLanguage": "українська"/);
+  assert.match(data, /"bookListingDate": "2026-08-10"/);
+  assert.match(data, /"bookPricePln": 99/);
+  assert.match(data, /"bookQualityScore": 78/);
   assert.match(data, /"sourceType": "olx"/);
   assert.match(data, /"sourceUrl": "https:\/\/www\.olx\.pl\/d\/oferta\//);
   assert.match(client, /"Книжки"/);
   assert.match(client, /BookLanguageStatus/);
+  assert.match(client, /BookFacts/);
+  assert.match(client, /compareBookRank/);
   assert.match(client, /Оголошення OLX/);
   assert.match(client, /Відкрити оголошення OLX/);
   assert.match(styles, /\.book-language-status/);
+  assert.match(styles, /\.book-facts/);
   assert.match(styles, /--cat-books:/);
 });

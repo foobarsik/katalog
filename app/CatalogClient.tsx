@@ -105,6 +105,11 @@ function makeSearchText(item: Specialist) {
     item.category,
     item.subcategory,
     item.bookLanguage,
+    item.bookListingDate,
+    item.bookPrice,
+    item.bookPricePln,
+    item.bookQualityScore,
+    item.bookCondition,
     item.description,
     item.review,
     item.comment,
@@ -329,6 +334,23 @@ function hasConfirmedLocation(item: Specialist) {
   return item.locationStatus === "confirmed";
 }
 
+function isBookItem(item: Specialist) {
+  return normalizeCategory(item.category) === "Книжки";
+}
+
+function getBookDateRank(item: Specialist) {
+  return item.bookListingDate ? Date.parse(item.bookListingDate) || 0 : 0;
+}
+
+function compareBookRank(a: Specialist, b: Specialist) {
+  if (!isBookItem(a) || !isBookItem(b)) return 0;
+  return (
+    b.bookQualityScore - a.bookQualityScore ||
+    getBookDateRank(b) - getBookDateRank(a) ||
+    (b.bookPricePln || 0) - (a.bookPricePln || 0)
+  );
+}
+
 function getResultNoun(count: number, currentCategory: string) {
   if (normalizeCategory(currentCategory) === "Книжки") {
     return count === 1 ? "оголошення" : "оголошень";
@@ -551,9 +573,34 @@ function ReviewStatus({ item, verbose = false }: { item: Specialist; verbose?: b
 }
 
 function BookLanguageStatus({ item }: { item: Specialist }) {
-  if (normalizeCategory(item.category) !== "Книжки" || !item.bookLanguage) return null;
+  if (!isBookItem(item) || !item.bookLanguage) return null;
 
   return <span className="book-language-status">{item.bookLanguage}</span>;
+}
+
+function BookFacts({ item }: { item: Specialist }) {
+  if (!isBookItem(item)) return null;
+
+  const facts = [
+    item.bookLanguage ? ["Мова", item.bookLanguage] : null,
+    item.bookListingDate ? ["Дата", item.bookListingDate] : null,
+    item.bookPrice ? ["Ціна", item.bookPrice] : null,
+    item.bookCondition ? ["Стан", item.bookCondition] : null,
+    item.bookQualityScore ? ["Score", `${item.bookQualityScore}/100`] : null,
+  ].filter(Boolean) as [string, string][];
+
+  if (!facts.length) return null;
+
+  return (
+    <dl className="book-facts" aria-label="Параметри книги">
+      {facts.map(([label, value]) => (
+        <div key={label}>
+          <dt>{label}</dt>
+          <dd>{value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
 }
 
 function NegativeReviewStatus({ item }: { item: Specialist }) {
@@ -593,6 +640,8 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
           {secondaryName ? <p className="person">{secondaryName}</p> : null}
         </div>
       </div>
+
+      <BookFacts item={item} />
 
       {bio ? <p className="card-bio">{bio}</p> : null}
 
@@ -728,6 +777,8 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
           <ContactRow item={item} verbose />
         </div>
 
+        <BookFacts item={item} />
+
         {bioTitle || bio ? (
           <div className="panel-body">
             <section>
@@ -847,6 +898,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
         (a, b) =>
           Number(a.needsReview) - Number(b.needsReview) ||
           Number(hasUnconfirmedLocation(a)) - Number(hasUnconfirmedLocation(b)) ||
+          compareBookRank(a, b) ||
           Number(Boolean(b.review)) - Number(Boolean(a.review)) ||
           Number(hasSocialContact(b)) - Number(hasSocialContact(a)) ||
           Number(hasAvatarImage(b)) - Number(hasAvatarImage(a)) ||
