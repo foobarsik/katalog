@@ -25,7 +25,7 @@ type ContactAction = {
 const ALL = "Усі";
 const PAGE_SIZE = 36;
 
-const priorityCategories = [ALL, "Здоров'я", "Краса", "Послуги", "Юридичні послуги", "Заклади"];
+const priorityCategories = [ALL, "Здоров'я", "Краса", "Послуги", "Юридичні послуги", "Заклади", "Книжки"];
 
 const categoryColors: Record<string, string> = {
   "Здоров'я": "var(--cat-health)",
@@ -33,6 +33,7 @@ const categoryColors: Record<string, string> = {
   Послуги: "var(--cat-services)",
   "Юридичні послуги": "var(--cat-legal)",
   Заклади: "var(--cat-venues)",
+  Книжки: "var(--cat-books)",
   Освіта: "var(--cat-education)",
   Транспорт: "var(--cat-transport)",
   Фінанси: "var(--cat-finance)",
@@ -132,6 +133,7 @@ function getSourceHeading(sourceType: string) {
   if (sourceType === "booksy") return "З профілю Booksy";
   if (sourceType === "facebook") return "З профілю Facebook";
   if (sourceType === "telegram") return "З профілю Telegram";
+  if (sourceType === "olx") return "Оголошення OLX";
   if (sourceType === "website") return "Інформація із сайту";
   return "Інформація з відкритого джерела";
 }
@@ -273,7 +275,14 @@ function getContactActions(item: Specialist) {
         ]
       : []),
     ...(item.website
-      ? [{ href: item.website, label: "Сайт", ariaLabel: "Відкрити сайт", icon: <WebsiteIcon /> }]
+      ? [
+          {
+            href: item.website,
+            label: item.sourceType === "olx" ? "OLX" : "Сайт",
+            ariaLabel: item.sourceType === "olx" ? "Відкрити оголошення OLX" : "Відкрити сайт",
+            icon: <WebsiteIcon />,
+          },
+        ]
       : []),
     ...socialContacts.map((social) => ({
       href: social.href,
@@ -317,6 +326,13 @@ function hasUnconfirmedLocation(item: Specialist) {
 
 function hasConfirmedLocation(item: Specialist) {
   return item.locationStatus === "confirmed";
+}
+
+function getResultNoun(count: number, currentCategory: string) {
+  if (normalizeCategory(currentCategory) === "Книжки") {
+    return count === 1 ? "оголошення" : "оголошень";
+  }
+  return count === 1 ? "позиція" : "позицій";
 }
 
 function hasAvatarImage(item: Specialist) {
@@ -891,18 +907,18 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       <header className="masthead">
         <p className="wordmark">Каталог · Катовіце та поруч</p>
         <h1>Свої люди рекомендують</h1>
-        <p className="lede">{specialists.length} контактів, зібраних українською спільнотою.</p>
+        <p className="lede">{specialists.length} контактів і знахідок, зібраних українською спільнотою.</p>
       </header>
 
-      <section className="finder" aria-label="Пошук спеціаліста">
+      <section className="finder" aria-label="Пошук у каталозі">
         <div className="search">
           <SearchIcon />
           <input
-            aria-label="Пошук спеціаліста"
+            aria-label="Пошук у каталозі"
             autoComplete="off"
             enterKeyHint="search"
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Кого шукаєте? Стоматолог, юрист, манікюр…"
+            placeholder="Кого шукаєте? Стоматолог, юрист, книжки…"
             ref={searchRef}
             type="search"
             value={query}
@@ -1031,7 +1047,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
 
       <div className="results-bar" aria-live="polite">
         <p>
-          <strong>{filtered.length}</strong> {filtered.length === 1 ? "спеціаліст" : "спеціалістів"}
+          <strong>{filtered.length}</strong> {getResultNoun(filtered.length, category)}
         </p>
         {profession ? (
           <button className="applied" type="button" onClick={() => setProfession("")}>

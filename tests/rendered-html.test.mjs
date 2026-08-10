@@ -289,3 +289,20 @@ test("collapses only long details on catalog previews", async () => {
   assert.match(styles, /\.review-note p[\s\S]*white-space: pre-line/);
   assert.doesNotMatch(client, /className="panel-body"[\s\S]{0,500}details-text collapsed/);
 });
+
+test("includes OLX Ukrainian book listings as a separate catalog section", async () => {
+  const [data, client, styles] = await Promise.all([
+    readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(data, /"category": "Книжки"/);
+  assert.match(data, /"subcategory": "Українські книжки"/);
+  assert.match(data, /"sourceType": "olx"/);
+  assert.match(data, /"sourceUrl": "https:\/\/www\.olx\.pl\/d\/oferta\//);
+  assert.match(client, /"Книжки"/);
+  assert.match(client, /Оголошення OLX/);
+  assert.match(client, /Відкрити оголошення OLX/);
+  assert.match(styles, /--cat-books:/);
+});
