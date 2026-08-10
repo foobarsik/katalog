@@ -338,6 +338,10 @@ function isBookItem(item: Specialist) {
   return normalizeCategory(item.category) === "Книжки";
 }
 
+function needsVisibleReview(item: Specialist) {
+  return item.needsReview && (!isBookItem(item) || item.bookQualityScore <= 80);
+}
+
 function getBookDateRank(item: Specialist) {
   return item.bookListingDate ? Date.parse(item.bookListingDate) || 0 : 0;
 }
@@ -563,7 +567,7 @@ function LocationStatus({ item }: { item: Specialist }) {
 }
 
 function ReviewStatus({ item, verbose = false }: { item: Specialist; verbose?: boolean }) {
-  if (!item.needsReview) return null;
+  if (!needsVisibleReview(item)) return null;
 
   return (
     <span className="review-status" title={verbose ? item.reviewReason || undefined : undefined}>
@@ -621,7 +625,7 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
     "card",
     item.review ? "has-review" : "",
     unavailable ? "dimmed" : "",
-    item.needsReview ? "needs-review" : "",
+    needsVisibleReview(item) ? "needs-review" : "",
   ]
     .filter(Boolean)
     .join(" ");
@@ -745,7 +749,7 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
       <div
         aria-labelledby="detail-title"
         aria-modal="true"
-        className={`panel${item.needsReview ? " needs-review" : ""}`}
+        className={`panel${needsVisibleReview(item) ? " needs-review" : ""}`}
         ref={panelRef}
         role="dialog"
         style={{ "--cat": getCategoryColor(item.category) } as React.CSSProperties}
@@ -903,7 +907,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true))
       .sort(
         (a, b) =>
-          Number(a.needsReview) - Number(b.needsReview) ||
+          Number(needsVisibleReview(a)) - Number(needsVisibleReview(b)) ||
           Number(hasUnconfirmedLocation(a)) - Number(hasUnconfirmedLocation(b)) ||
           compareBookRank(a, b) ||
           Number(Boolean(b.review)) - Number(Boolean(a.review)) ||

@@ -137,7 +137,7 @@ test("marks contacts that still need review", async () => {
   assert.doesNotMatch(data, /Та сама сторінка Facebook, що й у id 30 та id 91/);
   assert.match(client, /Очікує перевірки/);
   assert.match(client, /needs-review/);
-  assert.match(client, /Number\(a\.needsReview\) - Number\(b\.needsReview\)/);
+  assert.match(client, /Number\(needsVisibleReview\(a\)\) - Number\(needsVisibleReview\(b\)\)/);
   assert.match(client, /Number\(hasUnconfirmedLocation\(a\)\) - Number\(hasUnconfirmedLocation\(b\)\)/);
   assert.match(client, /Number\(Boolean\(b\.review\)\) - Number\(Boolean\(a\.review\)\)/);
   assert.match(client, /Number\(hasSocialContact\(b\)\) - Number\(hasSocialContact\(a\)\)/);
@@ -322,6 +322,8 @@ test("includes OLX Ukrainian book listings as a separate catalog section", async
   assert.match(client, /BookLanguageStatus/);
   assert.match(client, /BookFacts/);
   assert.match(client, /compareBookRank/);
+  assert.match(client, /function needsVisibleReview\(item: Specialist\)/);
+  assert.match(client, /item\.bookQualityScore <= 80/);
   assert.match(client, /minimumBookScore/);
   assert.match(client, /Score книги/);
   assert.match(client, /item\.bookQualityScore >= minimumBookScore/);
