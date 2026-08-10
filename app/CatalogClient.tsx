@@ -339,7 +339,7 @@ function isBookItem(item: Specialist) {
 }
 
 function needsVisibleReview(item: Specialist) {
-  return item.needsReview && (!isBookItem(item) || item.bookQualityScore <= 80);
+  return item.needsReview && (!isBookItem(item) || item.bookQualityScore < 80);
 }
 
 function getBookDateRank(item: Specialist) {
@@ -907,9 +907,9 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true))
       .sort(
         (a, b) =>
+          compareBookRank(a, b) ||
           Number(needsVisibleReview(a)) - Number(needsVisibleReview(b)) ||
           Number(hasUnconfirmedLocation(a)) - Number(hasUnconfirmedLocation(b)) ||
-          compareBookRank(a, b) ||
           Number(Boolean(b.review)) - Number(Boolean(a.review)) ||
           Number(hasSocialContact(b)) - Number(hasSocialContact(a)) ||
           Number(hasAvatarImage(b)) - Number(hasAvatarImage(a)) ||

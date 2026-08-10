@@ -303,7 +303,8 @@ test("includes OLX Ukrainian book listings as a separate catalog section", async
   assert.match(importer, /книги_olx\.csv/);
   assert.match(bookCsv, /Score книги/);
   assert.match(bookCsv, /Ціна PLN/);
-  assert.match(bookCsv, /Продам книгу «Мистецтво стратегії» українською/);
+  assert.match(bookCsv, /Мистецтво стратегії\. Путівник до успіху в житті та бізнесі/);
+  assert.match(bookCsv, /Жінки, що біжать з вовками — Клариса Пінкола Естес/);
   assert.match(bookCsv, /Психологія \/ саморозвиток/);
   assert.doesNotMatch(catalogCsv, /,Книжки,/);
   assert.match(data, /"category": "Книжки"/);
@@ -316,6 +317,7 @@ test("includes OLX Ukrainian book listings as a separate catalog section", async
   assert.match(data, /"bookListingDate": "2026-08-10"/);
   assert.match(data, /"bookPricePln": 99/);
   assert.match(data, /"bookQualityScore": 78/);
+  assert.match(data, /"id": 388,[\s\S]*?"category": "Книжки"[\s\S]*?"bookQualityScore": 84/);
   assert.match(data, /"sourceType": "olx"/);
   assert.match(data, /"sourceUrl": "https:\/\/www\.olx\.pl\/d\/oferta\//);
   assert.match(client, /"Книжки"/);
@@ -323,7 +325,7 @@ test("includes OLX Ukrainian book listings as a separate catalog section", async
   assert.match(client, /BookFacts/);
   assert.match(client, /compareBookRank/);
   assert.match(client, /function needsVisibleReview\(item: Specialist\)/);
-  assert.match(client, /item\.bookQualityScore <= 80/);
+  assert.match(client, /item\.bookQualityScore < 80/);
   assert.match(client, /minimumBookScore/);
   assert.match(client, /Score книги/);
   assert.match(client, /item\.bookQualityScore >= minimumBookScore/);
