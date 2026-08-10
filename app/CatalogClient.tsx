@@ -828,6 +828,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const [onlyWebsite, setOnlyWebsite] = useState(false);
   const [onlyPhone, setOnlyPhone] = useState(false);
   const [onlyContacted, setOnlyContacted] = useState(false);
+  const [minimumBookScore, setMinimumBookScore] = useState<number | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [visible, setVisible] = useState(PAGE_SIZE);
   const searchRef = useRef<HTMLInputElement | null>(null);
@@ -873,6 +874,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   function chooseCategory(name: string) {
     setCategory(name);
     setProfession("");
+    if (normalizeCategory(name) !== "Книжки") setMinimumBookScore(null);
   }
 
   const filtered = useMemo(() => {
@@ -893,6 +895,11 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
             (onlyContacted && hasAnyContact(item))
           : true,
       )
+      .filter((item) =>
+        minimumBookScore === null || normalizeCategory(category) !== "Книжки"
+          ? true
+          : item.bookQualityScore >= minimumBookScore,
+      )
       .filter((item) => (needle ? makeSearchText(item).includes(needle) : true))
       .sort(
         (a, b) =>
@@ -911,9 +918,20 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
           b.confidenceScore - a.confidenceScore ||
           getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
       );
-  }, [category, onlyContacted, onlyPhone, onlyReviewed, onlySocial, onlyWebsite, profession, query, specialists]);
+  }, [
+    category,
+    minimumBookScore,
+    onlyContacted,
+    onlyPhone,
+    onlyReviewed,
+    onlySocial,
+    onlyWebsite,
+    profession,
+    query,
+    specialists,
+  ]);
 
-  const filterKey = `${category}|${profession}|${query}|${onlyReviewed}|${onlySocial}|${onlyWebsite}|${onlyPhone}|${onlyContacted}`;
+  const filterKey = `${category}|${profession}|${query}|${onlyReviewed}|${onlySocial}|${onlyWebsite}|${onlyPhone}|${onlyContacted}|${minimumBookScore}`;
   const [lastFilterKey, setLastFilterKey] = useState(filterKey);
   if (lastFilterKey !== filterKey) {
     setLastFilterKey(filterKey);
@@ -946,7 +964,8 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     Number(onlySocial) +
     Number(onlyWebsite) +
     Number(onlyPhone) +
-    Number(onlyContacted);
+    Number(onlyContacted) +
+    Number(normalizeCategory(category) === "Книжки" && minimumBookScore !== null);
   const hasFilters = Boolean(query || activeFilterCount);
 
   const reset = useCallback(() => {
@@ -958,6 +977,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     setOnlyWebsite(false);
     setOnlyPhone(false);
     setOnlyContacted(false);
+    setMinimumBookScore(null);
     searchRef.current?.focus();
   }, []);
 
@@ -1056,6 +1076,25 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
                 </button>
               </div>
             </div>
+
+            {normalizeCategory(category) === "Книжки" ? (
+              <div className="filter-group">
+                <p>Score книги</p>
+                <div className="filter-options">
+                  {[null, 60, 80].map((score) => (
+                    <button
+                      aria-pressed={minimumBookScore === score}
+                      className={minimumBookScore === score ? "filter-chip on" : "filter-chip"}
+                      key={score ?? "all"}
+                      type="button"
+                      onClick={() => setMinimumBookScore(score)}
+                    >
+                      {score === null ? "Усі" : `${score}+`}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
         ) : null}
       </section>

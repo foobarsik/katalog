@@ -322,6 +322,9 @@ test("includes OLX Ukrainian book listings as a separate catalog section", async
   assert.match(client, /BookLanguageStatus/);
   assert.match(client, /BookFacts/);
   assert.match(client, /compareBookRank/);
+  assert.match(client, /minimumBookScore/);
+  assert.match(client, /Score книги/);
+  assert.match(client, /item\.bookQualityScore >= minimumBookScore/);
   assert.match(client, /Оголошення OLX/);
   assert.match(client, /Відкрити оголошення OLX/);
   assert.match(styles, /\.book-language-status/);
