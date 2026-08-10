@@ -890,7 +890,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     <main className="shell">
       <header className="masthead">
         <p className="wordmark">Каталог · Катовіце та поруч</p>
-        <h1>Свої люди поруч</h1>
+        <h1>Свої люди рекомендують</h1>
         <p className="lede">{specialists.length} контактів, зібраних українською спільнотою.</p>
       </header>
 
