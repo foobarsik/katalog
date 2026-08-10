@@ -299,10 +299,14 @@ test("includes OLX Ukrainian book listings as a separate catalog section", async
 
   assert.match(data, /"category": "Книжки"/);
   assert.match(data, /"subcategory": "Українські книжки"/);
+  assert.match(data, /bookLanguage: string/);
+  assert.match(data, /"bookLanguage": "українська"/);
   assert.match(data, /"sourceType": "olx"/);
   assert.match(data, /"sourceUrl": "https:\/\/www\.olx\.pl\/d\/oferta\//);
   assert.match(client, /"Книжки"/);
+  assert.match(client, /BookLanguageStatus/);
   assert.match(client, /Оголошення OLX/);
   assert.match(client, /Відкрити оголошення OLX/);
+  assert.match(styles, /\.book-language-status/);
   assert.match(styles, /--cat-books:/);
 });

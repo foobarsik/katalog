@@ -288,6 +288,7 @@ function renderDataFile(items) {
   title: string;
   category: string;
   subcategory: string;
+  bookLanguage: string;
   phone: string;
   email: string;
   website: string;
@@ -372,6 +373,7 @@ const specialists = activeCatalogRows.map((row, index) => {
   const instagramBio = cleanSourceInfo(instagramSource);
   const category = pick(row, ["Категорія", "Категория"]);
   const subcategory = pick(row, ["Підкатегорія", "Подкатегория"]);
+  const bookLanguage = pick(row, ["Мова книги", "Язык книги", "Book language"]);
   const rawReview = pick(row, ["Відгук", "Отзыв"]);
   const rawComment = pick(row, ["Коментар", "Кометар", "Комментарий"]);
   const foundAutomatically =
@@ -415,6 +417,7 @@ const specialists = activeCatalogRows.map((row, index) => {
     title: title || "Без назви",
     category: category || "Інше",
     subcategory: subcategory || "Не вказано",
+    bookLanguage,
     phone: normalizePhone(pick(row, ["Телефон"])),
     email,
     website,

@@ -104,6 +104,7 @@ function makeSearchText(item: Specialist) {
     item.name,
     item.category,
     item.subcategory,
+    item.bookLanguage,
     item.description,
     item.review,
     item.comment,
@@ -549,6 +550,12 @@ function ReviewStatus({ item, verbose = false }: { item: Specialist; verbose?: b
   );
 }
 
+function BookLanguageStatus({ item }: { item: Specialist }) {
+  if (normalizeCategory(item.category) !== "Книжки" || !item.bookLanguage) return null;
+
+  return <span className="book-language-status">{item.bookLanguage}</span>;
+}
+
 function NegativeReviewStatus({ item }: { item: Specialist }) {
   if (!item.hasNegativeReview) return null;
 
@@ -621,6 +628,7 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
         <ContactRow item={item} verbose={false} />
         <NegativeReviewStatus item={item} />
         <ReviewStatus item={item} />
+        <BookLanguageStatus item={item} />
         <LocationStatus item={item} />
       </div>
     </article>
@@ -711,6 +719,7 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
             </p>
             <NegativeReviewStatus item={item} />
             <ReviewStatus item={item} verbose />
+            <BookLanguageStatus item={item} />
             <LocationStatus item={item} />
           </div>
         </div>

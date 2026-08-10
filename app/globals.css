@@ -660,6 +660,21 @@ ul {
   line-height: 1.2;
 }
 
+.book-language-status {
+  display: inline-flex;
+  min-height: 24px;
+  flex: none;
+  align-items: center;
+  border: 1px solid color-mix(in srgb, var(--cat, var(--accent)) 38%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--cat, var(--accent)) 10%, var(--surface));
+  color: var(--cat, var(--accent-deep));
+  padding: 3px 9px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
 .negative-review-status {
   display: inline-flex;
   align-items: center;
@@ -677,7 +692,12 @@ ul {
   margin-top: 10px;
 }
 
-.panel-titles .review-status + .location-status {
+.panel-titles .book-language-status {
+  margin-top: 10px;
+}
+
+.panel-titles .review-status + .location-status,
+.panel-titles .book-language-status + .location-status {
   margin-left: 8px;
 }
 
@@ -891,7 +911,15 @@ ul {
   white-space: nowrap;
 }
 
-.card-actions .review-status + .location-status {
+.card-actions .book-language-status {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-actions .review-status + .location-status,
+.card-actions .book-language-status + .location-status {
   margin-left: 2px;
 }
 
