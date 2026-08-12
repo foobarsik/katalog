@@ -40,3 +40,6 @@ yarn-error.log*
 /outputs/
 /work/
 tsconfig.tsbuildinfo
+
+# Do not reconnect this repository to OpenAI Sites implicitly.
+/.openai/hosting.json
