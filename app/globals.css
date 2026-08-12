@@ -31,7 +31,8 @@
   --cat-food: #7c7a2e;
   --cat-other: #6b6250;
 
-  --radius: 14px;
+  --radius: 8px;
+  --radius-overlay: 12px;
   --ring: 0 0 0 3px rgba(26, 79, 160, 0.28);
 }
 
@@ -230,7 +231,7 @@ ul {
   flex: none;
   place-items: center;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius);
   background: var(--surface);
   color: var(--ink-soft);
   transition:
@@ -273,7 +274,7 @@ ul {
   gap: 16px;
   width: min(500px, 100%);
   border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
+  border-radius: var(--radius-overlay);
   background: var(--surface);
   box-shadow: 0 18px 48px rgba(20, 26, 36, 0.16);
   padding: 16px;
@@ -551,7 +552,7 @@ ul {
   gap: 13px;
   min-height: 206px;
   border: 1px solid #d5dae4;
-  border-radius: 6px;
+  border-radius: var(--radius);
   background: var(--surface);
   padding: 20px 22px 17px;
   cursor: pointer;
@@ -728,7 +729,7 @@ ul {
   align-items: center;
   gap: 5px;
   border: 1px solid color-mix(in srgb, var(--cat, var(--accent)) 24%, var(--line));
-  border-radius: 7px;
+  border-radius: var(--radius);
   background: color-mix(in srgb, var(--cat, var(--accent)) 6%, var(--surface));
   padding: 4px 7px;
 }
@@ -753,7 +754,7 @@ ul {
   min-height: 26px;
   padding: 4px 9px;
   border: 1px solid #dc9b9b;
-  border-radius: 6px;
+  border-radius: var(--radius);
   color: #9d2525;
   background: #fff1f1;
   font-size: 0.75rem;
@@ -818,7 +819,7 @@ ul {
   position: absolute;
   inset: 0;
   z-index: 1;
-  border-radius: 6px;
+  border-radius: var(--radius);
   cursor: pointer;
 }
 
@@ -1122,7 +1123,7 @@ ul {
   align-items: center;
   gap: 7px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius);
   background: var(--surface);
   color: var(--ink);
   padding: 9px 13px;
@@ -1258,7 +1259,7 @@ ul {
   max-height: calc(100dvh - 40px);
   overflow: auto;
   border-top: 4px solid var(--cat, var(--accent));
-  border-radius: var(--radius);
+  border-radius: var(--radius-overlay);
   background: var(--surface);
   box-shadow: 0 30px 70px rgba(15, 20, 30, 0.3);
   padding: 26px;
@@ -1286,7 +1287,7 @@ ul {
   height: 36px;
   place-items: center;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius);
   background: var(--surface);
   color: var(--ink-soft);
 }
