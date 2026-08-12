@@ -37,11 +37,12 @@ test("server-renders the Ukrainian catalog shell", async () => {
 });
 
 test("provides a dedicated Ukrainian privacy and RODO page", async () => {
-  const [client, policy, privacyPage, vercelEntry] = await Promise.all([
+  const [client, policy, privacyPage, vercelEntry, siteInfo] = await Promise.all([
     readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/PrivacyPolicy.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/privacy/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/vercel-entry.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/site-info.ts", import.meta.url), "utf8"),
   ]);
 
   assert.match(client, /href="\/privacy"/);
@@ -49,10 +50,17 @@ test("provides a dedicated Ukrainian privacy and RODO page", async () => {
   assert.match(policy, /стаття 6\(1\)\(f\) GDPR/);
   assert.match(policy, /Urząd Ochrony Danych Osobowych/);
   assert.match(policy, /не використовує рекламні або аналітичні cookies/);
-  assert.match(policy, /виправити або видалити картку/);
+  assert.match(policy, /оновити або видалити картку/);
   assert.match(privacyPage, /<PrivacyPolicy/);
   assert.match(vercelEntry, /window\.location\.pathname/);
   assert.match(vercelEntry, /<PrivacyPolicy/);
+  assert.match(client, /Оновити або видалити дані/);
+  assert.match(client, /не перевіряємо особу автора/);
+  assert.match(client, /дійсно скористалися послугою/);
+  assert.match(siteInfo, /Оберіть потрібну дію: ОНОВИТИ \/ ВИДАЛИТИ/);
+  assert.match(siteInfo, /Телефон:/);
+  assert.match(siteInfo, /Сайт або соцмережа:/);
+  assert.match(siteInfo, /Місто:/);
 });
 
 test("keeps location classification in the importer, data, and UI", async () => {

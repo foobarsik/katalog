@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { CONTACT_EMAIL } from "./site-info";
+import { CONTACT_EMAIL, getDataRequestHref } from "./site-info";
 import type { Specialist } from "./specialists-data";
 
 type CatalogClientProps = {
@@ -797,12 +797,7 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
 }
 
 function SiteFooter() {
-  const removalHref =
-    `mailto:${CONTACT_EMAIL}` +
-    `?subject=${encodeURIComponent("Видалення профілю з каталогу")}` +
-    `&body=${encodeURIComponent(
-      "Вкажіть, будь ласка, посилання або імʼя профілю, який треба видалити чи виправити.\n\n",
-    )}`;
+  const dataRequestHref = getDataRequestHref();
 
   return (
     <footer className="site-footer">
@@ -817,8 +812,9 @@ function SiteFooter() {
       <section>
         <h2>Про відгуки</h2>
         <p>
-          Відгуки — це особисті враження учасників спільноти, а не перевірені факти й не оцінка
-          кваліфікації спеціаліста. Вони описують досвід однієї людини на момент звернення.
+          Відгуки взяті з повідомлень учасників спільноти. Ми не перевіряємо особу автора та не
+          можемо підтвердити, що він або вона дійсно скористалися послугою. Відгук не є оцінкою
+          професійної кваліфікації спеціаліста.
         </p>
       </section>
 
@@ -826,10 +822,11 @@ function SiteFooter() {
         <h2>Ваші дані</h2>
         <p>
           Контакти зібрані з відкритих джерел і повідомлень спільноти. Якщо ви є в каталозі й хочете
-          виправити або видалити свої дані — напишіть нам, ми зробимо це без пояснень причин.
+          оновити контакти, виправити інформацію або видалити картку — надішліть заявку. Для
+          видалення пояснювати причину не потрібно.
         </p>
-        <a className="footer-action" href={removalHref}>
-          Видалити мій профіль
+        <a className="footer-action" href={dataRequestHref}>
+          Оновити або видалити дані
         </a>
       </section>
 

@@ -1,13 +1,8 @@
-import { CATALOG_NAME, CONTACT_EMAIL } from "./site-info";
-
-const removalHref =
-  `mailto:${CONTACT_EMAIL}` +
-  `?subject=${encodeURIComponent("Видалення або виправлення даних у каталозі")}` +
-  `&body=${encodeURIComponent(
-    "Вкажіть, будь ласка, посилання або імʼя профілю, який треба видалити чи виправити.\n\n",
-  )}`;
+import { CATALOG_NAME, CONTACT_EMAIL, getDataRequestHref } from "./site-info";
 
 export function PrivacyPolicy() {
+  const dataRequestHref = getDataRequestHref();
+
   return (
     <main className="legal-shell">
       <nav className="legal-nav" aria-label="Навігація">
@@ -152,10 +147,13 @@ export function PrivacyPolicy() {
         </section>
 
         <aside className="legal-request">
-          <h2>Потрібно виправити або видалити картку?</h2>
-          <p>Надішліть імʼя або посилання на профіль — пояснювати причину не потрібно.</p>
-          <a className="footer-action" href={removalHref}>
-            Написати адміністраторці
+          <h2>Потрібно оновити або видалити картку?</h2>
+          <p>
+            У заявці можна надіслати правильні контакти, місто, сайт або соцмережу. Для видалення
+            пояснювати причину не потрібно.
+          </p>
+          <a className="footer-action" href={dataRequestHref}>
+            Оновити або видалити дані
           </a>
         </aside>
       </article>
