@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { CONTACT_EMAIL, getDataRequestHref, SITE_OWNER } from "./site-info";
+import { getDataRequestHref } from "./site-info";
 import type { Specialist } from "./specialists-data";
 
 type CatalogClientProps = {
@@ -902,9 +902,6 @@ function SiteFooter() {
       </section>
 
       <p className="footer-owner">
-        {SITE_OWNER ? `${SITE_OWNER} · ` : null}
-        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-        <span aria-hidden="true"> · </span>
         <a href="/privacy">Політика конфіденційності та RODO</a>
       </p>
     </footer>

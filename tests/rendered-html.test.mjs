@@ -54,6 +54,7 @@ test("provides a dedicated Ukrainian privacy and RODO page", async () => {
 
   assert.match(client, /href="\/privacy"/);
   assert.match(client, /Політика конфіденційності та RODO/);
+  assert.doesNotMatch(client, /SITE_OWNER|CONTACT_EMAIL/);
   assert.match(policy, /стаття 6\(1\)\(f\) GDPR/);
   assert.match(policy, /Urząd Ochrony Danych Osobowych/);
   assert.match(policy, /не використовує рекламні або аналітичні cookies/);
