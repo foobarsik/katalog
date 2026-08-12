@@ -627,8 +627,8 @@ ul {
   min-width: 0;
   max-width: 20ch;
   color: var(--ink-faint);
-  font-size: 0.75rem;
-  font-weight: 550;
+  font-size: 0.72rem;
+  font-weight: 600;
   line-height: 1.35;
   text-align: right;
 }
@@ -847,11 +847,11 @@ ul {
 .card-quote::before {
   content: "“";
   position: absolute;
-  top: -7px;
+  top: -4px;
   left: 0;
   color: var(--cat);
   font-family: Georgia, serif;
-  font-size: 2rem;
+  font-size: 2.4rem;
   line-height: 1;
 }
 
@@ -860,11 +860,11 @@ ul {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
-  color: #3e424b;
+  color: #2f333b;
   padding-left: 3px;
-  font-size: 0.9rem;
+  font-size: 1.02rem;
   font-style: italic;
-  line-height: 1.52;
+  line-height: 1.55;
   white-space: pre-line;
 }
 
