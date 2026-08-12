@@ -332,6 +332,14 @@ function renderDataFile(items) {
   hasNegativeReview: boolean;
   needsReview: boolean;
   reviewReason: string;
+  registryVerified: boolean;
+  registryName: string;
+  registryOfficialName: string;
+  registryLedgerNumber: string;
+  registryPwz: string;
+  registryUrl: string;
+  registryCheckedAt: string;
+  registryScope: string;
   locationStatus: "confirmed" | "unknown" | "unconfirmed";
   locationEvidence: string;
 };
@@ -418,6 +426,9 @@ const specialists = activeCatalogRows.map((row, index) => {
     normalizeComparableText(importedComment) === normalizeComparableText(sourceInfo) ? "" : importedComment;
   const catalogReviewReason = pick(row, ["Причина проблеми", "Причина проблемы", "Problem reason"]);
   const catalogNeedsReview = isCatalogProblem(row);
+  const registryVerified = /^(?:так|yes|true|1)$/i.test(
+    pick(row, ["Перевірено в офіційному реєстрі", "Verified in official register"]),
+  );
   const catalogSourceNames = new Set(
     [title, name].map(normalizeSourceName).filter(Boolean),
   );
@@ -473,6 +484,24 @@ const specialists = activeCatalogRows.map((row, index) => {
     hasNegativeReview,
     needsReview: catalogNeedsReview,
     reviewReason: catalogNeedsReview ? catalogReviewReason : "",
+    registryVerified,
+    registryName: registryVerified ? pick(row, ["Офіційний реєстр", "Official register"]) : "",
+    registryOfficialName: registryVerified
+      ? pick(row, ["Офіційне ім'я в реєстрі", "Official registry name"])
+      : "",
+    registryLedgerNumber: registryVerified
+      ? pick(row, ["Номер реєстрової книги", "Registry ledger number"])
+      : "",
+    registryPwz: registryVerified ? pick(row, ["Номер PWZ", "PWZ number"]) : "",
+    registryUrl: registryVerified
+      ? normalizeUrl(pick(row, ["Посилання на запис у реєстрі", "Official registry URL"]))
+      : "",
+    registryCheckedAt: registryVerified
+      ? pick(row, ["Дата перевірки реєстру", "Registry checked at"])
+      : "",
+    registryScope: registryVerified
+      ? pick(row, ["Що підтверджено реєстром", "Registry verification scope"])
+      : "",
     ...location,
   };
 });

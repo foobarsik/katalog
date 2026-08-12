@@ -1,4 +1,4 @@
-import { CATALOG_NAME, CONTACT_EMAIL, getDataRequestHref } from "./site-info";
+import { CATALOG_NAME, CONTACT_EMAIL, getDataRequestHref, SITE_OWNER } from "./site-info";
 
 export function PrivacyPolicy() {
   const dataRequestHref = getDataRequestHref();
@@ -26,8 +26,8 @@ export function PrivacyPolicy() {
         <section>
           <h2>1. Хто відповідає за дані</h2>
           <p>
-            Адміністраторкою персональних даних є власниця каталогу «{CATALOG_NAME}». З усіх
-            питань щодо персональних даних можна звернутися за адресою{" "}
+            Адміністраторкою персональних даних і власницею каталогу «{CATALOG_NAME}» є {SITE_OWNER}.
+            З усіх питань щодо персональних даних можна звернутися за адресою{" "}
             <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
           </p>
         </section>

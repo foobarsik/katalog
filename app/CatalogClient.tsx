@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { CONTACT_EMAIL, getDataRequestHref } from "./site-info";
+import { CONTACT_EMAIL, getDataRequestHref, SITE_OWNER } from "./site-info";
 import type { Specialist } from "./specialists-data";
 
 type CatalogClientProps = {
@@ -25,9 +25,6 @@ type ContactAction = {
 
 const ALL = "Усі";
 const PAGE_SIZE = 36;
-
-/** Optional: name the person or organisation answering for the catalogue. Empty hides the line. */
-const SITE_OWNER = "";
 
 const priorityCategories = [ALL, "Здоров'я", "Краса", "Послуги", "Юридичні послуги", "Заклади", "Книжки"];
 
@@ -115,6 +112,10 @@ function makeSearchText(item: Specialist) {
     item.instagramBio,
     item.phone,
     item.email,
+    item.registryName,
+    item.registryOfficialName,
+    item.registryLedgerNumber,
+    item.registryPwz,
   ]
     .join(" ")
     .toLocaleLowerCase("uk-UA");
@@ -591,6 +592,34 @@ function NegativeReviewStatus({ item }: { item: Specialist }) {
   return <span className="negative-review-status">Є негативні відгуки</span>;
 }
 
+function RegistryStatus({ item, verbose = false }: { item: Specialist; verbose?: boolean }) {
+  if (!item.registryVerified || !item.registryUrl) return null;
+
+  const checkedAt = item.registryCheckedAt
+    ? new Intl.DateTimeFormat("uk-UA").format(new Date(`${item.registryCheckedAt}T00:00:00`))
+    : "";
+  const title = [item.registryScope, checkedAt ? `Перевірено ${checkedAt}` : ""].filter(Boolean).join(". ");
+
+  return (
+    <a
+      className={`registry-status${verbose ? " verbose" : ""}`}
+      href={item.registryUrl}
+      rel="noreferrer"
+      target="_blank"
+      title={title || undefined}
+    >
+      <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <path d="m8 12 2.6 2.6L16.5 9" />
+      </svg>
+      <span>
+        Перевірено в {item.registryName}
+        {item.registryOfficialName ? ` · ${item.registryOfficialName}` : ""}
+      </span>
+    </a>
+  );
+}
+
 function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Specialist) => void }) {
   const [detailsExpanded, setDetailsExpanded] = useState(false);
   const unavailable = isInstagramUnavailable(item);
@@ -651,6 +680,8 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
       ) : null}
 
       {unavailable ? <p className="flag">Контакти застарілі або неперевірені</p> : null}
+
+      <RegistryStatus item={item} />
 
       <div className="card-actions">
         <ContactRow item={item} verbose={false} />
@@ -748,6 +779,7 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
             <ReviewStatus item={item} verbose />
             <BookLanguageStatus item={item} />
             <LocationStatus item={item} />
+            <RegistryStatus item={item} verbose />
           </div>
         </div>
 
@@ -805,7 +837,8 @@ function SiteFooter() {
         <h2>Про каталог</h2>
         <p>
           Некомерційний перелік контактів, зібраних українською спільнотою Катовіце. Ми не беремо
-          плату за розміщення і не змінюємо порядок показу за гроші.
+          плату за розміщення і не змінюємо порядок показу за гроші. Позначка реєстру означає лише,
+          що на вказану дату знайдено відповідний активний запис; це не є рекомендацією каталогу.
         </p>
       </section>
 

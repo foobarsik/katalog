@@ -2,6 +2,8 @@ export const CONTACT_EMAIL = "olgaraat@gmail.com";
 
 export const CATALOG_NAME = "Свої люди рекомендують";
 
+export const SITE_OWNER = "Ольга Панібратченко";
+
 export function getDataRequestHref() {
   const subject = "Оновлення або видалення даних у каталозі";
   const body = [

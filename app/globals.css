@@ -873,6 +873,58 @@ ul {
   font-weight: 600;
 }
 
+.registry-status {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 7px;
+  min-width: 0;
+  max-width: 100%;
+  color: #286557;
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.registry-status .icon {
+  flex: none;
+  width: 17px;
+  height: 17px;
+}
+
+.registry-status span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.registry-status:hover,
+.registry-status:focus-visible {
+  color: #174d41;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.registry-status:focus-visible {
+  outline: 2px solid color-mix(in srgb, #286557, transparent 68%);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.registry-status.verbose {
+  margin-top: 4px;
+  color: var(--ink-soft);
+  white-space: normal;
+}
+
+.registry-status.verbose span {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+}
+
 .card-actions,
 .panel-actions {
   position: relative;
