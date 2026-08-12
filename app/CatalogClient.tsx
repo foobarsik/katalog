@@ -557,7 +557,7 @@ function ContactRow({ item, verbose }: { item: Specialist; verbose: boolean }) {
           tone={action.tone}
         >
           {action.icon}
-          {verbose ? action.label : null}
+          {verbose ? getCardActionLabel(item, action) : null}
         </ContactLink>
       ))}
       {!hasContacts ? (
@@ -810,89 +810,106 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
   const bioTitle = item.sourceInfo || sourceUnavailable ? "" : cleanBio(item.instagramTitle);
   const sourceHeading = getSourceHeading(item.sourceType);
   const reviews = splitReviews(item.review);
+  const profession =
+    item.subcategory && item.subcategory !== item.category
+      ? `${item.category} · ${item.subcategory}`
+      : item.category;
+  const hasStory = Boolean(bioTitle || bio || reviews.length || item.comment || unavailable);
 
   return (
     <div className="overlay">
-      <button aria-label="Закрити" className="overlay-dismiss" type="button" onClick={onClose} />
       <div
         aria-labelledby="detail-title"
         aria-modal="true"
-        className={`panel${needsVisibleReview(item) ? " needs-review" : ""}`}
+        className={`panel${needsVisibleReview(item) ? " needs-review" : ""}${hasStory ? "" : " is-compact"}`}
         ref={panelRef}
         role="dialog"
         style={{ "--cat": getCategoryColor(item.category) } as React.CSSProperties}
       >
-        <button aria-label="Закрити" className="panel-close" data-autofocus type="button" onClick={onClose}>
-          <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
-            <path d="m6 6 12 12M18 6 6 18" />
-          </svg>
-        </button>
+        <header className="detail-nav">
+          <button className="panel-close" data-autofocus type="button" onClick={onClose}>
+            <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+            <span>До каталогу</span>
+          </button>
+          <span className="detail-nav-label">Профіль</span>
+        </header>
 
-        <div className="panel-head">
-          <div className="panel-titles">
-            <p className="profession">{item.subcategory || item.category}</p>
-            <h2 id="detail-title">{getDisplayName(item)}</h2>
-            {secondaryName ? <p className="person">{secondaryName}</p> : null}
-            <p className="panel-category">
-              <span className="cat-dot" aria-hidden="true" />
-              {item.category}
-            </p>
-            <ReviewStatus item={item} verbose />
-            <BookLanguageStatus item={item} />
-            <LocationStatus item={item} />
-            <RegistryStatus item={item} verbose />
-          </div>
+        <div className="detail-layout">
+          <aside className="detail-summary">
+            <div className="panel-head">
+              <div className="panel-titles">
+                <div className="detail-kicker">
+                  <p className="profession">{profession}</p>
+                  <LocationStatus item={item} />
+                </div>
+                <h2 id="detail-title">{getDisplayName(item)}</h2>
+                {secondaryName ? <p className="person">{secondaryName}</p> : null}
+
+                <div className="detail-statuses">
+                  <ReviewStatus item={item} verbose />
+                  <BookLanguageStatus item={item} />
+                </div>
+                <RegistryStatus item={item} verbose />
+              </div>
+            </div>
+
+            <div className="panel-actions" aria-label="Контакти">
+              <ContactRow item={item} verbose />
+            </div>
+
+            <BookFacts item={item} />
+          </aside>
+
+          {hasStory ? (
+            <div className="detail-content">
+              {reviews.length > 0 ? (
+                <div className="review-note">
+                  {reviews.map((text, index) => (
+                    <blockquote key={index}>
+                      <p>{text}</p>
+                    </blockquote>
+                  ))}
+                  <cite>
+                    {reviews.length === 1
+                      ? "Особисте враження учасника спільноти"
+                      : `${reviews.length} ${pluralUk(reviews.length, "відгук", "відгуки", "відгуків")} від учасників спільноти`}
+                  </cite>
+                </div>
+              ) : null}
+
+              {bioTitle || bio ? (
+                <div className="panel-body">
+                  <section>
+                    <h4>{sourceHeading}</h4>
+                    {bioTitle ? <p className="bio-title">{bioTitle}</p> : null}
+                    {bio ? <p>{bio}</p> : null}
+                    <SourceMeta item={item} />
+                  </section>
+                </div>
+              ) : null}
+
+              {item.comment || unavailable ? (
+                <div className="panel-body">
+                  {item.comment ? (
+                    <section>
+                      <h4>Деталі</h4>
+                      <p>{item.comment}</p>
+                    </section>
+                  ) : null}
+
+                  {unavailable ? (
+                    <section>
+                      <h4>Instagram</h4>
+                      <p className="muted">Профіль не вдалося перевірити. Скористайтеся іншими контактами.</p>
+                    </section>
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+          ) : null}
         </div>
-
-        <div className="panel-actions">
-          <ContactRow item={item} verbose />
-        </div>
-
-        <BookFacts item={item} />
-
-        {bioTitle || bio ? (
-          <div className="panel-body">
-            <section>
-              <h4>{sourceHeading}</h4>
-              {bioTitle ? <p className="bio-title">{bioTitle}</p> : null}
-              {bio ? <p>{bio}</p> : null}
-              <SourceMeta item={item} />
-            </section>
-          </div>
-        ) : null}
-
-        {reviews.length > 0 ? (
-          <div className="review-note">
-            {reviews.map((text, index) => (
-              <blockquote key={index}>
-                <p>{text}</p>
-              </blockquote>
-            ))}
-            <cite>
-              {reviews.length === 1
-                ? "Особисте враження учасника спільноти"
-                : `${reviews.length} ${pluralUk(reviews.length, "відгук", "відгуки", "відгуків")} від учасників спільноти`}
-            </cite>
-          </div>
-        ) : null}
-
-        {item.comment || unavailable ? (
-          <div className="panel-body">
-            {item.comment ? (
-              <section>
-                <h4>Деталі</h4>
-                <p>{item.comment}</p>
-              </section>
-            ) : null}
-
-            {unavailable ? (
-              <section>
-                <h4>Instagram</h4>
-                <p className="muted">Профіль не вдалося перевірити. Скористайтеся іншими контактами.</p>
-              </section>
-            ) : null}
-          </div>
-        ) : null}
       </div>
     </div>
   );
