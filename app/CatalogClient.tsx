@@ -956,6 +956,10 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const [visible, setVisible] = useState(PAGE_SIZE);
   const searchRef = useRef<HTMLInputElement | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
+  const categorySurfaceRef = useRef<HTMLElement | null>(null);
+  const categoryListRef = useRef<HTMLUListElement | null>(null);
+  const activeCategoryRef = useRef<HTMLButtonElement | null>(null);
+  const [categoryCursor, setCategoryCursor] = useState({ x: 0, y: 0, width: 0, height: 0, ready: false });
 
   const publicSpecialists = useMemo(
     () => specialists.filter((item) => !item.hasNegativeReview && (isBookItem(item) || hasAnyContact(item))),
@@ -1015,6 +1019,38 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     setProfession("");
     if (normalizeCategory(name) !== "Книжки") setMinimumBookScore(null);
   }
+
+  useEffect(() => {
+    const surface = categorySurfaceRef.current;
+    const list = categoryListRef.current;
+    const active = activeCategoryRef.current;
+    if (!surface || !list || !active) return;
+
+    const updateCursor = () => {
+      const surfaceRect = surface.getBoundingClientRect();
+      const activeRect = active.getBoundingClientRect();
+      setCategoryCursor({
+        x: activeRect.left - surfaceRect.left,
+        y: activeRect.top - surfaceRect.top,
+        width: activeRect.width,
+        height: activeRect.height,
+        ready: true,
+      });
+    };
+
+    updateCursor();
+    const observer = new ResizeObserver(updateCursor);
+    observer.observe(surface);
+    observer.observe(list);
+    list.addEventListener("scroll", updateCursor, { passive: true });
+    window.addEventListener("resize", updateCursor);
+
+    return () => {
+      observer.disconnect();
+      list.removeEventListener("scroll", updateCursor);
+      window.removeEventListener("resize", updateCursor);
+    };
+  }, [category, categories.length]);
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase("uk-UA");
@@ -1257,13 +1293,31 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
         ) : null}
       </section>
 
-      <div className="filters">
-        <ul className="categories">
+      <nav
+        aria-label="Категорії каталогу"
+        className="filters"
+        ref={categorySurfaceRef}
+        style={
+          {
+            "--cursor-x": `${categoryCursor.x}px`,
+            "--cursor-y": `${categoryCursor.y}px`,
+            "--cursor-width": `${categoryCursor.width}px`,
+            "--cursor-height": `${categoryCursor.height}px`,
+            "--cursor-color": category === ALL ? "var(--ink)" : getCategoryColor(category),
+          } as React.CSSProperties
+        }
+      >
+        <span
+          aria-hidden="true"
+          className={categoryCursor.ready ? "category-cursor ready" : "category-cursor"}
+        />
+        <ul className="categories" ref={categoryListRef}>
           {categories.map((entry) => (
             <li key={entry.name}>
               <button
                 aria-pressed={category === entry.name}
                 className={category === entry.name ? "tab on" : "tab"}
+                ref={category === entry.name ? activeCategoryRef : undefined}
                 style={
                   entry.name === ALL
                     ? undefined
@@ -1272,35 +1326,40 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
                 type="button"
                 onClick={() => chooseCategory(entry.name)}
               >
-                <span className="cat-dot" aria-hidden="true" />
-                {entry.name}
+                <span className="cat-signal" aria-hidden="true">
+                  <span className="cat-dot" />
+                </span>
+                <span className="tab-label">{entry.name}</span>
                 <em>{entry.count}</em>
               </button>
             </li>
           ))}
         </ul>
 
-      </div>
+      </nav>
 
       {topProfessions.length > 0 ? (
-        <div className="refine">
-          <span className="refine-label">Уточнити</span>
-          <ul>
-            {topProfessions.map((entry) => (
-              <li key={entry.name}>
+        <nav className="refine" aria-label="Спеціалізації">
+          <span className="refine-label">Спеціалізації</span>
+          <ul key={category}>
+            {topProfessions.map((entry, index) => (
+              <li
+                key={entry.name}
+                style={{ "--stagger": index } as React.CSSProperties}
+              >
                 <button
                   aria-pressed={profession === entry.name}
                   className={profession === entry.name ? "chip on" : "chip"}
                   type="button"
                   onClick={() => setProfession(profession === entry.name ? "" : entry.name)}
                 >
-                  {entry.name}
+                  <span>{entry.name}</span>
                   <em>{entry.count}</em>
                 </button>
               </li>
             ))}
           </ul>
-        </div>
+        </nav>
       ) : null}
 
       <div className="results-bar" aria-live="polite">
