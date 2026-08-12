@@ -1,4 +1,4 @@
-import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { basename, dirname, extname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -6,10 +6,10 @@ const scriptDir = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(scriptDir, "..");
 const sourceRoot = resolve(projectRoot, "..");
 
-/** The CSVs keep everything; these gate what reaches the site, so re-importing cannot undo the
- * privacy cleanup. Flip either back to true to restore the old output. */
+/** Source CSVs keep the raw material. The site only receives photos and text through these
+ * explicit publication policies, so re-importing cannot restore raw profile content. */
 const PUBLISH_INSTAGRAM_PHOTOS = false;
-const PUBLISH_SCRAPED_BIOS = false;
+const PUBLISH_FACTUAL_INSTAGRAM_SUMMARIES = true;
 
 const catalogPath = resolve(process.env.CATALOG_CSV || join(sourceRoot, "каталог_специалистов.csv"));
 const booksPath = resolve(process.env.BOOKS_CSV || join(sourceRoot, "книги_olx.csv"));
@@ -276,6 +276,102 @@ function cleanSourceInfo(row) {
     .trim();
 }
 
+const instagramSpecialtyFacts = [
+  { source: /(?:дитяч(?:ий|а) стоматолог|стоматолог(?:ія)? для дітей|pediatric dent)/iu, value: "дитяча стоматологія", duplicate: /дитяч.*стоматолог|стоматолог.*дит/u },
+  { source: /(?:дитяч(?:ий|а) та доросл(?:ий|а) дерматолог)/iu, value: "дитяча й доросла дерматологія", duplicate: /дитяч.*доросл.*дерматолог/u },
+  { source: /(?:трихолог|trycholog)/iu, value: "трихологія", duplicate: /трихолог/u },
+  { source: /(?:колорист|koloryst)/iu, value: "колористика", duplicate: /колорист/u },
+  { source: /(?:перукар|fryzjer|hairdresser)/iu, value: "перукарські послуги", duplicate: /перукар|волос/u },
+  { source: /(?:манікюр|manicure|paznok)/iu, value: "манікюр", duplicate: /манікюр|нігт/u },
+  { source: /(?:педикюр|pedicure)/iu, value: "педикюр", duplicate: /педикюр/u },
+  { source: /(?:подолог|podolog)/iu, value: "подологія", duplicate: /подолог/u },
+  { source: /(?:бров|brow|brwi)/iu, value: "оформлення брів", duplicate: /бров/u },
+  { source: /(?:візаж|макіяж|makeup|makijaż)/iu, value: "макіяж", duplicate: /візаж|макіяж/u },
+  { source: /(?:нарощування вій|ламінування вій|lashes|rzęs)/iu, value: "оформлення вій", duplicate: /ві[йї]|lash/u },
+  { source: /(?:масаж|masaż)/iu, value: "масаж", duplicate: /масаж/u },
+  { source: /(?:косметолог|kosmetolog)/iu, value: "косметологія", duplicate: /косметолог/u },
+  { source: /(?:депіляц|епіляц|depilac|epilac)/iu, value: "депіляція", duplicate: /депіляц|епіляц/u },
+  { source: /(?:барбер|barber)/iu, value: "барберські послуги", duplicate: /барбер/u },
+  { source: /(?:татуювання|тату(?!р)|tattoo|tatuaż)/iu, value: "тату", duplicate: /тату/u },
+  { source: /(?:пірсинг|piercing)/iu, value: "пірсинг", duplicate: /пірсинг/u },
+  { source: /(?:стоматолог|dentyst)/iu, value: "стоматологія", duplicate: /стоматолог/u },
+  { source: /(?:педіатр|pediatr)/iu, value: "педіатрія", duplicate: /педіатр/u },
+  { source: /(?:гінеколог|ginekolog)/iu, value: "гінекологія", duplicate: /гінеколог/u },
+  { source: /(?:дерматолог|dermatolog)/iu, value: "дерматологія", duplicate: /дерматолог/u },
+  { source: /(?:психолог|psycholog)/iu, value: "психологічні консультації", duplicate: /психолог/u },
+  { source: /(?:нутриціолог|dietetyk)/iu, value: "нутриціологія", duplicate: /нутриціолог/u },
+  { source: /(?:фітнес|fitness)/iu, value: "фітнес", duplicate: /фітнес/u },
+  { source: /(?:фотограф|fotograf)/iu, value: "фотографія", duplicate: /фотограф/u },
+  { source: /(?:відеограф|videograf)/iu, value: "відеозйомка", duplicate: /відеограф|відеозйом/u },
+  { source: /(?:адвокат|юрист|lawyer|prawnik)/iu, value: "юридичні послуги", duplicate: /адвокат|юрист|юридич/u },
+  { source: /(?:бухгалтер|księg)/iu, value: "бухгалтерські послуги", duplicate: /бухгалтер/u },
+  { source: /(?:переклад|tłumacz)/iu, value: "переклад", duplicate: /переклад/u },
+  { source: /(?:флорист|floryst|букет)/iu, value: "флористика", duplicate: /флорист/u },
+  { source: /(?:ремонт взуття|naprawa obuw)/iu, value: "ремонт взуття", duplicate: /ремонт взуття/u },
+  { source: /(?:страхуван|ubezpiecze)/iu, value: "страхування", duplicate: /страхуван/u },
+  { source: /(?:нерухом|nieruchomo)/iu, value: "нерухомість", duplicate: /нерухом|ріелтор/u },
+  { source: /(?:турагент|туристичн(?:і|ий) послуг|travel agent|biuro podróży)/iu, value: "туристичні послуги", duplicate: /туроператор|турагент|туристич/u },
+];
+
+const instagramServiceFacts = [
+  [/(?:лікування зубів уві сні|лікування зубів під наркозом|leczenie zębów we śnie)/iu, "лікування зубів уві сні"],
+  [/(?:гібридн(?:ий|ого) манікюр|manicure hybrydowy)/iu, "гібридний манікюр"],
+  [/(?:гелев(?:ий|ого) манікюр|manicure żelowy)/iu, "гелевий манікюр"],
+  [/(?:тотальн(?:ий|ого) блонд|total blond)/iu, "тотальний блонд"],
+  [/(?:хімічн(?:а|ої) завивк|trwała ondulacja)/iu, "хімічна завивка"],
+  [/(?:відновлення волосся|rekonstrukcja włosów)/iu, "відновлення волосся"],
+  [/(?:лазерн(?:а|ої) епіляц)/iu, "лазерна епіляція"],
+  [/(?:електроепіляц|електроліз|elektroepilac)/iu, "електроепіляція"],
+  [/(?:кріоліполіз|kriolipoliz)/iu, "кріоліполіз"],
+  [/(?:ультразвуков(?:а|ої) кавітац|kawitacj)/iu, "ультразвукова кавітація"],
+  [/(?:онлайн-консультац|консультац(?:ії|ія) онлайн|online consult)/iu, "онлайн-консультації"],
+  [/(?:бізнес-план|business plan)/iu, "підготовка бізнес-планів"],
+  [/(?:поданн(?:я|і) на грант|grant)/iu, "допомога з грантовими заявками"],
+  [/(?:ціноутворення|pricing)/iu, "консультації з ціноутворення"],
+  [/(?:букет(?:и)? з доставкою|bukiety z dostawą)/iu, "доставка букетів"],
+  [/(?:весілля|śluby).*?(?:декорац|dekorac)/iu, "весільна та подієва флористика"],
+];
+
+const instagramLanguageFacts = [
+  [/(?:українськ|ukraińsk|ukrainian)/iu, "українська"],
+  [/(?:польськ|polsk|polish)/iu, "польська"],
+  [/(?:англійськ|english|angielsk)/iu, "англійська"],
+  [/(?:російськ|русск|russian|rosyjsk)/iu, "російська"],
+];
+
+function buildFactualInstagramSummary(row, { category, subcategory }) {
+  if (!PUBLISH_FACTUAL_INSTAGRAM_SUMMARIES || row?.source_type !== "instagram") return "";
+
+  const info = cleanSourceInfo(row);
+  if (!info) return "";
+  const professionalText = `${row.name || ""} ${info}`;
+  const catalogText = normalizeComparableText(`${category} ${subcategory}`);
+
+  const specialties = instagramSpecialtyFacts
+    .filter(({ source, duplicate }) => source.test(professionalText) && !duplicate.test(catalogText))
+    .map(({ value }) => value)
+    .slice(0, 4);
+  const services = instagramServiceFacts
+    .filter(([pattern]) => pattern.test(info))
+    .map(([, label]) => label)
+    .slice(0, 4);
+  const hasLanguageList = /(?:мов(?:а|и|ами)|languages?|język(?:i|ami)?|говорю|розмовляю)/iu.test(info);
+  const languages = hasLanguageList
+    ? instagramLanguageFacts.filter(([pattern]) => pattern.test(info)).map(([, label]) => label)
+    : [];
+  const facts = [];
+  const experience = info.match(/(?:\b(\d{1,2}\+?)\s*(?:рок(?:ів|и)|lat)\s*(?:досвіду|doświadczenia)|(?:досвід|doświadczenie)\s*(\d{1,2}\+?)\s*(?:рок(?:ів|и)|lat))/iu);
+  const workplace = info.match(/(?:головн(?:ий|а) лікар(?:ка)? (?:клініки|у клініці)|head doctor (?:at|of))\s+([\p{L}\p{N}][\p{L}\p{N}&'’ .-]{1,35}?)(?=\s*(?:[-|•]|$))/iu);
+
+  if (specialties.length) facts.push(`Спеціалізація: ${specialties.join(", ")}.`);
+  if (services.length) facts.push(`Послуги: ${services.join(", ")}.`);
+  if (experience) facts.push(`Досвід: ${experience[1] || experience[2]} років.`);
+  if (workplace) facts.push(`Місце роботи: ${workplace[1].trim()} (головний лікар).`);
+  if (languages.length) facts.push(`Мови: ${languages.join(", ")}.`);
+
+  return facts.join(" ");
+}
+
 function copySourcePhoto(row) {
   if (!PUBLISH_INSTAGRAM_PHOTOS) return "";
 
@@ -326,6 +422,8 @@ function renderDataFile(items) {
   sourceUrl: string;
   sourceInfo: string;
   sourceStatus: string;
+  sourceCheckedAt: string;
+  sourceUpdatedAt: string;
   foundAutomatically: boolean;
   confidenceScore: number;
   confidenceReason: string;
@@ -377,6 +475,7 @@ function isCatalogProblem(row) {
 
 const catalogRows = [...readCsv(catalogPath), ...readCsv(booksPath, false)];
 const sourceRows = readCsv(sourcesPath, false);
+const sourceDataUpdatedAt = existsSync(sourcesPath) ? statSync(sourcesPath).mtime.toISOString().slice(0, 10) : "";
 
 const activeCatalogRows = catalogRows.filter((row) => !isDuplicateCatalogRow(row));
 
@@ -397,10 +496,10 @@ const specialists = activeCatalogRows.map((row, index) => {
       candidate.source_type === "instagram" &&
       sourceMatchesCatalog(candidate, { instagram: username, social, website }),
   );
-  const sourceInfo = cleanSourceInfo(source);
-  const instagramBio = PUBLISH_SCRAPED_BIOS ? cleanSourceInfo(instagramSource) : "";
   const category = pick(row, ["Категорія", "Категория"]);
   const subcategory = pick(row, ["Підкатегорія", "Подкатегория"]);
+  const sourceInfo = buildFactualInstagramSummary(source, { category, subcategory });
+  const instagramBio = "";
   const bookLanguage = pick(row, ["Мова книги", "Язык книги", "Book language"]);
   const bookListingDate = pick(row, ["Дата оголошення", "Дата объявления", "Listing date"]);
   const bookPrice = pick(row, ["Ціна", "Цена", "Price"]);
@@ -469,13 +568,17 @@ const specialists = activeCatalogRows.map((row, index) => {
     comment,
     communityMatch: Boolean(pick(row, ["Національність (для сумнівних випадків)", "Национальность (для сомнительных случаев)"])),
     avatar: copySourcePhoto(source),
-    instagramTitle: PUBLISH_SCRAPED_BIOS ? instagramSource?.name || "" : "",
+    instagramTitle: "",
     instagramBio,
     instagramStatus: instagramSource?.status || "",
     sourceType: source?.source_type || "",
     sourceUrl: normalizeUrl(source?.identifier || ""),
-    sourceInfo: PUBLISH_SCRAPED_BIOS ? sourceInfo : "",
+    sourceInfo,
     sourceStatus: source?.status || "",
+    sourceCheckedAt: source?.source_type === "instagram"
+      ? pick(source, ["checked_at", "verified_at", "scraped_at", "Дата перевірки"])
+      : "",
+    sourceUpdatedAt: sourceInfo ? sourceDataUpdatedAt : "",
     foundAutomatically,
     confidenceScore: hasNegativeReview
       ? Math.min(Number.isFinite(confidenceScore) ? confidenceScore : 0, 40)

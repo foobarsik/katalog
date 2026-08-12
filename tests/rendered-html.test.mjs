@@ -23,6 +23,13 @@ async function render() {
   );
 }
 
+function parseGeneratedSpecialists(source) {
+  const marker = "export const specialists: Specialist[] = ";
+  const start = source.indexOf(marker);
+  assert.notEqual(start, -1);
+  return JSON.parse(source.slice(start + marker.length).replace(/;\s*$/, ""));
+}
+
 test("server-renders the Ukrainian catalog shell", async () => {
   const response = await render();
   assert.equal(response.status, 200);
@@ -129,6 +136,33 @@ test("imports profile details from the combined sources file", async () => {
   );
 });
 
+test("publishes only short factual Instagram summaries", async () => {
+  const [importer, data, client, policy] = await Promise.all([
+    readFile(new URL("../scripts/import-data.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/PrivacyPolicy.tsx", import.meta.url), "utf8"),
+  ]);
+  const summaries = parseGeneratedSpecialists(data).filter((item) => item.sourceInfo);
+
+  assert.match(importer, /PUBLISH_FACTUAL_INSTAGRAM_SUMMARIES = true/);
+  assert.match(importer, /function buildFactualInstagramSummary\(row, \{ category, subcategory \}\)/);
+  assert.doesNotMatch(importer, /PUBLISH_SCRAPED_BIOS/);
+  assert.ok(summaries.length >= 40);
+  assert.ok(summaries.every((item) => item.sourceType === "instagram" && item.sourceStatus === "ok"));
+  assert.ok(summaries.every((item) => item.sourceInfo.length <= 280));
+  assert.ok(summaries.every((item) => !/[@#]|https?:|www\.|\+?\d{7,}/iu.test(item.sourceInfo)));
+  assert.ok(summaries.every((item) => !/підписник|followers|direct|запис|рекоменду|найкращ|гаранті/iu.test(item.sourceInfo)));
+  assert.match(data, /"title": "Pixel Clinic"[\s\S]*?"sourceInfo": "Спеціалізація: дитяча стоматологія\. Послуги: лікування зубів уві сні\. Місце роботи: Kids Dental \(головний лікар\)\."/);
+  assert.doesNotMatch(data, /"sourceInfo": "(?:Напрями|Спеціалізація): стоматологія\."/);
+  assert.match(data, /"title": "karyna_keratyna_katowice"[\s\S]*?"sourceInfo": ""/);
+  assert.match(data, /sourceCheckedAt: string/);
+  assert.match(data, /sourceUpdatedAt: string/);
+  assert.match(client, /Джерело: Instagram/);
+  assert.match(client, /Дані оновлено/);
+  assert.match(policy, /не повний текст bio, а коротке фактичне резюме/);
+});
+
 test("normalizes imported phone numbers to digits with an optional leading plus", async () => {
   const [importer, data] = await Promise.all([
     readFile(new URL("../scripts/import-data.mjs", import.meta.url), "utf8"),
@@ -226,7 +260,7 @@ test("keeps tagged Facebook profiles and contradictory recommendations", async (
   assert.match(data, /"id": 18,[\s\S]*?Яніна Шиманська[\s\S]*?"hasNegativeReview": false/);
   assert.match(client, /Є негативні відгуки/);
   assert.match(data, /"id": 148,[\s\S]*?Рекомендую, Паляныця\./);
-  const tbilisuri = data.match(/"id": 307,[\s\S]*?\n  },\n  \{/)[0];
+  const tbilisuri = data.match(/"id": 307,[\s\S]*?\n {2}},\n {2}\{/)[0];
   assert.match(tbilisuri, /tbilisuri\.eatbu\.com/);
   assert.match(tbilisuri, /"needsReview": false/);
   assert.doesNotMatch(tbilisuri, /facebook\.com\/profile\.php\?id=100065051783764/);

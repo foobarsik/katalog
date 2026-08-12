@@ -130,13 +130,38 @@ function isInstagramUnavailable(item: Specialist) {
 }
 
 function getSourceHeading(sourceType: string) {
-  if (sourceType === "instagram") return "З профілю Instagram";
+  if (sourceType === "instagram") return "Коротко з профілю";
   if (sourceType === "booksy") return "З профілю Booksy";
   if (sourceType === "facebook") return "З профілю Facebook";
   if (sourceType === "telegram") return "З профілю Telegram";
   if (sourceType === "olx") return "Оголошення OLX";
   if (sourceType === "website") return "Інформація із сайту";
   return "Інформація з відкритого джерела";
+}
+
+function formatSourceDate(value: string) {
+  const match = value.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return match ? `${match[3]}.${match[2]}.${match[1]}` : value;
+}
+
+function SourceMeta({ item }: { item: Specialist }) {
+  if (!item.sourceInfo || item.sourceType !== "instagram") return null;
+
+  const date = item.sourceCheckedAt || item.sourceUpdatedAt;
+  const dateLabel = item.sourceCheckedAt ? "Перевірено" : "Дані оновлено";
+
+  return (
+    <p className="source-meta">
+      {item.sourceUrl ? (
+        <a href={item.sourceUrl} rel="noreferrer" target="_blank">
+          Джерело: Instagram
+        </a>
+      ) : (
+        <span>Джерело: Instagram</span>
+      )}
+      {date ? ` · ${dateLabel} ${formatSourceDate(date)}` : null}
+    </p>
+  );
 }
 
 function isFacebookSocialValue(value: string) {
@@ -651,7 +676,12 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
 
       <BookFacts item={item} />
 
-      {bio ? <p className="card-bio">{bio}</p> : null}
+      {bio ? (
+        <div className="card-source-summary">
+          <p className="card-bio">{bio}</p>
+          <SourceMeta item={item} />
+        </div>
+      ) : null}
 
       {item.review ? (
         <blockquote className="review-note">
@@ -795,6 +825,7 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
               <h4>{sourceHeading}</h4>
               {bioTitle ? <p className="bio-title">{bioTitle}</p> : null}
               {bio ? <p>{bio}</p> : null}
+              <SourceMeta item={item} />
             </section>
           </div>
         ) : null}

@@ -785,6 +785,29 @@ ul {
   line-height: 1.5;
 }
 
+.card-source-summary {
+  display: grid;
+  gap: 6px;
+}
+
+.source-meta {
+  position: relative;
+  z-index: 2;
+  color: var(--ink-faint);
+  font-size: 0.74rem;
+  line-height: 1.4;
+}
+
+.source-meta a {
+  color: inherit;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  text-underline-offset: 3px;
+}
+
+.source-meta a:hover {
+  color: var(--ink-soft);
+}
+
 .review-note {
   border-left: 3px solid var(--review-line);
   border-radius: 0 8px 8px 0;
@@ -1212,6 +1235,12 @@ ul {
 
 .panel-body .muted {
   color: var(--ink-soft);
+}
+
+.panel-body .source-meta {
+  margin-top: 10px;
+  color: var(--ink-faint);
+  font-size: 0.76rem;
 }
 
 @keyframes fade {
