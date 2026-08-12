@@ -367,7 +367,8 @@ ul {
 
 .refine ul {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(5, max-content);
+  justify-content: space-between;
   gap: 2px 18px;
 }
 
@@ -508,7 +509,7 @@ ul {
   display: grid;
   width: 100%;
   height: 48px;
-  grid-template-columns: 18px auto auto;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
   align-items: center;
   gap: 5px;
   border: 0;
@@ -547,11 +548,13 @@ ul {
 }
 
 .tab em {
+  min-width: 2ch;
   color: var(--ink-faint);
   font-style: normal;
   font-size: 0.74rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
+  text-align: right;
   transition: color 180ms ease;
 }
 
