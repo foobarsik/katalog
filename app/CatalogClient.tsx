@@ -94,16 +94,6 @@ function getSecondaryName(item: Specialist) {
   return item.name && item.name !== display ? item.name : "";
 }
 
-function getInitials(item: Specialist) {
-  return (getDisplayName(item) || "?")
-    .split(/[^\p{L}\p{N}]+/u)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join("")
-    .toLocaleUpperCase("uk-UA");
-}
-
 function makeSearchText(item: Specialist) {
   return [
     item.title,
@@ -368,10 +358,6 @@ function getResultNoun(count: number, currentCategory: string) {
   return count === 1 ? "позиція" : "позицій";
 }
 
-function hasAvatarImage(item: Specialist) {
-  return Boolean(item.avatar);
-}
-
 function telHref(phone: string) {
   return `tel:${phone.replace(/[^\d+]/g, "")}`;
 }
@@ -548,18 +534,6 @@ function ContactRow({ item, verbose }: { item: Specialist; verbose: boolean }) {
   );
 }
 
-function Avatar({ item, size }: { item: Specialist; size: "sm" | "lg" }) {
-  return (
-    <span className={`avatar ${size}`} aria-hidden="true">
-      {item.avatar ? (
-        <img src={item.avatar} alt="" loading="lazy" decoding="async" />
-      ) : (
-        <span>{getInitials(item)}</span>
-      )}
-    </span>
-  );
-}
-
 function LocationStatus({ item }: { item: Specialist }) {
   const status = item.locationStatus || "unknown";
   if (status === "unknown") return null;
@@ -638,17 +612,14 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
 
   return (
     <article className={className} style={{ "--cat": getCategoryColor(item.category) } as React.CSSProperties}>
-      <div className="card-identity">
-        <Avatar item={item} size="sm" />
-        <div className="card-names">
-          <p className="profession">{item.subcategory || item.category}</p>
-          <h3>
-            <button className="card-open" type="button" onClick={() => onOpen(item)}>
-              {getDisplayName(item)}
-            </button>
-          </h3>
-          {secondaryName ? <p className="person">{secondaryName}</p> : null}
-        </div>
+      <div className="card-names">
+        <p className="profession">{item.subcategory || item.category}</p>
+        <h3>
+          <button className="card-open" type="button" onClick={() => onOpen(item)}>
+            {getDisplayName(item)}
+          </button>
+        </h3>
+        {secondaryName ? <p className="person">{secondaryName}</p> : null}
       </div>
 
       <BookFacts item={item} />
@@ -767,7 +738,6 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
         </button>
 
         <div className="panel-head">
-          <Avatar item={item} size="lg" />
           <div className="panel-titles">
             <p className="profession">{item.subcategory || item.category}</p>
             <h2 id="detail-title">{getDisplayName(item)}</h2>
@@ -963,7 +933,6 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
           Number(hasUnconfirmedLocation(a)) - Number(hasUnconfirmedLocation(b)) ||
           Number(Boolean(b.review)) - Number(Boolean(a.review)) ||
           Number(hasSocialContact(b)) - Number(hasSocialContact(a)) ||
-          Number(hasAvatarImage(b)) - Number(hasAvatarImage(a)) ||
           Number(Boolean(b.website)) - Number(Boolean(a.website)) ||
           Number(hasConfirmedLocation(b)) - Number(hasConfirmedLocation(a)) ||
           Number(isInstagramUnavailable(a)) - Number(isInstagramUnavailable(b)) ||

@@ -573,7 +573,6 @@ ul {
   background: var(--surface-sunk);
 }
 
-.card.dimmed .avatar,
 .card.dimmed .card-bio {
   opacity: 0.72;
 }
@@ -584,13 +583,7 @@ ul {
   color: #4b5563;
 }
 
-.card.needs-review .avatar {
-  background: #8b95a5;
-  color: #fff;
-  filter: grayscale(1);
-}
-
-.card.needs-review .profession,
+.card.needs-review .card.needs-review .profession,
 .card.needs-review .person,
 .card.needs-review .card-bio,
 .card.needs-review .card-details p {
@@ -730,42 +723,6 @@ ul {
 .panel-titles .review-status + .location-status,
 .panel-titles .book-language-status + .location-status {
   margin-left: 8px;
-}
-
-.card-identity {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.avatar {
-  display: grid;
-  flex: none;
-  place-items: center;
-  overflow: hidden;
-  border-radius: 12px;
-  background: var(--cat, var(--accent));
-  color: #fff;
-  font-weight: 800;
-}
-
-.avatar.sm {
-  width: 96px;
-  height: 96px;
-  font-size: 1.7rem;
-}
-
-.avatar.lg {
-  width: 130px;
-  height: 130px;
-  border-radius: 16px;
-  font-size: 2.1rem;
-}
-
-.avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .card-names {
@@ -1108,11 +1065,6 @@ ul {
   background: #f7f8fa;
 }
 
-.panel.needs-review .avatar {
-  background: #8b95a5;
-  filter: grayscale(1);
-}
-
 .panel.needs-review .profession,
 .panel.needs-review .person,
 .panel.needs-review .panel-category,
@@ -1140,9 +1092,6 @@ ul {
 }
 
 .panel-head {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
   padding-right: 44px;
 }
 
@@ -1340,13 +1289,6 @@ ul {
   }
 }
 
-@media (max-width: 420px) {
-  .avatar.lg {
-    width: 80px;
-    height: 80px;
-    font-size: 1.5rem;
-  }
-}
 
 @media (prefers-reduced-motion: reduce) {
   *,
