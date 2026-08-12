@@ -36,6 +36,25 @@ test("server-renders the Ukrainian catalog shell", async () => {
   assert.doesNotMatch(html, /codex-preview|Building your site|react-loading-skeleton/i);
 });
 
+test("provides a dedicated Ukrainian privacy and RODO page", async () => {
+  const [client, policy, privacyPage, vercelEntry] = await Promise.all([
+    readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/PrivacyPolicy.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/privacy/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/vercel-entry.tsx", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(client, /href="\/privacy"/);
+  assert.match(client, /Політика конфіденційності та RODO/);
+  assert.match(policy, /стаття 6\(1\)\(f\) GDPR/);
+  assert.match(policy, /Urząd Ochrony Danych Osobowych/);
+  assert.match(policy, /не використовує рекламні або аналітичні cookies/);
+  assert.match(policy, /виправити або видалити картку/);
+  assert.match(privacyPage, /<PrivacyPolicy/);
+  assert.match(vercelEntry, /window\.location\.pathname/);
+  assert.match(vercelEntry, /<PrivacyPolicy/);
+});
+
 test("keeps location classification in the importer, data, and UI", async () => {
   const [importer, data, client, packageJson] = await Promise.all([
     readFile(new URL("../scripts/import-data.mjs", import.meta.url), "utf8"),
@@ -288,6 +307,13 @@ test("collapses only long details on catalog previews", async () => {
   assert.match(styles, /-webkit-line-clamp: 5/);
   assert.match(styles, /\.review-note p[\s\S]*white-space: pre-line/);
   assert.doesNotMatch(client, /className="panel-body"[\s\S]{0,500}details-text collapsed/);
+});
+
+test("stretches catalog cards to the tallest item in each row", async () => {
+  const styles = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+
+  assert.match(styles, /\.grid\s*\{[^}]*align-items:\s*stretch/);
+  assert.match(styles, /\.card-actions,[\s\S]*?margin-top:\s*auto/);
 });
 
 test("includes OLX Ukrainian book listings as a separate catalog section", async () => {

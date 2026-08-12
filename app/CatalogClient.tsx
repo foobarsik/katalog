@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { CONTACT_EMAIL } from "./site-info";
 import type { Specialist } from "./specialists-data";
 
 type CatalogClientProps = {
@@ -24,9 +25,6 @@ type ContactAction = {
 
 const ALL = "Усі";
 const PAGE_SIZE = 36;
-
-/** The only route for a listed person to reach us, so it has to stay a monitored address. */
-const CONTACT_EMAIL = "olgaraat@gmail.com";
 
 /** Optional: name the person or organisation answering for the catalogue. Empty hides the line. */
 const SITE_OWNER = "";
@@ -87,25 +85,6 @@ function getDisplayName(item: Specialist) {
   return item.instagram && item.title.toLowerCase() === item.instagram.toLowerCase()
     ? `@${handle}`
     : item.title || `@${handle}`;
-}
-
-function getInitials(item: Specialist) {
-  return (getDisplayName(item) || "?")
-    .split(/[^\p{L}\p{N}]+/u)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join("")
-    .toLocaleUpperCase("uk-UA");
-}
-
-/** Letters drawn from the name we already publish — never a copy of anyone's photo. */
-function Monogram({ item }: { item: Specialist }) {
-  return (
-    <span className="monogram" aria-hidden="true">
-      {getInitials(item)}
-    </span>
-  );
 }
 
 function getSecondaryName(item: Specialist) {
@@ -631,17 +610,14 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
 
   return (
     <article className={className} style={{ "--cat": getCategoryColor(item.category) } as React.CSSProperties}>
-      <div className="card-identity">
-        <Monogram item={item} />
-        <div className="card-names">
-          <p className="profession">{item.subcategory || item.category}</p>
-          <h3>
-            <button className="card-open" type="button" onClick={() => onOpen(item)}>
-              {getDisplayName(item)}
-            </button>
-          </h3>
-          {secondaryName ? <p className="person">{secondaryName}</p> : null}
-        </div>
+      <div className="card-names">
+        <p className="profession">{item.subcategory || item.category}</p>
+        <h3>
+          <button className="card-open" type="button" onClick={() => onOpen(item)}>
+            {getDisplayName(item)}
+          </button>
+        </h3>
+        {secondaryName ? <p className="person">{secondaryName}</p> : null}
       </div>
 
       <BookFacts item={item} />
@@ -860,6 +836,8 @@ function SiteFooter() {
       <p className="footer-owner">
         {SITE_OWNER ? `${SITE_OWNER} · ` : null}
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+        <span aria-hidden="true"> · </span>
+        <a href="/privacy">Політика конфіденційності та RODO</a>
       </p>
     </footer>
   );

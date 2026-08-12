@@ -532,12 +532,10 @@ ul {
 
 /* ---------- grid ---------- */
 
-/* Entries carry wildly different amounts of text; stretching each row to its tallest card left
-   short entries with a large empty block above the actions. */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(296px, 1fr));
-  align-items: start;
+  align-items: stretch;
   gap: 14px;
 }
 
@@ -726,26 +724,6 @@ ul {
 .panel-titles .review-status + .location-status,
 .panel-titles .book-language-status + .location-status {
   margin-left: 8px;
-}
-
-.card-identity {
-  display: flex;
-  align-items: flex-start;
-  gap: 13px;
-}
-
-.monogram {
-  display: grid;
-  width: 46px;
-  height: 46px;
-  flex: none;
-  place-items: center;
-  border-radius: 12px;
-  background: var(--cat, var(--accent));
-  color: #fff;
-  font-size: 0.95rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
 }
 
 .card-names {
@@ -1257,11 +1235,124 @@ ul {
   color: var(--accent);
 }
 
+/* ---------- legal ---------- */
+
+.legal-shell {
+  width: min(840px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 32px 0 80px;
+}
+
+.legal-nav {
+  margin-bottom: 28px;
+}
+
+.legal-nav a {
+  color: var(--accent-deep);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.legal-document {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: clamp(24px, 5vw, 56px);
+}
+
+.legal-header {
+  margin-bottom: 38px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 32px;
+}
+
+.legal-header h1 {
+  max-width: 700px;
+  margin-top: 10px;
+  font-size: clamp(2rem, 5vw, 3.35rem);
+  line-height: 1.04;
+}
+
+.legal-updated {
+  margin-top: 14px;
+  color: var(--ink-faint);
+  font-size: 0.86rem;
+}
+
+.legal-intro {
+  max-width: 700px;
+  margin-top: 22px;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.legal-document > section {
+  margin-top: 32px;
+}
+
+.legal-document h2 {
+  margin-bottom: 10px;
+  font-size: 1.12rem;
+  line-height: 1.3;
+}
+
+.legal-document section p,
+.legal-document li,
+.legal-request p {
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+.legal-document section p + p {
+  margin-top: 12px;
+}
+
+.legal-document section a {
+  color: var(--accent-deep);
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal-document section ul {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 12px;
+  padding-left: 22px;
+  list-style: disc;
+}
+
+.legal-request {
+  margin-top: 40px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-wash);
+  padding: 22px 24px;
+}
+
+.legal-request h2 {
+  margin-bottom: 6px;
+}
+
+.legal-request .footer-action {
+  background: var(--surface);
+}
+
 /* ---------- responsive ---------- */
 
 @media (max-width: 720px) {
   .shell {
     padding: 26px 16px 64px;
+  }
+
+  .legal-shell {
+    width: min(100% - 24px, 840px);
+    padding: 20px 0 48px;
+  }
+
+  .legal-document {
+    padding: 24px 20px;
   }
 
   .masthead h1 {
