@@ -96,6 +96,16 @@ test("keeps location classification in the importer, data, and UI", async () => 
   assert.doesNotMatch(client, /Локація не вказана/);
 });
 
+test("supports online as a confirmed service location", async () => {
+  const [importer, data] = await Promise.all([
+    readFile(new URL("../scripts/import-data.mjs", import.meta.url), "utf8"),
+    readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(importer, /\["Онлайн", \/\\bonline\\b\|онлайн\/u\]/);
+  assert.match(data, /Інна Москалюк[\s\S]*?"locationStatus": "confirmed"[\s\S]*?"locationEvidence": "Онлайн"/);
+});
+
 test("imports profile details from the combined sources file", async () => {
   const [importer, data, client] = await Promise.all([
     readFile(new URL("../scripts/import-data.mjs", import.meta.url), "utf8"),

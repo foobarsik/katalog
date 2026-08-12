@@ -17693,8 +17693,8 @@ export const specialists: Specialist[] = [
     "subjectTypeVerificationUrl": "",
     "subjectTypeCheckedAt": "2026-08-12",
     "individualNoticeRequired": "yes",
-    "locationStatus": "unknown",
-    "locationEvidence": ""
+    "locationStatus": "confirmed",
+    "locationEvidence": "Онлайн"
   },
   {
     "id": 316,

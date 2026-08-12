@@ -120,6 +120,7 @@ function normalizeComparableText(value) {
 }
 
 const acceptedLocations = [
+  ["Онлайн", /\bonline\b|онлайн/u],
   ["Katowice", /katowic|катов[іи]ц/u],
   ["Kraków", /krakow|крак[іо]в/u],
   ["Sosnowiec", /sosnowiec|сосновец|сосновець/u],
