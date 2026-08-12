@@ -779,15 +779,18 @@ ul {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .card-names h3 {
   max-width: none;
-  font-size: 1.26rem;
+  font-size: 1.5rem;
   font-weight: 800;
-  line-height: 1.18;
-  letter-spacing: -0.015em;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
   overflow-wrap: anywhere;
 }
 
