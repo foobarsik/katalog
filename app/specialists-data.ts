@@ -730,62 +730,6 @@ export const specialists: Specialist[] = [
   },
   {
     "id": 13,
-    "name": "Олег",
-    "title": "Олег",
-    "category": "Нерухомість",
-    "subcategory": "Ріелтор",
-    "bookLanguage": "",
-    "bookListingDate": "",
-    "bookPrice": "",
-    "bookPricePln": null,
-    "bookQualityScore": 0,
-    "bookCondition": "",
-    "phone": "",
-    "email": "",
-    "website": "",
-    "social": "Telegram: @oleh_rental",
-    "instagram": "",
-    "description": "",
-    "review": "",
-    "comment": "",
-    "communityMatch": true,
-    "avatar": "",
-    "instagramTitle": "",
-    "instagramBio": "",
-    "instagramStatus": "",
-    "sourceType": "telegram",
-    "sourceUrl": "https://t.me/oleh_rental",
-    "sourceInfo": "",
-    "sourceStatus": "ok",
-    "sourceCheckedAt": "",
-    "sourceUpdatedAt": "",
-    "foundAutomatically": true,
-    "confidenceScore": 100,
-    "confidenceReason": "Опис отримано з публічної сторінки точного Telegram-акаунта.",
-    "hasNegativeReview": false,
-    "needsReview": false,
-    "reviewReason": "",
-    "registryVerified": false,
-    "registryName": "",
-    "registryOfficialName": "",
-    "registryLedgerNumber": "",
-    "registryPwz": "",
-    "registryUrl": "",
-    "registryCheckedAt": "",
-    "registryScope": "",
-    "subjectType": "фізична особа / персональна картка",
-    "subjectTypeConfidence": 100,
-    "subjectTypeBasis": "У картці прямо вказано ім’я фізичної особи: Олег. Назва бренду або місця роботи, якщо вона є, не скасовує обробку персональних даних.",
-    "subjectTypeRegistry": "дані картки",
-    "subjectTypeIdentifier": "",
-    "subjectTypeVerificationUrl": "",
-    "subjectTypeCheckedAt": "2026-08-12",
-    "individualNoticeRequired": "yes",
-    "locationStatus": "unknown",
-    "locationEvidence": ""
-  },
-  {
-    "id": 14,
     "name": "Ольга Ромашкова",
     "title": "Ольга Ромашкова",
     "category": "Краса",
@@ -841,7 +785,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 15,
+    "id": 14,
     "name": "Надія",
     "title": "Надія",
     "category": "Краса",
@@ -897,7 +841,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 16,
+    "id": 15,
     "name": "Вікторія Дрон",
     "title": "M&M Legally Company",
     "category": "Юридичні послуги",
@@ -953,7 +897,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 17,
+    "id": 16,
     "name": "Леся Вовнянко",
     "title": "Леся Вовнянко",
     "category": "Здоров'я",
@@ -1009,7 +953,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Kraków"
   },
   {
-    "id": 18,
+    "id": 17,
     "name": "Яніна Шиманська",
     "title": "Яніна Шиманська",
     "category": "Здоров'я",
@@ -1065,7 +1009,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 19,
+    "id": 18,
     "name": "Ірина",
     "title": "Massage Studio by Iryna Metokhir",
     "category": "Здоров'я",
@@ -1121,7 +1065,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 20,
+    "id": 19,
     "name": "Вадим",
     "title": "Вадим Транспорт",
     "category": "Транспорт",
@@ -1177,7 +1121,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 21,
+    "id": 20,
     "name": "Ася",
     "title": "Ася",
     "category": "Освіта",
@@ -1233,7 +1177,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 22,
+    "id": 21,
     "name": "Аліна",
     "title": "dr.alina_katowice",
     "category": "Краса",
@@ -1289,7 +1233,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 23,
+    "id": 22,
     "name": "Вікторі",
     "title": "Вікторі",
     "category": "Краса",
@@ -1345,7 +1289,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 24,
+    "id": 23,
     "name": "Вікторія та Катерина",
     "title": "Crystal Katowice",
     "category": "Краса",
@@ -1401,7 +1345,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 25,
+    "id": 24,
     "name": "Петро",
     "title": "Петро",
     "category": "Послуги",
@@ -1457,7 +1401,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 26,
+    "id": 25,
     "name": "",
     "title": "Alledoctor",
     "category": "Здоров'я",
@@ -1513,7 +1457,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Łódź, Warszawa"
   },
   {
-    "id": 27,
+    "id": 26,
     "name": "Катерина Бакіко",
     "title": "Катерина Бакіко",
     "category": "Здоров'я",
@@ -1569,7 +1513,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 28,
+    "id": 27,
     "name": "",
     "title": "Нотаріус (Україна)",
     "category": "Юридичні послуги",
@@ -1625,7 +1569,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 29,
+    "id": 28,
     "name": "Iryna Hetsko",
     "title": "Iryna Hetsko",
     "category": "Здоров'я",
@@ -1681,7 +1625,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 30,
+    "id": 29,
     "name": "Юлія Рижак",
     "title": "Studio by Yuliia Ryzhak",
     "category": "Краса",
@@ -1737,7 +1681,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 31,
+    "id": 30,
     "name": "Lena Kovalova",
     "title": "Lena Kovalova",
     "category": "Краса",
@@ -1793,7 +1737,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 32,
+    "id": 31,
     "name": "Ira",
     "title": "APN Katowice (бухгалтерське бюро)",
     "category": "Фінанси",
@@ -1849,7 +1793,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Tychy, Mikołów"
   },
   {
-    "id": 33,
+    "id": 32,
     "name": "Ірина Карпова",
     "title": "Ірина Карпова",
     "category": "Юридичні послуги",
@@ -1905,7 +1849,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 34,
+    "id": 33,
     "name": "Lena Konovalova",
     "title": "Lena Konovalova",
     "category": "Здоров'я",
@@ -1961,7 +1905,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 35,
+    "id": 34,
     "name": "Анастасия",
     "title": "Анастасия",
     "category": "Здоров'я",
@@ -2017,7 +1961,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Wrocław"
   },
   {
-    "id": 36,
+    "id": 35,
     "name": "Ольга Зіненко",
     "title": "Kolorysta Olga Zinenko",
     "category": "Краса",
@@ -2073,7 +2017,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 37,
+    "id": 36,
     "name": "",
     "title": "Психіатрична клініка (назву не вказано)",
     "category": "Здоров'я",
@@ -2129,7 +2073,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 38,
+    "id": 37,
     "name": "",
     "title": "Studio Roxe",
     "category": "Послуги",
@@ -2185,7 +2129,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 39,
+    "id": 38,
     "name": "Julenka",
     "title": "Julenka",
     "category": "Здоров'я",
@@ -2241,7 +2185,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 40,
+    "id": 39,
     "name": "Оксана Іванюк",
     "title": "Оксана Іванюк",
     "category": "Краса",
@@ -2297,7 +2241,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 41,
+    "id": 40,
     "name": "Влада Монастирська",
     "title": "Влада Монастирська",
     "category": "Послуги",
@@ -2353,7 +2297,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Mikołów"
   },
   {
-    "id": 42,
+    "id": 41,
     "name": "Наталя",
     "title": "Time to Travel",
     "category": "Послуги",
@@ -2409,7 +2353,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 43,
+    "id": 42,
     "name": "Сергій Карпов",
     "title": "Адвокатське бюро «Карпов та Партнери»",
     "category": "Юридичні послуги",
@@ -2465,7 +2409,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Сміла"
   },
   {
-    "id": 44,
+    "id": 43,
     "name": "Iryna Yurchak",
     "title": "Iryna Yurchak",
     "category": "Юридичні послуги",
@@ -2521,7 +2465,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Wrocław"
   },
   {
-    "id": 45,
+    "id": 44,
     "name": "Olena Yelchyshcheva",
     "title": "Olena Yelchyshcheva",
     "category": "Здоров'я",
@@ -2577,7 +2521,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 46,
+    "id": 45,
     "name": "Svitlana Habaraieva",
     "title": "Svitlana Habaraieva",
     "category": "Освіта",
@@ -2633,7 +2577,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 47,
+    "id": 46,
     "name": "",
     "title": "Hairdresser.000",
     "category": "Краса",
@@ -2689,7 +2633,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 48,
+    "id": 47,
     "name": "",
     "title": "Już Czas Barbershop",
     "category": "Краса",
@@ -2745,7 +2689,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 49,
+    "id": 48,
     "name": "",
     "title": "Кав'ярня IRIS",
     "category": "Заклади",
@@ -2801,7 +2745,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 50,
+    "id": 49,
     "name": "Alina",
     "title": "Comfort Trans Dispatcher",
     "category": "Послуги",
@@ -2857,7 +2801,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 51,
+    "id": 50,
     "name": "",
     "title": "Українська стоматологія (Тихи)",
     "category": "Здоров'я",
@@ -2913,7 +2857,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 52,
+    "id": 51,
     "name": "Руслан",
     "title": "Руслан",
     "category": "Юридичні послуги",
@@ -2969,7 +2913,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 53,
+    "id": 52,
     "name": "Катерина",
     "title": "Provet s.c.",
     "category": "Здоров'я",
@@ -3025,7 +2969,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Siemianowice Śląskie"
   },
   {
-    "id": 54,
+    "id": 53,
     "name": "",
     "title": "Krawcowa Proff",
     "category": "Послуги",
@@ -3081,7 +3025,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Sosnowiec"
   },
   {
-    "id": 55,
+    "id": 54,
     "name": "Ганна",
     "title": "Ганна",
     "category": "Послуги",
@@ -3137,7 +3081,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 56,
+    "id": 55,
     "name": "",
     "title": "expert_docs_com",
     "category": "Юридичні послуги",
@@ -3193,7 +3137,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 57,
+    "id": 56,
     "name": "",
     "title": "Перевізник (Катовіце-Миколаїв)",
     "category": "Послуги",
@@ -3249,7 +3193,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 58,
+    "id": 57,
     "name": "",
     "title": "Czas Katowice",
     "category": "Заклади",
@@ -3305,7 +3249,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 59,
+    "id": 58,
     "name": "Олександр",
     "title": "Олександр",
     "category": "Послуги",
@@ -3361,7 +3305,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 60,
+    "id": 59,
     "name": "Андрей",
     "title": "Андрей",
     "category": "Послуги",
@@ -3417,7 +3361,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 61,
+    "id": 60,
     "name": "Diana Sidletska",
     "title": "Поїхали з нами",
     "category": "Послуги",
@@ -3473,7 +3417,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 62,
+    "id": 61,
     "name": "Максим",
     "title": "Українське СТО (Мисловіце)",
     "category": "Послуги",
@@ -3529,7 +3473,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Mysłowice"
   },
   {
-    "id": 63,
+    "id": 62,
     "name": "Оля",
     "title": "Studio Beauty Home",
     "category": "Краса",
@@ -3585,7 +3529,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 64,
+    "id": 63,
     "name": "",
     "title": "Anastasiia Kots",
     "category": "Краса",
@@ -3641,7 +3585,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 65,
+    "id": 64,
     "name": "Катрін",
     "title": "Катрін",
     "category": "Краса",
@@ -3697,7 +3641,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 66,
+    "id": 65,
     "name": "Марина",
     "title": "Марина",
     "category": "Здоров'я",
@@ -3753,7 +3697,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 67,
+    "id": 66,
     "name": "Світлана",
     "title": "Світлана",
     "category": "Юридичні послуги",
@@ -3809,7 +3753,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 68,
+    "id": 67,
     "name": "",
     "title": "Kancelaria Kutsko",
     "category": "Юридичні послуги",
@@ -3865,7 +3809,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 69,
+    "id": 68,
     "name": "Отець Олег",
     "title": "Українська церква (Катовіце)",
     "category": "Заклади",
@@ -3921,7 +3865,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 70,
+    "id": 69,
     "name": "",
     "title": "Soniadei",
     "category": "Краса",
@@ -3977,7 +3921,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 71,
+    "id": 70,
     "name": "",
     "title": "Soccer Barbershop",
     "category": "Краса",
@@ -4033,7 +3977,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 72,
+    "id": 71,
     "name": "Олександра",
     "title": "Олександра",
     "category": "Здоров'я",
@@ -4089,7 +4033,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Żory"
   },
   {
-    "id": 73,
+    "id": 72,
     "name": "",
     "title": "dr_ersteniuk",
     "category": "Здоров'я",
@@ -4145,7 +4089,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 74,
+    "id": 73,
     "name": "Андрій",
     "title": "MM Legally Company",
     "category": "Послуги",
@@ -4201,7 +4145,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 75,
+    "id": 74,
     "name": "Олег",
     "title": "Олег",
     "category": "Послуги",
@@ -4257,7 +4201,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 76,
+    "id": 75,
     "name": "Аня",
     "title": "Magiczne Dłoni",
     "category": "Краса",
@@ -4313,7 +4257,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Sosnowiec"
   },
   {
-    "id": 77,
+    "id": 76,
     "name": "Катерина Лазарєва",
     "title": "Катерина Лазарєва",
     "category": "Юридичні послуги",
@@ -4369,7 +4313,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Dnipro"
   },
   {
-    "id": 78,
+    "id": 77,
     "name": "",
     "title": "Dr. Krashchenko",
     "category": "Здоров'я",
@@ -4425,7 +4369,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 79,
+    "id": 78,
     "name": "Анна Івахненко",
     "title": "Tour Ukraine",
     "category": "Послуги",
@@ -4481,7 +4425,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 80,
+    "id": 79,
     "name": "",
     "title": "UKS Synergia",
     "category": "Заклади",
@@ -4537,7 +4481,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Chorzów"
   },
   {
-    "id": 81,
+    "id": 80,
     "name": "Ігор Суббота",
     "title": "Ігор Суббота",
     "category": "Послуги",
@@ -4593,7 +4537,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 82,
+    "id": 81,
     "name": "Петро",
     "title": "Петро",
     "category": "Послуги",
@@ -4649,7 +4593,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 83,
+    "id": 82,
     "name": "",
     "title": "Drukidruk.pl",
     "category": "Послуги",
@@ -4705,7 +4649,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 84,
+    "id": 83,
     "name": "Anastasiia Novgorodska",
     "title": "Anastasiia Novgorodska",
     "category": "Послуги",
@@ -4761,7 +4705,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 85,
+    "id": 84,
     "name": "Євген Жарков",
     "title": "Євген Жарков",
     "category": "Послуги",
@@ -4817,7 +4761,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 86,
+    "id": 85,
     "name": "Віка",
     "title": "Віка",
     "category": "Послуги",
@@ -4873,7 +4817,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 87,
+    "id": 86,
     "name": "Олег",
     "title": "Олег",
     "category": "Послуги",
@@ -4929,7 +4873,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 88,
+    "id": 87,
     "name": "Natalia Shlikhutka",
     "title": "Natalia Shlikhutka",
     "category": "Послуги",
@@ -4985,7 +4929,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 89,
+    "id": 88,
     "name": "Roman Narepekha",
     "title": "Roman Narepekha",
     "category": "Здоров'я",
@@ -5041,7 +4985,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Zabrze"
   },
   {
-    "id": 90,
+    "id": 89,
     "name": "Лиза",
     "title": "Лиза",
     "category": "Краса",
@@ -5097,7 +5041,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 91,
+    "id": 90,
     "name": "Юля",
     "title": "Юля",
     "category": "Освіта",
@@ -5153,7 +5097,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 92,
+    "id": 91,
     "name": "Андрей",
     "title": "Андрей",
     "category": "Послуги",
@@ -5209,7 +5153,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 93,
+    "id": 92,
     "name": "Анжеліка Дьячук",
     "title": "Zdorovo Katowice",
     "category": "Здоров'я",
@@ -5265,7 +5209,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 94,
+    "id": 93,
     "name": "",
     "title": "Автоскло / ремонт лобового скла (назву не вказано)",
     "category": "Послуги",
@@ -5321,7 +5265,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 95,
+    "id": 94,
     "name": "",
     "title": "Alyonka Masalyova",
     "category": "Краса",
@@ -5377,7 +5321,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 96,
+    "id": 95,
     "name": "",
     "title": "Українська студія танців (Тихи)",
     "category": "Заклади",
@@ -5433,7 +5377,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 97,
+    "id": 96,
     "name": "Олександра",
     "title": "Олександра",
     "category": "Здоров'я",
@@ -5489,7 +5433,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 98,
+    "id": 97,
     "name": "Артем",
     "title": "Артем",
     "category": "Здоров'я",
@@ -5545,7 +5489,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 99,
+    "id": 98,
     "name": "Яна Степанцова",
     "title": "Яна Степанцова",
     "category": "Здоров'я",
@@ -5601,7 +5545,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 100,
+    "id": 99,
     "name": "Злата",
     "title": "Злата",
     "category": "Здоров'я",
@@ -5657,7 +5601,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 101,
+    "id": 100,
     "name": "",
     "title": "Dr. Liliia Nikulina",
     "category": "Здоров'я",
@@ -5713,7 +5657,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 102,
+    "id": 101,
     "name": "",
     "title": "Dr. Krivenko Gastro",
     "category": "Здоров'я",
@@ -5769,7 +5713,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 103,
+    "id": 102,
     "name": "",
     "title": "Tru Coffee Machines",
     "category": "Послуги",
@@ -5825,7 +5769,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 104,
+    "id": 103,
     "name": "Олег",
     "title": "Олег",
     "category": "Нерухомість",
@@ -5839,7 +5783,7 @@ export const specialists: Specialist[] = [
     "phone": "+48794182180",
     "email": "",
     "website": "https://www.rentalinsilesia.pl/ua/oleh-tsinyk",
-    "social": "",
+    "social": "Telegram: @oleh_rental",
     "instagram": "",
     "description": "",
     "review": "",
@@ -5881,7 +5825,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 105,
+    "id": 104,
     "name": "Людмила Борисенко",
     "title": "Людмила Борисенко",
     "category": "Нерухомість",
@@ -5937,7 +5881,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 106,
+    "id": 105,
     "name": "Ольга Котик",
     "title": "Ольга Котик",
     "category": "Юридичні послуги",
@@ -5993,7 +5937,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 107,
+    "id": 106,
     "name": "",
     "title": "KPW Auto",
     "category": "Послуги",
@@ -6049,7 +5993,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Bytom, Ruda Śląska"
   },
   {
-    "id": 108,
+    "id": 107,
     "name": "Наталія Щукіна",
     "title": "Наталія Щукіна",
     "category": "Здоров'я",
@@ -6105,7 +6049,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Sosnowiec"
   },
   {
-    "id": 109,
+    "id": 108,
     "name": "Андрій Миколайович Тіщенко",
     "title": "Zdorovo (Сосновець)",
     "category": "Здоров'я",
@@ -6161,7 +6105,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Sosnowiec"
   },
   {
-    "id": 110,
+    "id": 109,
     "name": "",
     "title": "IVANCOM",
     "category": "Послуги",
@@ -6217,7 +6161,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 111,
+    "id": 110,
     "name": "Olena Lypovska",
     "title": "Olena Lypovska",
     "category": "Здоров'я",
@@ -6273,7 +6217,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Sosnowiec"
   },
   {
-    "id": 112,
+    "id": 111,
     "name": "Артем",
     "title": "Артем",
     "category": "Послуги",
@@ -6329,7 +6273,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 113,
+    "id": 112,
     "name": "",
     "title": "Pracownia Brigadir",
     "category": "Послуги",
@@ -6385,7 +6329,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 114,
+    "id": 113,
     "name": "Альона",
     "title": "Приватний дитячий садок",
     "category": "Заклади",
@@ -6441,7 +6385,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 115,
+    "id": 114,
     "name": "",
     "title": "Kosmetolog Tarasova Katowice",
     "category": "Здоров'я",
@@ -6497,7 +6441,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 116,
+    "id": 115,
     "name": "Лена",
     "title": "Beauty Atelier LS",
     "category": "Краса",
@@ -6553,7 +6497,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 117,
+    "id": 116,
     "name": "",
     "title": "A.kittttty",
     "category": "Краса",
@@ -6609,7 +6553,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 118,
+    "id": 117,
     "name": "Дмитро",
     "title": "Дмитро",
     "category": "Послуги",
@@ -6665,7 +6609,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 119,
+    "id": 118,
     "name": "",
     "title": "Tanita Zumba",
     "category": "Заклади",
@@ -6721,7 +6665,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 120,
+    "id": 119,
     "name": "Ирина Токаревич",
     "title": "Ирина Токаревич",
     "category": "Здоров'я",
@@ -6777,7 +6721,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 121,
+    "id": 120,
     "name": "Olga Chomątańska",
     "title": "Olga Chomątańska",
     "category": "Послуги",
@@ -6833,7 +6777,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Chorzów"
   },
   {
-    "id": 122,
+    "id": 121,
     "name": "",
     "title": "Butterfly (Siemianowice)",
     "category": "Заклади",
@@ -6889,7 +6833,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Siemianowice Śląskie"
   },
   {
-    "id": 123,
+    "id": 122,
     "name": "",
     "title": "Carmen Dance Center (Katowice)",
     "category": "Заклади",
@@ -6945,7 +6889,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Ruda Śląska, Chorzów"
   },
   {
-    "id": 124,
+    "id": 123,
     "name": "Міцкевич",
     "title": "Міцкевич",
     "category": "Здоров'я",
@@ -7001,7 +6945,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 125,
+    "id": 124,
     "name": "",
     "title": "Lova Estate (Katowice)",
     "category": "Нерухомість",
@@ -7057,7 +7001,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 126,
+    "id": 125,
     "name": "",
     "title": "Dynasty Stomatology (Krakow)",
     "category": "Здоров'я",
@@ -7113,7 +7057,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Kraków"
   },
   {
-    "id": 127,
+    "id": 126,
     "name": "Євген",
     "title": "Records.pl",
     "category": "Краса",
@@ -7169,7 +7113,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 128,
+    "id": 127,
     "name": "Olena Lahutina",
     "title": "Olena Lahutina",
     "category": "Послуги",
@@ -7225,7 +7169,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 129,
+    "id": 128,
     "name": "",
     "title": "Українське СТО (Ruda Śląska)",
     "category": "Послуги",
@@ -7281,7 +7225,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Ruda Śląska, Warszawa"
   },
   {
-    "id": 130,
+    "id": 129,
     "name": "",
     "title": "Кав'ярня (чизкейки)",
     "category": "Заклади",
@@ -7337,7 +7281,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 131,
+    "id": 130,
     "name": "",
     "title": "Материнка",
     "category": "Заклади",
@@ -7393,7 +7337,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 132,
+    "id": 131,
     "name": "",
     "title": "Гуртки для дітей (Катовіце)",
     "category": "Заклади",
@@ -7449,7 +7393,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 133,
+    "id": 132,
     "name": "Ірина Галенко",
     "title": "Centrum Medyczne Graniczna",
     "category": "Здоров'я",
@@ -7505,7 +7449,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 134,
+    "id": 133,
     "name": "Олег",
     "title": "Олег",
     "category": "Здоров'я",
@@ -7561,7 +7505,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 135,
+    "id": 134,
     "name": "Арсен",
     "title": "Арсен",
     "category": "Здоров'я",
@@ -7617,7 +7561,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 136,
+    "id": 135,
     "name": "Дмитро",
     "title": "Дмитро",
     "category": "Послуги",
@@ -7673,7 +7617,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 137,
+    "id": 136,
     "name": "",
     "title": "Soul Jewelry PL",
     "category": "Послуги",
@@ -7729,7 +7673,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 138,
+    "id": 137,
     "name": "",
     "title": "Bar Garden Katowice",
     "category": "Заклади",
@@ -7785,7 +7729,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 139,
+    "id": 138,
     "name": "Andrii Ziniuk",
     "title": "Andrii Ziniuk",
     "category": "Здоров'я",
@@ -7841,7 +7785,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 140,
+    "id": 139,
     "name": "Ольга Ліпкевич",
     "title": "Zdorovo",
     "category": "Здоров'я",
@@ -7897,7 +7841,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 141,
+    "id": 140,
     "name": "Марина",
     "title": "Марина",
     "category": "Здоров'я",
@@ -7953,7 +7897,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Świętochłowice"
   },
   {
-    "id": 142,
+    "id": 141,
     "name": "Михайло Ясінський",
     "title": "Михайло Ясінський",
     "category": "Здоров'я",
@@ -8009,7 +7953,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Ruda Śląska"
   },
   {
-    "id": 143,
+    "id": 142,
     "name": "",
     "title": "Паляниця",
     "category": "Заклади",
@@ -8065,7 +8009,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 144,
+    "id": 143,
     "name": "",
     "title": "Acaya",
     "category": "Заклади",
@@ -8121,7 +8065,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 145,
+    "id": 144,
     "name": "Вікторія",
     "title": "Вікторія",
     "category": "Освіта",
@@ -8177,7 +8121,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 146,
+    "id": 145,
     "name": "",
     "title": "Pani Bus",
     "category": "Послуги",
@@ -8233,7 +8177,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Kraków, Gliwice, Wrocław, Rzeszów, Opole"
   },
   {
-    "id": 147,
+    "id": 146,
     "name": "",
     "title": "Vektor",
     "category": "Послуги",
@@ -8289,7 +8233,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Kraków, Gliwice, Wrocław, Rzeszów, Opole"
   },
   {
-    "id": 148,
+    "id": 147,
     "name": "",
     "title": "Belinens UA",
     "category": "Послуги",
@@ -8345,7 +8289,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 149,
+    "id": 148,
     "name": "",
     "title": "Dr. Dermatokosmetolog",
     "category": "Здоров'я",
@@ -8401,7 +8345,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Pattaya, Cannes"
   },
   {
-    "id": 150,
+    "id": 149,
     "name": "",
     "title": "Viktoriya Nails Kharkov",
     "category": "Краса",
@@ -8457,7 +8401,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 151,
+    "id": 150,
     "name": "",
     "title": "Your Celebration",
     "category": "Послуги",
@@ -8513,7 +8457,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 152,
+    "id": 151,
     "name": "Наталия",
     "title": "Наталия",
     "category": "Здоров'я",
@@ -8569,7 +8513,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 153,
+    "id": 152,
     "name": "Юрій Лукащук",
     "title": "Юрій Лукащук",
     "category": "Послуги",
@@ -8625,7 +8569,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 154,
+    "id": 153,
     "name": "Дмитро Жаворонков",
     "title": "Дмитро Жаворонков",
     "category": "Здоров'я",
@@ -8681,7 +8625,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Gliwice"
   },
   {
-    "id": 155,
+    "id": 154,
     "name": "",
     "title": "Dr. Sistalyuk",
     "category": "Краса",
@@ -8737,7 +8681,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Lviv"
   },
   {
-    "id": 156,
+    "id": 155,
     "name": "",
     "title": "Студія Алли Камінської",
     "category": "Краса",
@@ -8793,7 +8737,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 157,
+    "id": 156,
     "name": "Оксана Камінська",
     "title": "Avimed (Катовіце)",
     "category": "Здоров'я",
@@ -8849,7 +8793,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Mikołów"
   },
   {
-    "id": 158,
+    "id": 157,
     "name": "",
     "title": "Campscouting",
     "category": "Заклади",
@@ -8905,7 +8849,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 159,
+    "id": 158,
     "name": "Вікторія",
     "title": "Салон (Booksy 197082)",
     "category": "Краса",
@@ -8961,7 +8905,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 160,
+    "id": 159,
     "name": "",
     "title": "МістоДент (Варшава)",
     "category": "Здоров'я",
@@ -9017,7 +8961,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Warszawa"
   },
   {
-    "id": 161,
+    "id": 160,
     "name": "Аліна",
     "title": "Аліна",
     "category": "Послуги",
@@ -9073,7 +9017,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 162,
+    "id": 161,
     "name": "Володимир",
     "title": "Володимир",
     "category": "Послуги",
@@ -9129,7 +9073,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 163,
+    "id": 162,
     "name": "",
     "title": "Velaskes Beauty",
     "category": "Послуги",
@@ -9185,7 +9129,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 164,
+    "id": 163,
     "name": "Катерина",
     "title": "Катерина",
     "category": "Здоров'я",
@@ -9241,7 +9185,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 165,
+    "id": 164,
     "name": "Дмитро",
     "title": "Дмитро",
     "category": "Послуги",
@@ -9297,7 +9241,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 166,
+    "id": 165,
     "name": "",
     "title": "Греко-католицька церква (Катовіце, район Ligota)",
     "category": "Заклади",
@@ -9353,7 +9297,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Wrocław"
   },
   {
-    "id": 167,
+    "id": 166,
     "name": "",
     "title": "Zdorovo",
     "category": "Здоров'я",
@@ -9409,7 +9353,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Kraków, Sosnowiec, Warszawa, Lublin"
   },
   {
-    "id": 168,
+    "id": 167,
     "name": "",
     "title": "Baksheieva Therapy",
     "category": "Здоров'я",
@@ -9465,7 +9409,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 169,
+    "id": 168,
     "name": "Наталія",
     "title": "Наталія",
     "category": "Фінанси",
@@ -9521,7 +9465,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Bytom"
   },
   {
-    "id": 170,
+    "id": 169,
     "name": "Ольга Гуменюк",
     "title": "Ольга Гуменюк",
     "category": "Здоров'я",
@@ -9577,7 +9521,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 171,
+    "id": 170,
     "name": "Олена",
     "title": "Олена",
     "category": "Освіта",
@@ -9633,7 +9577,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 172,
+    "id": 171,
     "name": "",
     "title": "Haftowane Unikaty",
     "category": "Послуги",
@@ -9689,7 +9633,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 173,
+    "id": 172,
     "name": "Ilona",
     "title": "Hair Laboratory by Aleksandra",
     "category": "Краса",
@@ -9745,7 +9689,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 174,
+    "id": 173,
     "name": "",
     "title": "Logoped Inna Poland",
     "category": "Здоров'я",
@@ -9801,7 +9745,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 175,
+    "id": 174,
     "name": "",
     "title": "Домашні пельмені/вареники",
     "category": "Послуги",
@@ -9857,7 +9801,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 176,
+    "id": 175,
     "name": "",
     "title": "Каритас (Центр для мигрантов, Jordana 18)",
     "category": "Юридичні послуги",
@@ -9913,7 +9857,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 177,
+    "id": 176,
     "name": "Євгенія Гергель",
     "title": "Dr. Gergel Cosmetology",
     "category": "Краса",
@@ -9969,7 +9913,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 178,
+    "id": 177,
     "name": "",
     "title": "Twins (зал, Катовіце)",
     "category": "Заклади",
@@ -10025,7 +9969,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 179,
+    "id": 178,
     "name": "Катя",
     "title": "Катя",
     "category": "Послуги",
@@ -10081,7 +10025,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 180,
+    "id": 179,
     "name": "",
     "title": "So Sushi (Мисловіце)",
     "category": "Заклади",
@@ -10137,7 +10081,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Mysłowice"
   },
   {
-    "id": 181,
+    "id": 180,
     "name": "",
     "title": "Football School Temp",
     "category": "Заклади",
@@ -10193,7 +10137,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Kraków"
   },
   {
-    "id": 182,
+    "id": 181,
     "name": "",
     "title": "Lampart Studio",
     "category": "Послуги",
@@ -10249,7 +10193,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 183,
+    "id": 182,
     "name": "",
     "title": "Harmoniya Balans",
     "category": "Послуги",
@@ -10305,7 +10249,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 184,
+    "id": 183,
     "name": "Julia",
     "title": "Julia Online Coach",
     "category": "Послуги",
@@ -10361,7 +10305,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 185,
+    "id": 184,
     "name": "Альона",
     "title": "Альона",
     "category": "Краса",
@@ -10417,7 +10361,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 186,
+    "id": 185,
     "name": "",
     "title": "Anet Brows",
     "category": "Краса",
@@ -10473,7 +10417,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 187,
+    "id": 186,
     "name": "",
     "title": "Sunshine Sweets Zefir",
     "category": "Послуги",
@@ -10529,7 +10473,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Tarnowskie Góry"
   },
   {
-    "id": 188,
+    "id": 187,
     "name": "Наталія",
     "title": "Gordi Nails Natali",
     "category": "Краса",
@@ -10585,7 +10529,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 189,
+    "id": 188,
     "name": "Галина",
     "title": "Mamonovaa Photo",
     "category": "Послуги",
@@ -10641,7 +10585,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Chernihiv"
   },
   {
-    "id": 190,
+    "id": 189,
     "name": "Богдана",
     "title": "Bogdana Borisovna",
     "category": "Послуги",
@@ -10697,7 +10641,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 191,
+    "id": 190,
     "name": "Ліза",
     "title": "E_levytska",
     "category": "Освіта",
@@ -10753,7 +10697,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 192,
+    "id": 191,
     "name": "Дарʼя",
     "title": "Barber Dar",
     "category": "Краса",
@@ -10809,7 +10753,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 193,
+    "id": 192,
     "name": "Яна",
     "title": "Яна",
     "category": "Краса",
@@ -10865,7 +10809,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 194,
+    "id": 193,
     "name": "Ольга",
     "title": "Vorona Studio",
     "category": "Краса",
@@ -10921,7 +10865,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Siemianowice Śląskie"
   },
   {
-    "id": 195,
+    "id": 194,
     "name": "",
     "title": "Ksiazki po Ukrainsku",
     "category": "Послуги",
@@ -10977,7 +10921,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 196,
+    "id": 195,
     "name": "Alina",
     "title": "Eposylka",
     "category": "Послуги",
@@ -11033,7 +10977,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 197,
+    "id": 196,
     "name": "Женя",
     "title": "Magiczne Dłonie (Sosnowiec)",
     "category": "Краса",
@@ -11089,7 +11033,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Sosnowiec"
   },
   {
-    "id": 198,
+    "id": 197,
     "name": "",
     "title": "Podolog Gliwice",
     "category": "Здоров'я",
@@ -11145,7 +11089,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Gliwice"
   },
   {
-    "id": 199,
+    "id": 198,
     "name": "Олена",
     "title": "Your Beauty Place Studio",
     "category": "Здоров'я",
@@ -11201,7 +11145,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 200,
+    "id": 199,
     "name": "",
     "title": "Кілограм Суші",
     "category": "Заклади",
@@ -11257,7 +11201,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Jaworzno"
   },
   {
-    "id": 201,
+    "id": 200,
     "name": "",
     "title": "Осама Суші",
     "category": "Заклади",
@@ -11313,7 +11257,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 202,
+    "id": 201,
     "name": "",
     "title": "Smoke Hause",
     "category": "Заклади",
@@ -11369,7 +11313,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 203,
+    "id": 202,
     "name": "",
     "title": "Urban Coffee",
     "category": "Заклади",
@@ -11425,7 +11369,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Kraków, Warszawa"
   },
   {
-    "id": 204,
+    "id": 203,
     "name": "",
     "title": "Mix Markt",
     "category": "Заклади",
@@ -11481,7 +11425,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 205,
+    "id": 204,
     "name": "",
     "title": "Alchemia Bar Katowice",
     "category": "Заклади",
@@ -11537,7 +11481,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 206,
+    "id": 205,
     "name": "",
     "title": "Bavovna Katowice",
     "category": "Заклади",
@@ -11593,7 +11537,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 207,
+    "id": 206,
     "name": "",
     "title": "Sana Medical Care (Katowice)",
     "category": "Здоров'я",
@@ -11649,7 +11593,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 208,
+    "id": 207,
     "name": "",
     "title": "Makeup.brows.kato_",
     "category": "Краса",
@@ -11705,7 +11649,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 209,
+    "id": 208,
     "name": "",
     "title": "Svitlana Beauty Keratin",
     "category": "Краса",
@@ -11761,7 +11705,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 210,
+    "id": 209,
     "name": "Жанна",
     "title": "Zhanna Caialo Colorist",
     "category": "Краса",
@@ -11817,7 +11761,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 211,
+    "id": 210,
     "name": "Юля",
     "title": "Romanova.ft",
     "category": "Послуги",
@@ -11873,7 +11817,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Kraków"
   },
   {
-    "id": 212,
+    "id": 211,
     "name": "Катя",
     "title": "Beauty Lab Katowice",
     "category": "Краса",
@@ -11929,7 +11873,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 213,
+    "id": 212,
     "name": "Аліса",
     "title": "Ellesse Afro Hair",
     "category": "Краса",
@@ -11985,7 +11929,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Warszawa, Manila"
   },
   {
-    "id": 214,
+    "id": 213,
     "name": "Зоя",
     "title": "Olexandrivna Sht",
     "category": "Послуги",
@@ -12041,7 +11985,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 215,
+    "id": 214,
     "name": "Софія Мусієнко",
     "title": "Софія Мусієнко",
     "category": "Послуги",
@@ -12097,7 +12041,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 216,
+    "id": 215,
     "name": "Даша",
     "title": "Manicure Bar Katowice",
     "category": "Краса",
@@ -12153,7 +12097,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 217,
+    "id": 216,
     "name": "",
     "title": "Перевізник (біля Супер Саму)",
     "category": "Послуги",
@@ -12209,7 +12153,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 218,
+    "id": 217,
     "name": "",
     "title": "Асма Барбер",
     "category": "Краса",
@@ -12265,7 +12209,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 219,
+    "id": 218,
     "name": "Андрій",
     "title": "Перевізник (Львів–Сосновець)",
     "category": "Транспорт",
@@ -12321,7 +12265,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 220,
+    "id": 219,
     "name": "",
     "title": "Присяжний перекладач (email kubabober334@gmail.com)",
     "category": "Юридичні послуги",
@@ -12377,7 +12321,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 221,
+    "id": 220,
     "name": "Оксана",
     "title": "Massage Katowice (Ligota)",
     "category": "Здоров'я",
@@ -12433,7 +12377,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 222,
+    "id": 221,
     "name": "Олена",
     "title": "Олена",
     "category": "Послуги",
@@ -12489,7 +12433,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 223,
+    "id": 222,
     "name": "",
     "title": "Лікар Олег (стоматолог)",
     "category": "Здоров'я",
@@ -12545,7 +12489,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 224,
+    "id": 223,
     "name": "",
     "title": "Dokument UA13",
     "category": "Юридичні послуги",
@@ -12601,7 +12545,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 225,
+    "id": 224,
     "name": "",
     "title": "Апостиль онлайн (apostille.in.ua)",
     "category": "Юридичні послуги",
@@ -12657,7 +12601,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 226,
+    "id": 225,
     "name": "Микола",
     "title": "Микола",
     "category": "Транспорт",
@@ -12713,7 +12657,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 227,
+    "id": 226,
     "name": "Назар",
     "title": "Авто-лайф",
     "category": "Транспорт",
@@ -12769,7 +12713,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 228,
+    "id": 227,
     "name": "",
     "title": "Довідкова лінія NFZ (українською)",
     "category": "Здоров'я",
@@ -12825,7 +12769,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 229,
+    "id": 228,
     "name": "",
     "title": "Хірург (Сосновець)",
     "category": "Здоров'я",
@@ -12881,7 +12825,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 230,
+    "id": 229,
     "name": "",
     "title": "Перевізник Щастя",
     "category": "Транспорт",
@@ -12937,7 +12881,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Kraków, Dąbrowa Górnicza, Lviv"
   },
   {
-    "id": 231,
+    "id": 230,
     "name": "",
     "title": "karyna_keratyna_katowice",
     "category": "Краса",
@@ -12993,7 +12937,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 232,
+    "id": 231,
     "name": "Anna Kadykało",
     "title": "Anna Kadykało",
     "category": "Юридичні послуги",
@@ -13049,7 +12993,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 233,
+    "id": 232,
     "name": "Ihor Dobosh",
     "title": "Ihor Dobosh",
     "category": "Фінанси",
@@ -13105,7 +13049,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 234,
+    "id": 233,
     "name": "Ihor Perepolkin",
     "title": "Ihor Perepolkin",
     "category": "Краса",
@@ -13161,7 +13105,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 235,
+    "id": 234,
     "name": "",
     "title": "Diana Hromakova (фінансова менеджерка)",
     "category": "Фінанси",
@@ -13217,7 +13161,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 236,
+    "id": 235,
     "name": "",
     "title": "ContraBus",
     "category": "Транспорт",
@@ -13273,7 +13217,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 237,
+    "id": 236,
     "name": "",
     "title": "Документи під ключ (легалізація, апостиль)",
     "category": "Юридичні послуги",
@@ -13329,7 +13273,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 238,
+    "id": 237,
     "name": "",
     "title": "Курси польської мови (Наталя, Краків)",
     "category": "Освіта",
@@ -13385,7 +13329,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 239,
+    "id": 238,
     "name": "Оксана",
     "title": "Тури для українок (авторські тури)",
     "category": "Транспорт",
@@ -13441,7 +13385,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 240,
+    "id": 239,
     "name": "",
     "title": "Без назви",
     "category": "Послуги",
@@ -13497,7 +13441,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 241,
+    "id": 240,
     "name": "Dmytro Holovenko",
     "title": "Dmytro Holovenko",
     "category": "Юридичні послуги",
@@ -13553,7 +13497,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Kraków"
   },
   {
-    "id": 242,
+    "id": 241,
     "name": "Julia Kambur",
     "title": "Julia Kambur",
     "category": "Краса",
@@ -13609,7 +13553,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 243,
+    "id": 242,
     "name": "Сергій",
     "title": "Сергій",
     "category": "Транспорт",
@@ -13665,7 +13609,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 244,
+    "id": 243,
     "name": "Лідія Рибак",
     "title": "Zdorovo",
     "category": "Здоров'я",
@@ -13721,7 +13665,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 245,
+    "id": 244,
     "name": "Володимир Маслов",
     "title": "Zdorovo",
     "category": "Здоров'я",
@@ -13777,7 +13721,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 246,
+    "id": 245,
     "name": "Денис Дьячук",
     "title": "Zdorovo",
     "category": "Здоров'я",
@@ -13833,7 +13777,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Kraków"
   },
   {
-    "id": 247,
+    "id": 246,
     "name": "Богдан Голюк",
     "title": "Zdorovo",
     "category": "Здоров'я",
@@ -13889,7 +13833,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 248,
+    "id": 247,
     "name": "Tetiana Bobrovnik",
     "title": "Zdorovo",
     "category": "Здоров'я",
@@ -13945,7 +13889,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 249,
+    "id": 248,
     "name": "Ольга",
     "title": "Автобусні перевезення (Україна-Європа)",
     "category": "Транспорт",
@@ -14001,7 +13945,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 250,
+    "id": 249,
     "name": "",
     "title": "ShoPoAuto (дошка оголошень)",
     "category": "Транспорт",
@@ -14057,7 +14001,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 251,
+    "id": 250,
     "name": "Віктор Вікторович",
     "title": "Віктор Вікторович",
     "category": "Здоров'я",
@@ -14113,7 +14057,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 252,
+    "id": 251,
     "name": "Галина Опалінська",
     "title": "Zdorovo",
     "category": "Здоров'я",
@@ -14169,7 +14113,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 253,
+    "id": 252,
     "name": "Вероніка Шмагель",
     "title": "Zdorovo",
     "category": "Здоров'я",
@@ -14225,7 +14169,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 254,
+    "id": 253,
     "name": "Олексій Фоменко",
     "title": "Zdorovo",
     "category": "Здоров'я",
@@ -14281,7 +14225,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Zabrze"
   },
   {
-    "id": 255,
+    "id": 254,
     "name": "Олександр Волошин",
     "title": "Zdorovo",
     "category": "Здоров'я",
@@ -14337,7 +14281,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Zabrze"
   },
   {
-    "id": 256,
+    "id": 255,
     "name": "Кристина",
     "title": "Кристина",
     "category": "Юридичні послуги",
@@ -14393,7 +14337,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 257,
+    "id": 256,
     "name": "",
     "title": "Maryna Pavlovska",
     "category": "Послуги",
@@ -14449,7 +14393,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Gliwice, Sosnowiec"
   },
   {
-    "id": 258,
+    "id": 257,
     "name": "Ксюша PL",
     "title": "Ксюша PL",
     "category": "Фінанси",
@@ -14505,7 +14449,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 259,
+    "id": 258,
     "name": "Світланка",
     "title": "Світланка",
     "category": "Освіта",
@@ -14561,7 +14505,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 260,
+    "id": 259,
     "name": "Іван Сергійович",
     "title": "Іван Сергійович",
     "category": "Освіта",
@@ -14617,7 +14561,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 261,
+    "id": 260,
     "name": "Ірина",
     "title": "Ірина",
     "category": "Освіта",
@@ -14673,7 +14617,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 262,
+    "id": 261,
     "name": "Аlla",
     "title": "Салон (центр Катовіце)",
     "category": "Краса",
@@ -14729,7 +14673,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 263,
+    "id": 262,
     "name": "Анжела",
     "title": "Гурток малювання",
     "category": "Освіта",
@@ -14785,7 +14729,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 264,
+    "id": 263,
     "name": "",
     "title": "Електрик (Катовіце)",
     "category": "Послуги",
@@ -14841,7 +14785,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Chorzów, Sosnowiec, Mysłowice, Siemianowice Śląskie, Tychy, Zabrze, Gliwice"
   },
   {
-    "id": 265,
+    "id": 264,
     "name": "",
     "title": "ДП «Документ» (Варшава)",
     "category": "Юридичні послуги",
@@ -14897,7 +14841,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 266,
+    "id": 265,
     "name": "",
     "title": "Spilno Hub (Катовіце)",
     "category": "Юридичні послуги",
@@ -14953,7 +14897,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 267,
+    "id": 266,
     "name": "",
     "title": "Присяжний перекладач (укр)",
     "category": "Юридичні послуги",
@@ -15009,7 +14953,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 268,
+    "id": 267,
     "name": "",
     "title": "Хімчистка автомобілів (Мишків)",
     "category": "Транспорт",
@@ -15065,7 +15009,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 269,
+    "id": 268,
     "name": "Оксана",
     "title": "Оксана Мама в Катовіце (вії)",
     "category": "Краса",
@@ -15121,7 +15065,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 270,
+    "id": 269,
     "name": "Інга",
     "title": "NovaШкола (репетиторський центр)",
     "category": "Освіта",
@@ -15177,7 +15121,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 271,
+    "id": 270,
     "name": "Діана Лавріненко",
     "title": "Діана Лавріненко",
     "category": "Здоров'я",
@@ -15233,7 +15177,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 272,
+    "id": 271,
     "name": "Елеонора Касьонкіна",
     "title": "Елеонора Касьонкіна",
     "category": "Освіта",
@@ -15289,7 +15233,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 273,
+    "id": 272,
     "name": "Олена",
     "title": "Olena Economist",
     "category": "Послуги",
@@ -15345,7 +15289,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 274,
+    "id": 273,
     "name": "Ліка Швецова",
     "title": "Ліка Швецова",
     "category": "Юридичні послуги",
@@ -15401,7 +15345,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 275,
+    "id": 274,
     "name": "",
     "title": "Kwiaty Kraft",
     "category": "Послуги",
@@ -15457,7 +15401,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Chorzów, Katowice"
   },
   {
-    "id": 276,
+    "id": 275,
     "name": "Татьяна Остапенко",
     "title": "Татьяна Остапенко",
     "category": "Послуги",
@@ -15513,7 +15457,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 277,
+    "id": 276,
     "name": "Natali Gromova",
     "title": "Natali Gromova",
     "category": "Освіта",
@@ -15569,7 +15513,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 278,
+    "id": 277,
     "name": "Ян Білоголовий",
     "title": "Ян Білоголовий",
     "category": "Юридичні послуги",
@@ -15625,7 +15569,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 279,
+    "id": 278,
     "name": "Ірина",
     "title": "Ірина",
     "category": "Послуги",
@@ -15681,7 +15625,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 280,
+    "id": 279,
     "name": "Олена",
     "title": "LionSystems (представник)",
     "category": "Послуги",
@@ -15737,7 +15681,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 281,
+    "id": 280,
     "name": "Дина Стрельникова",
     "title": "DiaModel School",
     "category": "Освіта",
@@ -15793,7 +15737,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 282,
+    "id": 281,
     "name": "Svitlana Trofymenko",
     "title": "Craft Dental",
     "category": "Здоров'я",
@@ -15849,7 +15793,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 283,
+    "id": 282,
     "name": "Tetiana Oleksiienko",
     "title": "Stomatologia WAMED",
     "category": "Здоров'я",
@@ -15905,7 +15849,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 284,
+    "id": 283,
     "name": "",
     "title": "Centrum Stomatologii Periodent",
     "category": "Здоров'я",
@@ -15961,7 +15905,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 285,
+    "id": 284,
     "name": "",
     "title": "Stomatologia DS Sosnowiec",
     "category": "Здоров'я",
@@ -16017,7 +15961,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Sosnowiec"
   },
   {
-    "id": 286,
+    "id": 285,
     "name": "",
     "title": "Stomatolog Bytom",
     "category": "Здоров'я",
@@ -16073,7 +16017,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 287,
+    "id": 286,
     "name": "",
     "title": "Мануфактура успіху",
     "category": "Здоров'я",
@@ -16129,7 +16073,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 288,
+    "id": 287,
     "name": "Anastasiia Kravchenko",
     "title": "Anastasiia Kravchenko",
     "category": "Здоров'я",
@@ -16185,7 +16129,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 289,
+    "id": 288,
     "name": "Aleksandra Kruk",
     "title": "Aleksandra Kruk",
     "category": "Здоров'я",
@@ -16241,7 +16185,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 290,
+    "id": 289,
     "name": "Serhii Drozdov",
     "title": "Serhii Drozdov",
     "category": "Здоров'я",
@@ -16297,7 +16241,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 291,
+    "id": 290,
     "name": "Tatiana Doronina",
     "title": "Tatiana Doronina",
     "category": "Здоров'я",
@@ -16353,7 +16297,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 292,
+    "id": 291,
     "name": "Татьяна Ващенко",
     "title": "Татьяна Ващенко",
     "category": "Здоров'я",
@@ -16409,7 +16353,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 293,
+    "id": 292,
     "name": "",
     "title": "Strefa Zmiany",
     "category": "Здоров'я",
@@ -16465,7 +16409,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 294,
+    "id": 293,
     "name": "Roman Pawel Montecki",
     "title": "Roman Pawel Montecki",
     "category": "Здоров'я",
@@ -16521,7 +16465,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 295,
+    "id": 294,
     "name": "Наталя Македон",
     "title": "Наталя Македон",
     "category": "Здоров'я",
@@ -16577,7 +16521,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 296,
+    "id": 295,
     "name": "Олександр Сорока",
     "title": "Олександр Сорока",
     "category": "Здоров'я",
@@ -16633,7 +16577,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 297,
+    "id": 296,
     "name": "Oleg Lipkevych",
     "title": "Oleg Lipkevych",
     "category": "Здоров'я",
@@ -16689,7 +16633,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 298,
+    "id": 297,
     "name": "",
     "title": "Лікарня (вул. Любінова 3, Катовіце) — пологове відділення",
     "category": "Здоров'я",
@@ -16745,7 +16689,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 299,
+    "id": 298,
     "name": "",
     "title": "Tbilisuri Katowice",
     "category": "Заклади",
@@ -16801,7 +16745,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 300,
+    "id": 299,
     "name": "Bogdan Sorokhman",
     "title": "Bogdan Sorokhman",
     "category": "Послуги",
@@ -16857,7 +16801,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 301,
+    "id": 300,
     "name": "Юлія Чернова",
     "title": "Юлія Чернова",
     "category": "Послуги",
@@ -16913,7 +16857,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 302,
+    "id": 301,
     "name": "Стадник Наталия",
     "title": "Стадник Наталия",
     "category": "Послуги",
@@ -16969,7 +16913,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 303,
+    "id": 302,
     "name": "Roman Petryshak",
     "title": "Roman Petryshak",
     "category": "Послуги",
@@ -17025,7 +16969,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 304,
+    "id": 303,
     "name": "Ольга",
     "title": "Przychodnia Weterynaryjna Centrum",
     "category": "Здоров'я",
@@ -17081,7 +17025,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Świętochłowice"
   },
   {
-    "id": 305,
+    "id": 304,
     "name": "Galina Derevianko",
     "title": "Galina Derevianko",
     "category": "Здоров'я",
@@ -17137,7 +17081,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Kraków"
   },
   {
-    "id": 306,
+    "id": 305,
     "name": "Вікторія Загородня",
     "title": "Top Clinic / Centrum Medyczne GAVITA",
     "category": "Здоров'я",
@@ -17193,7 +17137,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Będzin, Mysłowice"
   },
   {
-    "id": 307,
+    "id": 306,
     "name": "Maria Jegorowa",
     "title": "Maria Jegorowa",
     "category": "Здоров'я",
@@ -17249,7 +17193,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice, Mysłowice"
   },
   {
-    "id": 308,
+    "id": 307,
     "name": "Tetiana Lutsenko-Shlikhutka",
     "title": "Stopą w chmurach",
     "category": "Здоров'я",
@@ -17305,7 +17249,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 309,
+    "id": 308,
     "name": "Iryna Zavorotna",
     "title": "Iryna Zavorotna",
     "category": "Здоров'я",
@@ -17361,7 +17305,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 310,
+    "id": 309,
     "name": "Bartosz Macionczyk",
     "title": "LiftMed",
     "category": "Здоров'я",
@@ -17417,7 +17361,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 311,
+    "id": 310,
     "name": "Władimir Malarenko",
     "title": "Polis Clinic",
     "category": "Здоров'я",
@@ -17473,7 +17417,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 312,
+    "id": 311,
     "name": "Tetiana Kryvenko",
     "title": "Tetiana Kryvenko",
     "category": "Здоров'я",
@@ -17529,7 +17473,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Tychy"
   },
   {
-    "id": 313,
+    "id": 312,
     "name": "Kateryna Stankevych",
     "title": "Caritas",
     "category": "Здоров'я",
@@ -17585,7 +17529,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 314,
+    "id": 313,
     "name": "Inna Loitra",
     "title": "Inna Loitra",
     "category": "Здоров'я",
@@ -17641,7 +17585,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 315,
+    "id": 314,
     "name": "Інна Москалюк",
     "title": "Інна Москалюк",
     "category": "Здоров'я",
@@ -17697,7 +17641,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Онлайн"
   },
   {
-    "id": 316,
+    "id": 315,
     "name": "Наталія Кудінова",
     "title": "Наталія Кудінова",
     "category": "Здоров'я",
@@ -17753,7 +17697,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": ""
   },
   {
-    "id": 317,
+    "id": 316,
     "name": "",
     "title": "Planeta Terapii Katowice",
     "category": "Здоров'я",
@@ -17809,7 +17753,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Katowice"
   },
   {
-    "id": 318,
+    "id": 317,
     "name": "Євген Скрипник",
     "title": "Євген Скрипник",
     "category": "Здоров'я",
@@ -17865,7 +17809,7 @@ export const specialists: Specialist[] = [
     "locationEvidence": "Kyiv"
   },
   {
-    "id": 319,
+    "id": 318,
     "name": "Anna Andreeva",
     "title": "Anna Andreeva",
     "category": "Здоров'я",
