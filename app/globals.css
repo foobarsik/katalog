@@ -114,6 +114,11 @@ ul {
   stroke-linejoin: round;
 }
 
+.facebook-icon {
+  fill: currentColor;
+  stroke: none;
+}
+
 .shell {
   max-width: 1180px;
   margin: 0 auto;

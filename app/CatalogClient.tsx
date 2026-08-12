@@ -441,8 +441,8 @@ function TelegramIcon() {
 
 function FacebookIcon() {
   return (
-    <svg aria-hidden="true" className="icon" viewBox="0 0 24 24">
-      <path d="M14 8.1h2.1V4.6c-.4-.1-1.7-.2-3.2-.2-3.2 0-5.3 1.9-5.3 5.4v3H4.1v3.9h3.5v8h4.3v-8h3.4l.5-3.9h-3.9v-2.6c0-1.1.3-2.1 2.1-2.1Z" />
+    <svg aria-hidden="true" className="icon facebook-icon" viewBox="0 0 24 24">
+      <path d="M14.2 8H17V4h-3.2C10.6 4 9 5.9 9 9v3H6v4h3v5h4v-5h3.2l.6-4H13V9.4c0-1 .3-1.4 1.2-1.4Z" />
     </svg>
   );
 }
