@@ -532,9 +532,12 @@ ul {
 
 /* ---------- grid ---------- */
 
+/* Entries carry wildly different amounts of text; stretching each row to its tallest card left
+   short entries with a large empty block above the actions. */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(296px, 1fr));
+  align-items: start;
   gap: 14px;
 }
 
@@ -725,13 +728,39 @@ ul {
   margin-left: 8px;
 }
 
-.card-names {
-  min-width: 0;
-  padding-top: 2px;
+.card-identity {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
 }
 
+.monogram {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--cat, var(--accent));
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.card-names {
+  min-width: 0;
+  padding-top: 1px;
+}
+
+/* Some subcategories run to four comma-separated specialities; unclamped they push the name out of
+   line with neighbouring cards. */
 .card-names .profession {
-  margin-bottom: 8px;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  margin-bottom: 6px;
 }
 
 .card-names h3 {

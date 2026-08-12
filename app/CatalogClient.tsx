@@ -89,6 +89,25 @@ function getDisplayName(item: Specialist) {
     : item.title || `@${handle}`;
 }
 
+function getInitials(item: Specialist) {
+  return (getDisplayName(item) || "?")
+    .split(/[^\p{L}\p{N}]+/u)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toLocaleUpperCase("uk-UA");
+}
+
+/** Letters drawn from the name we already publish — never a copy of anyone's photo. */
+function Monogram({ item }: { item: Specialist }) {
+  return (
+    <span className="monogram" aria-hidden="true">
+      {getInitials(item)}
+    </span>
+  );
+}
+
 function getSecondaryName(item: Specialist) {
   const display = getDisplayName(item);
   return item.name && item.name !== display ? item.name : "";
@@ -612,14 +631,17 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
 
   return (
     <article className={className} style={{ "--cat": getCategoryColor(item.category) } as React.CSSProperties}>
-      <div className="card-names">
-        <p className="profession">{item.subcategory || item.category}</p>
-        <h3>
-          <button className="card-open" type="button" onClick={() => onOpen(item)}>
-            {getDisplayName(item)}
-          </button>
-        </h3>
-        {secondaryName ? <p className="person">{secondaryName}</p> : null}
+      <div className="card-identity">
+        <Monogram item={item} />
+        <div className="card-names">
+          <p className="profession">{item.subcategory || item.category}</p>
+          <h3>
+            <button className="card-open" type="button" onClick={() => onOpen(item)}>
+              {getDisplayName(item)}
+            </button>
+          </h3>
+          {secondaryName ? <p className="person">{secondaryName}</p> : null}
+        </div>
       </div>
 
       <BookFacts item={item} />
