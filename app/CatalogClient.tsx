@@ -936,24 +936,29 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const searchRef = useRef<HTMLInputElement | null>(null);
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
+  const publicSpecialists = useMemo(
+    () => specialists.filter((item) => isBookItem(item) || hasAnyContact(item)),
+    [specialists],
+  );
+
   const selected = useMemo(
-    () => specialists.find((item) => item.id === selectedId) || null,
-    [selectedId, specialists],
+    () => publicSpecialists.find((item) => item.id === selectedId) || null,
+    [publicSpecialists, selectedId],
   );
 
   const mainCatalogCount = useMemo(
-    () => specialists.filter((item) => !isBookItem(item)).length,
-    [specialists],
+    () => publicSpecialists.filter((item) => !isBookItem(item)).length,
+    [publicSpecialists],
   );
 
   const organizationCount = useMemo(
-    () => specialists.filter((item) => !isBookItem(item) && item.individualNoticeRequired === "no").length,
-    [specialists],
+    () => publicSpecialists.filter((item) => !isBookItem(item) && item.individualNoticeRequired === "no").length,
+    [publicSpecialists],
   );
 
   const categories = useMemo(() => {
     const counts = new Map<string, number>();
-    for (const item of specialists) {
+    for (const item of publicSpecialists) {
       const key = normalizeCategory(item.category);
       counts.set(key, (counts.get(key) || 0) + 1);
     }
@@ -966,12 +971,12 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       name,
       count: name === ALL ? mainCatalogCount : counts.get(normalizeCategory(name)) || 0,
     }));
-  }, [mainCatalogCount, specialists]);
+  }, [mainCatalogCount, publicSpecialists]);
 
   /** Professions narrow the chosen category rather than competing with it: subcategory ⊂ category. */
   const topProfessions = useMemo(() => {
     const counts = new Map<string, number>();
-    for (const item of specialists) {
+    for (const item of publicSpecialists) {
       if (!item.subcategory) continue;
       if (category === ALL && isBookItem(item)) continue;
       if (category !== ALL && normalizeCategory(item.category) !== normalizeCategory(category)) continue;
@@ -982,7 +987,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "uk-UA"))
       .slice(0, 10)
       .map(([name, count]) => ({ name, count }));
-  }, [category, specialists]);
+  }, [category, publicSpecialists]);
 
   function chooseCategory(name: string) {
     setCategory(name);
@@ -994,7 +999,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     const needle = query.trim().toLocaleLowerCase("uk-UA");
     const availabilityFiltersActive = onlyReviewed || onlySocial || onlyWebsite || onlyPhone || onlyContacted;
 
-    return specialists
+    return publicSpecialists
       .filter((item) =>
         category === ALL
           ? !isBookItem(item)
@@ -1044,7 +1049,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     onlyWebsite,
     profession,
     query,
-    specialists,
+    publicSpecialists,
   ]);
 
   const filterKey = `${category}|${profession}|${query}|${onlyReviewed}|${onlySocial}|${onlyWebsite}|${onlyPhone}|${onlyContacted}|${onlyOrganizations}|${minimumBookScore}`;

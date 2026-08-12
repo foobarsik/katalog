@@ -246,6 +246,22 @@ test("exposes quick filters from the search bar", async () => {
   assert.doesNotMatch(client, /Очікують перевірки/);
 });
 
+test("hides specialist cards without a usable contact", async () => {
+  const [client, data] = await Promise.all([
+    readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8"),
+  ]);
+  const specialists = parseGeneratedSpecialists(data);
+  const contactlessIds = specialists
+    .filter((item) => !item.bookLanguage)
+    .filter((item) => !item.phone && !item.email && !item.website && !item.social && !item.instagram)
+    .map((item) => item.id);
+
+  assert.ok(contactlessIds.length > 0);
+  assert.match(client, /specialists\.filter\(\(item\) => isBookItem\(item\) \|\| hasAnyContact\(item\)\)/);
+  assert.match(client, /return publicSpecialists/);
+});
+
 test("keeps tagged Facebook profiles and contradictory recommendations", async () => {
   const [data, client, importer] = await Promise.all([
     readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8"),
