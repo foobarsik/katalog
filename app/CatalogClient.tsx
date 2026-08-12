@@ -25,12 +25,11 @@ type ContactAction = {
 const ALL = "Усі";
 const PAGE_SIZE = 36;
 
-/**
- * SET BEFORE DEPLOYING. These back the site's only route for a listed person to reach us, so a
- * placeholder left here means the removal request in the footer silently goes nowhere.
- */
-const SITE_OWNER = "ВКАЖІТЬ ВЛАСНИКА КАТАЛОГУ";
-const CONTACT_EMAIL = "вкажіть-email@example.com";
+/** The only route for a listed person to reach us, so it has to stay a monitored address. */
+const CONTACT_EMAIL = "olgaraat@gmail.com";
+
+/** Optional: name the person or organisation answering for the catalogue. Empty hides the line. */
+const SITE_OWNER = "";
 
 const priorityCategories = [ALL, "Здоров'я", "Краса", "Послуги", "Юридичні послуги", "Заклади", "Книжки"];
 
@@ -867,7 +866,8 @@ function SiteFooter() {
       </section>
 
       <p className="footer-owner">
-        {SITE_OWNER} · <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+        {SITE_OWNER ? `${SITE_OWNER} · ` : null}
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       </p>
     </footer>
   );
