@@ -894,6 +894,11 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     [selectedId, specialists],
   );
 
+  const mainCatalogCount = useMemo(
+    () => specialists.filter((item) => !isBookItem(item)).length,
+    [specialists],
+  );
+
   const categories = useMemo(() => {
     const counts = new Map<string, number>();
     for (const item of specialists) {
@@ -907,15 +912,16 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
 
     return [...priorityCategories, ...rest].map((name) => ({
       name,
-      count: name === ALL ? specialists.length : counts.get(normalizeCategory(name)) || 0,
+      count: name === ALL ? mainCatalogCount : counts.get(normalizeCategory(name)) || 0,
     }));
-  }, [specialists]);
+  }, [mainCatalogCount, specialists]);
 
   /** Professions narrow the chosen category rather than competing with it: subcategory ⊂ category. */
   const topProfessions = useMemo(() => {
     const counts = new Map<string, number>();
     for (const item of specialists) {
       if (!item.subcategory) continue;
+      if (category === ALL && isBookItem(item)) continue;
       if (category !== ALL && normalizeCategory(item.category) !== normalizeCategory(category)) continue;
       counts.set(item.subcategory, (counts.get(item.subcategory) || 0) + 1);
     }
@@ -938,7 +944,9 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
 
     return specialists
       .filter((item) =>
-        category === ALL ? true : normalizeCategory(item.category) === normalizeCategory(category),
+        category === ALL
+          ? !isBookItem(item)
+          : normalizeCategory(item.category) === normalizeCategory(category),
       )
       .filter((item) => (profession ? item.subcategory === profession : true))
       .filter((item) =>
@@ -1042,7 +1050,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       <header className="masthead">
         <p className="wordmark">Каталог · Катовіце та поруч</p>
         <h1>Свої люди рекомендують</h1>
-        <p className="lede">{specialists.length} контактів і знахідок, зібраних українською спільнотою.</p>
+        <p className="lede">{mainCatalogCount} контактів і знахідок, зібраних українською спільнотою.</p>
       </header>
 
       <section className="finder" aria-label="Пошук у каталозі">
@@ -1053,7 +1061,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
             autoComplete="off"
             enterKeyHint="search"
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Кого шукаєте? Стоматолог, юрист, книжки…"
+            placeholder="Кого шукаєте? Стоматолог, юрист, фотограф…"
             ref={searchRef}
             type="search"
             value={query}
