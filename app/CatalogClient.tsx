@@ -643,10 +643,6 @@ function BookFacts({ item }: { item: Specialist }) {
 function CardMeta({ item }: { item: Specialist }) {
   return (
     <div className="card-meta">
-      <span className="card-category">
-        <span className="cat-dot" aria-hidden="true" />
-        {item.category}
-      </span>
       <LocationStatus item={item} />
       <ReviewStatus item={item} />
       <BookLanguageStatus item={item} />
@@ -689,13 +685,15 @@ function RegistryStatus({ item, verbose = false }: { item: Specialist; verbose?:
 }
 
 function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Specialist) => void }) {
-  const [detailsExpanded, setDetailsExpanded] = useState(false);
   const unavailable = isInstagramUnavailable(item);
   const secondaryName = getSecondaryName(item);
   const sourceUnavailable = item.sourceType === "instagram" && unavailable;
   const bio = sourceUnavailable ? "" : cleanBio(item.sourceInfo || item.instagramBio);
-  const hasLongDetails = item.comment.length > 280;
-  const detailsId = `card-details-${item.id}`;
+  const summary = item.review || bio || cleanBio(item.description) || item.comment;
+  const profession =
+    item.subcategory && item.subcategory !== item.category
+      ? `${item.category} / ${item.subcategory}`
+      : item.category;
   const className = [
     "card",
     item.review ? "has-review" : "",
@@ -708,7 +706,7 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
   return (
     <article className={className} style={{ "--cat": getCategoryColor(item.category) } as React.CSSProperties}>
       <div className="card-names">
-        <p className="profession">{item.subcategory || item.category}</p>
+        <p className="profession">{profession}</p>
         <h3>
           <button className="card-open" type="button" onClick={() => onOpen(item)}>
             {getDisplayName(item)}
@@ -719,40 +717,7 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
 
       <CardMeta item={item} />
 
-      <BookFacts item={item} />
-
-      {bio ? (
-        <div className="card-source-summary">
-          <p className="card-bio">{bio}</p>
-          <SourceMeta item={item} />
-        </div>
-      ) : null}
-
-      {item.review ? (
-        <blockquote className="review-note">
-          <p>{item.review}</p>
-        </blockquote>
-      ) : null}
-
-      {item.comment ? (
-        <section className="card-details">
-          <h4>Деталі</h4>
-          <p className={hasLongDetails && !detailsExpanded ? "details-text collapsed" : "details-text"} id={detailsId}>
-            {item.comment}
-          </p>
-          {hasLongDetails ? (
-            <button
-              aria-controls={detailsId}
-              aria-expanded={detailsExpanded}
-              className="details-toggle"
-              type="button"
-              onClick={() => setDetailsExpanded((current) => !current)}
-            >
-              {detailsExpanded ? "Згорнути" : "Показати більше"}
-            </button>
-          ) : null}
-        </section>
-      ) : null}
+      {summary ? <p className={item.review ? "card-summary is-review" : "card-summary"}>{summary}</p> : null}
 
       {unavailable ? <p className="flag">Контакти застарілі або неперевірені</p> : null}
 

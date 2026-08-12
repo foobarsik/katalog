@@ -338,19 +338,18 @@ test("uses Angela's provided Instagram profile", async () => {
   assert.match(data, /"id": 270,[\s\S]*?"needsReview": false/);
 });
 
-test("collapses only long details on catalog previews", async () => {
+test("keeps catalog previews concise and moves full details to the dialog", async () => {
   const [client, styles] = await Promise.all([
     readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
-  assert.match(client, /const hasLongDetails = item\.comment\.length > 280/);
-  assert.match(client, /detailsExpanded \? "Згорнути" : "Показати більше"/);
-  assert.match(client, /aria-expanded=\{detailsExpanded\}/);
-  assert.match(styles, /\.card-details \.details-text\.collapsed/);
-  assert.match(styles, /-webkit-line-clamp: 5/);
-  assert.match(styles, /\.review-note p[\s\S]*white-space: pre-line/);
-  assert.doesNotMatch(client, /className="panel-body"[\s\S]{0,500}details-text collapsed/);
+  assert.match(client, /const summary = item\.review \|\| bio \|\| cleanBio\(item\.description\) \|\| item\.comment/);
+  assert.match(client, /className=\{item\.review \? "card-summary is-review" : "card-summary"\}/);
+  assert.match(client, /className="panel-body"[\s\S]{0,500}\{item\.comment\}/);
+  assert.match(styles, /\.card-summary\s*\{[\s\S]*?-webkit-line-clamp: 3/);
+  assert.doesNotMatch(client, /className="card-details"/);
+  assert.doesNotMatch(client, /detailsExpanded/);
 });
 
 test("stretches catalog cards to the tallest item in each row", async () => {
