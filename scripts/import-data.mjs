@@ -6,6 +6,11 @@ const scriptDir = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(scriptDir, "..");
 const sourceRoot = resolve(projectRoot, "..");
 
+/** The CSVs keep everything; these gate what reaches the site, so re-importing cannot undo the
+ * privacy cleanup. Flip either back to true to restore the old output. */
+const PUBLISH_INSTAGRAM_PHOTOS = false;
+const PUBLISH_SCRAPED_BIOS = false;
+
 const catalogPath = resolve(process.env.CATALOG_CSV || join(sourceRoot, "каталог_специалистов.csv"));
 const booksPath = resolve(process.env.BOOKS_CSV || join(sourceRoot, "книги_olx.csv"));
 const sourcesPath = resolve(process.env.ALL_SOURCES_CSV || join(sourceRoot, "all_sources_results_ua.csv"));
@@ -272,6 +277,8 @@ function cleanSourceInfo(row) {
 }
 
 function copySourcePhoto(row) {
+  if (!PUBLISH_INSTAGRAM_PHOTOS) return "";
+
   const photoFile = (row?.photo_file || "").trim();
   if (!photoFile) return "";
 
@@ -383,7 +390,7 @@ const specialists = activeCatalogRows.map((row, index) => {
       sourceMatchesCatalog(candidate, { instagram: username, social, website }),
   );
   const sourceInfo = cleanSourceInfo(source);
-  const instagramBio = cleanSourceInfo(instagramSource);
+  const instagramBio = PUBLISH_SCRAPED_BIOS ? cleanSourceInfo(instagramSource) : "";
   const category = pick(row, ["Категорія", "Категория"]);
   const subcategory = pick(row, ["Підкатегорія", "Подкатегория"]);
   const bookLanguage = pick(row, ["Мова книги", "Язык книги", "Book language"]);
@@ -451,12 +458,12 @@ const specialists = activeCatalogRows.map((row, index) => {
     comment,
     communityMatch: Boolean(pick(row, ["Національність (для сумнівних випадків)", "Национальность (для сомнительных случаев)"])),
     avatar: copySourcePhoto(source),
-    instagramTitle: instagramSource?.name || "",
+    instagramTitle: PUBLISH_SCRAPED_BIOS ? instagramSource?.name || "" : "",
     instagramBio,
     instagramStatus: instagramSource?.status || "",
     sourceType: source?.source_type || "",
     sourceUrl: normalizeUrl(source?.identifier || ""),
-    sourceInfo,
+    sourceInfo: PUBLISH_SCRAPED_BIOS ? sourceInfo : "",
     sourceStatus: source?.status || "",
     foundAutomatically,
     confidenceScore: hasNegativeReview
