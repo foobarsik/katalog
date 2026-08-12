@@ -348,6 +348,13 @@ function getReviewCount(item: Specialist) {
   return splitReviews(item.review).length;
 }
 
+function getReviewTextLength(item: Specialist) {
+  return splitReviews(item.review).reduce(
+    (total, review) => total + review.replace(/\s+/g, " ").trim().length,
+    0,
+  );
+}
+
 function isRpwdlVerified(item: Specialist) {
   return item.registryVerified && item.registryName.trim().toLocaleUpperCase("uk-UA") === "RPWDL";
 }
@@ -1111,6 +1118,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
           Number(needsVisibleReview(a)) - Number(needsVisibleReview(b)) ||
           Number(hasUnconfirmedLocation(a)) - Number(hasUnconfirmedLocation(b)) ||
           getReviewCount(b) - getReviewCount(a) ||
+          getReviewTextLength(b) - getReviewTextLength(a) ||
           Number(isRpwdlVerified(b)) - Number(isRpwdlVerified(a)) ||
           getContactCount(b) - getContactCount(a) ||
           Number(hasConfirmedLocation(b)) - Number(hasConfirmedLocation(a)) ||

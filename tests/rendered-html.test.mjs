@@ -212,8 +212,9 @@ test("marks contacts that still need review", async () => {
   assert.match(client, /Number\(needsVisibleReview\(a\)\) - Number\(needsVisibleReview\(b\)\)/);
   assert.match(client, /Number\(hasUnconfirmedLocation\(a\)\) - Number\(hasUnconfirmedLocation\(b\)\)/);
   assert.match(client, /getReviewCount\(b\) - getReviewCount\(a\)/);
+  assert.match(client, /getReviewTextLength\(b\) - getReviewTextLength\(a\)/);
   assert.match(client, /Number\(isRpwdlVerified\(b\)\) - Number\(isRpwdlVerified\(a\)\)/);
-  assert.match(client, /getReviewCount\(b\) - getReviewCount\(a\) \|\|\s+Number\(isRpwdlVerified\(b\)\) - Number\(isRpwdlVerified\(a\)\) \|\|\s+getContactCount\(b\) - getContactCount\(a\)/);
+  assert.match(client, /getReviewCount\(b\) - getReviewCount\(a\) \|\|\s+getReviewTextLength\(b\) - getReviewTextLength\(a\) \|\|\s+Number\(isRpwdlVerified\(b\)\) - Number\(isRpwdlVerified\(a\)\) \|\|\s+getContactCount\(b\) - getContactCount\(a\)/);
   assert.match(client, /Number\(hasConfirmedLocation\(b\)\) - Number\(hasConfirmedLocation\(a\)\)/);
   assert.match(client, /Number\(isInstagramUnavailable\(a\)\) - Number\(isInstagramUnavailable\(b\)\)/);
   assert.match(client, /getLocationRank\(b\) - getLocationRank\(a\)/);
