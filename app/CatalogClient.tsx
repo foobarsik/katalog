@@ -344,6 +344,14 @@ function getContactCount(item: Specialist) {
   return getContactActions(item).length;
 }
 
+function getReviewCount(item: Specialist) {
+  return splitReviews(item.review).length;
+}
+
+function isRpwdlVerified(item: Specialist) {
+  return item.registryVerified && item.registryName.trim().toLocaleUpperCase("uk-UA") === "RPWDL";
+}
+
 function hasSocialContact(item: Specialist) {
   return Boolean(getInstagramUrl(item) || isFacebookSocialValue(item.social));
 }
@@ -1099,15 +1107,15 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       .sort(
         (a, b) =>
           compareBookRank(a, b) ||
+          // Keep moderation safeguards first; rank publishable specialists by social proof, verification, then reachability.
           Number(needsVisibleReview(a)) - Number(needsVisibleReview(b)) ||
           Number(hasUnconfirmedLocation(a)) - Number(hasUnconfirmedLocation(b)) ||
-          Number(Boolean(b.review)) - Number(Boolean(a.review)) ||
-          Number(hasSocialContact(b)) - Number(hasSocialContact(a)) ||
-          Number(Boolean(b.website)) - Number(Boolean(a.website)) ||
+          getReviewCount(b) - getReviewCount(a) ||
+          Number(isRpwdlVerified(b)) - Number(isRpwdlVerified(a)) ||
+          getContactCount(b) - getContactCount(a) ||
           Number(hasConfirmedLocation(b)) - Number(hasConfirmedLocation(a)) ||
           Number(isInstagramUnavailable(a)) - Number(isInstagramUnavailable(b)) ||
           getLocationRank(b) - getLocationRank(a) ||
-          getContactCount(b) - getContactCount(a) ||
           getRank(b) - getRank(a) ||
           b.confidenceScore - a.confidenceScore ||
           getDisplayName(a).localeCompare(getDisplayName(b), "uk-UA"),
