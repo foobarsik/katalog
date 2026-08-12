@@ -399,7 +399,7 @@ test("stretches catalog cards to the tallest item in each row", async () => {
   const styles = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
 
   assert.match(styles, /\.grid\s*\{[^}]*align-items:\s*stretch/);
-  assert.match(styles, /\.card-actions,[\s\S]*?margin-top:\s*auto/);
+  assert.match(styles, /\.card-actions\s*\{[^}]*margin-top:\s*auto/);
 });
 
 test("includes OLX Ukrainian book listings as a separate catalog section", async () => {
