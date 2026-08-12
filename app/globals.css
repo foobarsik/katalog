@@ -868,6 +868,15 @@ ul {
   white-space: pre-line;
 }
 
+.card-quote-more {
+  display: block;
+  margin-top: 6px;
+  padding-left: 3px;
+  color: var(--cat, var(--ink-faint));
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
 .card-bio {
   display: -webkit-box;
   overflow: hidden;
@@ -905,18 +914,21 @@ ul {
   border-left: 3px solid var(--review-line);
   border-radius: 0 8px 8px 0;
   background: var(--review-wash);
-  padding: 11px 14px;
+  padding: 13px 16px;
+}
+
+/* Each vouch is its own quote, so they get a rule between them rather than running together. */
+.review-note blockquote + blockquote {
+  margin-top: 11px;
+  border-top: 1px solid color-mix(in srgb, var(--review-line) 55%, transparent);
+  padding-top: 11px;
 }
 
 .review-note p {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
   white-space: pre-line;
   color: #4a3d22;
-  font-size: 0.94rem;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.55;
 }
 
 .review-note cite {

@@ -84,6 +84,22 @@ function getDisplayName(item: Specialist) {
     : item.title || `@${handle}`;
 }
 
+/** Several people often vouched for the same person; the import joins them with a blank line. */
+function splitReviews(review: string) {
+  return review
+    .split(/\n\s*\n/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+}
+
+function pluralUk(count: number, one: string, few: string, many: string) {
+  const mod10 = count % 10;
+  const mod100 = count % 100;
+  if (mod10 === 1 && mod100 !== 11) return one;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return few;
+  return many;
+}
+
 function getSecondaryName(item: Specialist) {
   const display = getDisplayName(item);
   return item.name && item.name !== display ? item.name : "";
@@ -681,6 +697,7 @@ function RegistryStatus({ item, verbose = false }: { item: Specialist; verbose?:
 function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Specialist) => void }) {
   const unavailable = isInstagramUnavailable(item);
   const secondaryName = getSecondaryName(item);
+  const reviews = splitReviews(item.review);
   const sourceUnavailable = item.sourceType === "instagram" && unavailable;
   const bio = sourceUnavailable ? "" : cleanBio(item.sourceInfo || item.instagramBio);
   const description = bio || cleanBio(item.description) || item.comment;
@@ -713,9 +730,15 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
         <CardMeta item={item} />
       </div>
 
-      {item.review ? (
+      {reviews.length > 0 ? (
         <blockquote className="card-quote">
-          <p>{item.review}</p>
+          <p>{reviews[0]}</p>
+          {reviews.length > 1 ? (
+            <span className="card-quote-more">
+              і ще {reviews.length - 1}{" "}
+              {pluralUk(reviews.length - 1, "відгук", "відгуки", "відгуків")}
+            </span>
+          ) : null}
         </blockquote>
       ) : description ? (
         <p className="card-description">{description}</p>
@@ -786,6 +809,7 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
   const bio = sourceUnavailable ? "" : cleanBio(item.sourceInfo || item.instagramBio);
   const bioTitle = item.sourceInfo || sourceUnavailable ? "" : cleanBio(item.instagramTitle);
   const sourceHeading = getSourceHeading(item.sourceType);
+  const reviews = splitReviews(item.review);
 
   return (
     <div className="overlay">
@@ -837,11 +861,19 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
           </div>
         ) : null}
 
-        {item.review ? (
-          <blockquote className="review-note">
-            <p>{item.review}</p>
-            <cite>Особисте враження учасника спільноти</cite>
-          </blockquote>
+        {reviews.length > 0 ? (
+          <div className="review-note">
+            {reviews.map((text, index) => (
+              <blockquote key={index}>
+                <p>{text}</p>
+              </blockquote>
+            ))}
+            <cite>
+              {reviews.length === 1
+                ? "Особисте враження учасника спільноти"
+                : `${reviews.length} ${pluralUk(reviews.length, "відгук", "відгуки", "відгуків")} від учасників спільноти`}
+            </cite>
+          </div>
         ) : null}
 
         {item.comment || unavailable ? (
