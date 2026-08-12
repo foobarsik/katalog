@@ -431,6 +431,8 @@ ul {
   gap: 6px;
 }
 
+/* The filter bar is sticky, so it is on screen the whole time: options stay as plain text and only
+   the selected one takes any fill. */
 .tab {
   display: inline-flex;
   align-items: center;
@@ -468,8 +470,9 @@ ul {
 }
 
 .tab.on {
-  background: var(--ink);
-  color: #fff;
+  border-color: var(--cat, var(--ink));
+  background: color-mix(in srgb, var(--cat, var(--ink)) 10%, var(--surface));
+  color: color-mix(in srgb, var(--cat, var(--ink)) 72%, #000);
 }
 
 .tab.on em {

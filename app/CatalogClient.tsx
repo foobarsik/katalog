@@ -393,9 +393,9 @@ function compareBookRank(a: Specialist, b: Specialist) {
 
 function getResultNoun(count: number, currentCategory: string) {
   if (normalizeCategory(currentCategory) === "Книжки") {
-    return count === 1 ? "оголошення" : "оголошень";
+    return pluralUk(count, "оголошення", "оголошення", "оголошень");
   }
-  return count === 1 ? "позиція" : "позицій";
+  return pluralUk(count, "рекомендація", "рекомендації", "рекомендацій");
 }
 
 function telHref(phone: string) {
