@@ -550,22 +550,21 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 13px;
-  min-height: 206px;
   border: 1px solid #d5dae4;
   border-radius: var(--radius);
   background: var(--surface);
   padding: 20px 22px 17px;
   cursor: pointer;
   transition:
-    border-color 140ms ease,
-    background 140ms ease;
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
 }
 
 .card:hover {
   border-color: color-mix(in srgb, var(--cat) 34%, #d5dae4);
-  background: var(--surface);
-  box-shadow: none;
-  transform: none;
+  box-shadow: 0 10px 26px rgba(20, 26, 36, 0.09);
+  transform: translateY(-2px);
 }
 
 .card:has(.card-open:focus-visible) {
@@ -785,10 +784,10 @@ ul {
 
 .card-names h3 {
   max-width: none;
-  font-size: 1.17rem;
-  font-weight: 780;
-  line-height: 1.2;
-  letter-spacing: 0;
+  font-size: 1.26rem;
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
   overflow-wrap: anywhere;
 }
 
@@ -1048,8 +1047,11 @@ ul {
   display: flex;
   flex-wrap: wrap;
   gap: 8px 10px;
-  margin-top: auto;
   padding-top: 4px;
+}
+
+.panel-actions {
+  margin-top: auto;
 }
 
 .card-actions {
@@ -1061,6 +1063,7 @@ ul {
   pointer-events: none;
 }
 
+/* The contacts are the point of the card, so they read as reachable links rather than grey metadata. */
 .card-contact {
   position: relative;
   z-index: 2;
@@ -1068,18 +1071,22 @@ ul {
   align-items: center;
   gap: 7px;
   min-width: 0;
-  color: var(--ink-soft);
-  font-size: 0.79rem;
-  font-weight: 580;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 620;
   line-height: 1.25;
   pointer-events: auto;
   transition: color 140ms ease;
 }
 
+.card-contact:hover {
+  color: var(--cat, var(--accent));
+}
+
 .card-contact .icon {
-  width: 14px;
-  height: 14px;
-  color: color-mix(in srgb, var(--cat) 52%, var(--ink-faint));
+  width: 15px;
+  height: 15px;
+  color: var(--cat, var(--ink-faint));
 }
 
 .card-contact span {
