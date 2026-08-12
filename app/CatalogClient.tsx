@@ -25,6 +25,13 @@ type ContactAction = {
 const ALL = "Усі";
 const PAGE_SIZE = 36;
 
+/**
+ * SET BEFORE DEPLOYING. These back the site's only route for a listed person to reach us, so a
+ * placeholder left here means the removal request in the footer silently goes nowhere.
+ */
+const SITE_OWNER = "ВКАЖІТЬ ВЛАСНИКА КАТАЛОГУ";
+const CONTACT_EMAIL = "вкажіть-email@example.com";
+
 const priorityCategories = [ALL, "Здоров'я", "Краса", "Послуги", "Юридичні послуги", "Заклади", "Книжки"];
 
 const categoryColors: Record<string, string> = {
@@ -796,7 +803,7 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
         {item.review ? (
           <blockquote className="review-note">
             <p>{item.review}</p>
-            <cite>Відгук спільноти</cite>
+            <cite>Особисте враження учасника спільноти</cite>
           </blockquote>
         ) : null}
 
@@ -819,6 +826,50 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
         ) : null}
       </div>
     </div>
+  );
+}
+
+function SiteFooter() {
+  const removalHref =
+    `mailto:${CONTACT_EMAIL}` +
+    `?subject=${encodeURIComponent("Видалення профілю з каталогу")}` +
+    `&body=${encodeURIComponent(
+      "Вкажіть, будь ласка, посилання або імʼя профілю, який треба видалити чи виправити.\n\n",
+    )}`;
+
+  return (
+    <footer className="site-footer">
+      <section>
+        <h2>Про каталог</h2>
+        <p>
+          Некомерційний перелік контактів, зібраних українською спільнотою Катовіце. Ми не беремо
+          плату за розміщення і не змінюємо порядок показу за гроші.
+        </p>
+      </section>
+
+      <section>
+        <h2>Про відгуки</h2>
+        <p>
+          Відгуки — це особисті враження учасників спільноти, а не перевірені факти й не оцінка
+          кваліфікації спеціаліста. Вони описують досвід однієї людини на момент звернення.
+        </p>
+      </section>
+
+      <section>
+        <h2>Ваші дані</h2>
+        <p>
+          Контакти зібрані з відкритих джерел і повідомлень спільноти. Якщо ви є в каталозі й хочете
+          виправити або видалити свої дані — напишіть нам, ми зробимо це без пояснень причин.
+        </p>
+        <a className="footer-action" href={removalHref}>
+          Видалити мій профіль
+        </a>
+      </section>
+
+      <p className="footer-owner">
+        {SITE_OWNER} · <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      </p>
+    </footer>
   );
 }
 
@@ -1197,6 +1248,8 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
       )}
 
       <DetailDialog item={selected} onClose={() => setSelectedId(null)} />
+
+      <SiteFooter />
     </main>
   );
 }
