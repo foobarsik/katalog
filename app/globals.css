@@ -795,7 +795,7 @@ ul {
 }
 
 .card-names h3 {
-  max-width: 24ch;
+  max-width: none;
   font-size: 1.17rem;
   font-weight: 780;
   line-height: 1.2;
