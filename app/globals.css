@@ -1365,7 +1365,6 @@ ul {
   inset: 0;
   z-index: 20;
   background: var(--page);
-  animation: detail-fade 180ms ease;
 }
 
 .panel {
@@ -1400,6 +1399,7 @@ ul {
   border-bottom: 1px solid var(--line);
   background: color-mix(in srgb, var(--page) 92%, transparent);
   backdrop-filter: blur(14px);
+  animation: detail-nav-enter 220ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .panel-close {
@@ -1450,7 +1450,6 @@ ul {
 
 .detail-summary {
   align-self: start;
-  animation: detail-enter 280ms 40ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .panel-head {
@@ -1466,6 +1465,7 @@ ul {
   align-items: flex-start;
   justify-content: space-between;
   gap: 20px;
+  animation: detail-item-enter 240ms 20ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .detail-kicker .profession {
@@ -1502,12 +1502,14 @@ ul {
   line-height: 0.98;
   letter-spacing: 0;
   overflow-wrap: anywhere;
+  animation: detail-title-enter 300ms 45ms both cubic-bezier(0.18, 0.8, 0.24, 1);
 }
 
 .panel-titles .person {
   margin-top: 13px;
   color: var(--ink-soft);
   font-size: 1rem;
+  animation: detail-item-enter 260ms 75ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .detail-statuses {
@@ -1516,6 +1518,7 @@ ul {
   align-items: center;
   gap: 8px;
   margin-top: 20px;
+  animation: detail-item-enter 260ms 90ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .detail-statuses:empty {
@@ -1524,6 +1527,7 @@ ul {
 
 .detail-summary .registry-status.verbose {
   margin-top: 18px;
+  animation: detail-item-enter 260ms 100ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .detail-summary .panel-actions {
@@ -1531,6 +1535,7 @@ ul {
   margin-top: 38px;
   border-top: 1px solid var(--line-strong);
   padding-top: 0;
+  animation: detail-item-enter 280ms 110ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .detail-summary .panel-actions .action {
@@ -1544,6 +1549,31 @@ ul {
   padding: 13px 0;
   font-size: 0.88rem;
   font-weight: 650;
+  animation: detail-contact-enter 240ms backwards cubic-bezier(0.2, 0.75, 0.25, 1);
+  transition:
+    border-color 140ms ease,
+    color 140ms ease,
+    transform 180ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.detail-summary .panel-actions .action:nth-child(1) {
+  animation-delay: 130ms;
+}
+
+.detail-summary .panel-actions .action:nth-child(2) {
+  animation-delay: 155ms;
+}
+
+.detail-summary .panel-actions .action:nth-child(3) {
+  animation-delay: 180ms;
+}
+
+.detail-summary .panel-actions .action:nth-child(4) {
+  animation-delay: 205ms;
+}
+
+.detail-summary .panel-actions .action:nth-child(n + 5) {
+  animation-delay: 230ms;
 }
 
 .detail-summary .panel-actions .action:hover,
@@ -1552,6 +1582,7 @@ ul {
   border-color: var(--line-strong);
   background: none;
   color: var(--cat, var(--accent-deep));
+  transform: translateX(4px);
 }
 
 .detail-summary .panel-actions .action .icon {
@@ -1562,12 +1593,13 @@ ul {
 
 .detail-summary .book-facts {
   margin-top: 28px;
+  animation: detail-item-enter 280ms 145ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .detail-content {
   min-width: 0;
   padding-top: 2px;
-  animation: detail-enter 320ms 90ms both cubic-bezier(0.2, 0.75, 0.25, 1);
+  animation: detail-enter 330ms 70ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .panel .review-note {
@@ -1587,6 +1619,20 @@ ul {
   font-family: Georgia, serif;
   font-size: 4.8rem;
   line-height: 1;
+  transform-origin: left top;
+  animation: detail-quote-mark-enter 300ms 130ms both cubic-bezier(0.18, 0.8, 0.24, 1);
+}
+
+.panel .review-note blockquote {
+  animation: detail-copy-enter 360ms 95ms both cubic-bezier(0.18, 0.8, 0.24, 1);
+}
+
+.panel .review-note blockquote:nth-of-type(2) {
+  animation-delay: 135ms;
+}
+
+.panel .review-note blockquote:nth-of-type(n + 3) {
+  animation-delay: 175ms;
 }
 
 .panel .review-note blockquote + blockquote {
@@ -1607,12 +1653,14 @@ ul {
   color: var(--ink-faint);
   font-size: 0.68rem;
   letter-spacing: 0.08em;
+  animation: detail-item-enter 250ms 180ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .panel-body {
   display: grid;
   gap: 32px;
   margin-top: 44px;
+  animation: detail-item-enter 300ms 150ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .panel-body section {
@@ -1650,9 +1698,10 @@ ul {
   font-size: 0.76rem;
 }
 
-@keyframes detail-fade {
+@keyframes detail-nav-enter {
   from {
     opacity: 0;
+    transform: translateY(-8px);
   }
 }
 
@@ -1660,6 +1709,41 @@ ul {
   from {
     opacity: 0;
     transform: translateY(14px);
+  }
+}
+
+@keyframes detail-title-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+@keyframes detail-item-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes detail-contact-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-9px);
+  }
+}
+
+@keyframes detail-copy-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes detail-quote-mark-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) rotate(-8deg) scale(0.86);
   }
 }
 
@@ -1995,6 +2079,7 @@ ul {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
     transition-duration: 0.01ms !important;
   }
 
