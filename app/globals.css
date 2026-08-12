@@ -748,19 +748,6 @@ ul {
   font-weight: 750;
 }
 
-.negative-review-status {
-  display: inline-flex;
-  align-items: center;
-  min-height: 26px;
-  padding: 4px 9px;
-  border: 1px solid #dc9b9b;
-  border-radius: var(--radius);
-  color: #9d2525;
-  background: #fff1f1;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
 .panel-titles .review-status {
   margin-top: 10px;
 }
@@ -1111,10 +1098,6 @@ ul {
 .card-contact.instagram:hover,
 .card-contact.instagram:focus-visible {
   color: #9b315d;
-}
-
-.card-actions .negative-review-status {
-  margin-left: auto;
 }
 
 .action {

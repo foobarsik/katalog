@@ -650,12 +650,6 @@ function CardMeta({ item }: { item: Specialist }) {
   );
 }
 
-function NegativeReviewStatus({ item }: { item: Specialist }) {
-  if (!item.hasNegativeReview) return null;
-
-  return <span className="negative-review-status">Є негативні відгуки</span>;
-}
-
 function RegistryStatus({ item, verbose = false }: { item: Specialist; verbose?: boolean }) {
   if (!item.registryVerified || !item.registryUrl) return null;
 
@@ -733,7 +727,6 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
 
       <div className="card-actions">
         <CardContactActions item={item} />
-        <NegativeReviewStatus item={item} />
       </div>
     </article>
   );
@@ -820,7 +813,6 @@ function DetailDialog({ item, onClose }: { item: Specialist | null; onClose: () 
               <span className="cat-dot" aria-hidden="true" />
               {item.category}
             </p>
-            <NegativeReviewStatus item={item} />
             <ReviewStatus item={item} verbose />
             <BookLanguageStatus item={item} />
             <LocationStatus item={item} />
@@ -937,7 +929,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   const publicSpecialists = useMemo(
-    () => specialists.filter((item) => isBookItem(item) || hasAnyContact(item)),
+    () => specialists.filter((item) => !item.hasNegativeReview && (isBookItem(item) || hasAnyContact(item))),
     [specialists],
   );
 

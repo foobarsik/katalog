@@ -258,8 +258,21 @@ test("hides specialist cards without a usable contact", async () => {
     .map((item) => item.id);
 
   assert.ok(contactlessIds.length > 0);
-  assert.match(client, /specialists\.filter\(\(item\) => isBookItem\(item\) \|\| hasAnyContact\(item\)\)/);
+  assert.match(client, /!item\.hasNegativeReview && \(isBookItem\(item\) \|\| hasAnyContact\(item\)\)/);
   assert.match(client, /return publicSpecialists/);
+});
+
+test("hides specialist cards with negative reviews", async () => {
+  const [client, data] = await Promise.all([
+    readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/specialists-data.ts", import.meta.url), "utf8"),
+  ]);
+  const specialists = parseGeneratedSpecialists(data);
+  const hiddenIds = specialists.filter((item) => item.hasNegativeReview).map((item) => item.id);
+
+  assert.ok(hiddenIds.length > 0);
+  assert.match(client, /!item\.hasNegativeReview && \(isBookItem\(item\) \|\| hasAnyContact\(item\)\)/);
+  assert.doesNotMatch(client, /Є негативні відгуки/);
 });
 
 test("keeps tagged Facebook profiles and contradictory recommendations", async () => {
@@ -276,7 +289,7 @@ test("keeps tagged Facebook profiles and contradictory recommendations", async (
   assert.match(data, /hasNegativeReview: boolean/);
   assert.match(data, /"id": 304,[\s\S]*?"confidenceScore": 35[\s\S]*?"hasNegativeReview": true/);
   assert.match(data, /"id": 18,[\s\S]*?Яніна Шиманська[\s\S]*?"hasNegativeReview": false/);
-  assert.match(client, /Є негативні відгуки/);
+  assert.match(client, /!item\.hasNegativeReview/);
   assert.match(data, /"id": 148,[\s\S]*?Рекомендую, Паляныця\./);
   const tbilisuri = data.match(/"id": 307,[\s\S]*?\n {2}},\n {2}\{/)[0];
   assert.match(tbilisuri, /tbilisuri\.eatbu\.com/);
