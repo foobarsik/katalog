@@ -241,6 +241,8 @@ test("exposes quick filters from the search bar", async () => {
   assert.match(client, /onlyWebsite && Boolean\(item\.website\)/);
   assert.match(client, /Є телефон/);
   assert.match(client, /Є контакт/);
+  assert.match(client, /Організації/);
+  assert.match(client, /item\.individualNoticeRequired === "no"/);
   assert.doesNotMatch(client, /Очікують перевірки/);
 });
 

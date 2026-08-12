@@ -438,6 +438,14 @@ function renderDataFile(items) {
   registryUrl: string;
   registryCheckedAt: string;
   registryScope: string;
+  subjectType: string;
+  subjectTypeConfidence: number;
+  subjectTypeBasis: string;
+  subjectTypeRegistry: string;
+  subjectTypeIdentifier: string;
+  subjectTypeVerificationUrl: string;
+  subjectTypeCheckedAt: string;
+  individualNoticeRequired: "yes" | "no" | "review";
   locationStatus: "confirmed" | "unknown" | "unconfirmed";
   locationEvidence: string;
 };
@@ -528,6 +536,8 @@ const specialists = activeCatalogRows.map((row, index) => {
   const registryVerified = /^(?:так|yes|true|1)$/i.test(
     pick(row, ["Перевірено в офіційному реєстрі", "Verified in official register"]),
   );
+  const subjectTypeConfidence = Number.parseInt(pick(row, ["Впевненість типу"]), 10);
+  const individualNoticeValue = pick(row, ["Потрібне індивідуальне повідомлення"]);
   const catalogSourceNames = new Set(
     [title, name].map(normalizeSourceName).filter(Boolean),
   );
@@ -605,6 +615,18 @@ const specialists = activeCatalogRows.map((row, index) => {
     registryScope: registryVerified
       ? pick(row, ["Що підтверджено реєстром", "Registry verification scope"])
       : "",
+    subjectType: pick(row, ["Тип суб’єкта"]),
+    subjectTypeConfidence: Number.isFinite(subjectTypeConfidence) ? subjectTypeConfidence : 0,
+    subjectTypeBasis: pick(row, ["Підстава класифікації"]),
+    subjectTypeRegistry: pick(row, ["Реєстр типу суб’єкта"]),
+    subjectTypeIdentifier: pick(row, ["Ідентифікатор суб’єкта"]),
+    subjectTypeVerificationUrl: normalizeUrl(pick(row, ["Посилання на перевірку типу"])),
+    subjectTypeCheckedAt: pick(row, ["Дата перевірки типу"]),
+    individualNoticeRequired: /^(?:ні|no)$/iu.test(individualNoticeValue)
+      ? "no"
+      : /^(?:так|yes)$/iu.test(individualNoticeValue)
+        ? "yes"
+        : "review",
     ...location,
   };
 });

@@ -558,6 +558,35 @@ function ContactRow({ item, verbose }: { item: Specialist; verbose: boolean }) {
   );
 }
 
+function getCardActionLabel(item: Specialist, action: ContactAction) {
+  if (action.tone === "instagram") return item.instagram ? `@${item.instagram}` : "Instagram";
+  return action.label;
+}
+
+function CardContactActions({ item }: { item: Specialist }) {
+  const actions = getContactActions(item);
+
+  if (!actions.length) return null;
+
+  return (
+    <>
+      {actions.map((action) => (
+        <a
+          aria-label={action.ariaLabel}
+          className={`card-contact${action.tone ? ` ${action.tone}` : ""}`}
+          href={action.href}
+          key={`${action.label}:${action.href}`}
+          rel={action.external === false ? undefined : "noreferrer"}
+          target={action.external === false ? undefined : "_blank"}
+        >
+          {action.icon}
+          <span>{getCardActionLabel(item, action)}</span>
+        </a>
+      ))}
+    </>
+  );
+}
+
 function LocationStatus({ item }: { item: Specialist }) {
   const status = item.locationStatus || "unknown";
   if (status === "unknown") return null;
@@ -608,6 +637,20 @@ function BookFacts({ item }: { item: Specialist }) {
         </div>
       ))}
     </dl>
+  );
+}
+
+function CardMeta({ item }: { item: Specialist }) {
+  return (
+    <div className="card-meta">
+      <span className="card-category">
+        <span className="cat-dot" aria-hidden="true" />
+        {item.category}
+      </span>
+      <LocationStatus item={item} />
+      <ReviewStatus item={item} />
+      <BookLanguageStatus item={item} />
+    </div>
   );
 }
 
@@ -674,6 +717,8 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
         {secondaryName ? <p className="person">{secondaryName}</p> : null}
       </div>
 
+      <CardMeta item={item} />
+
       <BookFacts item={item} />
 
       {bio ? (
@@ -714,11 +759,8 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
       <RegistryStatus item={item} />
 
       <div className="card-actions">
-        <ContactRow item={item} verbose={false} />
+        <CardContactActions item={item} />
         <NegativeReviewStatus item={item} />
-        <ReviewStatus item={item} />
-        <BookLanguageStatus item={item} />
-        <LocationStatus item={item} />
       </div>
     </article>
   );
@@ -914,6 +956,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
   const [onlyWebsite, setOnlyWebsite] = useState(false);
   const [onlyPhone, setOnlyPhone] = useState(false);
   const [onlyContacted, setOnlyContacted] = useState(false);
+  const [onlyOrganizations, setOnlyOrganizations] = useState(false);
   const [minimumBookScore, setMinimumBookScore] = useState<number | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [visible, setVisible] = useState(PAGE_SIZE);
@@ -927,6 +970,11 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
 
   const mainCatalogCount = useMemo(
     () => specialists.filter((item) => !isBookItem(item)).length,
+    [specialists],
+  );
+
+  const organizationCount = useMemo(
+    () => specialists.filter((item) => !isBookItem(item) && item.individualNoticeRequired === "no").length,
     [specialists],
   );
 
@@ -980,6 +1028,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
           : normalizeCategory(item.category) === normalizeCategory(category),
       )
       .filter((item) => (profession ? item.subcategory === profession : true))
+      .filter((item) => (onlyOrganizations ? item.individualNoticeRequired === "no" : true))
       .filter((item) =>
         availabilityFiltersActive
           ? (onlyReviewed && Boolean(item.review)) ||
@@ -1015,6 +1064,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     category,
     minimumBookScore,
     onlyContacted,
+    onlyOrganizations,
     onlyPhone,
     onlyReviewed,
     onlySocial,
@@ -1024,7 +1074,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     specialists,
   ]);
 
-  const filterKey = `${category}|${profession}|${query}|${onlyReviewed}|${onlySocial}|${onlyWebsite}|${onlyPhone}|${onlyContacted}|${minimumBookScore}`;
+  const filterKey = `${category}|${profession}|${query}|${onlyReviewed}|${onlySocial}|${onlyWebsite}|${onlyPhone}|${onlyContacted}|${onlyOrganizations}|${minimumBookScore}`;
   const [lastFilterKey, setLastFilterKey] = useState(filterKey);
   if (lastFilterKey !== filterKey) {
     setLastFilterKey(filterKey);
@@ -1058,6 +1108,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     Number(onlyWebsite) +
     Number(onlyPhone) +
     Number(onlyContacted) +
+    Number(onlyOrganizations) +
     Number(normalizeCategory(category) === "Книжки" && minimumBookScore !== null);
   const hasFilters = Boolean(query || activeFilterCount);
 
@@ -1070,6 +1121,7 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
     setOnlyWebsite(false);
     setOnlyPhone(false);
     setOnlyContacted(false);
+    setOnlyOrganizations(false);
     setMinimumBookScore(null);
     searchRef.current?.focus();
   }, []);
@@ -1122,6 +1174,20 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
               <button type="button" onClick={reset}>
                 Скинути
               </button>
+            </div>
+
+            <div className="filter-group">
+              <p>Тип картки</p>
+              <div className="filter-options">
+                <button
+                  aria-pressed={onlyOrganizations}
+                  className={onlyOrganizations ? "filter-chip on" : "filter-chip"}
+                  type="button"
+                  onClick={() => setOnlyOrganizations((current) => !current)}
+                >
+                  Організації <span>{organizationCount}</span>
+                </button>
+              </div>
             </div>
 
             <div className="filter-group">
@@ -1245,6 +1311,13 @@ export function CatalogClient({ specialists }: CatalogClientProps) {
         {profession ? (
           <button className="applied" type="button" onClick={() => setProfession("")}>
             {profession}
+            <span aria-hidden="true">×</span>
+            <span className="visually-hidden">Прибрати фільтр</span>
+          </button>
+        ) : null}
+        {onlyOrganizations ? (
+          <button className="applied" type="button" onClick={() => setOnlyOrganizations(false)}>
+            Організації
             <span aria-hidden="true">×</span>
             <span className="visually-hidden">Прибрати фільтр</span>
           </button>
