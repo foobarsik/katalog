@@ -35,7 +35,25 @@
     <link rel="icon" href="/favicon.svg" />
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Shown until the script mounts, then replaced by createRoot. Crawlers and anyone with
+         JavaScript off get the gist without waiting for a render; keep it true to the live page. -->
+    <div id="root">
+      <h1>Свої люди рекомендують</h1>
+      <p>
+        Каталог українських спеціалістів, майстрів і закладів у Катовіце та поруч — Забже, Тихи,
+        Гливиці, Сосновець, Хожув, Бендзин. Контакти зібрала українська спільнота, у частини записів
+        є відгуки від тих, хто вже звертався.
+      </p>
+      <p>
+        Розділи: здоров'я, послуги, краса, юридичні послуги, заклади, транспорт, освіта, нерухомість,
+        фінанси.
+      </p>
+      <p>
+        Серед професій: стоматолог, психолог, гінеколог, масаж, перевезення Україна–Польща, нігті,
+        волосся, барбершоп, ріелтор.
+      </p>
+      <p><a href="/privacy">Політика конфіденційності та RODO</a></p>
+    </div>
     <script type="module" src="/app/vercel-entry.tsx"></script>
   </body>
 </html>
