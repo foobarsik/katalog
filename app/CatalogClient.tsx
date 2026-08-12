@@ -689,10 +689,10 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
   const secondaryName = getSecondaryName(item);
   const sourceUnavailable = item.sourceType === "instagram" && unavailable;
   const bio = sourceUnavailable ? "" : cleanBio(item.sourceInfo || item.instagramBio);
-  const summary = item.review || bio || cleanBio(item.description) || item.comment;
+  const description = bio || cleanBio(item.description) || item.comment;
   const profession =
     item.subcategory && item.subcategory !== item.category
-      ? `${item.category} / ${item.subcategory}`
+      ? `${item.category} · ${item.subcategory}`
       : item.category;
   const className = [
     "card",
@@ -719,7 +719,13 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
         <CardMeta item={item} />
       </div>
 
-      {summary ? <p className={item.review ? "card-summary is-review" : "card-summary"}>{summary}</p> : null}
+      {item.review ? (
+        <blockquote className="card-quote">
+          <p>{item.review}</p>
+        </blockquote>
+      ) : description ? (
+        <p className="card-description">{description}</p>
+      ) : null}
 
       {unavailable ? <p className="flag">Контакти застарілі або неперевірені</p> : null}
 

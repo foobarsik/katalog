@@ -338,16 +338,19 @@ test("uses Angela's provided Instagram profile", async () => {
   assert.match(data, /"id": 270,[\s\S]*?"needsReview": false/);
 });
 
-test("keeps catalog previews concise and moves full details to the dialog", async () => {
+test("distinguishes review quotes from concise descriptions in catalog previews", async () => {
   const [client, styles] = await Promise.all([
     readFile(new URL("../app/CatalogClient.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
   ]);
 
-  assert.match(client, /const summary = item\.review \|\| bio \|\| cleanBio\(item\.description\) \|\| item\.comment/);
-  assert.match(client, /className=\{item\.review \? "card-summary is-review" : "card-summary"\}/);
+  assert.match(client, /const description = bio \|\| cleanBio\(item\.description\) \|\| item\.comment/);
+  assert.match(client, /<blockquote className="card-quote">/);
+  assert.match(client, /<p className="card-description">\{description\}<\/p>/);
   assert.match(client, /className="panel-body"[\s\S]{0,500}\{item\.comment\}/);
-  assert.match(styles, /\.card-summary\s*\{[\s\S]*?-webkit-line-clamp: 2/);
+  assert.match(styles, /\.card-description\s*\{[\s\S]*?-webkit-line-clamp: 2/);
+  assert.match(styles, /\.card-quote::before\s*\{[\s\S]*?content: "“"/);
+  assert.match(styles, /\.card-quote p\s*\{[\s\S]*?-webkit-line-clamp: 3/);
   assert.doesNotMatch(client, /className="card-details"/);
   assert.doesNotMatch(client, /detailsExpanded/);
 });

@@ -543,20 +543,20 @@ ul {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  min-height: 194px;
-  border: 1px solid var(--line-strong);
-  border-radius: 2px;
+  gap: 13px;
+  min-height: 206px;
+  border: 1px solid #d5dae4;
+  border-radius: 6px;
   background: var(--surface);
-  padding: 19px 20px 16px;
+  padding: 20px 22px 17px;
   transition:
     border-color 140ms ease,
     background 140ms ease;
 }
 
 .card:hover {
-  border-color: color-mix(in srgb, var(--cat) 46%, var(--line-strong));
-  background: color-mix(in srgb, var(--surface) 97%, var(--cat));
+  border-color: color-mix(in srgb, var(--cat) 34%, #d5dae4);
+  background: var(--surface);
   box-shadow: none;
   transform: none;
 }
@@ -568,7 +568,7 @@ ul {
 
 /* A written review is the rarest, most useful field, so it earns the only warm accent. */
 .card.has-review {
-  border-color: color-mix(in srgb, var(--review-line) 70%, var(--line-strong));
+  border-color: #d5dae4;
 }
 
 .card.dimmed {
@@ -607,11 +607,11 @@ ul {
 .profession {
   display: flex;
   align-items: center;
-  color: var(--ink-soft);
-  font-size: 0.68rem;
-  font-weight: 700;
+  color: var(--cat, var(--ink-soft));
+  font-size: 0.76rem;
+  font-weight: 650;
   letter-spacing: 0;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .card-meta {
@@ -619,10 +619,10 @@ ul {
   justify-items: end;
   gap: 5px;
   min-width: 0;
-  max-width: 18ch;
+  max-width: 20ch;
   color: var(--ink-faint);
-  font-size: 0.72rem;
-  font-weight: 650;
+  font-size: 0.75rem;
+  font-weight: 550;
   line-height: 1.35;
   text-align: right;
 }
@@ -776,7 +776,7 @@ ul {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: start;
-  gap: 16px;
+  gap: 20px;
 }
 
 /* Some subcategories run to four comma-separated specialities; unclamped they push the name out of
@@ -786,14 +786,14 @@ ul {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 }
 
 .card-names h3 {
-  max-width: 22ch;
-  font-size: 1.08rem;
-  font-weight: 760;
-  line-height: 1.22;
+  max-width: 24ch;
+  font-size: 1.17rem;
+  font-weight: 780;
+  line-height: 1.2;
   letter-spacing: 0;
   overflow-wrap: anywhere;
 }
@@ -811,11 +811,15 @@ ul {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 2px;
+  border-radius: 6px;
 }
 
 .card-open:focus-visible {
   outline: none;
+}
+
+.card:hover .card-open {
+  color: color-mix(in srgb, var(--cat) 72%, var(--ink));
 }
 
 .person {
@@ -824,20 +828,45 @@ ul {
   font-size: 0.86rem;
 }
 
-.card-summary {
+.card-description {
   display: -webkit-box;
   max-width: 52ch;
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   color: var(--ink-soft);
-  font-size: 0.86rem;
-  line-height: 1.5;
+  font-size: 0.88rem;
+  line-height: 1.52;
   white-space: pre-line;
 }
 
-.card-summary.is-review {
-  color: #403d37;
+.card-quote {
+  position: relative;
+  max-width: 52ch;
+  padding-left: 23px;
+}
+
+.card-quote::before {
+  content: "“";
+  position: absolute;
+  top: -7px;
+  left: 0;
+  color: var(--cat);
+  font-family: Georgia, serif;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.card-quote p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  color: #3e424b;
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.52;
+  white-space: pre-line;
 }
 
 .card-bio {
@@ -1026,10 +1055,10 @@ ul {
 
 .card-actions {
   align-items: center;
-  gap: 7px 20px;
+  gap: 7px 18px;
   overflow: visible;
-  border-top: 1px solid var(--line);
-  padding-top: 10px;
+  border-top: 1px solid #e6e9ef;
+  padding-top: 11px;
 }
 
 .card-contact {
@@ -1039,17 +1068,17 @@ ul {
   align-items: center;
   gap: 7px;
   min-width: 0;
-  color: var(--ink);
-  font-size: 0.8rem;
-  font-weight: 650;
+  color: var(--ink-soft);
+  font-size: 0.79rem;
+  font-weight: 580;
   line-height: 1.25;
   transition: color 140ms ease;
 }
 
 .card-contact .icon {
-  width: 15px;
-  height: 15px;
-  color: var(--ink-faint);
+  width: 14px;
+  height: 14px;
+  color: color-mix(in srgb, var(--cat) 52%, var(--ink-faint));
 }
 
 .card-contact span {
