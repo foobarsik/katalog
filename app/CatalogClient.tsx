@@ -705,17 +705,19 @@ function SpecialistCard({ item, onOpen }: { item: Specialist; onOpen: (item: Spe
 
   return (
     <article className={className} style={{ "--cat": getCategoryColor(item.category) } as React.CSSProperties}>
-      <div className="card-names">
-        <p className="profession">{profession}</p>
-        <h3>
-          <button className="card-open" type="button" onClick={() => onOpen(item)}>
-            {getDisplayName(item)}
-          </button>
-        </h3>
-        {secondaryName ? <p className="person">{secondaryName}</p> : null}
-      </div>
+      <div className="card-heading">
+        <div className="card-names">
+          <p className="profession">{profession}</p>
+          <h3>
+            <button className="card-open" type="button" onClick={() => onOpen(item)}>
+              {getDisplayName(item)}
+            </button>
+          </h3>
+          {secondaryName ? <p className="person">{secondaryName}</p> : null}
+        </div>
 
-      <CardMeta item={item} />
+        <CardMeta item={item} />
+      </div>
 
       {summary ? <p className={item.review ? "card-summary is-review" : "card-summary"}>{summary}</p> : null}
 

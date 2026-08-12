@@ -347,7 +347,7 @@ test("keeps catalog previews concise and moves full details to the dialog", asyn
   assert.match(client, /const summary = item\.review \|\| bio \|\| cleanBio\(item\.description\) \|\| item\.comment/);
   assert.match(client, /className=\{item\.review \? "card-summary is-review" : "card-summary"\}/);
   assert.match(client, /className="panel-body"[\s\S]{0,500}\{item\.comment\}/);
-  assert.match(styles, /\.card-summary\s*\{[\s\S]*?-webkit-line-clamp: 3/);
+  assert.match(styles, /\.card-summary\s*\{[\s\S]*?-webkit-line-clamp: 2/);
   assert.doesNotMatch(client, /className="card-details"/);
   assert.doesNotMatch(client, /detailsExpanded/);
 });

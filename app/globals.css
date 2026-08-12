@@ -536,44 +536,43 @@ ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
-  column-gap: 34px;
-  border-top: 1px solid var(--line-strong);
+  gap: 14px;
 }
 
 .card {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 13px;
-  min-height: 230px;
-  border: 0;
-  border-bottom: 1px solid var(--line-strong);
-  border-radius: 0;
-  background: transparent;
-  padding: 26px 2px 22px;
+  gap: 12px;
+  min-height: 194px;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  background: var(--surface);
+  padding: 19px 20px 16px;
   transition:
-    color 140ms ease,
-    opacity 140ms ease;
+    border-color 140ms ease,
+    background 140ms ease;
 }
 
 .card:hover {
-  border-color: var(--ink-faint);
+  border-color: color-mix(in srgb, var(--cat) 46%, var(--line-strong));
+  background: color-mix(in srgb, var(--surface) 97%, var(--cat));
   box-shadow: none;
   transform: none;
 }
 
 .card:has(.card-open:focus-visible) {
-  border-color: var(--ink);
-  box-shadow: none;
+  border-color: var(--accent);
+  box-shadow: var(--ring);
 }
 
 /* A written review is the rarest, most useful field, so it earns the only warm accent. */
 .card.has-review {
-  border-color: var(--line-strong);
+  border-color: color-mix(in srgb, var(--review-line) 70%, var(--line-strong));
 }
 
 .card.dimmed {
-  background: transparent;
+  background: var(--surface-sunk);
   opacity: 0.72;
 }
 
@@ -583,7 +582,7 @@ ul {
 
 .card.needs-review {
   border-color: var(--line-strong);
-  background: transparent;
+  background: #f8f9fb;
   color: #4b5563;
 }
 
@@ -609,21 +608,23 @@ ul {
   display: flex;
   align-items: center;
   color: var(--ink-soft);
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .card-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 5px 14px;
-  min-height: 18px;
+  display: grid;
+  justify-items: end;
+  gap: 5px;
+  min-width: 0;
+  max-width: 18ch;
   color: var(--ink-faint);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 650;
+  line-height: 1.35;
+  text-align: right;
 }
 
 .card-meta .location-status {
@@ -771,6 +772,13 @@ ul {
   padding-top: 1px;
 }
 
+.card-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 16px;
+}
+
 /* Some subcategories run to four comma-separated specialities; unclamped they push the name out of
    line with neighbouring cards. */
 .card-names .profession {
@@ -783,9 +791,9 @@ ul {
 
 .card-names h3 {
   max-width: 22ch;
-  font-size: 1.3rem;
-  font-weight: 780;
-  line-height: 1.18;
+  font-size: 1.08rem;
+  font-weight: 760;
+  line-height: 1.22;
   letter-spacing: 0;
   overflow-wrap: anywhere;
 }
@@ -803,7 +811,7 @@ ul {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 0;
+  border-radius: 2px;
 }
 
 .card-open:focus-visible {
@@ -821,10 +829,10 @@ ul {
   max-width: 52ch;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   color: var(--ink-soft);
-  font-size: 0.92rem;
-  line-height: 1.55;
+  font-size: 0.86rem;
+  line-height: 1.5;
   white-space: pre-line;
 }
 
@@ -1020,8 +1028,8 @@ ul {
   align-items: center;
   gap: 7px 20px;
   overflow: visible;
-  border-top: 0;
-  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
 }
 
 .card-contact {
@@ -1551,6 +1559,17 @@ ul {
   .grid,
   .site-footer {
     grid-template-columns: 1fr;
+  }
+
+  .card-heading {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .card-meta {
+    justify-items: start;
+    max-width: none;
+    text-align: left;
   }
 
   .panel {
