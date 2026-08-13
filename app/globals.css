@@ -768,6 +768,12 @@ ul {
   text-align: right;
 }
 
+.route-status {
+  color: var(--cat, var(--ink-soft));
+  font-weight: 650;
+  white-space: nowrap;
+}
+
 .card-meta .location-status {
   min-height: auto;
   border: 0;

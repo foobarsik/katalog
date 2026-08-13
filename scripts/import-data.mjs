@@ -340,6 +340,44 @@ const instagramLanguageFacts = [
   [/(?:російськ|русск|russian|rosyjsk)/iu, "російська"],
 ];
 
+/** No \b before the Cyrillic stems: JS word boundaries key off [A-Za-z0-9_], so one placed in front
+ * of "Україна" never matches. It is still needed to keep the two-letter codes from hitting words. */
+const routeCountries = [
+  ["Україна", /україн|украин|\bua\b/iu],
+  ["Польща", /польщ|польш|polsk|\bpl\b/iu],
+  ["Німеччина", /німеччин|германи|\bde\b/iu],
+  ["Чехія", /чехі|чехи|\bcz\b/iu],
+];
+
+/**
+ * A route baked into the subcategory splits one service across several filters: the catalogue held
+ * "Доставка посилок" three times over, differing only by dash character and direction. Keeping the
+ * pair in its own field also means a new country is a new value here, not a new taxonomy entry.
+ */
+function splitRoute(rawSubcategory, explicitRoute) {
+  const subcategory = (rawSubcategory || "").trim();
+  const explicit = (explicitRoute || "").trim();
+  if (explicit) return { subcategory, route: normalizeRoute(explicit) || explicit };
+
+  const parenthetical = subcategory.match(/^(.*?)\s*\(([^)]*)\)\s*$/u);
+  if (!parenthetical) return { subcategory, route: "" };
+
+  const route = normalizeRoute(parenthetical[2]);
+  return route ? { subcategory: parenthetical[1].trim(), route } : { subcategory, route: "" };
+}
+
+/** Both directions describe the same corridor, so they collapse to one canonical pair. */
+function normalizeRoute(value) {
+  const found = routeCountries.filter(([, pattern]) => pattern.test(value)).map(([name]) => name);
+  const unique = [...new Set(found)];
+  if (unique.length < 2) return "";
+
+  const ordered = unique.includes("Україна")
+    ? ["Україна", ...unique.filter((name) => name !== "Україна")]
+    : unique;
+  return ordered.join("–");
+}
+
 function buildFactualInstagramSummary(row, { category, subcategory }) {
   if (!PUBLISH_FACTUAL_INSTAGRAM_SUMMARIES || row?.source_type !== "instagram") return "";
 
@@ -400,6 +438,7 @@ function renderDataFile(items) {
   title: string;
   category: string;
   subcategory: string;
+  route: string;
   bookLanguage: string;
   bookListingDate: string;
   bookPrice: string;
@@ -506,7 +545,10 @@ const specialists = activeCatalogRows.map((row, index) => {
       sourceMatchesCatalog(candidate, { instagram: username, social, website }),
   );
   const category = pick(row, ["Категорія", "Категория"]);
-  const subcategory = pick(row, ["Підкатегорія", "Подкатегория"]);
+  const { subcategory, route } = splitRoute(
+    pick(row, ["Підкатегорія", "Подкатегория"]),
+    pick(row, ["Маршрут", "Напрямок", "Route"]),
+  );
   const sourceInfo = buildFactualInstagramSummary(source, { category, subcategory });
   const instagramBio = "";
   const bookLanguage = pick(row, ["Мова книги", "Язык книги", "Book language"]);
@@ -563,6 +605,7 @@ const specialists = activeCatalogRows.map((row, index) => {
     title: title || "Без назви",
     category: category || "Інше",
     subcategory: subcategory || "Не вказано",
+    route,
     bookLanguage,
     bookListingDate,
     bookPrice,

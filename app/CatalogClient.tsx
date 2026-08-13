@@ -671,9 +671,15 @@ function BookFacts({ item }: { item: Specialist }) {
   );
 }
 
+function RouteStatus({ item }: { item: Specialist }) {
+  if (!item.route) return null;
+  return <span className="route-status">{item.route}</span>;
+}
+
 function CardMeta({ item }: { item: Specialist }) {
   return (
     <div className="card-meta">
+      <RouteStatus item={item} />
       <LocationStatus item={item} />
       <ReviewStatus item={item} />
       <BookLanguageStatus item={item} />
