@@ -365,9 +365,11 @@ ul {
   text-transform: uppercase;
 }
 
+/* minmax(0, max-content), not max-content: a bare max-content track refuses to shrink, so one long
+   subcategory ("Доставка посилок (Польща–Україна)") pushed the row past the container. */
 .refine ul {
   display: grid;
-  grid-template-columns: repeat(5, max-content);
+  grid-template-columns: repeat(5, minmax(0, max-content));
   justify-content: space-between;
   gap: 2px 18px;
 }
@@ -382,9 +384,11 @@ ul {
   position: relative;
   display: inline-flex;
   width: 100%;
+  min-width: 0;
   align-items: baseline;
   justify-content: space-between;
   gap: 5px;
+  overflow-wrap: anywhere;
   border: 0;
   border-radius: 0;
   background: none;
@@ -462,15 +466,23 @@ ul {
   backdrop-filter: blur(16px);
 }
 
+/* Scrolls rather than spills: between the mobile breakpoint and roughly 1100px the twelve
+   categories need more width than the panel has, and max-content columns will not shrink. */
 .categories {
   position: relative;
   z-index: 1;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: max-content;
+  grid-auto-columns: minmax(0, max-content);
   grid-template-rows: repeat(2, 48px);
   justify-content: space-between;
   gap: 0 22px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.categories::-webkit-scrollbar {
+  display: none;
 }
 
 .categories li {
